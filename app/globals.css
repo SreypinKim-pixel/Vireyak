@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --surface: 251 249 246;
+    --panel: 255 255 255;
+    --ink: 14 13 21;
+    --brand: 24 35 70;
+    --secondary: 61 83 135;
+    --accent: 212 175 55;
+    color-scheme: light;
+  }
+  .dark {
+    --surface: 14 13 21;
+    --panel: 24 27 43;
+    --ink: 251 249 246;
+    --brand: 61 83 135;
+    --secondary: 24 35 70;
+    --accent: 243 205 95;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-surface font-sans text-ink antialiased;
+  }
+  ::selection {
+    @apply bg-gold/30;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-indigo dark:outline-brightgold;
+  }
+  button,
+  a,
+  input,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+  input,
+  select {
+    @apply min-w-0;
+  }
+}
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10;
+  }
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.22em] text-indigo dark:text-brightgold;
+  }
+  .section-title {
+    @apply text-2xl font-semibold leading-tight tracking-[-0.035em] text-navy dark:text-ivory sm:text-[30px];
+  }
+  .button-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3 text-xs font-medium text-white transition hover:bg-indigo dark:bg-indigo dark:hover:bg-slate;
+  }
+  .button-outline {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate/30 px-5 py-3 text-xs font-medium text-ink transition hover:border-indigo hover:bg-slate/5;
+  }
+  .field {
+    @apply w-full rounded-lg border border-slate/30 bg-panel px-4 py-3 text-sm text-ink placeholder:text-slate focus:border-indigo focus:outline-none focus:ring-2 focus:ring-indigo/20;
+  }
+  .field-label {
+    @apply mb-2 block text-xs font-medium;
+  }
+  .muted {
+    @apply text-ink/60;
+  }
+  .status-page {
+    @apply shell flex min-h-[60vh] flex-col items-center justify-center gap-5 text-center;
+  }
+  .status-page h1 {
+    @apply section-title text-5xl;
+  }
+  .status-page p {
+    @apply muted text-sm;
+  }
+  .btn {
+    @apply button-primary;
+  }
+}
+.hero-image {
+  object-position: center 52%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: rise-in 700ms ease-out both;
+  }
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dropdown-menu[data-state="open"] {
+    animation: dropdown-in 140ms ease-out;
+    transform-origin: var(--radix-select-content-transform-origin);
+  }
+  @keyframes dropdown-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
