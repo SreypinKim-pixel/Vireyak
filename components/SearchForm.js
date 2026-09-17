@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
+import DatePicker, { parseDate } from "./DatePicker";
 export default function SearchForm({
   compact = false,
   initial = {},
@@ -18,6 +19,13 @@ export default function SearchForm({
   const today = new Date().toLocaleDateString("en-CA");
   function submit(event) {
     event.preventDefault();
+    if (
+      (checkin && !parseDate(checkin)) ||
+      (tab === "stays" && checkout && !parseDate(checkout))
+    ) {
+      setError("Enter a valid date in YYYY-MM-DD format.");
+      return;
+    }
     if (
       tab === "stays" &&
       ((checkin && !checkout) ||
@@ -96,13 +104,22 @@ export default function SearchForm({
             <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
               {tab === "stays" ? "Check-in" : "Experience date"}
             </span>
-            <input
-              aria-label={tab === "stays" ? "Check-in" : "Experience date"}
-              type="date"
+            <DatePicker
+              label={tab === "stays" ? "Check-in" : "Experience date"}
               min={today}
               value={checkin}
-              onChange={(e) => setCheckin(e.target.value)}
-              className="w-full bg-transparent text-[11px] outline-none"
+              onChange={setCheckin}
+              from={checkin}
+              to={checkout}
+              onRangeChange={
+                tab === "stays"
+                  ? (start, end) => {
+                      setCheckin(start);
+                      setCheckout(end);
+                      setError("");
+                    }
+                  : undefined
+              }
             />
           </span>
         </label>
@@ -113,13 +130,18 @@ export default function SearchForm({
               <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
                 Check-out
               </span>
-              <input
-                aria-label="Check-out"
-                type="date"
-                min={checkin || today}
+              <DatePicker
+                label="Check-out"
+                min={today}
                 value={checkout}
-                onChange={(e) => setCheckout(e.target.value)}
-                className="w-full bg-transparent text-[11px] outline-none"
+                onChange={setCheckout}
+                from={checkin}
+                to={checkout}
+                onRangeChange={(start, end) => {
+                  setCheckin(start);
+                  setCheckout(end);
+                  setError("");
+                }}
               />
             </span>
           </label>

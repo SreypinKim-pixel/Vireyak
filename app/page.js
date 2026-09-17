@@ -1,55 +1,35 @@
 import Link from "next/link";
+import HeroGrid from "@/components/smoothui/blocks/heroes/hero-grid";
 import Icon from "../components/Icon";
 import SearchForm from "../components/SearchForm";
 import TravelCard from "../components/TravelCard";
+import SiriOrb from "@/components/smoothui/siri-orb";
+import RichPopover from "@/components/smoothui/rich-popover";
 import { destinations, stays, attractions } from "../data/travel";
 export default function HomePage() {
   return (
     <>
-      <section className="relative isolate min-h-[490px] bg-navy pb-28 pt-16 text-white sm:min-h-[520px] sm:pt-20">
-        <img
-          src="/images/angkor.jpg"
-          alt="The ancient towers of Angkor Wat in Cambodia"
-          width="1920"
-          height="1080"
-          fetchPriority="high"
-          className="hero-image absolute inset-0 -z-20 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-midnight/80 via-navy/45 to-midnight/10" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-midnight/35 to-transparent" />
-        <div className="shell reveal">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-2 text-[9px] font-medium uppercase tracking-[0.22em] backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-brightgold" /> The
-            kingdom of wonder awaits
-          </div>
-          <h1 className="max-w-[640px] text-[42px] font-semibold leading-[1.15] tracking-[-0.055em] sm:text-[60px]">
-            Some journeys
-            <br />
-            stay with you.<span className="text-brightgold"> Forever.</span>
-          </h1>
-          <p className="mt-5 max-w-[425px] text-xs leading-7 text-white/80 sm:text-sm">
-            Extraordinary stays. Unforgettable experiences.
-            <br />
-            Discover the Cambodia you&apos;ve been dreaming of.
-          </p>
-          <div className="mt-7 flex items-center gap-3 text-[10px] text-white/75">
-            <span className="h-px w-7 bg-brightgold" /> Go beyond the ordinary.
-            Go Vireyak.
-          </div>
-        </div>
-        <div className="absolute bottom-24 right-10 hidden items-center gap-2 text-[10px] text-white/85 lg:flex">
-          <Icon name="pin" size={15} />
-          <div>
-            Angkor Wat
-            <span className="block text-[8px] text-white/60">
-              Siem Reap, Cambodia
-            </span>
-          </div>
-        </div>
-      </section>
+      <HeroGrid />
       <div className="shell relative z-10 -mt-20">
         <SearchForm />
       </div>
+      <section
+        aria-label="Travel inspiration"
+        className="shell flex flex-col items-center gap-6 py-12"
+      >
+        <SiriOrb size="200px" />
+        <RichPopover
+          title="Find your Cambodia"
+          description="Explore ancient temples, peaceful islands, and beautiful places to stay. Your next journey starts here."
+          icon={<Icon name="spark" size={18} />}
+          side="bottom"
+          trigger={
+            <button type="button" className="button-outline">
+              Travel inspiration <Icon name="spark" size={16} />
+            </button>
+          }
+        />
+      </section>
       <div className="shell">
         <div className="grid grid-cols-1 gap-6 border-b border-slate/20 py-7 sm:grid-cols-3 sm:gap-8">
           {[

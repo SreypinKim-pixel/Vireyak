@@ -1,10 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx}", "./components/**/*.{js,jsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
     extend: {
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        border: "var(--border)",
+        ring: "var(--ring)",
         midnight: "#0E0D15",
         navy: "#182346",
         indigo: "#3D5387",

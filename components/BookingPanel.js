@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
+import DatePicker, { parseDate } from "./DatePicker";
 export default function BookingPanel({ item, kind, initial = {} }) {
   const [date, setDate] = useState(
     typeof initial.checkin === "string" ? initial.checkin : "",
@@ -21,7 +22,11 @@ export default function BookingPanel({ item, kind, initial = {} }) {
   const today = new Date().toLocaleDateString("en-CA");
   function submit(e) {
     e.preventDefault();
-    if (date < today || (kind === "stays" && nights < 1)) {
+    if (
+      !parseDate(date) ||
+      date < today ||
+      (kind === "stays" && (!parseDate(end) || nights < 1))
+    ) {
       setReady(false);
       setMessage("Choose a future stay with check-out after check-in.");
       return;
@@ -49,31 +54,49 @@ export default function BookingPanel({ item, kind, initial = {} }) {
           <span className="field-label">
             {kind === "stays" ? "Check-in" : "Experience date"}
           </span>
-          <input
+          <DatePicker
             required
-            type="date"
-            aria-label={kind === "stays" ? "Check-in" : "Experience date"}
+            label={kind === "stays" ? "Check-in" : "Experience date"}
             min={today}
             value={date}
-            onChange={(e) => {
-              setDate(e.target.value);
+            from={date}
+            to={end}
+            onChange={(value) => {
+              setDate(value);
               setReady(false);
               setMessage("");
             }}
+            onRangeChange={
+              kind === "stays"
+                ? (start, finish) => {
+                    setDate(start);
+                    setEnd(finish);
+                    setReady(false);
+                    setMessage("");
+                  }
+                : undefined
+            }
             className="field"
           />
         </label>
         {kind === "stays" && (
           <label className="block">
             <span className="field-label">Check-out</span>
-            <input
+            <DatePicker
               required
-              type="date"
-              aria-label="Check-out"
-              min={date || today}
+              label="Check-out"
+              min={today}
               value={end}
-              onChange={(e) => {
-                setEnd(e.target.value);
+              from={date}
+              to={end}
+              onChange={(value) => {
+                setEnd(value);
+                setReady(false);
+                setMessage("");
+              }}
+              onRangeChange={(start, finish) => {
+                setDate(start);
+                setEnd(finish);
                 setReady(false);
                 setMessage("");
               }}
