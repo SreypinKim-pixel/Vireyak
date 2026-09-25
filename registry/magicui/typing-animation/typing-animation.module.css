@@ -1,0 +1,57 @@
+.wrapper {
+  display: inline-block;
+}
+
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  animation: char-in 0.05s forwards;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+}
+
+@keyframes char-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  opacity: 0;
+  animation: cursor-blink 1.1s linear infinite;
+  animation-play-state: paused;
+}
+
+.wrapper[data-typing-ready="true"] .char,
+.wrapper[data-typing-ready="true"] > .cursor {
+  animation-play-state: running;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper:not([data-respect-reduced-motion="false"]) .char,
+  .cursor {
+    animation: none;
+    opacity: 1;
+  }
+
+  .cursor {
+    display: none;
+  }
+}

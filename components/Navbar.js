@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Brand from "./Brand";
 import Icon from "./Icon";
 const links = [
@@ -10,19 +10,28 @@ const links = [
   ["Attraction", "/attraction"],
   ["About", "/about"],
 ];
+function subscribeTheme(onChange) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+}
+const getTheme = () => document.documentElement.classList.contains("dark");
+const getServerTheme = () => false;
+
 export default function Navbar() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(false);
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-  }, []);
-  useEffect(() => {
+  const [previousPath, setPreviousPath] = useState(path);
+  const dark = useSyncExternalStore(subscribeTheme, getTheme, getServerTheme);
+  if (path !== previousPath) {
+    setPreviousPath(path);
     setOpen(false);
-  }, [path]);
+  }
   function toggleTheme() {
     const next = !dark;
-    setDark(next);
     document.documentElement.classList.toggle("dark", next);
     try {
       localStorage.setItem("vireyak-theme", next ? "dark" : "light");

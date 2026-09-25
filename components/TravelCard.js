@@ -1,7 +1,23 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Icon from "./Icon";
+const savedFallback = new Map();
+function readSaved(key) {
+  try {
+    return localStorage.getItem(key) === "true";
+  } catch {
+    return savedFallback.get(key) ?? false;
+  }
+}
+function subscribeSaved(onChange) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener("vireyak-saved-change", onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener("vireyak-saved-change", onChange);
+  };
+}
 export default function TravelCard({
   item,
   kind = "stays",
@@ -9,18 +25,18 @@ export default function TravelCard({
   onSavedChange,
 }) {
   const key = `vireyak-saved-${kind}-${item.id}`;
-  const [saved, setSaved] = useState(false);
-  useEffect(() => {
-    try {
-      setSaved(localStorage.getItem(key) === "true");
-    } catch {}
-  }, [key]);
+  const saved = useSyncExternalStore(
+    subscribeSaved,
+    () => readSaved(key),
+    () => false,
+  );
   function toggle() {
     const next = !saved;
-    setSaved(next);
     try {
       localStorage.setItem(key, String(next));
     } catch {}
+    savedFallback.set(key, next);
+    window.dispatchEvent(new Event("vireyak-saved-change"));
     onSavedChange?.(item.id, next);
   }
   return (

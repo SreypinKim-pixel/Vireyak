@@ -14,12 +14,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * whole surface move as one organism instead of a set of independent widgets.
  */
 export type AIState =
-  | "idle"
-  | "listening"
-  | "thinking"
-  | "streaming"
-  | "done"
-  | "error";
+  "idle" | "listening" | "thinking" | "streaming" | "done" | "error";
 
 /**
  * A behavioural hint each component expresses **in its own material**.
@@ -31,12 +26,7 @@ export type AIState =
  * a character changes expression. Same vocabulary, different flesh.
  */
 export type AIStateMotif =
-  | "breathe"
-  | "receive"
-  | "scan"
-  | "pulse"
-  | "ping"
-  | "fault";
+  "breathe" | "receive" | "scan" | "pulse" | "ping" | "fault";
 
 /** Semantic accent applied on top of the component's own palette. */
 export type AIStateAccent = "success" | "danger" | null;
@@ -188,7 +178,7 @@ export const AI_ACCENT_COLORS: Record<"success" | "danger", string> = {
  */
 export const getAIStateAccentColor = (
   state: AIState | undefined,
-  fallback: string
+  fallback: string,
 ): string => {
   const accent = AI_STATE_MOTION[state ?? "idle"]?.accent;
   return accent ? AI_ACCENT_COLORS[accent] : fallback;
@@ -214,7 +204,7 @@ const isMotionValue = (value: AIAmplitude): value is MotionValue<number> =>
  * component internals only deal with one shape.
  */
 export const useAmplitudeValue = (
-  amplitude: AIAmplitude
+  amplitude: AIAmplitude,
 ): MotionValue<number> => {
   const fallback = useMotionValue(0);
   const numeric = typeof amplitude === "number" ? amplitude : null;
@@ -229,11 +219,7 @@ export const useAmplitudeValue = (
 };
 
 export type AudioAmplitudeStatus =
-  | "idle"
-  | "requesting"
-  | "active"
-  | "denied"
-  | "unsupported";
+  "idle" | "requesting" | "active" | "denied" | "unsupported";
 
 export type UseAudioAmplitudeOptions = {
   /** Request microphone access as soon as the hook mounts. */
@@ -270,7 +256,7 @@ const ATTACK_FACTOR = 0.35;
  * ambient animation.
  */
 export const useAudioAmplitude = (
-  options: UseAudioAmplitudeOptions = {}
+  options: UseAudioAmplitudeOptions = {},
 ): UseAudioAmplitudeResult => {
   const {
     autoStart = false,
@@ -286,14 +272,17 @@ export const useAudioAmplitude = (
   const analyserRef = useRef<AnalyserNode | null>(null);
   const bufferRef = useRef<Float32Array<ArrayBuffer> | null>(null);
 
+  const requestRef = useRef(0);
+
   const stop = useCallback(() => {
+    requestRef.current += 1;
     for (const track of streamRef.current?.getTracks() ?? []) {
       track.stop();
     }
     streamRef.current = null;
     analyserRef.current = null;
     bufferRef.current = null;
-    contextRef.current?.close();
+    void contextRef.current?.close().catch(() => {});
     contextRef.current = null;
     amplitude.set(0);
     setStatus("idle");
@@ -316,11 +305,18 @@ export const useAudioAmplitude = (
       return;
     }
 
+    const request = ++requestRef.current;
     setStatus("requesting");
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (request !== requestRef.current) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+      streamRef.current = stream;
       const context = new AudioContextCtor();
+      contextRef.current = context;
       const analyser = context.createAnalyser();
       analyser.fftSize = fftSize;
       context.createMediaStreamSource(stream).connect(analyser);
@@ -331,15 +327,25 @@ export const useAudioAmplitude = (
       bufferRef.current = new Float32Array(analyser.fftSize);
       setStatus("active");
     } catch {
+      if (request !== requestRef.current) return;
+      streamRef.current?.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+      void contextRef.current?.close().catch(() => {});
+      contextRef.current = null;
       setStatus("denied");
     }
   }, [fftSize]);
 
   useEffect(() => {
-    if (autoStart) {
-      start();
-    }
-    return stop;
+    const timer = autoStart
+      ? setTimeout(() => {
+          void start();
+        }, 0)
+      : undefined;
+    return () => {
+      clearTimeout(timer);
+      stop();
+    };
   }, [autoStart, start, stop]);
 
   useAnimationFrame(() => {
@@ -374,7 +380,7 @@ export const useAudioAmplitude = (
  * asking the visitor for permissions.
  */
 export const useSimulatedAmplitude = (
-  state: AIState = "idle"
+  state: AIState = "idle",
 ): MotionValue<number> => {
   const amplitude = useMotionValue(0);
   const motion = getAIStateMotion(state);

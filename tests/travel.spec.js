@@ -12,7 +12,7 @@ test("global navigation, local photography, theme persistence, and mobile layout
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Some journeys",
+    /SIEM REAP|KOH RONG|KAMPOT|PHNOM PENH|KIRIROM/,
   );
   await expect(
     page
@@ -198,6 +198,7 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
   const destination = page.getByRole("combobox", {
     name: "Destination",
     exact: true,
+    includeHidden: true, // Radix hides the trigger from the accessibility tree while open.
   });
   await destination.focus();
   await page.keyboard.press("Enter");
@@ -215,7 +216,7 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
   await expect(destination).toHaveAttribute("aria-expanded", "false");
   await expect(destination).toBeFocused();
   await destination.click();
-  await page.getByRole("heading", { level: 1 }).click({ force: true });
+  await page.locator("h1").click({ force: true });
   await expect(page.getByRole("listbox")).toHaveCount(0);
   await destination.click();
   await page.screenshot({

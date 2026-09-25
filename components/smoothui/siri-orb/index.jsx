@@ -155,9 +155,8 @@ const SiriOrb = ({
     (level) => stateMotion.scale + level * reactivity * AMPLITUDE_SCALE_GAIN
   );
 
-  const loopDuration = shouldReduceMotion
-    ? animationDuration
-    : animationDuration / stateMotion.speed;
+  // CSS disables the loop for reduced motion without changing server markup.
+  const loopDuration = animationDuration / stateMotion.speed;
 
   // Rim thickness scales with the orb, so the lit edge reads the same at 24px
   // and at 240px instead of swallowing the small one.
