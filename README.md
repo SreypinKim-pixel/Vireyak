@@ -119,3 +119,21 @@ viewport-aware positioning, and Royal Twilight light/dark menus.
 All application code and browser tests use TypeScript (`.ts` / `.tsx`). Run
 `npm run typecheck` for strict project-wide type checking. PostCSS uses
 `postcss.config.json` because Next.js does not load TypeScript PostCSS configs.
+
+## Registration and province API previews
+
+Registration includes inline name/email validation, a 12-character minimum password,
+password confirmation, and an optional attraction selector fetched from
+`GET /api/attractions`. Loading, empty, and failed requests are handled, with retry.
+Credentials and preferences are neither sent nor stored; a valid submission explains
+that account creation is unavailable. Replace this preview submission with the real
+registration API when its endpoint and contract are provided.
+
+The local demo APIs return `{ data: [...], demo: true }` from the curated catalog.
+`GET /api/provinces/{id}/attractions` also returns a `province` object, or a JSON
+404 for unknown IDs. Demo province IDs are `siem-reap`, `preah-sihanouk`,
+`phnom-penh`, and `kampot`; they are not official administrative codes.
+`/provinces/{id}/attractions` uses the same catalog lookup and shows the custom
+404 for unknown provinces. Invalid `/attraction/{id}` URLs also show that page,
+with Back Home and Explore Attractions links. These local endpoints can be replaced
+with backend adapters once a real API host and response schema are supplied.

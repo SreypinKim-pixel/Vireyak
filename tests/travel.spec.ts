@@ -88,7 +88,14 @@ test("global navigation, local photography, theme persistence, and mobile layout
       ),
       `${path} should not overflow`,
     ).toBe(true);
-    await expect(page.locator("footer")).toBeVisible();
+    if (path === "/register") {
+      await expect(page.locator("footer")).toHaveCount(0);
+      await expect(
+        page.getByRole("navigation", { name: "Main navigation", exact: true }),
+      ).toHaveCount(0);
+    } else {
+      await expect(page.locator("footer")).toBeVisible();
+    }
   }
   await page.goto("/");
   await page.screenshot({
@@ -214,14 +221,14 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
   await page.keyboard.press("End");
   // Radix moves keyboard focus on the next task; wait before selecting.
   await expect(
-    page.getByRole("option", { name: "Kampot", exact: true }),
+    page.getByRole("option", { name: "Tboung Khmum", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(destination).toContainText("Kampot");
+  await expect(destination).toContainText("Tboung Khmum");
   await expect(destination).toBeFocused();
   await destination.press("ArrowDown");
   await expect(
-    page.getByRole("option", { name: "Kampot", exact: true }),
+    page.getByRole("option", { name: "Tboung Khmum", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("Home");
   await expect(

@@ -1,5 +1,6 @@
 "use client";
 import type { TravelKind, SearchParams } from "@/lib/travel-types";
+import { destinationNames, provinceNames } from "@/data/province-names";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "./Icon";
@@ -9,10 +10,12 @@ export default function SearchForm({
   compact = false,
   initial = {},
   mode = "stays",
+  provinces = provinceNames,
 }: {
   compact?: boolean;
   initial?: SearchParams;
   mode?: TravelKind;
+  provinces?: string[];
 }) {
   const router = useRouter();
   const [tab, setTab] = useState<TravelKind>(mode);
@@ -98,9 +101,10 @@ export default function SearchForm({
               onChange={setDestination}
               options={[
                 { value: "", label: "Explore Cambodia" },
-                ...["Siem Reap", "Phnom Penh", "Koh Rong", "Kampot"].map(
-                  (d) => ({ value: d, label: d }),
-                ),
+                ...destinationNames(provinces).map((d) => ({
+                  value: d,
+                  label: d,
+                })),
               ]}
             />
           </span>

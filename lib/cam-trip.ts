@@ -1,3 +1,4 @@
+import { provinceNames } from "@/data/province-names";
 import { localDestinationImage } from "./destination-images";
 
 interface Province {
@@ -186,5 +187,29 @@ export async function getHomepageAttractions() {
   } catch (error) {
     console.error("Unable to load homepage attractions:", error);
     return { experiences: [], spotlight: null, unavailable: true };
+  }
+}
+
+export async function getProvinceNames(): Promise<string[]> {
+  try {
+    const response = await fetch(API_ENDPOINTS.provinces.getAll, {
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!response.ok) throw new Error("Province list unavailable");
+    const data: unknown = await response.json();
+    if (!Array.isArray(data)) return provinceNames;
+    const names = data.flatMap((province: unknown) => {
+      if (!province || typeof province !== "object" || !("nameEn" in province))
+        return [];
+      return typeof province.nameEn === "string" && province.nameEn.trim()
+        ? [province.nameEn.trim()]
+        : [];
+    });
+    return names.length
+      ? [...new Set(names)].sort((a, b) => a.localeCompare(b))
+      : provinceNames;
+  } catch {
+    return provinceNames;
   }
 }
