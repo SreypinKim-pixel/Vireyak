@@ -1,9 +1,18 @@
 {
   "compilerOptions": {
+    "checkJs": false,
+    "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "exclude": ["node_modules", ".next", ".next-production"]
+  "include": ["**/*.js", "**/*.jsx", "**/*.mjs"],
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".next-production",
+    "test-results",
+    "playwright-report"
+  ]
 }

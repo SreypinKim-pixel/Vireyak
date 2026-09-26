@@ -83,7 +83,14 @@ test("global navigation, local photography, theme persistence, and mobile layout
       ),
       `${path} should not overflow`,
     ).toBe(true);
-    await expect(page.locator("footer")).toBeVisible();
+    if (path === "/register") {
+      await expect(page.locator("footer")).toHaveCount(0);
+      await expect(
+        page.getByRole("navigation", { name: "Main navigation", exact: true }),
+      ).toHaveCount(0);
+    } else {
+      await expect(page.locator("footer")).toBeVisible();
+    }
   }
   await page.goto("/");
   await page.screenshot({

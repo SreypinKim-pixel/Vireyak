@@ -11,7 +11,13 @@ export default function NotFound() {
         explore.
       </p>
       <Link href="/" className="button-primary">
-        Back to the journey <Icon name="arrow" size={16} />
+        Back Home <Icon name="arrow" size={16} />
+      </Link>
+      <Link
+        href="/attraction"
+        className="mt-4 inline-block font-medium underline underline-offset-4"
+      >
+        Explore Attractions
       </Link>
     </div>
   );

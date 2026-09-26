@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SiteChrome from "../components/SiteChrome";
 export const metadata = {
   title: {
     default: "Vireyak — Discover Cambodia, beautifully",
@@ -29,11 +30,15 @@ export default function RootLayout({ children }) {
         >
           Skip to content
         </a>
-        <Navbar />
+        <SiteChrome>
+          <Navbar />
+        </SiteChrome>
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <Footer />
+        <SiteChrome>
+          <Footer />
+        </SiteChrome>
       </body>
     </html>
   );
