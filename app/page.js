@@ -3,6 +3,7 @@ import { getHomepageAttractions } from "@/lib/cam-trip";
 import SearchForm from "@/components/SearchForm";
 import FeatureStrip from "@/components/home/FeatureStrip";
 import FeaturedDestinations from "@/components/home/FeaturedDestinations.jsx";
+import ProvinceLookup from "@/components/home/ProvinceLookup";
 import FeaturedExperiences from "@/components/home/FeaturedExperiences";
 import WhyVireyak from "@/components/home/WhyVireyak";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -20,6 +21,7 @@ export default async function HomePage() {
       </div>
       <FeatureStrip />
       <FeaturedDestinations />
+      <ProvinceLookup />
       <FeaturedExperiences
         experiences={experiences}
         unavailable={unavailable}

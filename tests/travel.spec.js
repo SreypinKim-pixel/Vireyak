@@ -177,7 +177,7 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   await page.getByLabel("Password", { exact: true }).fill("demonstration-only");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.getByRole("status")).toContainText(
-    "Sign-in is not available yet",
+    "Authentication service is not connected yet",
   );
   await expect(page.getByLabel("Password", { exact: true })).toHaveValue("");
   for (const route of ["/products", "/products/1", "/table"]) {
@@ -189,6 +189,112 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   await expect(
     page.getByRole("heading", { name: "Off the beaten path." }),
   ).toBeVisible();
+});
+
+test("login form validates client-side without pretending authentication", async ({
+  page,
+}) => {
+  await page.goto("/login");
+
+  // Empty submission shows both field errors and stays on the page.
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("#email-error")).toContainText(
+    "Email is required.",
+  );
+  await expect(page.locator("#password-error")).toContainText(
+    "Password is required.",
+  );
+  await expect(page).toHaveURL(/\/login$/);
+
+  // An invalid email format is rejected even with a filled password.
+  await page.getByLabel("Email address").fill("not-an-email");
+  await page.getByLabel("Password", { exact: true }).fill("demonstration-only");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("#email-error")).toContainText(
+    "Enter a valid email address.",
+  );
+  await expect(page.locator("#password-error")).toHaveCount(0);
+
+  // A missing password is rejected even when the email is valid.
+  await page.getByLabel("Email address").fill("test@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("#password-error")).toContainText(
+    "Password is required.",
+  );
+  await expect(page.locator("#email-error")).toHaveCount(0);
+
+  // Valid input passes client-side validation without claiming real login.
+  await page.getByLabel("Email address").fill("test@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("demonstration-only");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  const status = page.getByRole("status");
+  await expect(status).toContainText(
+    "Your login information is valid. Authentication service is not connected yet.",
+  );
+  await expect(status).not.toContainText(
+    /signed in|successful|welcome back|authenticated/i,
+  );
+
+  // The login page still links to the existing register page.
+  await page
+    .locator("p")
+    .filter({ hasText: "New to Vireyak?" })
+    .getByRole("link", { name: "Sign up", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/register$/);
+  await expect(
+    page.getByRole("heading", {
+      name: "Your journey starts here.",
+      exact: true,
+    }),
+  ).toBeVisible();
+});
+
+test("province lookup fetches live teacher API data with loading and error states", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  // Slow this same-origin proxy request so the loading state is observable.
+  await page.route("**/api/provinces/2", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    await route.continue();
+  });
+
+  await page.getByLabel("Province ID").fill("2");
+  await page
+    .getByRole("button", { name: "View province", exact: true })
+    .click();
+  await expect(page.getByTestId("province-loading")).toContainText(
+    "Loading province 2",
+  );
+  await expect(page.getByTestId("province-result")).toContainText("Battambang");
+  await expect(page.getByTestId("province-result")).toContainText(
+    "Northwest Cambodia",
+  );
+  await expect(page.getByTestId("province-result")).toContainText(
+    "GET /api/provinces/2",
+  );
+
+  // A missing province is reported clearly, without showing stale data.
+  await page.getByLabel("Province ID").fill("99999");
+  await page
+    .getByRole("button", { name: "View province", exact: true })
+    .click();
+  await expect(page.getByTestId("province-error")).toContainText(
+    "Province not found",
+  );
+  await expect(page.getByTestId("province-result")).toHaveCount(0);
+
+  // Empty input is rejected locally before any request is attempted.
+  await page.getByLabel("Province ID").fill("");
+  await page
+    .getByRole("button", { name: "View province", exact: true })
+    .click();
+  await expect(page.getByTestId("province-error")).toContainText(
+    "Enter a positive province ID",
+  );
 });
 
 test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile boundaries", async ({

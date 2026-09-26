@@ -2,17 +2,52 @@
 import { useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function AuthForm({ register = false }) {
   const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  function clearError(field) {
+    if (errors[field]) setErrors({ ...errors, [field]: "" });
+  }
+
+  function validate(form) {
+    const email = (form.get("email") || "").trim();
+    const password = form.get("password") || "";
+    const next = {};
+    if (!email) next.email = "Email is required.";
+    else if (!EMAIL_PATTERN.test(email))
+      next.email = "Enter a valid email address.";
+    if (!password || !password.trim()) next.password = "Password is required.";
+    else if (register && password.length < 12)
+      next.password = "Password must be at least 12 characters.";
+    if (register && !(form.get("name") || "").trim())
+      next.name = "Full name is required.";
+    return next;
+  }
+
   function submit(e) {
     e.preventDefault();
-    setMessage(
-      register
-        ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
-        : "Sign-in is not available yet. You can still explore Cambodia without an account.",
-    );
-    e.currentTarget.reset();
+    if (submitting) return;
+    const form = e.currentTarget;
+    setSubmitting(true);
+    const nextErrors = validate(new FormData(form));
+    setErrors(nextErrors);
+    if (nextErrors.email || nextErrors.password || nextErrors.name) {
+      setMessage("Please fix the highlighted fields and try again.");
+    } else {
+      setMessage(
+        register
+          ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
+          : "Your login information is valid. Authentication service is not connected yet.",
+      );
+      form.reset();
+    }
+    setSubmitting(false);
   }
   return (
     <div className="shell py-10 sm:py-16">
@@ -58,7 +93,7 @@ export default function AuthForm({ register = false }) {
             Account preview only. Sign-in and registration are not connected
             yet. Please don&apos;t enter a real password.
           </p>
-          <form onSubmit={submit} className="space-y-4">
+          <form onSubmit={submit} noValidate className="space-y-4">
             {register && (
               <label className="block">
                 <span className="field-label">Full name</span>
@@ -69,8 +104,16 @@ export default function AuthForm({ register = false }) {
                   required
                   maxLength={100}
                   placeholder="Your name"
-                  className="field"
+                  aria-invalid={errors.name ? "true" : undefined}
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  onChange={() => clearError("name")}
+                  className={`field${errors.name ? " field-invalid" : ""}`}
                 />
+                {errors.name && (
+                  <span id="name-error" className="field-error">
+                    {errors.name}
+                  </span>
+                )}
               </label>
             )}
             <label className="block">
@@ -82,8 +125,16 @@ export default function AuthForm({ register = false }) {
                 required
                 maxLength={254}
                 placeholder="you@example.com"
-                className="field"
+                aria-invalid={errors.email ? "true" : undefined}
+                aria-describedby={errors.email ? "email-error" : undefined}
+                onChange={() => clearError("email")}
+                className={`field${errors.email ? " field-invalid" : ""}`}
               />
+              {errors.email && (
+                <span id="email-error" className="field-error">
+                  {errors.email}
+                </span>
+              )}
             </label>
             <label className="block">
               <span className="field-label">Password</span>
@@ -101,7 +152,12 @@ export default function AuthForm({ register = false }) {
                       ? "At least 12 characters (demo only)"
                       : "Enter a demo password"
                   }
-                  className="field pr-16"
+                  aria-invalid={errors.password ? "true" : undefined}
+                  aria-describedby={
+                    errors.password ? "password-error" : undefined
+                  }
+                  onChange={() => clearError("password")}
+                  className={`field pr-16${errors.password ? " field-invalid" : ""}`}
                 />
                 <button
                   type="button"
@@ -112,8 +168,17 @@ export default function AuthForm({ register = false }) {
                   {showPassword ? "Hide" : "Show"}
                 </button>
               </span>
+              {errors.password && (
+                <span id="password-error" className="field-error">
+                  {errors.password}
+                </span>
+              )}
             </label>
-            <button type="submit" className="button-primary w-full">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="button-primary w-full"
+            >
               {register ? "Create account" : "Log in"}
               <Icon name="arrow" size={16} />
             </button>
