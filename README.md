@@ -28,7 +28,7 @@ so an open development server does not overwrite the production check output.
 
 ## Design
 
-The Royal Twilight palette lives in `tailwind.config.js`; semantic light/dark
+The Royal Twilight palette lives in `tailwind.config.ts`; semantic light/dark
 mappings live in `app/globals.css`.
 
 | Token                | Light     | Dark      |
@@ -44,19 +44,19 @@ White light-mode cards and a dark card surface supplement the supplied tokens.
 Body copy uses translucent primary text for readability. The theme follows the
 system preference on first visit; the navbar toggle persists a manual choice.
 
-`components/Brand.js` contains the text wordmark and accepts a `logoSrc` prop
-for a future image. Navbar and footer are shared through `app/layout.js`.
+`components/Brand.tsx` contains the text wordmark and accepts a `logoSrc` prop
+for a future image. Navbar and footer are shared through `app/layout.tsx`.
 
 ## Structure and behavior
 
-- `app/page.js`: destination-led landing page with stay/experience search.
+- `app/page.tsx`: destination-led landing page with stay/experience search.
 - `app/stays/`: destination, capacity, type, budget, and saved-favorite filters;
   sorting; stay details; estimated trip subtotal.
 - `app/attraction/`: experience discovery, filtering, and detail pages.
 - `app/about/`: brand story, thoughtful travel guidance, and FAQs.
 - `app/login/`, `app/register/`: styled account previews with native validation.
 - `components/`: shared navigation, footer, icons, cards, search, filters, and forms.
-- `data/travel.js`: explicitly illustrative stays, prices, ratings, and experiences.
+- `data/travel.ts`: explicitly illustrative stays, prices, ratings, and experiences.
 - `public/images/README.md`: photo sources and licensing links.
 - Legacy `/products`, `/products/:id`, and `/table` URLs redirect to `/stays`.
 
@@ -83,7 +83,7 @@ pre-push checks.
 
 `.env` is ignored and has owner-only permissions. `.env.example` must contain
 placeholders only. Never expose secrets via `NEXT_PUBLIC_`, client props,
-`next.config.js`'s `env` option, or anything in `public/`.
+`next.config.ts`'s `env` option, or anything in `public/`.
 
 `.gitignore` protects Git staging; `.ignore` mirrors its rules for compatible
 search tools. Keep them synchronized. They exclude environment variants,
@@ -112,6 +112,10 @@ navigation, theme persistence, local images, filtering/sorting, favorites,
 search-to-trip date propagation, trip estimates, account preview feedback,
 legacy redirects, and missing pages. Screenshots are written to `/tmp/`.
 `npm run lint` runs ESLint with Next.js core web vitals rules and rejects warnings.
-Dropdowns share `components/Dropdown.js`, built with Radix Select: keyboard
+Dropdowns share `components/Dropdown.tsx`, built with Radix Select: keyboard
 navigation, typeahead, Escape/outside-click dismissal, focus restoration,
 viewport-aware positioning, and Royal Twilight light/dark menus.
+
+All application code and browser tests use TypeScript (`.ts` / `.tsx`). Run
+`npm run typecheck` for strict project-wide type checking. PostCSS uses
+`postcss.config.json` because Next.js does not load TypeScript PostCSS configs.

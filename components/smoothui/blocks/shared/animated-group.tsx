@@ -113,7 +113,7 @@ const addDefaultVariants = (variants: Variants) => ({
 // Keep a stable wrapper per element type across all renders and instances.
 const motionComponents = new Map<
   React.ElementType,
-  ReturnType<typeof motion.create>
+  React.ComponentType<import("motion/react").HTMLMotionProps<"div">>
 >();
 function getMotionComponent(element: React.ElementType) {
   let component = motionComponents.get(element);
