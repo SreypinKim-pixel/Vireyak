@@ -1,4 +1,5 @@
 import Icon from "../Icon";
+import { GitHub, Telegram } from "./SocialIcons";
 
 type ProfileLink = { label: string; href: string };
 
@@ -30,16 +31,46 @@ export default function ProfileLinks({
       {links.map((link) => {
         const isEmail =
           typeof link.href === "string" && link.href.startsWith("mailto:");
+        const SocialIcon =
+          link.label === "GitHub"
+            ? GitHub
+            : link.label === "Telegram"
+              ? Telegram
+              : null;
+        const content = SocialIcon ? (
+          <SocialIcon width={22} height={22} aria-hidden="true" />
+        ) : (
+          <>
+            <Icon name={isEmail ? "mail" : "globe"} size={14} />
+            {link.label || "Profile"}
+          </>
+        );
+        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-[10px] font-medium transition-colors ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
+        if (!link.href?.trim()) {
+          return (
+            <span
+              key={link.label}
+              role="link"
+              aria-disabled="true"
+              aria-label={`${link.label} — profile coming soon`}
+              title={`${link.label} — profile coming soon`}
+              className={`${className} cursor-default`}
+            >
+              {content}
+            </span>
+          );
+        }
         return (
           <a
             key={`${link.label}-${link.href}`}
-            href={link.href}
+            href={link.href.trim()}
+            aria-label={link.label || "Profile"}
+            title={link.label || "Profile"}
             target={isEmail ? undefined : "_blank"}
             rel={isEmail ? undefined : "noreferrer"}
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] font-medium transition ${toneClasses}`}
+            className={className}
           >
-            <Icon name={isEmail ? "mail" : "globe"} size={12} />
-            {link.label || "Profile"}
+            {content}
           </a>
         );
       })}

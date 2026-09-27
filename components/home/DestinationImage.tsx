@@ -5,14 +5,19 @@ import { useState } from "react";
 export default function DestinationImage({
   src,
   alt,
+  fallbackSrc,
   ...props
 }: Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src?: string | null;
   alt: string;
+  fallbackSrc?: string;
 }) {
-  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const [failedSources, setFailedSources] = useState<string[]>([]);
+  const imageSrc = [src, fallbackSrc].find(
+    (candidate) => candidate && !failedSources.includes(candidate),
+  );
 
-  if (!src || failedSrc === src) {
+  if (!imageSrc) {
     return (
       <div
         role="img"
@@ -26,6 +31,11 @@ export default function DestinationImage({
   }
 
   return (
-    <img {...props} src={src} alt={alt} onError={() => setFailedSrc(src)} />
+    <img
+      {...props}
+      src={imageSrc}
+      alt={alt}
+      onError={() => setFailedSources((failed) => [...failed, imageSrc])}
+    />
   );
 }

@@ -21,12 +21,23 @@ test("registration validates fields and loads optional attractions", async ({
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByLabel("Confirm password")).toBeFocused();
   await page.getByLabel("Confirm password").fill("demo-password-only");
-  // The attraction field is the themed combobox (components/Dropdown.tsx), not a
-  // native <select>, so it is driven the way tests/travel.spec.ts drives the
-  // other themed selects.
+  await expect(page.getByText("Your passwords must match.")).not.toBeVisible();
   await page.getByLabel("Attraction of interest").click();
+  await page.getByRole("option", { name: "Angkor Wat", exact: true }).click();
+  await page.getByLabel("Province of interest").click();
+  await page.getByRole("option", { name: "Kampot", exact: true }).click();
+  await expect(page.getByLabel("Attraction of interest")).toHaveText(
+    "Choose an attraction",
+  );
+  await page.getByLabel("Attraction of interest").click();
+  await expect(
+    page.getByRole("option", {
+      name: "Angkor Wat",
+      exact: true,
+    }),
+  ).toHaveCount(0);
   await page
-    .getByRole("option", { name: "Angkor Wat at first light", exact: true })
+    .getByRole("option", { name: "Bokor National Park", exact: true })
     .click();
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
@@ -65,12 +76,11 @@ test("invalid attraction and province IDs show the custom 404 with recovery link
     const response = await page.goto(path);
     expect(response?.status()).toBe(404);
     await expect(
-      page.getByRole("heading", { name: "Off the beaten path." }),
+      page.getByRole("heading", { name: /wandered off the map/ }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Back Home" })).toHaveAttribute(
-      "href",
-      "/",
-    );
+    await expect(
+      page.getByRole("link", { name: "Back to the map" }),
+    ).toHaveAttribute("href", "/");
     await page
       .getByRole("link", { name: "Explore Attractions", exact: true })
       .click();
@@ -85,5 +95,25 @@ test("invalid attraction and province IDs show the custom 404 with recovery link
   await page.goto("/provinces/siem-reap/attractions");
   await expect(
     page.getByRole("heading", { name: "Explore Siem Reap" }),
+  ).toBeVisible();
+});
+
+test("malformed attraction data does not block registration", async ({
+  page,
+}) => {
+  await page.route("**/api/attractions", (route) =>
+    route.fulfill({
+      json: { data: [{ id: "broken", name: "Broken", province: null }] },
+    }),
+  );
+  await page.goto("/register");
+  await expect(page.getByText(/Attractions could not be loaded/)).toBeVisible();
+  await page.getByLabel("Full name").fill("Demo Traveler");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("demo-password-only");
+  await page.getByLabel("Confirm password").fill("demo-password-only");
+  await page.getByRole("button", { name: "Create account" }).click();
+  await expect(
+    page.getByText(/Account creation is not available yet/),
   ).toBeVisible();
 });

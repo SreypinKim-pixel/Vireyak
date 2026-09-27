@@ -63,10 +63,8 @@ function toneFor(name: string) {
  * card face and the caption sits on top of it. All three crop with
  * `object-cover` anchored to the top edge.
  *
- * The zooms differ on purpose: every frame except the gallery face zooms on CSS
- * `:hover`, while the gallery face is driven by the active card the gallery
- * already tracks (`.team-gallery-photo` in app/globals.css), so that row's photo
- * moves with the same state — and the same timing — as the card around it.
+ * Gallery portraits stay at a fixed size while their parent layer is clipped
+ * and translated to create the accordion expansion.
  */
 function photoSourceOf(photo: StaticImageData | string | null) {
   if (typeof photo === "string" && photo.length > 0) {
@@ -95,9 +93,6 @@ export default function ProfilePhoto({
   const tone = TONES[toneFor(name)];
   const image = photoSourceOf(photo);
   const showPhoto = image !== null && !failed;
-  // The gallery face is the only frame whose zoom is not a CSS `:hover` effect:
-  // the gallery expands the card and the photo together, so its zoom class is
-  // driven by the card's active state instead.
   const isGalleryFace = variant === "fill";
 
   return (

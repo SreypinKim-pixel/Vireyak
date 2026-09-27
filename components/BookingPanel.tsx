@@ -2,7 +2,6 @@
 import type { TravelItem, TravelKind, SearchParams } from "@/lib/travel-types";
 import { useState } from "react";
 import Icon from "./Icon";
-import Dropdown from "./Dropdown";
 import DatePicker, { parseDate } from "./DatePicker";
 export default function BookingPanel({
   item,
@@ -20,7 +19,9 @@ export default function BookingPanel({
     typeof initial.checkout === "string" ? initial.checkout : "",
   );
   const [guests, setGuests] = useState(
-    Math.max(1, Math.min(item.capacity || 6, Number(initial.guests) || 2)),
+    String(
+      Math.max(1, Math.min(item.capacity || 6, Number(initial.guests) || 2)),
+    ),
   );
   const [message, setMessage] = useState("");
   const [ready, setReady] = useState(false);
@@ -115,21 +116,21 @@ export default function BookingPanel({
         )}
         <div className="block">
           <span className="field-label">Travelers</span>
-          <Dropdown
-            label="Travelers"
+          <input
+            aria-label="Travelers"
+            type="number"
+            inputMode="numeric"
+            min={1}
+            max={item.capacity || 6}
+            step={1}
+            required
+            className="field"
             value={guests}
-            onChange={(value) => {
-              setGuests(Number(value));
+            onChange={(event) => {
+              setGuests(event.target.value);
               setReady(false);
               setMessage("");
             }}
-            options={Array.from(
-              { length: item.capacity || 6 },
-              (_, i) => i + 1,
-            ).map((n) => ({
-              value: String(n),
-              label: `${n} ${n === 1 ? "guest" : "guests"}`,
-            }))}
           />
         </div>
         {(kind !== "stays" || nights > 0) && (
@@ -139,7 +140,7 @@ export default function BookingPanel({
               estimated subtotal
             </span>
             <strong>
-              ${item.price * (kind === "stays" ? nights : guests)}
+              ${item.price * (kind === "stays" ? nights : Number(guests))}
             </strong>
           </div>
         )}

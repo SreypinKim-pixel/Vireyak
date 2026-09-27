@@ -2,12 +2,7 @@ import { mentor, teamMembers, teamSection } from "../../data/team";
 import MentorCard from "./MentorCard";
 import TeamGallery from "./TeamGallery";
 
-/**
- * Meet the team. The mentor leads the section in its own larger highlighted
- * card, and the six members sit under it in one interactive gallery — the card
- * under the pointer expands while the other cards narrow. The mentor is kept
- * clear of that interaction, so its profile never expands like a member panel.
- */
+/** Mentor above the six-panel expanding member gallery. */
 export default function TeamSection() {
   return (
     <section id="team" className="shell scroll-mt-8 py-14 sm:py-16">

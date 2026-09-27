@@ -7,14 +7,14 @@ import ProfilePhoto from "./ProfilePhoto";
  * Larger than a team panel, on a dark surface, with gold accents and a dedicated
  * portrait frame for the mentor's photo, so the mentor reads as the profile the
  * six team panels sit under. It deliberately has none of the gallery's
- * hover/expand behaviour — only the shared photo zoom.
+ * hover, expansion, or photo zoom behaviour.
  *
  * Expected shape (see data/team.ts): { id, name, role, bio, photo, links }
  */
 export default function MentorCard({ mentor }: { mentor?: TeamMember | null }) {
   if (!mentor) return null;
   return (
-    <article className="group relative isolate overflow-hidden rounded-3xl border border-gold/30 bg-navy text-ivory shadow-soft">
+    <article className="relative isolate overflow-hidden rounded-3xl border border-gold/30 bg-navy text-ivory shadow-soft">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-gold/15 blur-3xl"

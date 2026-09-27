@@ -7,6 +7,7 @@ import { HeroFootnote } from "./HeroHighlights";
 /**
  * About page hero. `highlights` is an optional streamed slot holding the live
  * API figures, so the hero itself paints immediately.
+ * @param {{ highlights?: import("react").ReactNode }} props
  */
 export default function AboutHero({
   highlights = null,

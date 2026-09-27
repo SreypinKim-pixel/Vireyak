@@ -1,9 +1,17 @@
-import { test, expect } from "@playwright/test";
+const { test, expect } = require("@playwright/test");
+
+function visiblePanelWidths(nodes) {
+  return nodes.map((node) => {
+    const clip = getComputedStyle(node).clipPath;
+    const right = Number(clip.match(/^inset\(0px ([\d.]+)px/)?.[1] || 0);
+    return Math.round(node.getBoundingClientRect().width - right);
+  });
+}
 
 test("about page renders live Cambodia catalogue data, team, and mentor", async ({
   page,
 }) => {
-  const errors: string[] = [];
+  const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
 
   await page.goto("/about");
@@ -97,16 +105,13 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
           .evaluateAll(
             (photos) =>
               photos.length > 0 &&
-              photos.every(
-                (photo) =>
-                  photo instanceof HTMLImageElement && photo.naturalWidth > 0,
-              ),
+              photos.every((photo) => photo.naturalWidth > 0),
           ),
       { message: "every team photo should load", timeout: 15000 },
     )
     .toBe(true);
 
-  // Cards in order: the mentor first, then the six members as data/team.ts lists
+  // Cards in order: the mentor first, then the six members as data/team.js lists
   // them, each with their own bundled photo.
   const cards = await teamCards.evaluateAll((articles) =>
     articles.map((article) => {
@@ -182,10 +187,7 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
   const cards = page.locator('#team [data-slot="team-gallery"] article');
   await expect(cards).toHaveCount(6);
 
-  const widths = () =>
-    cards.evaluateAll((nodes) =>
-      nodes.map((node) => Math.round(node.getBoundingClientRect().width)),
-    );
+  const widths = () => cards.evaluateAll(visiblePanelWidths);
 
   // Default state: nothing is hovered, so the six panels are about equal.
   const idle = await widths();
@@ -194,12 +196,11 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
     "cards should start at similar widths",
   ).toBeLessThanOrEqual(8);
 
-  // The panel transition runs for 800ms on an ease-out curve, so it has landed
-  // on the final width well before this wait — 99.9% of the travel by 700ms.
-  const settle = () => page.waitForTimeout(700);
+  // Measure settled accordion states; switching mid-animation is tested separately.
+  const settle = () => page.waitForTimeout(1300);
 
   // Hovering a card expands it and shrinks the other five.
-  await cards.nth(2).hover();
+  await cards.nth(2).hover({ position: { x: 20, y: 30 } });
   await settle();
   const expanded = await widths();
   expect(
@@ -221,7 +222,7 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
   }
 
   // Moving the pointer to another card hands the expansion over.
-  await cards.nth(4).hover();
+  await cards.nth(4).hover({ position: { x: 20, y: 30 } });
   await settle();
   const handedOver = await widths();
   expect(
@@ -260,12 +261,9 @@ test.describe("team gallery on touch screens", () => {
       "the gallery should scroll inside itself instead of widening the page",
     ).toBe(true);
 
-    const widths = () =>
-      cards.evaluateAll((nodes) =>
-        nodes.map((node) => Math.round(node.getBoundingClientRect().width)),
-      );
+    const widths = () => cards.evaluateAll(visiblePanelWidths);
 
-    await cards.nth(1).tap();
+    await cards.nth(1).tap({ position: { x: 20, y: 30 } });
     await expect
       .poll(
         async () => {
@@ -276,7 +274,7 @@ test.describe("team gallery on touch screens", () => {
       )
       .toBe(true);
 
-    await cards.nth(3).tap();
+    await cards.nth(3).tap({ position: { x: 20, y: 30 } });
     await expect
       .poll(
         async () => {
@@ -332,10 +330,7 @@ test("about page call to action links use the existing routes", async ({
           .evaluateAll(
             (photos) =>
               photos.length > 0 &&
-              photos.every(
-                (photo) =>
-                  photo instanceof HTMLImageElement && photo.naturalWidth > 0,
-              ),
+              photos.every((photo) => photo.naturalWidth > 0),
           ),
       { message: "team photos should load at mobile width", timeout: 15000 },
     )
@@ -346,4 +341,153 @@ test("about page call to action links use the existing routes", async ({
     fullPage: true,
     animations: "disabled",
   });
+});
+
+test("team hover stays stable across gaps and brief exits", async ({
+  page,
+}) => {
+  await page.goto("/about");
+  const gallery = page.locator('[data-slot="team-gallery"]');
+  const cards = gallery.locator("article");
+  await cards.nth(2).hover({ position: { x: 20, y: 30 } });
+  await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
+  await page.waitForTimeout(750);
+  const box = await cards.nth(2).boundingBox();
+  // The space between panels belongs to the gallery, not another member.
+  await page.mouse.move(box.x + box.width + 6, box.y + 30);
+  await page.waitForTimeout(180);
+  await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
+  // A small accidental excursion should not collapse and reopen the row.
+  await page.mouse.move(box.x + box.width / 2, box.y - 3);
+  await page.mouse.move(box.x + box.width / 2, box.y + 30);
+  await page.waitForTimeout(180);
+  await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
+  // Remaining outside still restores the idle state.
+  await page.mouse.move(5, 5);
+  await expect(gallery.locator('[data-active="true"]')).toHaveCount(0);
+});
+
+test("mentor photo does not zoom on hover", async ({ page }) => {
+  await page.goto("/about");
+  const mentor = page.locator("#team article").first();
+  await mentor.hover();
+  await page.waitForTimeout(800);
+  expect(
+    await mentor
+      .locator("img")
+      .evaluate((img) => getComputedStyle(img).transform),
+  ).toBe("none");
+});
+
+test("team portraits stay at a fixed size while an expansion is interrupted", async ({
+  page,
+}) => {
+  await page.goto("/about");
+  const cards = page.locator(".team-gallery-card");
+  await cards.first().scrollIntoViewIfNeeded();
+  const photoSizes = () =>
+    cards.locator("img").evaluateAll((images) =>
+      images.map((img) => {
+        const rect = img.getBoundingClientRect();
+        return { width: rect.width, height: rect.height };
+      }),
+    );
+  const initialPhotos = await photoSizes();
+  await cards.nth(2).focus();
+  await page.waitForTimeout(160);
+  const beforeSwitch = await cards
+    .nth(2)
+    .evaluate(
+      (card) =>
+        card.getBoundingClientRect().width -
+        Number(
+          getComputedStyle(card).clipPath.match(
+            /^inset\(0px ([\d.]+)px/,
+          )?.[1] || 0,
+        ),
+    );
+  await cards.nth(4).focus();
+  const samples = await cards.nth(2).evaluate(
+    (card) =>
+      new Promise((resolve) => {
+        const widths = [];
+        const start = performance.now();
+        const sample = (time) => {
+          widths.push(
+            card.getBoundingClientRect().width -
+              Number(
+                getComputedStyle(card).clipPath.match(
+                  /^inset\(0px ([\d.]+)px/,
+                )?.[1] || 0,
+              ),
+          );
+          if (time - start < 450) requestAnimationFrame(sample);
+          else resolve(widths);
+        };
+        requestAnimationFrame(sample);
+      }),
+  );
+  expect(Math.abs(samples[0] - beforeSwitch)).toBeLessThan(45);
+  expect(new Set(samples.map(Math.round)).size).toBeGreaterThan(5);
+  expect(samples.at(-1)).toBeLessThan(samples[0]);
+  const finalPhotos = await photoSizes();
+  for (const [index, photo] of finalPhotos.entries()) {
+    // Translated DOMRects carry floating-point rounding below a thousandth px.
+    expect(photo.width).toBeCloseTo(initialPhotos[index].width, 3);
+    expect(photo.height).toBeCloseTo(initialPhotos[index].height, 3);
+  }
+  await expect(cards.nth(4)).toHaveAttribute("data-active", "true");
+});
+
+test("team gallery respects reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/about");
+  const cards = page.locator(".team-gallery-card");
+  await cards.nth(2).focus();
+  await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
+  expect(
+    await cards
+      .nth(2)
+      .evaluate((card) => getComputedStyle(card).transitionDuration),
+  ).toBe("0s");
+  const widths = await cards.evaluateAll(visiblePanelWidths);
+  expect(widths[2]).toBeGreaterThan(widths[0] * 3);
+  await cards.nth(4).focus();
+  const switched = await cards.evaluateAll(visiblePanelWidths);
+  expect(switched[4]).toBeGreaterThan(switched[2] * 3);
+});
+
+test("accordion layers never resize or retrigger under a stationary pointer", async ({
+  page,
+}) => {
+  await page.goto("/about");
+  const cards = page.locator(".team-gallery-card");
+  await cards.first().scrollIntoViewIfNeeded();
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(750);
+  await page.evaluate(() => {
+    window.teamHoverFrames = [];
+    window.teamHoverStop = false;
+    const sample = () => {
+      const nodes = [...document.querySelectorAll(".team-gallery-card")];
+      window.teamHoverFrames.push({
+        active: nodes.findIndex((node) => node.dataset.active === "true"),
+        dimensions: nodes.map((node) => [node.offsetWidth, node.offsetHeight]),
+      });
+      if (!window.teamHoverStop) requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
+  await cards.nth(2).hover({ position: { x: 20, y: 30 } });
+  await page.waitForTimeout(1000);
+  const frames = await page.evaluate(() => {
+    window.teamHoverStop = true;
+    return window.teamHoverFrames;
+  });
+  expect(frames.length).toBeGreaterThan(10);
+  for (const frame of frames)
+    expect(frame.dimensions).toEqual(frames[0].dimensions);
+  const activeFrames = frames.filter((frame) => frame.active !== -1);
+  expect(activeFrames.length).toBeGreaterThan(10);
+  expect(activeFrames.every((frame) => frame.active === 2)).toBe(true);
 });

@@ -11,13 +11,10 @@
 //    interactive gallery and the mentor card alike), so a portrait shot with the
 //    face in the upper half looks best. If `photo` is null — or the file fails to
 //    load — the card shows an initials tile instead, so nothing ever breaks.
-// 3. `links` takes any number of entries, for example:
-//    links: [
-//      { label: "GitHub", href: "https://github.com/your-handle" },
-//      { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle" },
-//      { label: "Email", href: "mailto:you@example.com" },
-//    ]
-//    An empty list simply hides the link row.
+// 3. Paste each person's profile URLs into the matching `href` below.
+//    Example: { label: "GitHub", href: "https://github.com/your-handle" }
+//    Example: { label: "Telegram", href: "https://t.me/your-handle" }
+//    Empty URLs show the icons without making them clickable.
 // 4. `id` is only used as the React key, so keep it stable and unique.
 
 import hengLeapPhoto from "../components/about/image/HengLeap.png";
@@ -56,7 +53,10 @@ export const teamMembers: TeamMember[] = [
     role: "Home Page Developer",
     bio: "Developed the main landing page and its overall content and layout. Worked on the hero section, featured attractions, popular provinces, categories, CTA, and attraction search functionality.",
     photo: pinLeaderPhoto,
-    links: [],
+    links: [
+      { label: "GitHub", href: "" },
+      { label: "Telegram", href: "" },
+    ],
   },
   {
     id: "leang-seavminh",
@@ -64,7 +64,10 @@ export const teamMembers: TeamMember[] = [
     role: "Sign Up Page Developer",
     bio: "Developed the user Registration / Sign Up page. Worked on the registration form, input fields, buttons, basic form validation, and API integration.",
     photo: seavminhPhoto,
-    links: [],
+    links: [
+      { label: "GitHub", href: "" },
+      { label: "Telegram", href: "" },
+    ],
   },
   {
     id: "keo-hengleap",
@@ -72,7 +75,10 @@ export const teamMembers: TeamMember[] = [
     role: "Login Page Developer",
     bio: "Developed the user Login page. Worked on the login form, input fields, buttons, basic form validation, and API integration.",
     photo: hengLeapPhoto,
-    links: [],
+    links: [
+      { label: "GitHub", href: "" },
+      { label: "Telegram", href: "" },
+    ],
   },
   {
     id: "sok-chanpanha",
@@ -80,7 +86,10 @@ export const teamMembers: TeamMember[] = [
     role: "Navbar & Footer Developer",
     bio: "Developed the website's navigation bar and footer. Ensured navigation links are consistent across all pages and the layout is responsive. Added navigation to Home, Attractions, Provinces, About, Login, and Sign Up.",
     photo: panhaPhoto,
-    links: [],
+    links: [
+      { label: "GitHub", href: "" },
+      { label: "Telegram", href: "" },
+    ],
   },
   {
     id: "koem-longhuy",
@@ -88,7 +97,10 @@ export const teamMembers: TeamMember[] = [
     role: "Custom 404 Page Developer",
     bio: "Developed the custom 404 Error page. Created a clear and user-friendly design for pages that cannot be found and added Back Home / Explore Attractions navigation.",
     photo: longhuyPhoto,
-    links: [],
+    links: [
+      { label: "GitHub", href: "" },
+      { label: "Telegram", href: "" },
+    ],
   },
   {
     id: "chhom-nadaraguel",
@@ -96,7 +108,10 @@ export const teamMembers: TeamMember[] = [
     role: "About Page Developer",
     bio: "Developed the About page. Worked on the project information, website purpose, team section, and Popular Provinces / Explore Cambodia section using the provinces API.",
     photo: raguelPhoto,
-    links: [],
+    links: [
+      { label: "GitHub", href: "" },
+      { label: "Telegram", href: "" },
+    ],
   },
 ];
 
@@ -122,5 +137,8 @@ export const mentor: TeamMember = {
   role: "Project Mentor",
   bio: "Guides the team through scope, architecture, and presentation, and reviews each release before it reaches the Vireyak catalogue.",
   photo: mentorPhoto,
-  links: [],
+  links: [
+    { label: "GitHub", href: "" },
+    { label: "Telegram", href: "" },
+  ],
 };

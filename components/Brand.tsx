@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 export default function Brand({
   light = false,
@@ -6,7 +8,8 @@ export default function Brand({
   light?: boolean;
   logoSrc?: string | null;
 }) {
-  if (logoSrc) {
+  const [failed, setFailed] = useState(false);
+  if (logoSrc && !failed) {
     return (
       <Link
         href="/"
@@ -15,6 +18,7 @@ export default function Brand({
       >
         <img
           src={logoSrc}
+          onError={() => setFailed(true)}
           alt="Vireyak"
           width={2001}
           height={786}

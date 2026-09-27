@@ -231,105 +231,62 @@
   .btn {
     @apply button-primary;
   }
-  /* --------------------------------------------------------------------------
-     Interactive team gallery: hover motion (components/about/TeamGallery.js).
-
-     The row is plain flex. The card under the pointer only asks for more of the
-     row's width — `flex-grow: 3.4` instead of `1`, both on a `flex-basis: 0` — and
-     the browser interpolates that one number, so the active card opens while its
-     five neighbours compress in the same layout pass. The row redistributes the
-     width it already has; no card ever switches to a different width, and the
-     cards sum to the same total on every frame.
-
-     Every moving part below runs on that one duration and one curve, so the panel,
-     the photo and the text read as a single physical movement — the only
-     deliberate exception is the spine name, which says why below:
-     - .team-gallery-card     panel: flex-grow, dim, border and shadow
-     - .team-gallery-photo    photo: a whisper of zoom, never more than 4%
-     - .team-gallery-caption  member details, laid out at one fixed width
-     - .team-gallery-fade     caption and spine: fade and the small rise
-     - .team-gallery-spine    narrow-panel name, handed over to the caption
-     - .team-gallery-name     member name: size only, 13px <=> 18/20px
-     - .team-gallery-reveal   bio: unfolds to its own height
-
-     The curve is an ease-out: the row starts moving on the frame the pointer
-     arrives and then settles, so a hand-off reads as one movement. An ease-in-out
-     spends its first tenth of a second almost still and then rushes through the
-     middle, which reads as "the old card closed, then the new one opened" even
-     though the layout itself was already continuous.
-  */
+  /* Keep the accordion design, but animate painted layers instead of layout.
+     The row and every card have fixed dimensions throughout hover. */
+  .team-gallery-row {
+    container-type: inline-size;
+    --team-gap: 12px;
+    --team-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --team-duration: 600ms;
+  }
+  @media (min-width: 1024px) {
+    .team-gallery-row {
+      --team-gap: 16px;
+    }
+  }
   .team-gallery-card {
-    --team-motion-duration: 800ms;
-    --team-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --team-space: calc(100cqw - (var(--team-count) - 1) * var(--team-gap));
+    --team-open-width: calc(var(--team-space) * 3.4 / var(--team-total));
+    --team-visible-width: calc(var(--team-space) * var(--team-fraction));
+    width: var(--team-open-width);
+    transform: translateX(
+      calc(
+        var(--team-space) * var(--team-preceding) + var(--team-index) *
+          var(--team-gap)
+      )
+    );
+    clip-path: inset(
+      0 calc(var(--team-open-width) - var(--team-visible-width)) 0 0 round 16px
+    );
   }
-
-  /* The caption is laid out at the width an active card settles on
-     (`--team-gallery-panel-width`, measured from the row's own geometry by
-     TeamGallery and present only while a card is open) instead of at the card's
-     current width. A card that is still moving therefore reveals the copy it
-     already has — clipped by the panel's `overflow-hidden` — rather than
-     re-wrapping it in every frame, which is what used to push the member's name
-     onto a second line and step the caption upward mid-transition. The variable
-     is absent while the row is at rest, so the narrow panels wrap their copy
-     exactly as they did before. */
-  .team-gallery-caption {
-    width: max(100%, var(--team-gallery-panel-width, 0px));
+  .team-gallery-image {
+    width: 100%;
+    transform: translateX(
+      calc((var(--team-visible-width) - var(--team-open-width)) / 2)
+    );
   }
-
-  /* Zoom anchored to the top edge, so a face in the upper half of the photo
-     stays put while the panel grows around it. */
-  .team-gallery-photo {
-    transform: scale(1);
-    transform-origin: center top;
+  .team-gallery-idle {
+    width: calc(var(--team-space) / var(--team-count));
   }
-  .team-gallery-card[data-active="true"] .team-gallery-photo {
-    transform: scale(1.04);
+  .team-gallery-spine {
+    width: calc(var(--team-space) / var(--team-total));
   }
-
-  /* Transitions only: a visitor who asks for less motion still gets both states,
-     they just change instantly. */
+  .team-gallery-card:focus-visible .team-gallery-details {
+    box-shadow: inset 0 -3px #d5b77a;
+  }
   @media (prefers-reduced-motion: no-preference) {
     .team-gallery-card {
       transition:
-        flex-grow var(--team-motion-duration) var(--team-motion-ease),
-        opacity var(--team-motion-duration) var(--team-motion-ease),
-        filter var(--team-motion-duration) var(--team-motion-ease),
-        border-color var(--team-motion-duration) var(--team-motion-ease),
-        box-shadow var(--team-motion-duration) var(--team-motion-ease);
+        transform var(--team-duration) var(--team-ease),
+        clip-path var(--team-duration) var(--team-ease);
     }
-    .team-gallery-photo {
-      transition: transform var(--team-motion-duration) var(--team-motion-ease);
+    .team-gallery-image {
+      transition: transform var(--team-duration) var(--team-ease);
     }
     .team-gallery-fade {
       transition:
-        opacity var(--team-motion-duration) var(--team-motion-ease),
-        transform var(--team-motion-duration) var(--team-motion-ease);
-    }
-    /* The caption and the spine name are two readings of the same name, so they
-       hand over instead of overlapping: opening, the spine is gone in the first
-       fifth of the movement (well before the caption has faded in), and closing,
-       it waits until the caption has faded out. Cross-fading them over the whole
-       800ms showed the member's name twice at once. */
-    .team-gallery-spine {
-      transition:
-        opacity 360ms var(--team-motion-ease) 400ms,
-        transform 360ms var(--team-motion-ease) 400ms;
-    }
-    .team-gallery-card[data-active="true"] .team-gallery-spine {
-      transition:
-        opacity 200ms var(--team-motion-ease),
-        transform 200ms var(--team-motion-ease);
-    }
-    .team-gallery-name {
-      transition:
-        font-size var(--team-motion-duration) var(--team-motion-ease),
-        line-height var(--team-motion-duration) var(--team-motion-ease);
-    }
-    .team-gallery-reveal {
-      transition:
-        grid-template-rows var(--team-motion-duration) var(--team-motion-ease),
-        margin-top var(--team-motion-duration) var(--team-motion-ease),
-        opacity var(--team-motion-duration) var(--team-motion-ease);
+        opacity 220ms ease,
+        transform 320ms var(--team-ease);
     }
   }
 }
@@ -337,6 +294,20 @@
   object-position: center 52%;
 }
 @media (prefers-reduced-motion: no-preference) {
+  /* CSS handles the browser preference without changing hydration markup. */
+  .nav-link-enter {
+    animation: nav-link-enter 300ms ease-out both;
+  }
+  @keyframes nav-link-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   .reveal {
     animation: rise-in 700ms ease-out both;
   }

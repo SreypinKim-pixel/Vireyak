@@ -20,7 +20,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "allowJs": false
+    "allowJs": true
   },
   "include": [
     "next-env.d.ts",

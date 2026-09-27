@@ -125,6 +125,15 @@ All application code and browser tests use TypeScript (`.ts` / `.tsx`). Run
 
 ## Registration and province API previews
 
+The registration form loads optional province and attraction preferences from
+`GET /api/attractions`. The catalog contains 32 real Cambodian attractions across all 25 province/capital groups (24 provinces and Phnom Penh), with mock prices and ratings.
+Each mock attraction includes province metadata; choosing
+another province clears the selected attraction and filters the available choices.
+The endpoint returns `{ data: [...], demo: true }`. API failures, malformed data,
+and empty results allow registration validation to continue without a preference.
+There is no registration backend yet: valid submissions explain that accounts
+cannot be created and clear the form without sending or saving credentials.
+
 Registration includes inline name/email validation, a 12-character minimum password,
 password confirmation, and an optional attraction selector fetched from
 `GET /api/attractions`. Loading, empty, and failed requests are handled, with retry.
@@ -140,3 +149,7 @@ The local demo APIs return `{ data: [...], demo: true }` from the curated catalo
 404 for unknown provinces. Invalid `/attraction/{id}` URLs also show that page,
 with Back Home and Explore Attractions links. These local endpoints can be replaced
 with backend adapters once a real API host and response schema are supplied.
+
+Attraction names and locations are based on the [Ministry of Tourism province guides](https://www.tourismcambodia.org/public/provinces). The catalog is a varied selection, not a visitor-count ranking. Existing local photographs may be illustrative.
+
+The demo catalog includes at least one attraction for every name in `data/province-names.ts`. Province slugs are derived from those names, and Preah Sihanouk maps to the Koh Rong destination. These are selected local highlights, not an official popularity ranking.

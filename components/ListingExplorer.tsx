@@ -3,6 +3,7 @@ import type { TravelItem, TravelKind, SearchParams } from "@/lib/travel-types";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import SearchForm from "./SearchForm";
+import { provinces } from "../lib/provinces";
 import TravelCard from "./TravelCard";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
@@ -23,6 +24,9 @@ export default function ListingExplorer({
   const types = ["All", ...new Set(items.map((i) => i.type))];
   const destination =
     typeof initial.destination === "string" ? initial.destination : "";
+  const catalogDestination =
+    provinces.find((province) => province.name === destination)?.destination ??
+    destination;
   const query = new URLSearchParams(
     Object.entries(initial).filter(
       (entry): entry is [string, string] => typeof entry[1] === "string",
@@ -32,7 +36,7 @@ export default function ListingExplorer({
   const filtered = useMemo(() => {
     const result = items.filter(
       (i) =>
-        (!destination || i.destination === destination) &&
+        (!catalogDestination || i.destination === catalogDestination) &&
         (type === "All" || i.type === type) &&
         (budget === "all" || i.price <= Number(budget)) &&
         (kind !== "stays" || (i.capacity ?? 0) >= guests) &&
@@ -45,7 +49,7 @@ export default function ListingExplorer({
     return result;
   }, [
     items,
-    destination,
+    catalogDestination,
     type,
     budget,
     guests,

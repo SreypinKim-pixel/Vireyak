@@ -8,6 +8,7 @@ import PlaceCard from "./PlaceCard";
  * Explore Cambodia grid. Handles every API outcome:
  * ready (cards), empty (helpful empty state) and error (static fallback cards
  * plus an explanation), so the page never breaks when the API is unreachable.
+ * @param {{ places: import("./PlaceCard").PlaceCardData[], fallbackPlaces?: import("./PlaceCard").PlaceCardData[], totalPlaces?: number, status?: "ready" | "empty" | "error" }} props
  */
 export default function PlacesSection({
   places,

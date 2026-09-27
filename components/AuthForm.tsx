@@ -5,11 +5,12 @@ import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 export default function AuthForm({ register = false }) {
   const [message, setMessage] = useState("");
+  const [province, setProvince] = useState("");
   const [attraction, setAttraction] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [attractions, setAttractions] = useState<
-    { id: string; name: string }[]
+    { id: string; name: string; province?: { id: string; name: string } }[]
   >([]);
   const [loadState, setLoadState] = useState("loading");
   const [attempt, setAttempt] = useState(0);
@@ -21,12 +22,23 @@ export default function AuthForm({ register = false }) {
         if (!response.ok) throw new Error("Unable to load attractions");
         const body = await response.json();
         if (
+          !body ||
           !Array.isArray(body.data) ||
           body.data.some(
-            (item: { id?: unknown; name?: unknown } | null) =>
+            (
+              item: {
+                id?: unknown;
+                name?: unknown;
+                province?: { id?: unknown; name?: unknown } | null;
+              } | null,
+            ) =>
               !item ||
               typeof item.id !== "string" ||
-              typeof item.name !== "string",
+              typeof item.name !== "string" ||
+              (item.province !== undefined &&
+                (!item.province ||
+                  typeof item.province.id !== "string" ||
+                  typeof item.province.name !== "string")),
           )
         )
           throw new Error("Invalid attractions response");
@@ -38,6 +50,16 @@ export default function AuthForm({ register = false }) {
       });
     return () => controller.abort();
   }, [register, attempt]);
+  const provinces = Array.from(
+    new Map(
+      attractions.flatMap((item) =>
+        item.province ? [[item.province.id, item.province] as const] : [],
+      ),
+    ).values(),
+  );
+  const visibleAttractions = attractions.filter(
+    (item) => !province || item.province?.id === province,
+  );
   function fieldError(name: string) {
     return errors[name] ? (
       <span
@@ -92,6 +114,8 @@ export default function AuthForm({ register = false }) {
     );
     e.currentTarget.reset();
     setAttraction("");
+    setProvince("");
+    setShowPassword(false);
   }
   return (
     <div
@@ -162,7 +186,7 @@ export default function AuthForm({ register = false }) {
             }
           >
             {register
-              ? "Make room for a little more adventure."
+              ? "Preview registration with demo details. Account creation is not connected yet; your details will not be saved."
               : "Your next Cambodian escape is waiting."}
           </p>
           <form
@@ -220,7 +244,11 @@ export default function AuthForm({ register = false }) {
                 <input
                   name="password"
                   onChange={() =>
-                    setErrors((previous) => ({ ...previous, password: "" }))
+                    setErrors((previous) => ({
+                      ...previous,
+                      password: "",
+                      confirmPassword: "",
+                    }))
                   }
                   aria-invalid={Boolean(errors.password)}
                   aria-describedby={
@@ -254,6 +282,12 @@ export default function AuthForm({ register = false }) {
                   <span className="field-label">Confirm password</span>
                   <input
                     name="confirmPassword"
+                    onChange={() =>
+                      setErrors((previous) => ({
+                        ...previous,
+                        confirmPassword: "",
+                      }))
+                    }
                     type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
                     required
@@ -269,6 +303,31 @@ export default function AuthForm({ register = false }) {
                   />
                   {fieldError("confirmPassword")}
                 </label>
+                {provinces.length > 0 && (
+                  <div className="block">
+                    <label htmlFor="province-interest" className="field-label">
+                      Province of interest (optional)
+                    </label>
+                    <Dropdown
+                      id="province-interest"
+                      label="Province of interest (optional)"
+                      name="province"
+                      value={province}
+                      onChange={(value) => {
+                        setProvince(value);
+                        setAttraction("");
+                      }}
+                      describedBy="attraction-help"
+                      options={[
+                        { value: "", label: "All provinces" },
+                        ...provinces.map((item) => ({
+                          value: item.id,
+                          label: item.name,
+                        })),
+                      ]}
+                    />
+                  </div>
+                )}
                 <div className="block">
                   <label htmlFor="attraction-interest" className="field-label">
                     Attraction of interest (optional)
@@ -290,7 +349,7 @@ export default function AuthForm({ register = false }) {
                             ? "Loading attractions…"
                             : "Choose an attraction",
                       },
-                      ...attractions.map((item) => ({
+                      ...visibleAttractions.map((item) => ({
                         value: item.id,
                         label: item.name,
                       })),

@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Brand from "./Brand";
 import Icon from "./Icon";
 const links = [
@@ -23,6 +24,28 @@ const getServerTheme = () => false;
 
 export default function Navbar() {
   const path = usePathname();
+  const reducedMotion = useReducedMotion();
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncTheme = () => {
+      try {
+        const saved = localStorage.getItem("vireyak-theme");
+        document.documentElement.classList.toggle(
+          "dark",
+          saved === "dark" || (!saved && preference.matches),
+        );
+      } catch {}
+    };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === "vireyak-theme" || event.key === null) syncTheme();
+    };
+    preference.addEventListener("change", syncTheme);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      preference.removeEventListener("change", syncTheme);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
   const [open, setOpen] = useState(false);
   const [previousPath, setPreviousPath] = useState(path);
   const dark = useSyncExternalStore(subscribeTheme, getTheme, getServerTheme);
@@ -38,24 +61,33 @@ export default function Navbar() {
     } catch {}
   }
   return (
-    <header className="relative z-40 border-b border-slate/15 bg-surface">
+    <header className="relative z-40 border-b border-slate/15 bg-surface transition-colors duration-300">
       <div className="shell flex h-[88px] items-center justify-between gap-2 sm:gap-4">
-        <Brand logoSrc="/images/brand/vireyak-logo.png" />
+        <Brand logoSrc="/Logo.png" />
         <nav
           aria-label="Main navigation"
           className="hidden h-full items-center gap-9 md:flex"
         >
-          {links.map(([label, href]) => {
+          {links.map(([label, href], index) => {
             const active = href === "/" ? path === "/" : path.startsWith(href);
             return (
-              <Link
+              <div
                 key={href}
-                href={href}
-                aria-current={active ? "page" : undefined}
-                className={`relative flex h-full items-center text-xs font-medium transition hover:text-indigo dark:hover:text-brightgold ${active ? "text-navy dark:text-brightgold after:absolute after:bottom-5 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full after:bg-gold" : "text-ink/60"}`}
+                className="nav-link-enter h-full"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
-                {label}
-              </Link>
+                <Link
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  className={`group relative flex h-full items-center text-xs font-medium transition hover:text-indigo dark:hover:text-brightgold ${active ? "text-navy dark:text-brightgold after:absolute after:bottom-5 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full after:bg-gold" : "text-ink/60"}`}
+                >
+                  {label}
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-7 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300 group-hover:origin-left group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
+                  />
+                </Link>
+              </div>
             );
           })}
         </nav>
@@ -90,25 +122,32 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      {open && (
-        <nav
-          id="mobile-menu"
-          aria-label="Mobile navigation"
-          className="absolute inset-x-0 top-full border-b border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
-        >
-          {[...links, ["Log in", "/login"]].map(([label, href]) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block rounded-lg px-4 py-3 text-sm hover:bg-slate/10"
-              aria-current={path === href ? "page" : undefined}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.nav
+            key="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.2 }}
+            id="mobile-menu"
+            aria-label="Mobile navigation"
+            className="absolute inset-x-0 top-full overflow-hidden border-b border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
+          >
+            {[...links, ["Log in", "/login"]].map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="block rounded-lg px-4 py-3 text-sm hover:bg-slate/10"
+                aria-current={path === href ? "page" : undefined}
+              >
+                {label}
+              </Link>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

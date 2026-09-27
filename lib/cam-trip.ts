@@ -1,5 +1,6 @@
 import { provinceNames } from "@/data/province-names";
-import { localDestinationImage } from "./destination-images";
+import { attractions } from "@/data/travel";
+import { getProvincePhoto, getAttractionPhoto } from "./destination-images";
 
 export interface Province {
   id: string | number;
@@ -59,6 +60,33 @@ export const regions: Record<string, string> = {
   COASTAL: "Coastal Cambodia",
 };
 
+function getLocalFeaturedDestinations() {
+  return provinceNames.map((name) => {
+    const destination = name === "Preah Sihanouk" ? "Koh Rong" : name;
+    const highlights = attractions.filter(
+      (attraction) => attraction.destination === destination,
+    );
+    return {
+      id: name.toLowerCase().replaceAll(" ", "-"),
+      name,
+      location: "Cambodia",
+      category: "Province",
+      description: highlights.length
+        ? `Explore ${highlights
+            .slice(0, 3)
+            .map((attraction) => attraction.name)
+            .join(", ")} and more in ${name}.`
+        : `Discover cultural and natural highlights in ${name}, Cambodia.`,
+      attractionCount: highlights.length,
+      image: getProvincePhoto(name)?.src || highlights[0]?.image || null,
+      photo: getProvincePhoto(name),
+      // The curated travel listing supports destination filters and remains
+      // useful when the live province service is unavailable.
+      href: `/attraction?destination=${encodeURIComponent(name)}`,
+    };
+  });
+}
+
 export async function getFeaturedDestinations() {
   try {
     const response = await fetch(API_ENDPOINTS.provinces.getAll, {
@@ -77,7 +105,6 @@ export async function getFeaturedDestinations() {
             province?.id != null && (province.nameEn || province.nameKh),
         )
         .sort((a, b) => Number(a.id) - Number(b.id))
-        .slice(0, 3)
         .map(async (province) => {
           const name = province.nameEn || province.nameKh;
           let highlights: string[] = [];
@@ -107,19 +134,16 @@ export async function getFeaturedDestinations() {
               ? `${name} highlights include ${highlights.join(", ")}.`
               : `${name} is in ${regions[province.region] || "Cambodia"}.`,
             attractionCount,
-            image: localDestinationImage(
-              "province",
-              province.id,
-              province.imageUrl,
-            ),
-            href: `/stays?destination=${encodeURIComponent(name)}`,
+            image: getProvincePhoto(name, province.imageUrl)?.src || null,
+            photo: getProvincePhoto(name, province.imageUrl),
+            href: `/provinces/${encodeURIComponent(province.id)}`,
           };
         }),
     );
     return { destinations, unavailable: false };
   } catch (error) {
     console.error("Unable to load featured destinations:", error);
-    return { destinations: [], unavailable: true };
+    return { destinations: getLocalFeaturedDestinations(), unavailable: false };
   }
 }
 
@@ -184,15 +208,7 @@ export async function getHomepageAttractions() {
             item.descriptionEn) ||
           item.descriptionKh ||
           `${name} is a ${(item.category || "attraction").toLowerCase().replaceAll("_", " ")} in ${province}.`,
-        image: localDestinationImage(
-          "attraction",
-          item.id,
-          item.imageUrls?.find(
-            (image: unknown) => typeof image === "string" && image,
-          ) ||
-            item.province.imageUrl ||
-            null,
-        ),
+        image: getAttractionPhoto(name, province, item.imageUrls)?.src || null,
         rating: item.rating,
         entryFee: item.entryFee,
         openingHours: item.openingHours,
@@ -233,4 +249,35 @@ export async function getProvinceNames(): Promise<string[]> {
   } catch {
     return provinceNames;
   }
+}
+
+// Read the same province catalogue used by the homepage, preserving record IDs.
+export async function getProvinceDetails(id: string) {
+  const response = await fetch(API_ENDPOINTS.provinces.getAll, {
+    next: { revalidate: 300 },
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!response.ok) throw new Error("Province catalogue unavailable");
+  const provinces: Province[] = await response.json();
+  if (!Array.isArray(provinces)) throw new Error("Invalid province catalogue");
+  const province = provinces.find((item) => String(item.id) === id);
+  if (!province) return null;
+
+  let attractions: Attraction[] = [];
+  let total = province.attractionCount;
+  let attractionsUnavailable = false;
+  try {
+    const result = await fetch(
+      `${API_ENDPOINTS.provinces.getById(id)}/attractions?size=12`,
+      { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) },
+    );
+    if (!result.ok) throw new Error("Province attractions unavailable");
+    const data: AttractionPage = await result.json();
+    if (!Array.isArray(data.content)) throw new Error("Invalid attractions");
+    attractions = data.content;
+    total = data.totalElements ?? total;
+  } catch {
+    attractionsUnavailable = true;
+  }
+  return { province, attractions, total, attractionsUnavailable };
 }

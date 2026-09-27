@@ -113,7 +113,7 @@ test("search carries dates and travelers to a stay preview", async ({
   await choose(page, "Destination", "Siem Reap");
   await page.getByLabel("Check-in", { exact: true }).fill("2030-11-10");
   await page.getByLabel("Check-out", { exact: true }).fill("2030-11-13");
-  await choose(page, "Travelers", "3 guests");
+  await page.getByRole("spinbutton", { name: "Travelers" }).fill("3");
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(page).toHaveURL(/destination=Siem\+Reap/);
   // Lotus Blanc Retreat, Angkor Garden Villas, and Raffles Grand Hotel
@@ -174,10 +174,10 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   await expect(page).toHaveURL(/\/attraction\?/);
   await expect(page.locator("article")).toHaveCount(1);
   await page
-    .getByRole("link", { name: "The slower side of Kampot", exact: true })
+    .getByRole("link", { name: "Bokor National Park", exact: true })
     .click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "The slower side of Kampot",
+    "Bokor National Park",
   );
   await page.getByLabel("Experience date", { exact: true }).fill("2030-11-10");
   await expect(page.getByLabel("Experience date", { exact: true })).toHaveValue(
@@ -202,7 +202,7 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   const response = await page.goto("/stays/does-not-exist");
   expect(response!.status()).toBe(404);
   await expect(
-    page.getByRole("heading", { name: "Off the beaten path." }),
+    page.getByRole("heading", { name: /wandered off the map/ }),
   ).toBeVisible();
 });
 
