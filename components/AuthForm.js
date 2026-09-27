@@ -1,11 +1,19 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Icon from "./Icon";
+import { signInDemo } from "../lib/demoSession";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Login password rules: at least 8 characters with an uppercase letter, a
+// lowercase letter, and a number. No special character is required.
+const PASSWORD_STRENGTH_PATTERN = /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/;
+const PASSWORD_STRENGTH_MESSAGE =
+  "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
 
 export default function AuthForm({ register = false }) {
+  const router = useRouter();
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -23,8 +31,15 @@ export default function AuthForm({ register = false }) {
     else if (!EMAIL_PATTERN.test(email))
       next.email = "Enter a valid email address.";
     if (!password || !password.trim()) next.password = "Password is required.";
-    else if (register && password.length < 12)
-      next.password = "Password must be at least 12 characters.";
+    else if (register) {
+      if (password.length < 12)
+        next.password = "Password must be at least 12 characters.";
+    } else if (
+      password.length < 8 ||
+      !PASSWORD_STRENGTH_PATTERN.test(password)
+    ) {
+      next.password = PASSWORD_STRENGTH_MESSAGE;
+    }
     if (register && !(form.get("name") || "").trim())
       next.name = "Full name is required.";
     return next;
@@ -35,17 +50,26 @@ export default function AuthForm({ register = false }) {
     if (submitting) return;
     const form = e.currentTarget;
     setSubmitting(true);
-    const nextErrors = validate(new FormData(form));
+    const data = new FormData(form);
+    const nextErrors = validate(data);
     setErrors(nextErrors);
     if (nextErrors.email || nextErrors.password || nextErrors.name) {
       setMessage("Please fix the highlighted fields and try again.");
     } else {
       setMessage(
         register
-          ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
-          : "Your login information is valid. Authentication service is not connected yet.",
+          ? "Account creation is not available yet. You can still explore all stays and experiences without an account. Taking you to the home page..."
+          : "Your login information is valid. Authentication service is not connected yet. Taking you to the home page...",
       );
       form.reset();
+      // Record a local-only demo sign-in so the navbar can reflect the preview
+      // login, then open the site so the demo flow does not dead-end.
+      if (!register)
+        signInDemo(
+          String(data.get("email") || "").trim(),
+          data.get("remember") === "on",
+        );
+      setTimeout(() => router.push("/"), 1000);
     }
     setSubmitting(false);
   }
@@ -145,7 +169,7 @@ export default function AuthForm({ register = false }) {
                   type={showPassword ? "text" : "password"}
                   autoComplete={register ? "new-password" : "current-password"}
                   required
-                  minLength={register ? 12 : 1}
+                  minLength={register ? 12 : 8}
                   maxLength={128}
                   placeholder={
                     register
@@ -174,6 +198,19 @@ export default function AuthForm({ register = false }) {
                 </span>
               )}
             </label>
+            {!register && (
+              <label className="flex items-center gap-2.5">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  aria-label="Remember me"
+                  className="h-4 w-4 accent-indigo dark:accent-brightgold"
+                />
+                <span className="text-[11px] font-medium text-ink/70">
+                  Remember me
+                </span>
+              </label>
+            )}
             <button
               type="submit"
               disabled={submitting}

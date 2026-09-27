@@ -3,6 +3,8 @@ import { useState } from "react";
 import SectionHeading from "./SectionHeading";
 import DestinationImage from "./DestinationImage";
 import { regions } from "@/lib/cam-trip";
+import { localDestinationImage } from "@/lib/destination-images";
+import { localProvinceImage } from "@/lib/province-images";
 
 export default function ProvinceLookup() {
   const [provinceId, setProvinceId] = useState("1");
@@ -119,7 +121,14 @@ export default function ProvinceLookup() {
           >
             <div className="relative aspect-[16/9] overflow-hidden">
               <DestinationImage
-                src={province.imageUrl}
+                src={
+                  localProvinceImage(province) ||
+                  localDestinationImage(
+                    "province",
+                    province.id,
+                    province.imageUrl,
+                  )
+                }
                 alt={`${name} province photo`}
                 width={800}
                 height={450}
