@@ -116,7 +116,9 @@ test("search carries dates and travelers to a stay preview", async ({
   await choose(page, "Travelers", "3 guests");
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(page).toHaveURL(/destination=Siem\+Reap/);
-  await expect(page.locator("article")).toHaveCount(2);
+  // Lotus Blanc Retreat, Angkor Garden Villas, and Raffles Grand Hotel
+  // d'Angkor all sleep at least three guests.
+  await expect(page.locator("article")).toHaveCount(3);
   await page
     .getByRole("link", { name: "Lotus Blanc Retreat", exact: true })
     .click();
@@ -137,7 +139,8 @@ test("filters, sorting, saved favorites, and empty results", async ({
   page,
 }) => {
   await page.goto("/stays");
-  await expect(page.locator("article")).toHaveCount(6);
+  // Six curated previews plus eleven named Cambodian properties.
+  await expect(page.locator("article")).toHaveCount(17);
   await choose(page, "Sort results", "Price: low to high");
   await expect(page.locator("article").first()).toContainText(
     "Kampot River Lodge",
@@ -376,5 +379,6 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
   await page.getByRole("option", { name: "Koh Rong", exact: true }).click();
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(page).toHaveURL(/destination=Koh\+Rong/);
-  await expect(page.locator("article")).toHaveCount(1);
+  // The island hideaway and The Royal Sands Koh Rong both sleep four.
+  await expect(page.locator("article")).toHaveCount(2);
 });
