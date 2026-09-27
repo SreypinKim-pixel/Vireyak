@@ -5,14 +5,15 @@ import FeatureStrip from "@/components/home/FeatureStrip";
 import FeaturedDestinations from "@/components/home/FeaturedDestinations";
 import ProvinceLookup from "@/components/home/ProvinceLookup";
 import FeaturedExperiences from "@/components/home/FeaturedExperiences";
-import WhyVireyak from "@/components/home/WhyVireyak";
 import HowItWorks from "@/components/home/HowItWorks";
 import TravelerReviews from "@/components/home/TravelerReviews";
 import HomeCTA from "@/components/home/HomeCTA";
 
 export default async function HomePage() {
-  const [{ experiences, spotlight, unavailable }, provinces] =
-    await Promise.all([getHomepageAttractions(), getProvinceNames()]);
+  const [{ experiences }, provinces] = await Promise.all([
+    getHomepageAttractions(),
+    getProvinceNames(),
+  ]);
   return (
     <>
       <HeroGrid />
@@ -22,11 +23,7 @@ export default async function HomePage() {
       <FeatureStrip />
       <FeaturedDestinations />
       <ProvinceLookup />
-      <FeaturedExperiences
-        experiences={experiences}
-        unavailable={unavailable}
-      />
-      <WhyVireyak spotlight={spotlight} unavailable={unavailable} />
+      <FeaturedExperiences experiences={experiences} />
       <HowItWorks />
       <TravelerReviews />
       <HomeCTA />

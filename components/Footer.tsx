@@ -218,35 +218,36 @@ export default function Footer() {
           <h2 className="mb-5 text-m font-semibold text-gray-900 dark:text-white leading-none pt-9">
             Contact Info
           </h2>
-          <div className="flex flex-col gap-3.5 text-xs text-gray-600 dark:text-gray-400">
-            <div className="flex items-start gap-2.5">
-              <span className="mt-0.5 text-blue-800 dark:text-blue-400">
-                <Icon name="pin" size={16} />
-              </span>
-              <span>Phnom Penh, Cambodia</span>
-            </div>
-            <a
-              href="tel:+85512888699"
-              className="flex items-center gap-2.5 hover:text-blue-800 dark:hover:text-white transition-colors"
-            >
-              <span className="text-blue-800 dark:text-blue-400">
-                <Icon name="phone" size={16} />
-              </span>
-              <span>+855 12 888 699</span>
-            </a>
-            <a
-              href="mailto:info@vireyak.com"
-              className="flex items-center gap-2.5 hover:text-blue-800 dark:hover:text-white transition-colors"
-            >
-              <span className="text-blue-800 dark:text-blue-400">
-                <Icon name="mail" size={16} />
-              </span>
-              <span>info@vireyak.com</span>
-            </a>
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex min-w-0 flex-1 flex-col gap-3.5 text-xs text-gray-600 dark:text-gray-400">
+              <div className="flex items-start gap-2.5">
+                <span className="mt-0.5 text-blue-800 dark:text-blue-400">
+                  <Icon name="pin" size={16} />
+                </span>
+                <span>Phnom Penh, Cambodia</span>
+              </div>
+              <a
+                href="tel:+85512888699"
+                className="flex items-center gap-2.5 hover:text-blue-800 dark:hover:text-white transition-colors"
+              >
+                <span className="text-blue-800 dark:text-blue-400">
+                  <Icon name="phone" size={16} />
+                </span>
+                <span>+855 12 888 699</span>
+              </a>
+              <a
+                href="mailto:info@vireyak.com"
+                className="flex items-center gap-2.5 hover:text-blue-800 dark:hover:text-white transition-colors"
+              >
+                <span className="text-blue-800 dark:text-blue-400">
+                  <Icon name="mail" size={16} />
+                </span>
+                <span>info@vireyak.com</span>
+              </a>
 
-            {/* Social Icons */}
-            {/* <div className="mt-2 flex items-center gap-3.5"> */}
-            {/* <a
+              {/* Social Icons */}
+              {/* <div className="mt-2 flex items-center gap-3.5"> */}
+              {/* <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -284,10 +285,14 @@ export default function Footer() {
                 
               </a>
             </div> */}
+            </div>
             <img
-              src="/logo-white.png"
-              alt="Vireyak White Logo"
-              className="h-16 w-56"
+              src="/images/istad-logo.png"
+              alt="ISTAD — Institute of Science and Technology Advanced Development"
+              width={455}
+              height={439}
+              className="h-auto w-24 shrink-0 -translate-y-[40px] origin-top-right scale-125 object-contain sm:origin-top-left xl:scale-[1.75]"
+              style={{ clipPath: "ellipse(46.3% 48% at 50% 50%)" }}
             />
           </div>
         </div>
