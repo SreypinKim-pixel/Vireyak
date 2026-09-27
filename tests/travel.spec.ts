@@ -113,7 +113,7 @@ test("search carries dates and travelers to a stay preview", async ({
   await choose(page, "Destination", "Siem Reap");
   await page.getByLabel("Check-in", { exact: true }).fill("2030-11-10");
   await page.getByLabel("Check-out", { exact: true }).fill("2030-11-13");
-  await choose(page, "Travelers", "3 guests");
+  await page.getByRole("spinbutton", { name: "Travelers" }).fill("3");
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(page).toHaveURL(/destination=Siem\+Reap/);
   await expect(page.locator("article")).toHaveCount(2);

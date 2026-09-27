@@ -112,7 +112,7 @@ export async function getFeaturedDestinations() {
               province.id,
               province.imageUrl,
             ),
-            href: `/stays?destination=${encodeURIComponent(name)}`,
+            href: `/provinces/${encodeURIComponent(province.id)}`,
           };
         }),
     );
@@ -233,4 +233,35 @@ export async function getProvinceNames(): Promise<string[]> {
   } catch {
     return provinceNames;
   }
+}
+
+// Read the same province catalogue used by the homepage, preserving record IDs.
+export async function getProvinceDetails(id: string) {
+  const response = await fetch(API_ENDPOINTS.provinces.getAll, {
+    next: { revalidate: 300 },
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!response.ok) throw new Error("Province catalogue unavailable");
+  const provinces: Province[] = await response.json();
+  if (!Array.isArray(provinces)) throw new Error("Invalid province catalogue");
+  const province = provinces.find((item) => String(item.id) === id);
+  if (!province) return null;
+
+  let attractions: Attraction[] = [];
+  let total = province.attractionCount;
+  let attractionsUnavailable = false;
+  try {
+    const result = await fetch(
+      `${API_ENDPOINTS.provinces.getById(id)}/attractions?size=12`,
+      { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) },
+    );
+    if (!result.ok) throw new Error("Province attractions unavailable");
+    const data: AttractionPage = await result.json();
+    if (!Array.isArray(data.content)) throw new Error("Invalid attractions");
+    attractions = data.content;
+    total = data.totalElements ?? total;
+  } catch {
+    attractionsUnavailable = true;
+  }
+  return { province, attractions, total, attractionsUnavailable };
 }

@@ -71,14 +71,10 @@ export default function Navbar() {
           {links.map(([label, href], index) => {
             const active = href === "/" ? path === "/" : path.startsWith(href);
             return (
-              <motion.div
+              <div
                 key={href}
-                className="h-full"
-                initial={false}
-                animate={
-                  reducedMotion ? undefined : { opacity: [0, 1], y: [-8, 0] }
-                }
-                transition={{ duration: 0.3, delay: index * 0.08 }}
+                className="nav-link-enter h-full"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
                 <Link
                   href={href}
@@ -91,7 +87,7 @@ export default function Navbar() {
                     className="absolute bottom-7 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300 group-hover:origin-left group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
                   />
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
         </nav>

@@ -215,6 +215,10 @@
   .muted {
     @apply text-ink/60;
   }
+  /* Poppins has no Khmer glyphs, so Khmer names use a system Khmer font first. */
+  .text-khmer {
+    font-family: "Noto Sans Khmer", "Khmer OS", "Khmer UI", Poppins, sans-serif;
+  }
   .status-page {
     @apply shell flex min-h-[60vh] flex-col items-center justify-center gap-5 text-center;
   }
@@ -227,11 +231,83 @@
   .btn {
     @apply button-primary;
   }
+  /* Keep the accordion design, but animate painted layers instead of layout.
+     The row and every card have fixed dimensions throughout hover. */
+  .team-gallery-row {
+    container-type: inline-size;
+    --team-gap: 12px;
+    --team-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --team-duration: 600ms;
+  }
+  @media (min-width: 1024px) {
+    .team-gallery-row {
+      --team-gap: 16px;
+    }
+  }
+  .team-gallery-card {
+    --team-space: calc(100cqw - (var(--team-count) - 1) * var(--team-gap));
+    --team-open-width: calc(var(--team-space) * 3.4 / var(--team-total));
+    --team-visible-width: calc(var(--team-space) * var(--team-fraction));
+    width: var(--team-open-width);
+    transform: translateX(
+      calc(
+        var(--team-space) * var(--team-preceding) + var(--team-index) *
+          var(--team-gap)
+      )
+    );
+    clip-path: inset(
+      0 calc(var(--team-open-width) - var(--team-visible-width)) 0 0 round 16px
+    );
+  }
+  .team-gallery-image {
+    width: 100%;
+    transform: translateX(
+      calc((var(--team-visible-width) - var(--team-open-width)) / 2)
+    );
+  }
+  .team-gallery-idle {
+    width: calc(var(--team-space) / var(--team-count));
+  }
+  .team-gallery-spine {
+    width: calc(var(--team-space) / var(--team-total));
+  }
+  .team-gallery-card:focus-visible .team-gallery-details {
+    box-shadow: inset 0 -3px #d5b77a;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .team-gallery-card {
+      transition:
+        transform var(--team-duration) var(--team-ease),
+        clip-path var(--team-duration) var(--team-ease);
+    }
+    .team-gallery-image {
+      transition: transform var(--team-duration) var(--team-ease);
+    }
+    .team-gallery-fade {
+      transition:
+        opacity 220ms ease,
+        transform 320ms var(--team-ease);
+    }
+  }
 }
 .hero-image {
   object-position: center 52%;
 }
 @media (prefers-reduced-motion: no-preference) {
+  /* CSS handles the browser preference without changing hydration markup. */
+  .nav-link-enter {
+    animation: nav-link-enter 300ms ease-out both;
+  }
+  @keyframes nav-link-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   .reveal {
     animation: rise-in 700ms ease-out both;
   }

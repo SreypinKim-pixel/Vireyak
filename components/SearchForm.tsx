@@ -167,15 +167,16 @@ export default function SearchForm({
             <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
               Travelers
             </span>
-            <Dropdown
-              label="Travelers"
-              variant="inline"
+            <input
+              aria-label="Travelers"
+              type="number"
+              inputMode="numeric"
+              min={1}
+              step={1}
+              required
               value={guests}
-              onChange={setGuests}
-              options={[1, 2, 3, 4, 5, 6].map((n) => ({
-                value: String(n),
-                label: `${n} ${n === 1 ? "guest" : "guests"}`,
-              }))}
+              onChange={(event) => setGuests(event.target.value)}
+              className="w-full min-w-0 rounded bg-transparent text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-gold"
             />
           </span>
         </div>
