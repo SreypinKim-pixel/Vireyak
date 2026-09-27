@@ -235,28 +235,45 @@
      Interactive team gallery: hover motion (components/about/TeamGallery.js).
 
      The row is plain flex. The card under the pointer only asks for more of the
-     row's width — `flex: 3.4 1 0%` instead of `flex: 1 1 0%` — and the browser
-     interpolates that one number, so the active card opens while its five
-     neighbours compress in the same layout pass. The row redistributes the width
-     it already has; no card ever switches to a different width.
+     row's width — `flex-grow: 3.4` instead of `1`, both on a `flex-basis: 0` — and
+     the browser interpolates that one number, so the active card opens while its
+     five neighbours compress in the same layout pass. The row redistributes the
+     width it already has; no card ever switches to a different width, and the
+     cards sum to the same total on every frame.
 
-     Every moving part below shares one duration and one curve, so the panel, the
-     photo and the text read as a single physical movement:
-     - .team-gallery-card    panel: flex-grow, dim, border and shadow
-     - .team-gallery-photo   photo: a whisper of zoom, never more than 4%
-     - .team-gallery-fade    caption, faded spine name, gradient scrim
-     - .team-gallery-name    member name: size only, 13px <=> 18/20px
-     - .team-gallery-reveal  bio: unfolds to its own height
+     Every moving part below runs on that one duration and one curve, so the panel,
+     the photo and the text read as a single physical movement — the only
+     deliberate exception is the spine name, which says why below:
+     - .team-gallery-card     panel: flex-grow, dim, border and shadow
+     - .team-gallery-photo    photo: a whisper of zoom, never more than 4%
+     - .team-gallery-caption  member details, laid out at one fixed width
+     - .team-gallery-fade     caption and spine: fade and the small rise
+     - .team-gallery-spine    narrow-panel name, handed over to the caption
+     - .team-gallery-name     member name: size only, 13px <=> 18/20px
+     - .team-gallery-reveal   bio: unfolds to its own height
 
-     The curve is an ease-in-out, so the movement leaves and arrives at rest.
-     That matters most in the first frames: the whole row reflows at once, and if
-     a frame arrives late there, an ease-out curve is already a third of the way
-     open and reads as a jump. This one has not moved yet, and it lands on the
-     final size exactly — it never overshoots.
+     The curve is an ease-out: the row starts moving on the frame the pointer
+     arrives and then settles, so a hand-off reads as one movement. An ease-in-out
+     spends its first tenth of a second almost still and then rushes through the
+     middle, which reads as "the old card closed, then the new one opened" even
+     though the layout itself was already continuous.
   */
   .team-gallery-card {
     --team-motion-duration: 800ms;
-    --team-motion-ease: cubic-bezier(0.45, 0, 0.15, 1);
+    --team-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* The caption is laid out at the width an active card settles on
+     (`--team-gallery-panel-width`, measured from the row's own geometry by
+     TeamGallery and present only while a card is open) instead of at the card's
+     current width. A card that is still moving therefore reveals the copy it
+     already has — clipped by the panel's `overflow-hidden` — rather than
+     re-wrapping it in every frame, which is what used to push the member's name
+     onto a second line and step the caption upward mid-transition. The variable
+     is absent while the row is at rest, so the narrow panels wrap their copy
+     exactly as they did before. */
+  .team-gallery-caption {
+    width: max(100%, var(--team-gallery-panel-width, 0px));
   }
 
   /* Zoom anchored to the top edge, so a face in the upper half of the photo
@@ -287,6 +304,21 @@
       transition:
         opacity var(--team-motion-duration) var(--team-motion-ease),
         transform var(--team-motion-duration) var(--team-motion-ease);
+    }
+    /* The caption and the spine name are two readings of the same name, so they
+       hand over instead of overlapping: opening, the spine is gone in the first
+       fifth of the movement (well before the caption has faded in), and closing,
+       it waits until the caption has faded out. Cross-fading them over the whole
+       800ms showed the member's name twice at once. */
+    .team-gallery-spine {
+      transition:
+        opacity 360ms var(--team-motion-ease) 400ms,
+        transform 360ms var(--team-motion-ease) 400ms;
+    }
+    .team-gallery-card[data-active="true"] .team-gallery-spine {
+      transition:
+        opacity 200ms var(--team-motion-ease),
+        transform 200ms var(--team-motion-ease);
     }
     .team-gallery-name {
       transition:

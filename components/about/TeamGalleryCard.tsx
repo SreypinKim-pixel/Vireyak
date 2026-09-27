@@ -21,6 +21,12 @@ import ProfilePhoto from "./ProfilePhoto";
  * them, all with one duration and one curve. The six cards are one flex row, so
  * they open and close in the same layout pass instead of one after the other.
  *
+ * `ACTIVE_GROW` is the whole layout contract: the active card asks for that much
+ * more of the row than a narrow one, the browser interpolates that single number
+ * (`.team-gallery-card` transitions `flex-grow`), and TeamGallery uses the same
+ * number to work out the width an open card settles on — the width the caption
+ * is laid out at, so the member's text never re-wraps while the card moves.
+ *
  * The panel has a fixed height, the caption is layered over the photo, and the
  * bio unfolds inside that caption, so nothing a card shows can change the card's
  * own height: the movement stays horizontal. `data-active` feeds the photo zoom
@@ -29,6 +35,8 @@ import ProfilePhoto from "./ProfilePhoto";
  *
  * Expected shape (see data/team.ts): { id, name, role, bio, photo, links }
  */
+export const ACTIVE_GROW = 3.4;
+
 type TeamGalleryCardProps = {
   member: TeamMember;
   index: number;
@@ -62,10 +70,11 @@ export default function TeamGalleryCard({
       onPointerUp={(event) => onPointerUp(event, index)}
       onFocus={() => onFocus(index)}
       onKeyDown={(event) => onKeyDown(event, index)}
+      style={{ flexGrow: active ? ACTIVE_GROW : 1 }}
       className={`team-gallery-card relative isolate min-w-0 basis-0 cursor-pointer overflow-hidden rounded-2xl border bg-navy outline-none focus-visible:ring-2 focus-visible:ring-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${
         active
-          ? "flex-[3.4_1_0%] border-brightgold/45 shadow-[0_24px_60px_-24px_rgba(14,13,21,0.5)]"
-          : "flex-[1_1_0%] border-slate/20"
+          ? "border-brightgold/45 shadow-[0_24px_60px_-24px_rgba(14,13,21,0.5)]"
+          : "border-slate/20"
       } ${collapsed ? "opacity-90 saturate-[0.85]" : ""}`}
     >
       {/* The photo fills the panel and stays anchored to the top edge, so a face
@@ -80,10 +89,12 @@ export default function TeamGalleryCard({
         }`}
       />
 
-      {/* Full details. The bio unfolds while the card is active, so the text
-          grows with the card instead of popping in. */}
+      {/* Full details. The caption keeps the width of an open card, so the copy
+          is laid out once and simply revealed as the card grows; the bio unfolds
+          while the card is active, so the text rises with the card instead of
+          popping in. */}
       <div
-        className={`team-gallery-fade absolute inset-x-0 bottom-0 p-4 sm:p-5 ${
+        className={`team-gallery-fade team-gallery-caption absolute bottom-0 left-0 p-4 sm:p-5 ${
           collapsed
             ? "pointer-events-none translate-y-3 opacity-0"
             : "translate-y-0 opacity-100"
@@ -119,10 +130,12 @@ export default function TeamGalleryCard({
       </div>
 
       {/* Narrow panels keep the full name readable by running it down the card.
-          Decorative: the <h3> above already carries the name. */}
+          Decorative: the <h3> above already carries the name. This name and the
+          caption above are two readings of the same person, so they hand over
+          instead of fading through each other (`.team-gallery-spine`). */}
       <div
         aria-hidden="true"
-        className={`team-gallery-fade absolute inset-0 flex items-end justify-center p-3 ${
+        className={`team-gallery-fade team-gallery-spine absolute inset-0 flex items-end justify-center p-3 ${
           collapsed
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-3 opacity-0"

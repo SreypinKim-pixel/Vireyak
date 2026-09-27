@@ -194,8 +194,8 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
     "cards should start at similar widths",
   ).toBeLessThanOrEqual(8);
 
-  // The width transition runs for 500ms, so wait for it to settle before
-  // measuring the resting widths of the two states.
+  // The panel transition runs for 800ms on an ease-out curve, so it has landed
+  // on the final width well before this wait — 99.9% of the travel by 700ms.
   const settle = () => page.waitForTimeout(700);
 
   // Hovering a card expands it and shrinks the other five.
