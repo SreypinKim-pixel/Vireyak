@@ -1,4 +1,5 @@
 import { cache } from "react";
+import type { CatalogueStat } from "../../lib/camTripApi";
 import Link from "next/link";
 import Icon from "../Icon";
 
@@ -6,7 +7,11 @@ import Icon from "../Icon";
  * The hero's live figures, streamed in after the hero has painted. Renders
  * nothing when the API is unavailable, so the hero stays intact.
  */
-export default function HeroHighlights({ stats }) {
+export default function HeroHighlights({
+  stats = [],
+}: {
+  stats?: CatalogueStat[];
+}) {
   if (!Array.isArray(stats) || stats.length === 0) return null;
   const highlights = stats.slice(0, 4);
   return (

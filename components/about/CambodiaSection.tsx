@@ -1,3 +1,8 @@
+import type {
+  CatalogueStat,
+  Province,
+  RegionSummary,
+} from "../../lib/camTripApi";
 import Icon from "../Icon";
 import {
   cambodiaSection,
@@ -12,11 +17,17 @@ import ProvinceChips from "./ProvinceChips";
  * province list are all rendered from live API responses passed in by the page.
  */
 export default function CambodiaSection({
-  provinces,
-  stats,
-  regions,
+  provinces = [],
+  stats = [],
+  regions = [],
   live,
   reachable = true,
+}: {
+  provinces?: Province[];
+  stats?: CatalogueStat[];
+  regions?: RegionSummary[];
+  live?: { provinces: boolean; places: boolean };
+  reachable?: boolean;
 }) {
   const hasLiveFigures = Boolean(live?.provinces) || Boolean(live?.places);
   const hasStats = Array.isArray(stats) && stats.length > 0;

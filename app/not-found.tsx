@@ -1,15 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Compass } from "lucide-react";
 import Recommended from "@/components/Recommended";
 
 export default function NotFound() {
+  const router = useRouter();
   const goBack = () => {
     if (window.history.length > 1) {
       window.history.back();
     } else {
-      window.location.href = "/";
+      router.push("/");
     }
   };
 

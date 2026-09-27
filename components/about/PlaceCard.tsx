@@ -1,3 +1,4 @@
+import type { PlaceCardData } from "../../lib/camTripApi";
 import Icon from "../Icon";
 
 /**
@@ -8,12 +9,12 @@ import Icon from "../Icon";
  * Reusable card for one Cambodian place. Works for API catalogue entries and
  * for the local fallback destinations shown when the API is unreachable.
  *
- * Expected shape (see lib/camTripApi.js):
+ * Expected shape (see lib/camTripApi.ts):
  * { id, nameEn, nameKh, description, categoryLabel, provinceName, regionLabel,
  *   rating, image, imageIsProvincePhoto, mapsUrl, featured }
  * @param {{ place: PlaceCardData }} props
  */
-export default function PlaceCard({ place }) {
+export default function PlaceCard({ place }: { place: PlaceCardData }) {
   const location = [place.provinceName, place.regionLabel]
     .filter(Boolean)
     .join(" · ");
@@ -21,7 +22,8 @@ export default function PlaceCard({ place }) {
     place.imageIsProvincePhoto && place.provinceName
       ? `${place.provinceName} province, Cambodia`
       : `${place.nameEn}, Cambodia`;
-  const hasRating = typeof place.rating === "number";
+  const rating = place.rating;
+  const hasRating = typeof rating === "number";
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate/15 bg-panel transition duration-300 hover:-translate-y-1 hover:shadow-soft">
@@ -73,7 +75,7 @@ export default function PlaceCard({ place }) {
           {hasRating ? (
             <span className="flex items-center gap-2">
               <span className="rounded-t-md rounded-br-md bg-navy px-1.5 py-1 text-[10px] font-semibold text-white dark:bg-indigo">
-                {place.rating.toFixed(1)}
+                {rating.toFixed(1)}
               </span>
               <span className="text-[9px] text-ink/45">API rating</span>
             </span>

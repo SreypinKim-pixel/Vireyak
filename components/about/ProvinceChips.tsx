@@ -1,11 +1,20 @@
+import type { Province } from "../../lib/camTripApi";
+
+/** One API region with the provinces that belong to it, in API order. */
+type RegionGroup = { region: string; label: string; items: Province[] };
+
 /**
  * The provinces the CamTrip catalogue covers, grouped by API region and shown
  * with both the Khmer and English names returned by the API.
  */
-export default function ProvinceChips({ provinces }) {
+export default function ProvinceChips({
+  provinces = [],
+}: {
+  provinces?: Province[];
+}) {
   if (!Array.isArray(provinces) || provinces.length === 0) return null;
 
-  const groups = [];
+  const groups: RegionGroup[] = [];
   for (const province of provinces) {
     let group = groups.find((entry) => entry.region === province.region);
     if (!group) {

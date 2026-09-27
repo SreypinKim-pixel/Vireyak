@@ -1,6 +1,8 @@
 import Icon from "../Icon";
 import { GitHub, Telegram } from "./SocialIcons";
 
+type ProfileLink = { label: string; href: string };
+
 /**
  * Optional social or contact links for a profile card. `links` entries are
  * { label, href }. Anything that is not a mailto: link opens in a new tab.
@@ -10,6 +12,10 @@ export default function ProfileLinks({
   links,
   tone = "light",
   justify = "center",
+}: {
+  links?: ProfileLink[];
+  tone?: "light" | "dark";
+  justify?: "center" | "start";
 }) {
   if (!Array.isArray(links) || links.length === 0) return null;
 

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Icon from "../Icon";
 import { aboutHero } from "../../data/about";
@@ -8,7 +9,11 @@ import { HeroFootnote } from "./HeroHighlights";
  * API figures, so the hero itself paints immediately.
  * @param {{ highlights?: import("react").ReactNode }} props
  */
-export default function AboutHero({ highlights = null }) {
+export default function AboutHero({
+  highlights = null,
+}: {
+  highlights?: ReactNode;
+}) {
   return (
     <section
       aria-labelledby="about-hero-title"

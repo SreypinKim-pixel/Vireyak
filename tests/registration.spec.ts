@@ -76,12 +76,11 @@ test("invalid attraction and province IDs show the custom 404 with recovery link
     const response = await page.goto(path);
     expect(response?.status()).toBe(404);
     await expect(
-      page.getByRole("heading", { name: "Off the beaten path." }),
+      page.getByRole("heading", { name: /wandered off the map/ }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Back Home" })).toHaveAttribute(
-      "href",
-      "/",
-    );
+    await expect(
+      page.getByRole("link", { name: "Back to the map" }),
+    ).toHaveAttribute("href", "/");
     await page
       .getByRole("link", { name: "Explore Attractions", exact: true })
       .click();

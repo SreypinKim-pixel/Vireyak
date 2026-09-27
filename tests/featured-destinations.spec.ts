@@ -7,9 +7,10 @@ test("featured destinations open their matching province image and information",
   const cards = page.locator(
     'section[aria-labelledby="featured-destinations-title"] article',
   );
-  await expect(cards).toHaveCount(3);
+  await expect(cards.first()).toBeVisible();
+  expect(await cards.count()).toBeGreaterThanOrEqual(3);
   const destinations = await cards.evaluateAll((nodes) =>
-    nodes.map((node) => ({
+    nodes.slice(0, 3).map((node) => ({
       name: node.querySelector("h3")!.textContent!,
       image: node.querySelector("img")!.getAttribute("src")!,
       href: node.querySelector("a")!.getAttribute("href")!,

@@ -16,7 +16,10 @@ import TravelCompass from "../../components/about/TravelCompass";
 import AboutFaqs from "../../components/about/AboutFaqs";
 import AboutCTA from "../../components/about/AboutCTA";
 import { destinations } from "../../data/travel";
-import { loadCambodiaCatalogue } from "../../lib/camTripApi";
+import {
+  loadCambodiaCatalogue,
+  type PlaceCardData,
+} from "../../lib/camTripApi";
 
 export const metadata = {
   title: "About CamTrip",
@@ -25,12 +28,12 @@ export const metadata = {
 };
 
 // Route segment config must be a literal. Keep in sync with
-// CAMTRIP_REVALIDATE_SECONDS in lib/camTripApi.js.
+// CAMTRIP_REVALIDATE_SECONDS in lib/camTripApi.ts.
 export const revalidate = 1800;
 
 // Preview content used only when the public API cannot be reached, so the
 // page always shows real Cambodian destinations instead of an empty grid.
-const fallbackPlaces = destinations.map((destination) => ({
+const fallbackPlaces: PlaceCardData[] = destinations.map((destination) => ({
   id: `preview-${destination.name}`,
   nameEn: destination.name,
   nameKh: null,

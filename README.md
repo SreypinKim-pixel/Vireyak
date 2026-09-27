@@ -57,7 +57,8 @@ for a future image. Navbar and footer are shared through `app/layout.tsx`.
 - `app/login/`, `app/register/`: styled account previews with native validation.
 - `components/`: shared navigation, footer, icons, cards, search, filters, and forms.
 - `data/travel.ts`: explicitly illustrative stays, prices, ratings, and experiences.
-- `public/images/README.md`: photo sources and licensing links.
+- `public/images/README.md`: photo sources and licensing links, including the
+  named Cambodian properties' own photography.
 - Legacy `/products`, `/products/:id`, and `/table` URLs redirect to `/stays`.
 
 Favorites and the theme preference use local storage; neither requires an account.
@@ -67,8 +68,10 @@ check real inventory. Subtotals exclude taxes and fees.
 ## Preview boundaries
 
 This is a functioning discovery UI, not a live reservation service. All property
-names, prices, ratings, reviews, and amenities are sample content. Accommodation
-photographs are inspiration imagery, not verified pictures of those properties.
+names, prices, ratings, reviews, and amenities are sample content. Photographs
+for the fictional preview properties are inspiration imagery, not verified
+pictures of those properties; the named Cambodian hotels use the properties' own
+publicity photography instead (sources in `public/images/README.md`).
 No booking, payment, session, or account is created. Account forms display an
 honest unavailable message rather than simulated authentication success, and do
 not send or store credentials. Do not enter real passwords.

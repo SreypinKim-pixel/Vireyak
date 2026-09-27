@@ -1,3 +1,5 @@
+import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
+import type { TeamMember } from "../../data/team";
 import ProfileLinks from "./ProfileLinks";
 import ProfilePhoto from "./ProfilePhoto";
 
@@ -10,6 +12,14 @@ export default function TeamGalleryCard({
   onFocus,
   onKeyDown,
   onPointerUp,
+}: {
+  member: TeamMember;
+  index: number;
+  count: number;
+  activeIndex: number | null;
+  onFocus: (index: number) => void;
+  onKeyDown: (event: KeyboardEvent<HTMLElement>, index: number) => void;
+  onPointerUp: (event: PointerEvent<HTMLElement>) => void;
 }) {
   const active = activeIndex === index;
   const collapsed = activeIndex !== null && !active;
@@ -26,11 +36,13 @@ export default function TeamGalleryCard({
       aria-label={`${member.name} — ${member.role}`}
       data-active={active ? "true" : "false"}
       data-team-index={index}
-      style={{
-        "--team-fraction": fraction,
-        "--team-preceding": preceding,
-        "--team-index": index,
-      }}
+      style={
+        {
+          "--team-fraction": fraction,
+          "--team-preceding": preceding,
+          "--team-index": index,
+        } as CSSProperties
+      }
       onFocus={() => onFocus(index)}
       onKeyDown={(event) => onKeyDown(event, index)}
       onPointerUp={onPointerUp}
