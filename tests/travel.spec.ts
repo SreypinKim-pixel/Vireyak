@@ -171,10 +171,10 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   await expect(page).toHaveURL(/\/attraction\?/);
   await expect(page.locator("article")).toHaveCount(1);
   await page
-    .getByRole("link", { name: "The slower side of Kampot", exact: true })
+    .getByRole("link", { name: "Bokor National Park", exact: true })
     .click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "The slower side of Kampot",
+    "Bokor National Park",
   );
   await page.getByLabel("Experience date", { exact: true }).fill("2030-11-10");
   await expect(page.getByLabel("Experience date", { exact: true })).toHaveValue(

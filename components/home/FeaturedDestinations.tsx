@@ -17,8 +17,8 @@ export default async function FeaturedDestinations() {
         <SectionHeading
           id="featured-destinations-title"
           eyebrow="Explore Cambodia"
-          title="Featured Destinations"
-          description="Places that deserve a place on your next Cambodian adventure."
+          title="Explore all 25 provinces"
+          description="Find Cambodia’s best known temples, coastlines, wildlife, and cultural sites across every province."
         >
           <Link
             href="/attraction"

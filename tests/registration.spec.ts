@@ -21,9 +21,24 @@ test("registration validates fields and loads optional attractions", async ({
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByLabel("Confirm password")).toBeFocused();
   await page.getByLabel("Confirm password").fill("demo-password-only");
+  await expect(page.getByText("Your passwords must match.")).not.toBeVisible();
+  await page.getByLabel("Attraction of interest").click();
+  await page.getByRole("option", { name: "Angkor Wat", exact: true }).click();
+  await page.getByLabel("Province of interest").click();
+  await page.getByRole("option", { name: "Kampot", exact: true }).click();
+  await expect(page.getByLabel("Attraction of interest")).toHaveText(
+    "Choose an attraction",
+  );
+  await page.getByLabel("Attraction of interest").click();
+  await expect(
+    page.getByRole("option", {
+      name: "Angkor Wat",
+      exact: true,
+    }),
+  ).toHaveCount(0);
   await page
-    .getByLabel("Attraction of interest")
-    .selectOption("angkor-sunrise");
+    .getByRole("option", { name: "Bokor National Park", exact: true })
+    .click();
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
     page.getByText(/Account creation is not available yet/),
@@ -81,5 +96,25 @@ test("invalid attraction and province IDs show the custom 404 with recovery link
   await page.goto("/provinces/siem-reap/attractions");
   await expect(
     page.getByRole("heading", { name: "Explore Siem Reap" }),
+  ).toBeVisible();
+});
+
+test("malformed attraction data does not block registration", async ({
+  page,
+}) => {
+  await page.route("**/api/attractions", (route) =>
+    route.fulfill({
+      json: { data: [{ id: "broken", name: "Broken", province: null }] },
+    }),
+  );
+  await page.goto("/register");
+  await expect(page.getByText(/Attractions could not be loaded/)).toBeVisible();
+  await page.getByLabel("Full name").fill("Demo Traveler");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("demo-password-only");
+  await page.getByLabel("Confirm password").fill("demo-password-only");
+  await page.getByRole("button", { name: "Create account" }).click();
+  await expect(
+    page.getByText(/Account creation is not available yet/),
   ).toBeVisible();
 });

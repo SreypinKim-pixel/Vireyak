@@ -1,4 +1,5 @@
 import { provinceNames } from "@/data/province-names";
+import { attractions } from "@/data/travel";
 import { localDestinationImage } from "./destination-images";
 
 export interface Province {
@@ -59,6 +60,32 @@ export const regions: Record<string, string> = {
   COASTAL: "Coastal Cambodia",
 };
 
+function getLocalFeaturedDestinations() {
+  return provinceNames.map((name) => {
+    const destination = name === "Preah Sihanouk" ? "Koh Rong" : name;
+    const highlights = attractions.filter(
+      (attraction) => attraction.destination === destination,
+    );
+    return {
+      id: name.toLowerCase().replaceAll(" ", "-"),
+      name,
+      location: "Cambodia",
+      category: "Province",
+      description: highlights.length
+        ? `Explore ${highlights
+            .slice(0, 3)
+            .map((attraction) => attraction.name)
+            .join(", ")} and more in ${name}.`
+        : `Discover cultural and natural highlights in ${name}, Cambodia.`,
+      attractionCount: highlights.length,
+      image: highlights[0]?.image || null,
+      // The curated travel listing supports destination filters and remains
+      // useful when the live province service is unavailable.
+      href: `/attraction?destination=${encodeURIComponent(name)}`,
+    };
+  });
+}
+
 export async function getFeaturedDestinations() {
   try {
     const response = await fetch(API_ENDPOINTS.provinces.getAll, {
@@ -77,7 +104,6 @@ export async function getFeaturedDestinations() {
             province?.id != null && (province.nameEn || province.nameKh),
         )
         .sort((a, b) => Number(a.id) - Number(b.id))
-        .slice(0, 3)
         .map(async (province) => {
           const name = province.nameEn || province.nameKh;
           let highlights: string[] = [];
@@ -119,7 +145,7 @@ export async function getFeaturedDestinations() {
     return { destinations, unavailable: false };
   } catch (error) {
     console.error("Unable to load featured destinations:", error);
-    return { destinations: [], unavailable: true };
+    return { destinations: getLocalFeaturedDestinations(), unavailable: false };
   }
 }
 
