@@ -33,7 +33,7 @@
       "licenseUrl": ""
     },
     "banteay-chhmar-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Banteay_Chhmar_IMG_0715.JPG/960px-Banteay_Chhmar_IMG_0715.JPG",
+      "src": "/images/provinces/banteay-meanchey.jpg",
       "alt": "Banteay Chhmar Temple, Banteay Meanchey",
       "source": "https://commons.wikimedia.org/wiki/File:Banteay_Chhmar_IMG_0715.JPG",
       "credit": "Antoinette von Moos",
@@ -78,7 +78,7 @@
       "backupSrc": "/images/kampong-phluk.jpg"
     },
     "phnom-sampov-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Gate_on_Phnom_Sampeau.jpg/960px-Gate_on_Phnom_Sampeau.jpg",
+      "src": "/images/provinces/battambang.jpg",
       "alt": "Phnom Sampeau, Battambang",
       "source": "https://commons.wikimedia.org/wiki/File:Gate_on_Phnom_Sampeau.jpg",
       "credit": "Christophe95",
@@ -87,7 +87,7 @@
       "backupSrc": "/images/phnom-sampov.jpg"
     },
     "bousra-waterfall-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Bousra_Waterfall.jpg/960px-Bousra_Waterfall.jpg",
+      "src": "/images/provinces/mondulkiri.jpg",
       "alt": "Bou Sra Waterfall, Mondulkiri",
       "source": "https://commons.wikimedia.org/wiki/File:Bousra_Waterfall.jpg",
       "credit": "Kiensvay",
@@ -96,7 +96,7 @@
       "backupSrc": "/images/bousra-waterfall.jpg"
     },
     "sambor-prei-kuk-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Sambor_Prei_Kuk-nX-11.jpg/960px-Sambor_Prei_Kuk-nX-11.jpg",
+      "src": "/images/provinces/kampong-thom.jpg",
       "alt": "Sambor Prei Kuk, Kampong Thom",
       "source": "https://commons.wikimedia.org/wiki/File:Sambor_Prei_Kuk-nX-11.jpg",
       "credit": "PsamatheM",
@@ -105,7 +105,7 @@
       "backupSrc": "/images/sambor-prei-kuk.jpg"
     },
     "nokor-bachey-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/VatNokor_01.jpg/960px-VatNokor_01.jpg",
+      "src": "/images/provinces/kampong-cham.jpg",
       "alt": "Wat Nokor, Kampong Cham",
       "source": "https://commons.wikimedia.org/wiki/File:VatNokor_01.jpg",
       "credit": "BluesyPete",
@@ -114,7 +114,7 @@
       "backupSrc": "/images/nokor-bachey.jpg"
     },
     "oudong-jpg": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Udong_0001.jpg",
+      "src": "/images/provinces/kandal.jpg",
       "alt": "Oudong, Kandal",
       "source": "https://commons.wikimedia.org/wiki/File:Udong_0001.jpg",
       "credit": "Stefan Fussan",
@@ -123,7 +123,7 @@
       "backupSrc": "/images/oudong.jpg"
     },
     "phnom-chisor-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Phnom_Chisor_4003.jpg/960px-Phnom_Chisor_4003.jpg",
+      "src": "/images/provinces/takeo.jpg",
       "alt": "Phnom Chisor Temple, Takeo",
       "source": "https://commons.wikimedia.org/wiki/File:Phnom_Chisor_4003.jpg",
       "credit": "Stefan Fussan",
@@ -132,7 +132,7 @@
       "backupSrc": "/images/phnom-chisor.jpg"
     },
     "kampong-luong-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Kompong_luong_catholic_church.jpg/960px-Kompong_luong_catholic_church.jpg",
+      "src": "/images/provinces/pursat.jpg",
       "alt": "Kampong Luong floating village, Pursat",
       "source": "https://commons.wikimedia.org/wiki/File:Kompong_luong_catholic_church.jpg",
       "credit": "Phil Whitehouse from London, United Kingdom",
@@ -141,7 +141,7 @@
       "backupSrc": "/images/kampong-luong.jpg"
     },
     "kirirom-national-park-jpg": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/0/05/Kirirom_National_Park.jpg",
+      "src": "/images/provinces/kampong-speu.jpg",
       "alt": "Kirirom National Park, Kampong Speu",
       "source": "https://commons.wikimedia.org/wiki/File:Kirirom_National_Park.jpg",
       "credit": "Arie at flickr",
@@ -235,7 +235,7 @@
       "licenseUrl": ""
     },
     "destinations-attraction-41-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Prasat_Ta_Muen_Thom-3-HDC.jpg/960px-Prasat_Ta_Muen_Thom-3-HDC.jpg",
+      "src": "/images/provinces/oddar-meanchey.jpg",
       "alt": "Prasat Ta Muen Thom, Oddar Meanchey",
       "source": "https://commons.wikimedia.org/wiki/File:Prasat_Ta_Muen_Thom-3-HDC.jpg",
       "credit": "Ddalbiez",
@@ -276,7 +276,7 @@
       "licenseUrl": ""
     },
     "commons-2461855": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/3/34/Sunset_Kracheh.jpg",
+      "src": "/images/provinces/kratie.jpg",
       "alt": "Sunset over the Mekong River in Kratie",
       "source": "https://commons.wikimedia.org/wiki/File:Sunset_Kracheh.jpg",
       "credit": "Juan Manuel Garcia from Mexico City, Mexico",
@@ -285,12 +285,22 @@
       "backupSrc": "/images/locations/commons-2461855.jpg"
     },
     "tatai": {
-      "src": "https://www.novo-monde.com/app/uploads/2023/07/tatai-waterfall-1024x683.jpg",
+      "src": "/images/provinces/koh-kong.jpg",
       "alt": "Tatai Waterfall, Koh Kong",
       "source": "https://www.novo-monde.com/en/koh-kong-island-cardamom-mountains-cambodia/",
       "credit": "Novo-monde",
       "license": "",
-      "licenseUrl": ""
+      "licenseUrl": "",
+      "backupSrc": "https://www.novo-monde.com/app/uploads/2023/07/tatai-waterfall-1024x683.jpg"
+    },
+    "koh-kong-jpg": {
+      "src": "/images/provinces/koh-kong.jpg",
+      "alt": "Tatai Waterfall, Koh Kong",
+      "source": "https://www.novo-monde.com/en/koh-kong-island-cardamom-mountains-cambodia/",
+      "credit": "Novo-monde",
+      "license": "",
+      "licenseUrl": "",
+      "backupSrc": "/images/provinces/koh-kong-island.jpg"
     },
     "commons-5609684": {
       "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Phnom_Bakheng.jpg/960px-Phnom_Bakheng.jpg",
@@ -473,7 +483,7 @@
       "backupSrc": "/images/locations/commons-81495410.jpg"
     },
     "commons-96371245": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Yak_Loum_Lake_Panorama.jpg/960px-Yak_Loum_Lake_Panorama.jpg",
+      "src": "/images/provinces/ratanakiri.jpg",
       "alt": "Yeak Laom Lake, Ratanakiri",
       "source": "https://commons.wikimedia.org/wiki/File:Yak_Loum_Lake_Panorama.jpg",
       "credit": "Barang",
@@ -500,7 +510,7 @@
       "backupSrc": "/images/locations/commons-16973632.jpg"
     },
     "commons-106269187": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/06-Kep_Crab_Market_Cambodia-nX-17.jpg/960px-06-Kep_Crab_Market_Cambodia-nX-17.jpg",
+      "src": "/images/provinces/kep.jpg",
       "alt": "Kep Crab Market, Kep",
       "source": "https://commons.wikimedia.org/wiki/File:06-Kep_Crab_Market_Cambodia-nX-17.jpg",
       "credit": "PsamatheM",
@@ -509,7 +519,7 @@
       "backupSrc": "/images/locations/commons-106269187.jpg"
     },
     "commons-123792913": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Angkor_Wat_with_its_reflection_%28cropped%29.jpg/960px-Angkor_Wat_with_its_reflection_%28cropped%29.jpg",
+      "src": "/images/provinces/siem-reap.jpg",
       "alt": "Angkor Wat, Siem Reap",
       "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_with_its_reflection_(cropped).jpg",
       "credit": "Satdeep Gill",
@@ -536,7 +546,7 @@
       "backupSrc": "/images/locations/commons-23216403.jpg"
     },
     "commons-8928780": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Royal_Palace%2C_Phnom_Penh_Cambodia_1.jpg/960px-Royal_Palace%2C_Phnom_Penh_Cambodia_1.jpg",
+      "src": "/images/provinces/phnom-penh.jpg",
       "alt": "Royal Palace, Phnom Penh",
       "source": "https://commons.wikimedia.org/wiki/File:Royal_Palace,_Phnom_Penh_Cambodia_1.jpg",
       "credit": "Hanay",
@@ -712,7 +722,7 @@
     "battambang": "phnom-sampov-jpg",
     "banteay-meanchey": "banteay-chhmar-jpg",
     "kratie": "commons-2461855",
-    "koh-kong": "tatai"
+    "koh-kong": "koh-kong-jpg"
   },
   "attractions": {
     "siem-reap/angkor-wat": "commons-123792913",
