@@ -206,6 +206,12 @@
   .field-label {
     @apply mb-2 block text-xs font-medium;
   }
+  .field-invalid {
+    @apply border-red-600/70 focus:border-red-600 focus:ring-red-600/20;
+  }
+  .field-error {
+    @apply mt-1.5 block text-[11px] leading-4 text-red-600 dark:text-red-400;
+  }
   .muted {
     @apply text-ink/60;
   }

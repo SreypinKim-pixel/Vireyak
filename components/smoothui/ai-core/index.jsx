@@ -1,4 +1,4 @@
-"use client";;
+"use client";
 import { useAnimationFrame, useMotionValue } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -122,15 +122,17 @@ export const getAIStateAccentColor = (state, fallback) => {
 };
 
 /** Motion preset for a state, falling back to `idle` for unknown values. */
-export const getAIStateMotion = state => AI_STATE_MOTION[state ?? "idle"] ?? AI_STATE_MOTION.idle;
+export const getAIStateMotion = (state) =>
+  AI_STATE_MOTION[state ?? "idle"] ?? AI_STATE_MOTION.idle;
 
-const isMotionValue = value => typeof value === "object" && value !== null && "get" in value;
+const isMotionValue = (value) =>
+  typeof value === "object" && value !== null && "get" in value;
 
 /**
  * Normalises the `amplitude` prop into a stable `MotionValue<number>` so
  * component internals only deal with one shape.
  */
-export const useAmplitudeValue = amplitude => {
+export const useAmplitudeValue = (amplitude) => {
   const fallback = useMotionValue(0);
   const numeric = typeof amplitude === "number" ? amplitude : null;
 
@@ -172,14 +174,17 @@ export const useAudioAmplitude = (options = {}) => {
   const analyserRef = useRef(null);
   const bufferRef = useRef(null);
 
+  const requestRef = useRef(0);
+
   const stop = useCallback(() => {
+    requestRef.current += 1;
     for (const track of streamRef.current?.getTracks() ?? []) {
       track.stop();
     }
     streamRef.current = null;
     analyserRef.current = null;
     bufferRef.current = null;
-    contextRef.current?.close();
+    void contextRef.current?.close().catch(() => {});
     contextRef.current = null;
     amplitude.set(0);
     setStatus("idle");
@@ -193,20 +198,25 @@ export const useAudioAmplitude = (options = {}) => {
     const AudioContextCtor =
       typeof window === "undefined"
         ? undefined
-        : (window.AudioContext ??
-          (window)
-            .webkitAudioContext);
+        : (window.AudioContext ?? window.webkitAudioContext);
 
     if (!(AudioContextCtor && navigator.mediaDevices?.getUserMedia)) {
       setStatus("unsupported");
       return;
     }
 
+    const request = ++requestRef.current;
     setStatus("requesting");
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (request !== requestRef.current) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+      streamRef.current = stream;
       const context = new AudioContextCtor();
+      contextRef.current = context;
       const analyser = context.createAnalyser();
       analyser.fftSize = fftSize;
       context.createMediaStreamSource(stream).connect(analyser);
@@ -217,15 +227,25 @@ export const useAudioAmplitude = (options = {}) => {
       bufferRef.current = new Float32Array(analyser.fftSize);
       setStatus("active");
     } catch {
+      if (request !== requestRef.current) return;
+      streamRef.current?.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+      void contextRef.current?.close().catch(() => {});
+      contextRef.current = null;
       setStatus("denied");
     }
   }, [fftSize]);
 
   useEffect(() => {
-    if (autoStart) {
-      start();
-    }
-    return stop;
+    const timer = autoStart
+      ? setTimeout(() => {
+          void start();
+        }, 0)
+      : undefined;
+    return () => {
+      clearTimeout(timer);
+      stop();
+    };
   }, [autoStart, start, stop]);
 
   useAnimationFrame(() => {

@@ -110,6 +110,20 @@ const addDefaultVariants = (variants: Variants) => ({
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
+// Keep a stable wrapper per element type across all renders and instances.
+const motionComponents = new Map<
+  React.ElementType,
+  ReturnType<typeof motion.create>
+>();
+function getMotionComponent(element: React.ElementType) {
+  let component = motionComponents.get(element);
+  if (!component) {
+    component = motion.create(element);
+    motionComponents.set(element, component);
+  }
+  return component;
+}
+
 function AnimatedGroup({
   children,
   className,
@@ -131,11 +145,12 @@ function AnimatedGroup({
     ? reducedItemVariants
     : (variants?.item ?? selectedVariants.item);
 
-  const MotionComponent = motion(as);
+  const MotionComponent = getMotionComponent(as);
 
-  const MotionChild = motion(asChild);
+  const MotionChild = getMotionComponent(asChild);
 
   return (
+    // eslint-disable-next-line react-hooks/static-components -- Module cache returns the same component identity for each element type.
     <MotionComponent
       animate="visible"
       className={className}

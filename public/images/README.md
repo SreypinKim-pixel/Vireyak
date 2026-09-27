@@ -15,3 +15,10 @@ Pexels license: https://www.pexels.com/license/
 Unsplash license: https://unsplash.com/license
 
 Keep these sources with the assets. Replace inspiration photography with verified property photography when connecting real inventory.
+
+## Kirirom hero photo
+
+`kirirom-resort.jpg`: Romhaey Kirirom Resort by EHM, sourced from the user-provided Tripadvisor listing:
+https://www.tripadvisor.com/Hotel_Review-g729357-d27757353-Reviews-Romhaey_Kirirom_Resort_By_Ehm-Kampong_Speu_Kampong_Speu_Province.html
+
+Photo: https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/80/68/17/escape-to-romhaey-kirirom.jpg
