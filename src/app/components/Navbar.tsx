@@ -21,8 +21,8 @@ const navItems = [
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
-  // Use resolvedTheme to accurately detect active theme (light/dark) even if set to 'system'
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   // Ensure component is mounted on client before rendering theme toggle UI
@@ -31,19 +31,31 @@ export default function Navbar() {
   }, []);
 
   const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    const currentTheme = resolvedTheme || theme;
+    setTheme(currentTheme === "dark" ? "light" : "dark");
   };
 
   return (
     <header className="bg-white dark:bg-gray-800 shadow-lg relative z-50 transition-colors duration-300">
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo Link with fallback text */}
         <Link
           href="/"
-          className="text-2xl font-bold text-indigo-800 dark:text-white transition-colors duration-300"
-        >
-          Vireyak
-        </Link>
+          className="flex items-center gap-2 hover:opacity-90 transition-opacity"
+          >
+          {!imgError ? (
+          <img
+          src="/Logo.png"
+          alt="Vireyak Logo"
+          onError={() => setImgError(true)}
+         className="h-19 w-auto object-contain transition-all duration-300"
+    />
+  ) : (
+    <span className="text-2xl font-bold text-indigo-800 dark:text-white transition-colors duration-300">
+      Vireyak
+    </span>
+  )}
+</Link>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex space-x-6">
@@ -69,6 +81,7 @@ export default function Navbar() {
         {/* Desktop Controls (Dark Mode Toggle, Sign Up & Register) */}
         <div className="hidden md:flex items-center space-x-3">
           <button
+            type="button"
             onClick={toggleTheme}
             className="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition-colors duration-300"
             aria-label="Toggle dark mode"
@@ -102,6 +115,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <div className="flex md:hidden items-center space-x-2">
           <button
+            type="button"
             onClick={toggleTheme}
             className="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition-colors duration-300"
             aria-label="Toggle dark mode"
@@ -118,6 +132,7 @@ export default function Navbar() {
           </button>
 
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white focus:outline-none transition-colors duration-300"
             aria-label="Toggle mobile menu"
