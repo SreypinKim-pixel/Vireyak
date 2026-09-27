@@ -28,7 +28,7 @@ so an open development server does not overwrite the production check output.
 
 ## Design
 
-The Royal Twilight palette lives in `tailwind.config.js`; semantic light/dark
+The Royal Twilight palette lives in `tailwind.config.ts`; semantic light/dark
 mappings live in `app/globals.css`.
 
 | Token                | Light     | Dark      |
@@ -44,19 +44,19 @@ White light-mode cards and a dark card surface supplement the supplied tokens.
 Body copy uses translucent primary text for readability. The theme follows the
 system preference on first visit; the navbar toggle persists a manual choice.
 
-`components/Brand.js` contains the text wordmark and accepts a `logoSrc` prop
-for a future image. Navbar and footer are shared through `app/layout.js`.
+`components/Brand.tsx` contains the text wordmark and accepts a `logoSrc` prop
+for a future image. Navbar and footer are shared through `app/layout.tsx`.
 
 ## Structure and behavior
 
-- `app/page.js`: destination-led landing page with stay/experience search.
+- `app/page.tsx`: destination-led landing page with stay/experience search.
 - `app/stays/`: destination, capacity, type, budget, and saved-favorite filters;
   sorting; stay details; estimated trip subtotal.
 - `app/attraction/`: experience discovery, filtering, and detail pages.
 - `app/about/`: brand story, thoughtful travel guidance, and FAQs.
 - `app/login/`, `app/register/`: styled account previews with native validation.
 - `components/`: shared navigation, footer, icons, cards, search, filters, and forms.
-- `data/travel.js`: explicitly illustrative stays, prices, ratings, and experiences.
+- `data/travel.ts`: explicitly illustrative stays, prices, ratings, and experiences.
 - `public/images/README.md`: photo sources and licensing links.
 - Legacy `/products`, `/products/:id`, and `/table` URLs redirect to `/stays`.
 
@@ -83,7 +83,7 @@ pre-push checks.
 
 `.env` is ignored and has owner-only permissions. `.env.example` must contain
 placeholders only. Never expose secrets via `NEXT_PUBLIC_`, client props,
-`next.config.js`'s `env` option, or anything in `public/`.
+`next.config.ts`'s `env` option, or anything in `public/`.
 
 `.gitignore` protects Git staging; `.ignore` mirrors its rules for compatible
 search tools. Keep them synchronized. They exclude environment variants,
@@ -112,6 +112,28 @@ navigation, theme persistence, local images, filtering/sorting, favorites,
 search-to-trip date propagation, trip estimates, account preview feedback,
 legacy redirects, and missing pages. Screenshots are written to `/tmp/`.
 `npm run lint` runs ESLint with Next.js core web vitals rules and rejects warnings.
-Dropdowns share `components/Dropdown.js`, built with Radix Select: keyboard
+Dropdowns share `components/Dropdown.tsx`, built with Radix Select: keyboard
 navigation, typeahead, Escape/outside-click dismissal, focus restoration,
 viewport-aware positioning, and Royal Twilight light/dark menus.
+
+All application code and browser tests use TypeScript (`.ts` / `.tsx`). Run
+`npm run typecheck` for strict project-wide type checking. PostCSS uses
+`postcss.config.json` because Next.js does not load TypeScript PostCSS configs.
+
+## Registration and province API previews
+
+Registration includes inline name/email validation, a 12-character minimum password,
+password confirmation, and an optional attraction selector fetched from
+`GET /api/attractions`. Loading, empty, and failed requests are handled, with retry.
+Credentials and preferences are neither sent nor stored; a valid submission explains
+that account creation is unavailable. Replace this preview submission with the real
+registration API when its endpoint and contract are provided.
+
+The local demo APIs return `{ data: [...], demo: true }` from the curated catalog.
+`GET /api/provinces/{id}/attractions` also returns a `province` object, or a JSON
+404 for unknown IDs. Demo province IDs are `siem-reap`, `preah-sihanouk`,
+`phnom-penh`, and `kampot`; they are not official administrative codes.
+`/provinces/{id}/attractions` uses the same catalog lookup and shows the custom
+404 for unknown provinces. Invalid `/attraction/{id}` URLs also show that page,
+with Back Home and Explore Attractions links. These local endpoints can be replaced
+with backend adapters once a real API host and response schema are supplied.

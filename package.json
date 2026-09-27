@@ -8,9 +8,10 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "test:e2e": "playwright test",
-    "format": "prettier --write \"app/**/*.{js,css}\" \"components/**/*.js\" \"data/**/*.js\" \"tests/**/*.js\" *.config.{js,mjs} package.json README.md",
-    "format:check": "prettier --check \"app/**/*.{js,css}\" \"components/**/*.js\" \"data/**/*.js\" \"tests/**/*.js\" *.config.{js,mjs} package.json README.md",
-    "audit:security": "npm audit --audit-level=low"
+    "format": "prettier --write \"app/**/*.{ts,tsx,css}\" \"components/**/*.{ts,tsx}\" \"lib/**/*.ts\" \"data/**/*.ts\" \"tests/**/*.ts\" \"registry/**/*.{ts,tsx}\" *.config.ts *.json README.md",
+    "format:check": "prettier --check \"app/**/*.{ts,tsx,css}\" \"components/**/*.{ts,tsx}\" \"lib/**/*.ts\" \"data/**/*.ts\" \"tests/**/*.ts\" \"registry/**/*.{ts,tsx}\" *.config.ts *.json README.md",
+    "audit:security": "npm audit --audit-level=low",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -31,12 +32,15 @@
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.2",
     "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.6.1",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.5",
+    "jiti": "^2.7.0",
     "postcss": "^8.5.28",
     "prettier": "^3.9.6",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^6.0.3"
   },
   "engines": {
     "node": ">=22.13.0"
