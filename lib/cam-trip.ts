@@ -1,7 +1,7 @@
 import { provinceNames } from "@/data/province-names";
 import { localDestinationImage } from "./destination-images";
 
-interface Province {
+export interface Province {
   id: string | number;
   nameEn: string;
   nameKh: string;
@@ -29,7 +29,15 @@ interface AttractionPage {
   totalElements?: number;
 }
 
-export const API_BASE_URL = "https://cam-trip.cheat.casa/api";
+const DEFAULT_API_BASE_URL = "https://cam-trip.cheat.casa/api";
+
+// Optional override for the teacher CamTrip API, e.g. a local copy:
+//   API_BASE_URL=https://cam-trip.cheat.casa/api npm run dev
+// The guard keeps this safe in the browser, where `process` does not exist.
+export const API_BASE_URL =
+  typeof process === "undefined" || !process.env.API_BASE_URL
+    ? DEFAULT_API_BASE_URL
+    : process.env.API_BASE_URL;
 
 export const API_ENDPOINTS = {
   provinces: {
@@ -44,7 +52,7 @@ export const API_ENDPOINTS = {
   },
 };
 
-const regions: Record<string, string> = {
+export const regions: Record<string, string> = {
   NORTHWEST: "Northwest Cambodia",
   NORTHEAST: "Northeast Cambodia",
   CENTRAL: "Central Cambodia",
@@ -113,6 +121,19 @@ export async function getFeaturedDestinations() {
     console.error("Unable to load featured destinations:", error);
     return { destinations: [], unavailable: true };
   }
+}
+
+// Single-province lookup used by the province API demo. Called server-side
+// inside app/api/provinces/[id]/route.ts against the teacher CamTrip API.
+export async function getProvince(id: string | number): Promise<Province> {
+  const response = await fetch(API_ENDPOINTS.provinces.getById(id), {
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!response.ok) throw new Error(`Provinces API: ${response.status}`);
+  const province = await response.json();
+  if (!province?.id || !(province.nameEn || province.nameKh))
+    throw new Error("Invalid province response");
+  return province;
 }
 
 // Both sections share one selection so their places never overlap.

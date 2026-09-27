@@ -49,10 +49,10 @@ export default function AuthForm({ register = false }) {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setMessage("");
-    if (register) {
+    {
       const values = new FormData(e.currentTarget);
       const next: Record<string, string> = {};
-      if (!String(values.get("name") ?? "").trim())
+      if (register && !String(values.get("name") ?? "").trim())
         next.name = "Enter your full name.";
       if (
         !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
@@ -60,15 +60,22 @@ export default function AuthForm({ register = false }) {
         )
       )
         next.email = "Enter a valid email address.";
-      if (String(values.get("password") ?? "").length < 12)
+      if (!String(values.get("email") ?? "").trim())
+        next.email = "Email is required.";
+      if (!String(values.get("password") ?? "").trim())
+        next.password = "Password is required.";
+      else if (register && String(values.get("password") ?? "").length < 12)
         next.password = "Use at least 12 characters.";
       if (
-        !values.get("confirmPassword") ||
-        values.get("confirmPassword") !== String(values.get("password") ?? "")
+        register &&
+        (!values.get("confirmPassword") ||
+          values.get("confirmPassword") !==
+            String(values.get("password") ?? ""))
       )
         next.confirmPassword = "Your passwords must match.";
       setErrors(next);
       if (Object.keys(next).length) {
+        setMessage("Please fix the highlighted fields and try again.");
         const invalidField = e.currentTarget.elements.namedItem(
           Object.keys(next)[0],
         );
@@ -79,7 +86,7 @@ export default function AuthForm({ register = false }) {
     setMessage(
       register
         ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
-        : "Sign-in is not available yet. You can still explore Cambodia without an account.",
+        : "Your login information is valid. Authentication service is not connected yet.",
     );
     e.currentTarget.reset();
   }
@@ -161,7 +168,7 @@ export default function AuthForm({ register = false }) {
           </p>
           <form
             onSubmit={submit}
-            noValidate={register}
+            noValidate
             className={
               register
                 ? "grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2 [&>*]:col-span-full"
@@ -173,6 +180,9 @@ export default function AuthForm({ register = false }) {
                 <span className="field-label">Full name</span>
                 <input
                   name="name"
+                  onChange={() =>
+                    setErrors((previous) => ({ ...previous, name: "" }))
+                  }
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={errors.name ? "name-error" : undefined}
                   type="text"
@@ -189,6 +199,9 @@ export default function AuthForm({ register = false }) {
               <span className="field-label">Email address</span>
               <input
                 name="email"
+                onChange={() =>
+                  setErrors((previous) => ({ ...previous, email: "" }))
+                }
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? "email-error" : undefined}
                 type="email"
@@ -207,6 +220,9 @@ export default function AuthForm({ register = false }) {
               <span className="relative block">
                 <input
                   name="password"
+                  onChange={() =>
+                    setErrors((previous) => ({ ...previous, password: "" }))
+                  }
                   aria-invalid={Boolean(errors.password)}
                   aria-describedby={
                     errors.password ? "password-error" : undefined
