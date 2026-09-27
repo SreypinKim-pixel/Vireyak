@@ -209,6 +209,10 @@
   .muted {
     @apply text-ink/60;
   }
+  /* Poppins has no Khmer glyphs, so Khmer names use a system Khmer font first. */
+  .text-khmer {
+    font-family: "Noto Sans Khmer", "Khmer OS", "Khmer UI", Poppins, sans-serif;
+  }
   .status-page {
     @apply shell flex min-h-[60vh] flex-col items-center justify-center gap-5 text-center;
   }
@@ -220,6 +224,75 @@
   }
   .btn {
     @apply button-primary;
+  }
+  /* --------------------------------------------------------------------------
+     Interactive team gallery: hover motion (components/about/TeamGallery.js).
+
+     The row is plain flex. The card under the pointer only asks for more of the
+     row's width — `flex: 3.4 1 0%` instead of `flex: 1 1 0%` — and the browser
+     interpolates that one number, so the active card opens while its five
+     neighbours compress in the same layout pass. The row redistributes the width
+     it already has; no card ever switches to a different width.
+
+     Every moving part below shares one duration and one curve, so the panel, the
+     photo and the text read as a single physical movement:
+     - .team-gallery-card    panel: flex-grow, dim, border and shadow
+     - .team-gallery-photo   photo: a whisper of zoom, never more than 4%
+     - .team-gallery-fade    caption, faded spine name, gradient scrim
+     - .team-gallery-name    member name: size only, 13px <=> 18/20px
+     - .team-gallery-reveal  bio: unfolds to its own height
+
+     The curve is an ease-in-out, so the movement leaves and arrives at rest.
+     That matters most in the first frames: the whole row reflows at once, and if
+     a frame arrives late there, an ease-out curve is already a third of the way
+     open and reads as a jump. This one has not moved yet, and it lands on the
+     final size exactly — it never overshoots.
+  */
+  .team-gallery-card {
+    --team-motion-duration: 800ms;
+    --team-motion-ease: cubic-bezier(0.45, 0, 0.15, 1);
+  }
+
+  /* Zoom anchored to the top edge, so a face in the upper half of the photo
+     stays put while the panel grows around it. */
+  .team-gallery-photo {
+    transform: scale(1);
+    transform-origin: center top;
+  }
+  .team-gallery-card[data-active="true"] .team-gallery-photo {
+    transform: scale(1.04);
+  }
+
+  /* Transitions only: a visitor who asks for less motion still gets both states,
+     they just change instantly. */
+  @media (prefers-reduced-motion: no-preference) {
+    .team-gallery-card {
+      transition:
+        flex-grow var(--team-motion-duration) var(--team-motion-ease),
+        opacity var(--team-motion-duration) var(--team-motion-ease),
+        filter var(--team-motion-duration) var(--team-motion-ease),
+        border-color var(--team-motion-duration) var(--team-motion-ease),
+        box-shadow var(--team-motion-duration) var(--team-motion-ease);
+    }
+    .team-gallery-photo {
+      transition: transform var(--team-motion-duration) var(--team-motion-ease);
+    }
+    .team-gallery-fade {
+      transition:
+        opacity var(--team-motion-duration) var(--team-motion-ease),
+        transform var(--team-motion-duration) var(--team-motion-ease);
+    }
+    .team-gallery-name {
+      transition:
+        font-size var(--team-motion-duration) var(--team-motion-ease),
+        line-height var(--team-motion-duration) var(--team-motion-ease);
+    }
+    .team-gallery-reveal {
+      transition:
+        grid-template-rows var(--team-motion-duration) var(--team-motion-ease),
+        margin-top var(--team-motion-duration) var(--team-motion-ease),
+        opacity var(--team-motion-duration) var(--team-motion-ease);
+    }
   }
 }
 .hero-image {
