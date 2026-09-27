@@ -21,9 +21,13 @@ test("registration validates fields and loads optional attractions", async ({
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByLabel("Confirm password")).toBeFocused();
   await page.getByLabel("Confirm password").fill("demo-password-only");
+  // The attraction field is the themed combobox (components/Dropdown.tsx), not a
+  // native <select>, so it is driven the way tests/travel.spec.ts drives the
+  // other themed selects.
+  await page.getByLabel("Attraction of interest").click();
   await page
-    .getByLabel("Attraction of interest")
-    .selectOption("angkor-sunrise");
+    .getByRole("option", { name: "Angkor Wat at first light", exact: true })
+    .click();
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
     page.getByText(/Account creation is not available yet/),

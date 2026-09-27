@@ -1,9 +1,9 @@
-const { test, expect } = require("@playwright/test");
+import { test, expect } from "@playwright/test";
 
 test("about page renders live Cambodia catalogue data, team, and mentor", async ({
   page,
 }) => {
-  const errors = [];
+  const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
 
   await page.goto("/about");
@@ -97,13 +97,16 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
           .evaluateAll(
             (photos) =>
               photos.length > 0 &&
-              photos.every((photo) => photo.naturalWidth > 0),
+              photos.every(
+                (photo) =>
+                  photo instanceof HTMLImageElement && photo.naturalWidth > 0,
+              ),
           ),
       { message: "every team photo should load", timeout: 15000 },
     )
     .toBe(true);
 
-  // Cards in order: the mentor first, then the six members as data/team.js lists
+  // Cards in order: the mentor first, then the six members as data/team.ts lists
   // them, each with their own bundled photo.
   const cards = await teamCards.evaluateAll((articles) =>
     articles.map((article) => {
@@ -329,7 +332,10 @@ test("about page call to action links use the existing routes", async ({
           .evaluateAll(
             (photos) =>
               photos.length > 0 &&
-              photos.every((photo) => photo.naturalWidth > 0),
+              photos.every(
+                (photo) =>
+                  photo instanceof HTMLImageElement && photo.naturalWidth > 0,
+              ),
           ),
       { message: "team photos should load at mobile width", timeout: 15000 },
     )

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { StaticImageData } from "next/image";
 import Icon from "../Icon";
 
 // Deterministic tones: the same name always renders the same placeholder, on
@@ -19,14 +20,14 @@ const TONES = [
 // - portrait: the mentor column, which fills its grid cell height from `sm` up.
 // - fill: the whole card face, for the interactive gallery where the caption is
 //   layered over the photo.
-const VARIANTS = {
+const VARIANTS: Record<"cover" | "portrait" | "fill", string> = {
   cover: "relative aspect-square w-full",
   portrait:
     "relative aspect-[4/3] w-full sm:aspect-auto sm:h-full sm:min-h-[300px] lg:min-h-[360px]",
   fill: "absolute inset-0",
 };
 
-function initialsOf(name) {
+function initialsOf(name: string) {
   const parts = String(name || "")
     .trim()
     .split(/\s+/)
@@ -36,7 +37,7 @@ function initialsOf(name) {
   return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
 }
 
-function toneFor(name) {
+function toneFor(name: string) {
   const value = String(name || "");
   let hash = 0;
   for (let index = 0; index < value.length; index += 1) {
@@ -48,7 +49,7 @@ function toneFor(name) {
 /**
  * Photo area for a team member or mentor.
  *
- * `photo` accepts either a static import — as data/team.js does, e.g.
+ * `photo` accepts either a static import — as data/team.ts does, e.g.
  * `import pinPhoto from "./image/Pin-Leader.JPG"` — or a plain path string for
  * a file in `public/`, for example `photo: "/images/team/member-1.jpg"`. Both
  * fill the frame with `object-cover` anchored to the top edge, so a portrait
@@ -67,7 +68,7 @@ function toneFor(name) {
  * already tracks (`.team-gallery-photo` in app/globals.css), so that row's photo
  * moves with the same state — and the same timing — as the card around it.
  */
-function photoSourceOf(photo) {
+function photoSourceOf(photo: StaticImageData | string | null) {
   if (typeof photo === "string" && photo.length > 0) {
     return { src: photo, width: 800, height: 800 };
   }
@@ -85,6 +86,10 @@ export default function ProfilePhoto({
   name,
   photo = null,
   variant = "cover",
+}: {
+  name: string;
+  photo?: StaticImageData | string | null;
+  variant?: "cover" | "portrait" | "fill";
 }) {
   const [failed, setFailed] = useState(false);
   const tone = TONES[toneFor(name)];

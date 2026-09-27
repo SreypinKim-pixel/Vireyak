@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import type {
+  FocusEvent as ReactFocusEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  PointerEvent as ReactPointerEvent,
+} from "react";
+import type { TeamMember } from "../../data/team";
 import TeamGalleryCard from "./TeamGalleryCard";
 
 /**
@@ -28,33 +34,46 @@ import TeamGalleryCard from "./TeamGalleryCard";
  * On small screens the row keeps a usable minimum width and scrolls inside the
  * gallery (`overflow-x-auto`), so the page itself never scrolls sideways.
  */
-export default function TeamGallery({ members }) {
-  const [activeIndex, setActiveIndex] = useState(null);
+export default function TeamGallery({
+  members = [],
+}: {
+  members?: TeamMember[];
+}) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   if (!Array.isArray(members) || members.length === 0) return null;
 
-  const handlePointerEnter = (event, index) => {
+  const handlePointerEnter = (
+    event: ReactPointerEvent<HTMLElement>,
+    index: number,
+  ) => {
     // Only a real mouse drives the hover expansion; touch and pen select on tap,
     // so a tap cannot activate a card and immediately collapse it again.
     if (event.pointerType === "mouse") setActiveIndex(index);
   };
 
-  const handlePointerUp = (event, index) => {
+  const handlePointerUp = (
+    event: ReactPointerEvent<HTMLElement>,
+    index: number,
+  ) => {
     if (event.pointerType !== "mouse") setActiveIndex(index);
   };
 
-  const handlePointerLeave = (event) => {
+  const handlePointerLeave = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "mouse") setActiveIndex(null);
   };
 
-  const handleBlur = (event) => {
+  const handleBlur = (event: ReactFocusEvent<HTMLDivElement>) => {
     // React's onBlur is the bubbling focusout, so this fires for the whole row:
     // clear only once focus has moved outside the gallery.
     if (!event.currentTarget.contains(event.relatedTarget))
       setActiveIndex(null);
   };
 
-  const handleKeyDown = (event, index) => {
+  const handleKeyDown = (
+    event: ReactKeyboardEvent<HTMLElement>,
+    index: number,
+  ) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       setActiveIndex((current) => (current === index ? null : index));
@@ -72,7 +91,8 @@ export default function TeamGallery({ members }) {
     event.preventDefault();
     const step = event.key === "ArrowRight" ? 1 : -1;
     const next = (index + step + cards.length) % cards.length;
-    cards[next]?.focus();
+    const nextCard = cards[next];
+    if (nextCard instanceof HTMLElement) nextCard.focus();
   };
 
   return (

@@ -27,11 +27,29 @@ import panhaPhoto from "../components/about/image/Panha.JPG";
 import pinLeaderPhoto from "../components/about/image/Pin-Leader.JPG";
 import raguelPhoto from "../components/about/image/Raguel.png";
 import seavminhPhoto from "../components/about/image/Seavminh.jpg";
+import type { StaticImageData } from "next/image";
+
+/** One optional profile link, e.g. { label: "GitHub", href: "https://…" }. */
+export type ProfileLink = { label: string; href: string };
+
+/** A person on the About page: one team member, or the mentor. */
+export type TeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  /**
+   * Bundled portrait — a `StaticImageData` from the imports above — or a plain
+   * path string for a file in `public/`. `null` shows the initials placeholder.
+   */
+  photo: StaticImageData | string | null;
+  links: ProfileLink[];
+};
 
 // The six members of the project, each wired to the photo in
 // `components/about/image/` that matches their name.
 
-export const teamMembers = [
+export const teamMembers: TeamMember[] = [
   {
     id: "kim-sreypin",
     name: "Kim Sreypin",
@@ -98,7 +116,7 @@ export const teamSection = {
 // hover/expand interaction. The portrait is the `Mentor.PNG` bundled next to the
 // member photos in `components/about/image/`, imported the same way, so the
 // mentor column fills with a real photo instead of the initials placeholder.
-export const mentor = {
+export const mentor: TeamMember = {
   id: "mentor",
   name: "Srorng Sokcheat",
   role: "Project Mentor",

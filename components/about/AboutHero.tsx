@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Icon from "../Icon";
 import { aboutHero } from "../../data/about";
@@ -7,7 +8,11 @@ import { HeroFootnote } from "./HeroHighlights";
  * About page hero. `highlights` is an optional streamed slot holding the live
  * API figures, so the hero itself paints immediately.
  */
-export default function AboutHero({ highlights = null }) {
+export default function AboutHero({
+  highlights = null,
+}: {
+  highlights?: ReactNode;
+}) {
   return (
     <section
       aria-labelledby="about-hero-title"

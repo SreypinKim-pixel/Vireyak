@@ -1,3 +1,4 @@
+import type { Place, PlaceCardData } from "../../lib/camTripApi";
 import Link from "next/link";
 import Icon from "../Icon";
 import { placesSection } from "../../data/about";
@@ -13,6 +14,11 @@ export default function PlacesSection({
   fallbackPlaces = [],
   totalPlaces = 0,
   status = "ready",
+}: {
+  places?: Place[];
+  fallbackPlaces?: PlaceCardData[];
+  totalPlaces?: number;
+  status?: "ready" | "empty" | "error";
 }) {
   const livePlaces = Array.isArray(places) ? places : [];
   const isError = status === "error";

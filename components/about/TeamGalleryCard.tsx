@@ -1,3 +1,8 @@
+import type {
+  KeyboardEvent as ReactKeyboardEvent,
+  PointerEvent as ReactPointerEvent,
+} from "react";
+import type { TeamMember } from "../../data/team";
 import ProfileLinks from "./ProfileLinks";
 import ProfilePhoto from "./ProfilePhoto";
 
@@ -22,8 +27,22 @@ import ProfilePhoto from "./ProfilePhoto";
  * from the gallery's active card — the same state as the layout — rather than
  * from CSS `:hover`, so the whole row has a single source of truth.
  *
- * Expected shape (see data/team.js): { id, name, role, bio, photo, links }
+ * Expected shape (see data/team.ts): { id, name, role, bio, photo, links }
  */
+type TeamGalleryCardProps = {
+  member: TeamMember;
+  index: number;
+  active: boolean;
+  collapsed: boolean;
+  onPointerEnter: (
+    event: ReactPointerEvent<HTMLElement>,
+    index: number,
+  ) => void;
+  onPointerUp: (event: ReactPointerEvent<HTMLElement>, index: number) => void;
+  onFocus: (index: number) => void;
+  onKeyDown: (event: ReactKeyboardEvent<HTMLElement>, index: number) => void;
+};
+
 export default function TeamGalleryCard({
   member,
   index,
@@ -33,7 +52,7 @@ export default function TeamGalleryCard({
   onPointerUp,
   onFocus,
   onKeyDown,
-}) {
+}: TeamGalleryCardProps) {
   return (
     <article
       tabIndex={0}

@@ -1,10 +1,15 @@
+import type { CatalogueStat, RegionSummary } from "../../lib/camTripApi";
 import Icon from "../Icon";
 
 /**
  * Statistics for the Cambodia section. Values arrive already calculated from
- * live API responses (see lib/camTripApi.js), so nothing here is hardcoded.
+ * live API responses (see lib/camTripApi.ts), so nothing here is hardcoded.
  */
-export default function CambodiaStats({ stats }) {
+export default function CambodiaStats({
+  stats = [],
+}: {
+  stats?: CatalogueStat[];
+}) {
   if (!Array.isArray(stats) || stats.length === 0) return null;
   return (
     <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -30,7 +35,13 @@ export default function CambodiaStats({ stats }) {
  * Province and place counts per API region, with a proportional bar. The bar
  * only appears when the whole catalogue could be read.
  */
-export function RegionBreakdown({ regions, descriptions = {} }) {
+export function RegionBreakdown({
+  regions = [],
+  descriptions = {},
+}: {
+  regions?: RegionSummary[];
+  descriptions?: Record<string, string>;
+}) {
   if (!Array.isArray(regions) || regions.length === 0) return null;
   const highest = Math.max(...regions.map((region) => region.placeCount), 0);
   const showBars = highest > 0;

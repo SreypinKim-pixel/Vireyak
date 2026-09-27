@@ -1,3 +1,4 @@
+import type { TeamMember } from "../../data/team";
 import ProfileLinks from "./ProfileLinks";
 import ProfilePhoto from "./ProfilePhoto";
 
@@ -8,9 +9,9 @@ import ProfilePhoto from "./ProfilePhoto";
  * six team panels sit under. It deliberately has none of the gallery's
  * hover/expand behaviour — only the shared photo zoom.
  *
- * Expected shape (see data/team.js): { id, name, role, bio, photo, links }
+ * Expected shape (see data/team.ts): { id, name, role, bio, photo, links }
  */
-export default function MentorCard({ mentor }) {
+export default function MentorCard({ mentor }: { mentor?: TeamMember | null }) {
   if (!mentor) return null;
   return (
     <article className="group relative isolate overflow-hidden rounded-3xl border border-gold/30 bg-navy text-ivory shadow-soft">
