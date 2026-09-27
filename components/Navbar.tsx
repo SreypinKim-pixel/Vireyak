@@ -5,6 +5,11 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Brand from "./Brand";
 import Icon from "./Icon";
+import {
+  getDemoUser,
+  subscribeDemoUser,
+  signOutDemo,
+} from "../lib/demoSession";
 const links = [
   ["Home", "/"],
   ["Stays", "/stays"],
@@ -49,6 +54,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [previousPath, setPreviousPath] = useState(path);
   const dark = useSyncExternalStore(subscribeTheme, getTheme, getServerTheme);
+  const demoUser = useSyncExternalStore(
+    subscribeDemoUser,
+    getDemoUser,
+    () => null,
+  );
   if (path !== previousPath) {
     setPreviousPath(path);
     setOpen(false);
@@ -101,9 +111,27 @@ export default function Navbar() {
             <Icon name={dark ? "sun" : "moon"} size={18} />
           </button>
           <span className="hidden h-5 w-px bg-slate/25 lg:block" />
-          <Link href="/login" className="hidden text-xs font-medium sm:block">
-            Log in
-          </Link>
+          {demoUser ? (
+            <span className="hidden items-center gap-3 sm:flex">
+              <span className="flex max-w-[180px] items-center gap-2">
+                <Icon name="check" size={14} className="shrink-0 text-accent" />
+                <span className="truncate text-xs font-medium text-ink/80">
+                  Signed in as {demoUser}
+                </span>
+              </span>
+              <button
+                type="button"
+                onClick={signOutDemo}
+                className="text-xs font-medium text-indigo transition hover:opacity-70 dark:text-brightgold"
+              >
+                Log out
+              </button>
+            </span>
+          ) : (
+            <Link href="/login" className="hidden text-xs font-medium sm:block">
+              Log in
+            </Link>
+          )}
           <Link
             href="/register"
             className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
@@ -134,17 +162,31 @@ export default function Navbar() {
             aria-label="Mobile navigation"
             className="absolute inset-x-0 top-full overflow-hidden border-b border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
           >
-            {[...links, ["Log in", "/login"]].map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-4 py-3 text-sm hover:bg-slate/10"
-                aria-current={path === href ? "page" : undefined}
+            {[...links, ...(demoUser ? [] : [["Log in", "/login"]])].map(
+              ([label, href]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-4 py-3 text-sm hover:bg-slate/10"
+                  aria-current={path === href ? "page" : undefined}
+                >
+                  {label}
+                </Link>
+              ),
+            )}
+            {demoUser && (
+              <button
+                type="button"
+                onClick={() => {
+                  signOutDemo();
+                  setOpen(false);
+                }}
+                className="block w-full rounded-lg px-4 py-3 text-left text-sm hover:bg-slate/10"
               >
-                {label}
-              </Link>
-            ))}
+                Log out
+              </button>
+            )}
           </motion.nav>
         )}
       </AnimatePresence>

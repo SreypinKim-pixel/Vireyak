@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signInDemo } from "../lib/demoSession";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 export default function AuthForm({ register = false }) {
+  const router = useRouter();
   const [message, setMessage] = useState("");
   const [province, setProvince] = useState("");
   const [attraction, setAttraction] = useState("");
@@ -73,6 +76,7 @@ export default function AuthForm({ register = false }) {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setMessage("");
+    const data = new FormData(e.currentTarget);
     {
       const values = new FormData(e.currentTarget);
       const next: Record<string, string> = {};
@@ -90,6 +94,16 @@ export default function AuthForm({ register = false }) {
         next.password = "Password is required.";
       else if (register && String(values.get("password") ?? "").length < 12)
         next.password = "Use at least 12 characters.";
+      if (
+        !register &&
+        String(values.get("password") ?? "").trim() &&
+        (String(values.get("password")).length < 8 ||
+          !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/.test(
+            String(values.get("password")),
+          ))
+      )
+        next.password =
+          "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
       if (
         register &&
         (!values.get("confirmPassword") ||
@@ -112,6 +126,12 @@ export default function AuthForm({ register = false }) {
         ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
         : "Your login information is valid. Authentication service is not connected yet.",
     );
+    if (!register)
+      signInDemo(
+        String(data.get("email") || "").trim(),
+        data.get("remember") === "on",
+      );
+    setTimeout(() => router.push("/"), 1000);
     e.currentTarget.reset();
     setAttraction("");
     setProvince("");
@@ -258,7 +278,7 @@ export default function AuthForm({ register = false }) {
                   type={showPassword ? "text" : "password"}
                   autoComplete={register ? "new-password" : "current-password"}
                   required
-                  minLength={register ? 12 : 1}
+                  minLength={register ? 12 : 8}
                   maxLength={128}
                   placeholder={
                     register ? "12+ characters" : "Enter a demo password"
@@ -380,6 +400,19 @@ export default function AuthForm({ register = false }) {
                   </button>
                 )}
               </>
+            )}
+            {!register && (
+              <label className="flex items-center gap-2.5">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  aria-label="Remember me"
+                  className="h-4 w-4 accent-indigo dark:accent-brightgold"
+                />
+                <span className="text-[11px] font-medium text-ink/70">
+                  Remember me
+                </span>
+              </label>
             )}
             <button type="submit" className="button-primary w-full">
               {register ? "Create account" : "Log in"}

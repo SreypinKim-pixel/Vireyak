@@ -54,14 +54,16 @@ for a future image. Navbar and footer are shared through `app/layout.tsx`.
   sorting; stay details; estimated trip subtotal.
 - `app/attraction/`: experience discovery, filtering, and detail pages.
 - `app/about/`: brand story, thoughtful travel guidance, and FAQs.
-- `app/login/`, `app/register/`: styled account previews with native validation.
+- `app/login/`, `app/register/`: styled account previews with native validation;
+  valid submissions show an honest notice and return to the home page.
 - `components/`: shared navigation, footer, icons, cards, search, filters, and forms.
 - `data/travel.ts`: explicitly illustrative stays, prices, ratings, and experiences.
 - `public/images/README.md`: photo sources and licensing links, including the
   named Cambodian properties' own photography.
 - Legacy `/products`, `/products/:id`, and `/table` URLs redirect to `/stays`.
 
-Favorites and the theme preference use local storage; neither requires an account.
+Favorites, the theme preference, and the local demo sign-in marker use browser
+storage; none of them require an account.
 Search dates and guest counts carry through to the trip preview. Dates do not
 check real inventory. Subtotals exclude taxes and fees.
 
@@ -72,9 +74,13 @@ names, prices, ratings, reviews, and amenities are sample content. Photographs
 for the fictional preview properties are inspiration imagery, not verified
 pictures of those properties; the named Cambodian hotels use the properties' own
 publicity photography instead (sources in `public/images/README.md`).
-No booking, payment, session, or account is created. Account forms display an
-honest unavailable message rather than simulated authentication success, and do
-not send or store credentials. Do not enter real passwords.
+No booking, payment, or account is created. Account forms display an honest
+unavailable message rather than simulated authentication success, do not send
+or store credentials, and return to the home page after a valid demo
+submission. A successful demo login records a local-only "signed in" marker in
+browser storage to update the navbar; it uses session storage by default and is
+kept in local storage only when "Remember me" is checked. It is never
+transmitted and is cleared by Log out. Do not enter real passwords.
 
 Connect verified inventory and a server-side booking/authentication service before
 launching. The framework is updated to Next.js 16.3.5 with React 19, including the patched

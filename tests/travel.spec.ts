@@ -189,12 +189,12 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   );
   await page.goto("/login");
   await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("demonstration-only");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.getByRole("status")).toContainText(
     "Authentication service is not connected yet",
   );
-  await expect(page.getByLabel("Password", { exact: true })).toHaveValue("");
+  await expect(page).toHaveURL(/\/$/);
   for (const route of ["/products", "/products/1", "/table"]) {
     await page.goto(route);
     await expect(page).toHaveURL(/\/stays$/);
@@ -223,7 +223,7 @@ test("login form validates client-side without pretending authentication", async
 
   // An invalid email format is rejected even with a filled password.
   await page.getByLabel("Email address").fill("not-an-email");
-  await page.getByLabel("Password", { exact: true }).fill("demonstration-only");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("#email-error")).toContainText(
     "Enter a valid email address.",
@@ -239,9 +239,29 @@ test("login form validates client-side without pretending authentication", async
   );
   await expect(page.locator("#email-error")).toHaveCount(0);
 
-  // Valid input passes client-side validation without claiming real login.
+  // Login passwords must be at least 8 characters with an uppercase letter, a
+  // lowercase letter, and a number.
+  const strengthMessage =
+    "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
+  for (const password of ["Ab1", "abcdefgh", "ABCDEFG1", "Abcdefgh"]) {
+    await page.getByLabel("Email address").fill("test@example.com");
+    await page.getByLabel("Password", { exact: true }).fill(password);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
+    await expect(page.locator("#password-error")).toContainText(
+      strengthMessage,
+    );
+    await expect(page).toHaveURL(/\/login$/);
+  }
+
+  // Remember me is visible and unchecked by default (session-only marker).
+  const remember = page.getByRole("checkbox", { name: "Remember me" });
+  await expect(remember).toBeVisible();
+  await expect(remember).not.toBeChecked();
+
+  // A valid password passes client-side validation without claiming real login,
+  // then opens the home page as a guest so the preview does not dead-end.
   await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("demonstration-only");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   const status = page.getByRole("status");
   await expect(status).toContainText(
@@ -250,8 +270,24 @@ test("login form validates client-side without pretending authentication", async
   await expect(status).not.toContainText(
     /signed in|successful|welcome back|authenticated/i,
   );
+  await expect(page).toHaveURL(/\/$/);
+
+  // Default unchecked login uses session-only storage, never persistent.
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
+  ).toBe("test@example.com");
+  expect(
+    await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
+  ).toBe(null);
+
+  // The navbar shows the demo sign-in and a log-out action.
+  await expect(
+    page.getByRole("button", { name: "Log out", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("Signed in as test@example.com")).toBeVisible();
 
   // The login page still links to the existing register page.
+  await page.goto("/login");
   await page
     .locator("p")
     .filter({ hasText: "New to Vireyak?" })
@@ -264,6 +300,35 @@ test("login form validates client-side without pretending authentication", async
       exact: true,
     }),
   ).toBeVisible();
+
+  // Logging out clears both stores and restores the guest nav.
+  await page.goto("/");
+  await page.getByRole("button", { name: "Log out", exact: true }).click();
+  await expect(
+    page.getByRole("link", { name: "Log in", exact: true }),
+  ).toBeVisible();
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
+  ).toBe(null);
+  expect(
+    await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
+  ).toBe(null);
+
+  // Checking "Remember me" keeps the demo marker in persistent local storage.
+  await page.goto("/login");
+  await remember.check();
+  await expect(remember).toBeChecked();
+  await page.getByLabel("Email address").fill("test@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  expect(
+    await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
+  ).toBe("test@example.com");
+  await page.getByRole("button", { name: "Log out", exact: true }).click();
+  expect(
+    await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
+  ).toBe(null);
 });
 
 test("province lookup fetches live teacher API data with loading and error states", async ({
@@ -291,6 +356,27 @@ test("province lookup fetches live teacher API data with loading and error state
   await expect(page.getByTestId("province-result")).toContainText(
     "GET /api/provinces/2",
   );
+
+  // Local name-matched photos replace wrong or missing remote images, e.g.
+  // Kampong Thom (14) keeps the current curated local province cover.
+  await page.getByLabel("Province ID").fill("14");
+  await page
+    .getByRole("button", { name: "View province", exact: true })
+    .click();
+  await expect(page.getByTestId("province-result")).toContainText(
+    "Kampong Thom",
+  );
+  await expect(
+    page.getByTestId("province-result").getByRole("img"),
+  ).toHaveAttribute("src", "/images/provinces/kampong-thom.jpg");
+  await expect
+    .poll(async () =>
+      page
+        .getByTestId("province-result")
+        .getByRole("img")
+        .evaluate((image) => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0),
+    )
+    .toBe(true);
 
   // A missing province is reported clearly, without showing stale data.
   await page.getByLabel("Province ID").fill("99999");

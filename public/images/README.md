@@ -18,6 +18,17 @@ Unsplash license: https://unsplash.com/license
 
 Keep these sources with the assets. Replace inspiration photography with verified property photography when connecting real inventory.
 
+## Province photos
+
+`Kampong Cham.png` through `Tboung Khmum.png` (22 files, one per province, named
+after each province's English name) were provided by the project owner and live
+in this folder. `lib/province-images.js` maps each province name to its local
+photo and prefers it over the teacher CamTrip API image, which occasionally
+returns a missing or mismatched picture (e.g. flags or broken Wikimedia links).
+Siem Reap, Battambang, and Banteay Meanchey use the existing
+`destinations/province-1.jpg`, `province-2.webp`, and `province-3.jpg`
+photographs instead.
+
 ## Kirirom hero photo
 
 `kirirom-resort.jpg`: Romhaey Kirirom Resort by EHM, sourced from the user-provided Tripadvisor listing:
