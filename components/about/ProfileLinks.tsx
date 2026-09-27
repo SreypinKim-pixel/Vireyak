@@ -22,7 +22,7 @@ export default function ProfileLinks({
   const toneClasses =
     tone === "dark"
       ? "border-white/25 text-ivory/75 hover:border-brightgold hover:text-brightgold"
-      : "border-slate/25 text-ink/70 hover:border-indigo hover:text-indigo dark:hover:border-brightgold dark:hover:text-brightgold";
+      : "border-slate/60 dark:border-slate/25 text-ink/70 hover:border-indigo hover:text-indigo dark:hover:border-brightgold dark:hover:text-brightgold";
 
   return (
     <div
@@ -45,7 +45,7 @@ export default function ProfileLinks({
             {link.label || "Profile"}
           </>
         );
-        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-[10px] font-medium transition-colors ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
+        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-[10px] font-medium transition-colors duration-500 ease-out motion-reduce:transition-none ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
         if (!link.href?.trim()) {
           return (
             <span

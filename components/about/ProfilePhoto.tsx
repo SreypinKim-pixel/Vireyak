@@ -129,7 +129,7 @@ export default function ProfilePhoto({
           className={`absolute inset-0 h-full w-full object-cover object-top ${
             isGalleryFace
               ? "team-gallery-photo"
-              : "transition duration-700 motion-reduce:transition-none group-hover:scale-105"
+              : "transition duration-500 ease-out motion-reduce:transition-none motion-safe:group-hover:scale-105"
           }`}
         />
       ) : null}

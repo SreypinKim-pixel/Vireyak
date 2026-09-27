@@ -16,7 +16,7 @@ export default function CambodiaStats({
       {stats.map((stat) => (
         <div
           key={stat.key}
-          className="rounded-xl border border-slate/15 bg-panel p-5 transition duration-300 hover:-translate-y-1 hover:shadow-soft"
+          className="rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-5 transition duration-500 ease-out hover:-translate-y-1 hover:shadow-soft motion-reduce:transition-none motion-reduce:transform-none"
         >
           <dt className="flex items-start gap-2 text-[10px] font-medium uppercase tracking-[0.12em] text-ink/50">
             <Icon name={stat.icon} size={14} className="mt-0.5 text-gold" />
@@ -47,7 +47,7 @@ export function RegionBreakdown({
   const showBars = highest > 0;
 
   return (
-    <div className="h-full rounded-xl border border-slate/15 bg-panel p-6">
+    <div className="h-full rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-6">
       <h3 className="text-sm font-semibold text-navy dark:text-ivory">
         Regions at a glance
       </h3>

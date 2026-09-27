@@ -14,9 +14,17 @@ export default function ProvinceGrid({
   unavailable,
 }: Awaited<ReturnType<typeof getFeaturedDestinations>>) {
   const [expanded, setExpanded] = useState(false);
+  const priority = ["Phnom Penh", "Preah Sihanouk"];
+  const orderedDestinations = [...destinations].sort((a, b) => {
+    const rank = (name: string) => {
+      const index = priority.indexOf(name);
+      return index === -1 ? priority.length : index;
+    };
+    return rank(a.name) - rank(b.name);
+  });
   const visibleDestinations = expanded
-    ? destinations
-    : destinations.slice(0, 6);
+    ? orderedDestinations
+    : orderedDestinations.slice(0, 6);
 
   return (
     <section
@@ -56,7 +64,7 @@ export default function ProvinceGrid({
         <div id="province-grid" className="mt-8 grid gap-6 md:grid-cols-3">
           {visibleDestinations.map((destination, index) => (
             <Reveal key={destination.id} delay={(index % 3) * 0.08}>
-              <article className="group h-full overflow-hidden rounded-3xl border border-ink/10 bg-surface shadow-sm transition-shadow hover:shadow-xl">
+              <article className="group h-full overflow-hidden rounded-3xl border border-slate/60 dark:border-ink/10 bg-surface shadow-sm transition-shadow hover:shadow-xl">
                 <Link
                   href={destination.href}
                   aria-label={`Discover ${destination.name}`}

@@ -75,7 +75,7 @@ export default function ListingExplorer({
   }
   return (
     <>
-      <section className="border-b border-slate/15 bg-slate/[0.045] pb-10 pt-10">
+      <section className="border-b border-slate/60 dark:border-slate/15 bg-slate/[0.045] pb-10 pt-10">
         <div className="shell">
           <p className="eyebrow">
             {kind === "stays"
@@ -102,7 +102,7 @@ export default function ListingExplorer({
       </section>
       <section className="shell grid gap-8 py-10 lg:grid-cols-[215px_1fr]">
         <aside>
-          <div className="rounded-xl border border-slate/20 bg-panel p-5">
+          <div className="rounded-xl border border-slate/60 dark:border-slate/20 bg-panel p-5">
             <h2 className="mb-5 text-sm font-semibold">
               Make it your kind of trip
             </h2>
@@ -229,7 +229,7 @@ export default function ListingExplorer({
               ))}
             </div>
           ) : (
-            <div className="rounded-xl border border-dashed border-slate/30 px-6 py-16 text-center">
+            <div className="rounded-xl border border-dashed border-slate/60 dark:border-slate/30 px-6 py-16 text-center">
               <Icon
                 name="search"
                 size={32}

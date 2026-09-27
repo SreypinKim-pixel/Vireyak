@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-300 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Subscribe Banner Above */}
-      <div className="shell pt-12 pb-8 border-b border-gray-300 dark:border-gray-800">
+      <div className="shell pt-12 pb-8 border-b border-slate/60 dark:border-gray-800">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="relative flex items-center gap-4">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -59,7 +59,7 @@ export default function Footer() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
               required
-              className="w-full rounded-lg bg-white dark:bg-gray-800 px-4 py-3 text-xs sm:text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-400 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition"
+              className="w-full rounded-lg bg-white dark:bg-gray-800 px-4 py-3 text-xs sm:text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-400 border border-slate/60 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition"
             />
             <button
               type="submit"
@@ -299,7 +299,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-300 dark:border-gray-800">
+      <div className="border-t border-slate/60 dark:border-gray-800">
         <div className="shell flex flex-col items-center justify-between gap-4 py-5 text-[10px] text-gray-500 dark:text-gray-400 sm:flex-row">
           <p suppressHydrationWarning>
             © {new Date().getFullYear()} Vireyak. A world of wonder, closer to

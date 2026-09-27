@@ -99,7 +99,7 @@ export default function WhyVireyak({
                 className="aspect-square max-h-[480px] w-full object-cover"
               />
             </div>
-            <div className="absolute bottom-0 left-5 right-5 rounded-2xl border border-[#E8E8E8] bg-white px-6 py-4 shadow-lg sm:right-auto sm:min-w-[240px]">
+            <div className="absolute bottom-0 left-5 right-5 rounded-2xl border border-slate/60 dark:border-[#E8E8E8] bg-white px-6 py-4 shadow-lg sm:right-auto sm:min-w-[240px]">
               <p className="text-sm font-medium text-[#667085]">Discover</p>
               <p className="mt-1 text-lg font-semibold text-navy sm:text-xl">
                 {spotlight.name}

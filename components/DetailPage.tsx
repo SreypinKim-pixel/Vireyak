@@ -82,7 +82,7 @@ export default function DetailPage({
             {(item.amenities || item.includes || []).map((a) => (
               <div
                 key={a}
-                className="flex items-center gap-3 rounded-lg border border-slate/20 p-4 text-xs"
+                className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/20 p-4 text-xs"
               >
                 <Icon name="check" size={17} className="text-gold" />
                 {a}
@@ -102,7 +102,7 @@ export default function DetailPage({
         </div>
         <BookingPanel item={item} kind={kind} initial={initial} />
       </div>
-      <section className="mt-16 border-t border-slate/20 pt-10">
+      <section className="mt-16 border-t border-slate/60 dark:border-slate/20 pt-10">
         <h2 className="section-title mb-7">A little more inspiration</h2>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {related.slice(0, 3).map((i) => (

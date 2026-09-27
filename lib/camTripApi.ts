@@ -1,3 +1,4 @@
+import { isVisibleAttraction } from "./attraction-visibility";
 /**
  * CamTrip public API client.
  *
@@ -279,7 +280,7 @@ function toPlace(input: unknown): Place | null {
   const raw = asObject(input);
   const id = asNumber(raw.id);
   const nameEn = asText(raw.nameEn);
-  if (id === null || !nameEn) return null;
+  if (id === null || !nameEn || !isVisibleAttraction(id)) return null;
 
   const province = raw.province ? toProvince(raw.province) : null;
   const category = asText(raw.category) || "OTHER";

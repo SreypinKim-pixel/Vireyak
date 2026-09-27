@@ -46,7 +46,6 @@ export const aboutIntro = {
       copy: "Cambodia is compact, welcoming, and astonishingly varied. A single country holds temple complexes, river towns, tropical islands, and highland forest — and much of it is still quietly under-visited.",
     },
   ],
-  note: "Figures on this page are calculated from live responses of the public Vireyak API. Country facts are general reference information.",
 };
 
 export const cambodiaSection = {

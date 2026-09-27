@@ -4,7 +4,7 @@ import type { Review } from "./reviews";
 
 export default function ReviewCard({ review }: { review: Review }) {
   return (
-    <article className="flex h-full flex-col rounded-3xl border border-ink/10 bg-surface p-6 shadow-sm transition-shadow duration-300 hover:shadow-soft sm:p-7">
+    <article className="flex h-full flex-col rounded-3xl border border-slate/60 dark:border-ink/10 bg-surface p-6 shadow-sm transition-shadow duration-300 hover:shadow-soft sm:p-7">
       <div className="flex items-center gap-3.5">
         <img
           src={review.avatar}
@@ -13,7 +13,7 @@ export default function ReviewCard({ review }: { review: Review }) {
           height={52}
           loading="lazy"
           decoding="async"
-          className="h-[52px] w-[52px] shrink-0 rounded-full border border-ink/5 object-cover"
+          className="h-[52px] w-[52px] shrink-0 rounded-full border border-slate/60 dark:border-ink/5 object-cover"
         />
         <div>
           <h3 className="text-sm font-semibold text-ink">{review.name}</h3>

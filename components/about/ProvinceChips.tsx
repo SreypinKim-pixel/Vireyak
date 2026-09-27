@@ -43,7 +43,7 @@ export default function ProvinceChips({
             {group.items.map((province) => (
               <li
                 key={province.id}
-                className="rounded-lg border border-slate/15 bg-panel px-3 py-2 transition hover:border-gold/40"
+                className="rounded-lg border border-slate/60 dark:border-slate/15 bg-panel px-3 py-2 transition duration-500 ease-out hover:border-gold dark:hover:border-gold/40 motion-reduce:transition-none"
               >
                 <p className="text-[11px] font-medium text-navy dark:text-ivory">
                   {province.nameEn}

@@ -13,7 +13,7 @@ export default function FeaturedExperiences({
       aria-labelledby="featured-experiences"
       className="shell py-12 sm:py-16"
     >
-      <div className="grid overflow-hidden rounded-3xl border border-slate/15 bg-panel md:grid-cols-2">
+      <div className="grid overflow-hidden rounded-3xl border border-slate/60 dark:border-slate/15 bg-panel md:grid-cols-2">
         <div className="flex flex-col items-start justify-center p-7 sm:p-10 lg:p-12">
           <p className="eyebrow mb-4">Make memories, not just plans</p>
           <h2

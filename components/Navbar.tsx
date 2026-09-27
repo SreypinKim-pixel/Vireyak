@@ -71,7 +71,7 @@ export default function Navbar() {
     } catch {}
   }
   return (
-    <header className="relative z-40 border-b border-slate/15 bg-surface transition-colors duration-300">
+    <header className="relative z-40 border-b border-slate/60 dark:border-slate/15 bg-surface transition-colors duration-300">
       <div className="shell flex h-[88px] items-center justify-between gap-2 sm:gap-4">
         <Brand logoSrc="/Logo.png" />
         <nav
@@ -160,7 +160,7 @@ export default function Navbar() {
             transition={{ duration: reducedMotion ? 0 : 0.2 }}
             id="mobile-menu"
             aria-label="Mobile navigation"
-            className="absolute inset-x-0 top-full overflow-hidden border-b border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
+            className="absolute inset-x-0 top-full overflow-hidden border-b border-slate/60 dark:border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
           >
             {[...links, ...(demoUser ? [] : [["Log in", "/login"]])].map(
               ([label, href]) => (

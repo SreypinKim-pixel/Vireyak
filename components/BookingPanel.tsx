@@ -47,7 +47,7 @@ export default function BookingPanel({
     );
   }
   return (
-    <div className="sticky top-6 rounded-xl border border-slate/20 bg-panel p-6 shadow-soft">
+    <div className="sticky top-6 rounded-xl border border-slate/60 dark:border-slate/20 bg-panel p-6 shadow-soft">
       <div className="flex items-end gap-2">
         <span className="text-3xl font-semibold text-navy dark:text-ivory">
           ${item.price}
@@ -134,7 +134,7 @@ export default function BookingPanel({
           />
         </div>
         {(kind !== "stays" || nights > 0) && (
-          <div className="flex items-center justify-between border-t border-slate/20 pt-4 text-xs">
+          <div className="flex items-center justify-between border-t border-slate/60 dark:border-slate/20 pt-4 text-xs">
             <span>
               {kind === "stays" ? `${nights} nights` : `${guests} travelers`} ·
               estimated subtotal

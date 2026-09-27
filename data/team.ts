@@ -54,8 +54,8 @@ export const teamMembers: TeamMember[] = [
     bio: "Developed the main landing page and its overall content and layout. Worked on the hero section, featured attractions, popular provinces, categories, CTA, and attraction search functionality.",
     photo: pinLeaderPhoto,
     links: [
-      { label: "GitHub", href: "" },
-      { label: "Telegram", href: "" },
+      { label: "GitHub", href: "https://github.com/SreypinKim-pixel" },
+      { label: "Telegram", href: "https://t.me/cheriebyn" },
     ],
   },
   {
@@ -65,8 +65,8 @@ export const teamMembers: TeamMember[] = [
     bio: "Developed the user Registration / Sign Up page. Worked on the registration form, input fields, buttons, basic form validation, and API integration.",
     photo: seavminhPhoto,
     links: [
-      { label: "GitHub", href: "" },
-      { label: "Telegram", href: "" },
+      { label: "GitHub", href: "https://github.com/seavminhleang-art" },
+      { label: "Telegram", href: "https://t.me/puthea_reach" },
     ],
   },
   {
@@ -76,8 +76,8 @@ export const teamMembers: TeamMember[] = [
     bio: "Developed the user Login page. Worked on the login form, input fields, buttons, basic form validation, and API integration.",
     photo: hengLeapPhoto,
     links: [
-      { label: "GitHub", href: "" },
-      { label: "Telegram", href: "" },
+      { label: "GitHub", href: "https://github.com/keohengleap" },
+      { label: "Telegram", href: "https://t.me/KeoHengLeap" },
     ],
   },
   {
@@ -87,8 +87,8 @@ export const teamMembers: TeamMember[] = [
     bio: "Developed the website's navigation bar and footer. Ensured navigation links are consistent across all pages and the layout is responsive. Added navigation to Home, Attractions, Provinces, About, Login, and Sign Up.",
     photo: panhaPhoto,
     links: [
-      { label: "GitHub", href: "" },
-      { label: "Telegram", href: "" },
+      { label: "GitHub", href: "https://github.com/Chanpanha-sok" },
+      { label: "Telegram", href: "https://t.me/khmengkomrora" },
     ],
   },
   {
@@ -98,8 +98,8 @@ export const teamMembers: TeamMember[] = [
     bio: "Developed the custom 404 Error page. Created a clear and user-friendly design for pages that cannot be found and added Back Home / Explore Attractions navigation.",
     photo: longhuyPhoto,
     links: [
-      { label: "GitHub", href: "" },
-      { label: "Telegram", href: "" },
+      { label: "GitHub", href: "https://github.com/LonghuyKoem" },
+      { label: "Telegram", href: "https://t.me/Bro_huy" },
     ],
   },
   {
@@ -109,8 +109,8 @@ export const teamMembers: TeamMember[] = [
     bio: "Developed the About page. Worked on the project information, website purpose, team section, and Popular Provinces / Explore Cambodia section using the provinces API.",
     photo: raguelPhoto,
     links: [
-      { label: "GitHub", href: "" },
-      { label: "Telegram", href: "" },
+      { label: "GitHub", href: "https://github.com/raguelkh-eng" },
+      { label: "Telegram", href: "https://t.me/HAVERTZ_CHHOM" },
     ],
   },
 ];
@@ -126,11 +126,7 @@ export const teamSection = {
   membersTitle: "The team",
 };
 
-// Mentor entry, shown in its own larger card *above* the six-member interactive
-// gallery, so it reads as the profile the team sits under and stays clear of the
-// hover/expand interaction. The portrait is the `Mentor.PNG` bundled next to the
-// member photos in `components/about/image/`, imported the same way, so the
-// mentor column fills with a real photo instead of the initials placeholder.
+
 export const mentor: TeamMember = {
   id: "mentor",
   name: "Srorng Sokcheat",
@@ -138,7 +134,7 @@ export const mentor: TeamMember = {
   bio: "Guides the team through scope, architecture, and presentation, and reviews each release before it reaches the Vireyak catalogue.",
   photo: mentorPhoto,
   links: [
-    { label: "GitHub", href: "" },
-    { label: "Telegram", href: "" },
+    { label: "GitHub", href: "https://github.com/CheatDev07" },
+    { label: "Telegram", href: "https://t.me/Sokcheat_srorng" },
   ],
 };

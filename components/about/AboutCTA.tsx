@@ -27,13 +27,13 @@ export default function AboutCTA() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href={finalCta.primaryCta.href}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brightgold px-6 py-3 text-xs font-semibold text-navy transition hover:bg-gold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-brightgold px-6 py-3 text-xs font-semibold text-navy transition duration-500 ease-out hover:bg-gold motion-reduce:transition-none"
             >
               {finalCta.primaryCta.label} <Icon name="arrow" size={16} />
             </Link>
             <Link
               href={finalCta.secondaryCta.href}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 px-6 py-3 text-xs font-medium text-white transition hover:bg-white/10"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 px-6 py-3 text-xs font-medium text-white transition duration-500 ease-out hover:bg-white/10 motion-reduce:transition-none"
             >
               {finalCta.secondaryCta.label}
             </Link>

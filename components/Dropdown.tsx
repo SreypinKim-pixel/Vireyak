@@ -43,7 +43,7 @@ export default function Dropdown({
         aria-label={label}
         aria-describedby={describedBy}
         disabled={disabled}
-        className={`group flex w-full min-w-0 items-center justify-between gap-3 rounded-lg text-left text-xs text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-panel data-[state=open]:text-secondary dark:data-[state=open]:text-brightgold ${variant === "inline" ? "min-h-7 bg-transparent py-1" : "min-h-11 border border-slate/30 bg-panel px-3.5 py-3 hover:border-accent/70 data-[state=open]:border-accent"} ${className}`}
+        className={`group flex w-full min-w-0 items-center justify-between gap-3 rounded-lg text-left text-xs text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-panel data-[state=open]:text-secondary dark:data-[state=open]:text-brightgold ${variant === "inline" ? "min-h-7 bg-transparent py-1" : "min-h-11 border border-slate/60 dark:border-slate/30 bg-panel px-3.5 py-3 hover:border-indigo dark:hover:border-accent/70 data-[state=open]:border-indigo dark:data-[state=open]:border-accent"} ${className}`}
       >
         <span className="truncate">
           <Select.Value />
@@ -61,14 +61,14 @@ export default function Dropdown({
           position="popper"
           sideOffset={8}
           collisionPadding={16}
-          className="dropdown-menu z-[80] min-w-[var(--radix-select-trigger-width)] max-w-[calc(100vw-32px)] overflow-hidden rounded-xl border border-slate/20 bg-panel text-ink shadow-[0_16px_48px_-12px_rgba(14,13,21,0.3)] dark:border-slate/30"
+          className="dropdown-menu z-[80] min-w-[var(--radix-select-trigger-width)] max-w-[calc(100vw-32px)] overflow-hidden rounded-xl border border-slate/60 bg-panel text-ink shadow-[0_16px_48px_-12px_rgba(14,13,21,0.3)] dark:border-slate/30"
         >
           <Select.ScrollUpButton className="flex h-7 items-center justify-center bg-panel text-accent">
             <Icon name="chevron" size={13} className="-rotate-90" />
           </Select.ScrollUpButton>
           <Select.Viewport className="max-h-[min(320px,var(--radix-select-content-available-height))] p-1.5">
             <Select.Group>
-              <Select.Label className="mx-1 mb-1 border-b border-slate/15 px-2 py-2.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/55">
+              <Select.Label className="mx-1 mb-1 border-b border-slate/60 dark:border-slate/15 px-2 py-2.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/55">
                 {label}
               </Select.Label>
               {options.map((option) => (

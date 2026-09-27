@@ -36,7 +36,7 @@ export default function CambodiaSection({
   return (
     <section
       id="cambodia"
-      className="scroll-mt-8 border-y border-slate/15 bg-slate/[0.045] py-14 sm:py-16"
+      className="scroll-mt-8 border-y border-slate/60 dark:border-slate/15 bg-slate/[0.045] py-14 sm:py-16"
     >
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -47,7 +47,7 @@ export default function CambodiaSection({
               {cambodiaSection.description}
             </p>
           </div>
-          <span className="flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-2 text-[10px] font-medium text-ink/70">
+          <span className="flex items-center gap-2 rounded-full border border-gold/60 dark:border-gold/30 bg-gold/10 px-3.5 py-2 text-[10px] font-medium text-ink/70">
             <Icon
               name={hasLiveFigures ? "globe" : "shield"}
               size={14}
@@ -66,7 +66,7 @@ export default function CambodiaSection({
             <CambodiaStats stats={stats} />
           </div>
         ) : (
-          <p className="mt-8 rounded-xl border border-dashed border-slate/30 bg-panel p-6 text-xs leading-7 text-ink/60">
+          <p className="mt-8 rounded-xl border border-dashed border-slate/60 dark:border-slate/30 bg-panel p-6 text-xs leading-7 text-ink/60">
             {reachable
               ? "The catalogue returned no entries, so there are no figures to calculate yet. The rest of this section is reference information about Cambodia."
               : "The Vireyak API did not respond, so catalogue figures cannot be shown right now. Everything on this page still works — the rest of the section is reference information about Cambodia."}
@@ -80,14 +80,14 @@ export default function CambodiaSection({
               descriptions={regionDescriptions}
             />
           ) : null}
-          <div className="h-full rounded-xl border border-slate/15 bg-panel p-6">
+          <div className="h-full rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-6">
             <h3 className="text-sm font-semibold text-navy dark:text-ivory">
               {cambodiaSection.factsTitle}
             </h3>
             <p className="mt-2 text-[10px] text-ink/50">
               {cambodiaSection.factsNote}
             </p>
-            <dl className="mt-5 divide-y divide-slate/15">
+            <dl className="mt-5 divide-y divide-slate/50 dark:divide-slate/15">
               {countryFacts.map((fact) => (
                 <div
                   key={fact.label}

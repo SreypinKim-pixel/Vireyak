@@ -52,7 +52,7 @@ export default function ProvinceLookup() {
   return (
     <section
       aria-labelledby="province-lookup-title"
-      className="border-t border-slate/15 bg-panel py-12 sm:py-16"
+      className="border-t border-slate/60 dark:border-slate/15 bg-panel py-12 sm:py-16"
     >
       <div className="shell">
         <SectionHeading
@@ -84,14 +84,6 @@ export default function ProvinceLookup() {
           >
             View province
           </button>
-          <p className="mt-2 text-[10px] leading-5 text-ink/55">
-            Calls{" "}
-            <code className="break-all">
-              GET https://cam-trip.cheat.casa/api/provinces/
-              {provinceId || "[id]"}
-            </code>{" "}
-            on submit. Try 1 (Siem Reap), 11 (Phnom Penh), or 22 (Kampot).
-          </p>
         </form>
 
         {status === "loading" && (
@@ -117,7 +109,7 @@ export default function ProvinceLookup() {
         {status === "success" && province && (
           <article
             data-testid="province-result"
-            className="mt-8 overflow-hidden rounded-2xl border border-slate/20 bg-surface shadow-soft"
+            className="mt-8 overflow-hidden rounded-2xl border border-slate/60 dark:border-slate/20 bg-surface shadow-soft"
           >
             <div className="relative aspect-[16/9] overflow-hidden">
               <DestinationImage

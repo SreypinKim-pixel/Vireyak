@@ -148,8 +148,8 @@ export default function AuthForm({ register = false }) {
       <div
         className={
           register
-            ? "grid w-full max-w-[1040px] overflow-hidden rounded-3xl border border-slate/15 bg-panel shadow-soft lg:grid-cols-[0.85fr_1.15fr]"
-            : "mx-auto grid max-w-[1000px] overflow-hidden rounded-2xl border border-slate/20 bg-panel shadow-soft lg:grid-cols-2"
+            ? "grid w-full max-w-[1040px] overflow-hidden rounded-3xl border border-slate/60 dark:border-slate/15 bg-panel shadow-soft lg:grid-cols-[0.85fr_1.15fr]"
+            : "mx-auto grid max-w-[1000px] overflow-hidden rounded-2xl border border-slate/60 dark:border-slate/20 bg-panel shadow-soft lg:grid-cols-2"
         }
       >
         <div className="relative isolate hidden min-h-[640px] flex-col justify-end bg-navy p-10 text-white lg:flex">
@@ -421,7 +421,7 @@ export default function AuthForm({ register = false }) {
             {message && (
               <p
                 role="status"
-                className="rounded-lg border border-slate/20 p-4 text-xs leading-6"
+                className="rounded-lg border border-slate/60 dark:border-slate/20 p-4 text-xs leading-6"
               >
                 {message}
               </p>

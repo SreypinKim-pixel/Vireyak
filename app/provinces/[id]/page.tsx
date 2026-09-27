@@ -25,7 +25,7 @@ export default async function ProvincePage({
       >
         ← Featured destinations
       </Link>
-      <div className="mt-6 overflow-hidden rounded-3xl border border-slate/20 bg-panel">
+      <div className="mt-6 overflow-hidden rounded-3xl border border-slate/60 dark:border-slate/20 bg-panel">
         <DestinationImage
           src={provincePhoto?.src}
           fallbackSrc={provincePhoto?.backupSrc}
@@ -77,7 +77,7 @@ export default async function ProvincePage({
               return (
                 <article
                   key={item.id}
-                  className="overflow-hidden rounded-2xl border border-slate/20 bg-panel"
+                  className="overflow-hidden rounded-2xl border border-slate/60 dark:border-slate/20 bg-panel"
                 >
                   <DestinationImage
                     src={photo?.src}

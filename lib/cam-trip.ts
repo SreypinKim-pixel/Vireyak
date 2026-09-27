@@ -1,3 +1,4 @@
+import { isVisibleAttraction } from "./attraction-visibility";
 import { provinceNames } from "@/data/province-names";
 import { attractions } from "@/data/travel";
 import { getProvincePhoto, getAttractionPhoto } from "./destination-images";
@@ -32,9 +33,7 @@ interface AttractionPage {
 
 const DEFAULT_API_BASE_URL = "https://cam-trip.cheat.casa/api";
 
-// Optional override for the teacher CamTrip API, e.g. a local copy:
-//   API_BASE_URL=https://cam-trip.cheat.casa/api npm run dev
-// The guard keeps this safe in the browser, where `process` does not exist.
+
 export const API_BASE_URL =
   typeof process === "undefined" || !process.env.API_BASE_URL
     ? DEFAULT_API_BASE_URL
@@ -117,6 +116,7 @@ export async function getFeaturedDestinations() {
             if (highlightsResponse.ok) {
               const data: AttractionPage = await highlightsResponse.json();
               highlights = (data.content || [])
+                .filter((item) => isVisibleAttraction(item.id))
                 .map((item) => item.nameEn || item.nameKh)
                 .filter(Boolean);
               attractionCount = data.totalElements ?? attractionCount;
@@ -173,7 +173,9 @@ export async function getHomepageAttractions() {
       const data: AttractionPage = await response.json();
       if (!Array.isArray(data.content) || !Number.isInteger(data.totalPages))
         throw new Error("Invalid attractions response");
-      items.push(...data.content);
+      items.push(
+        ...data.content.filter((item) => isVisibleAttraction(item.id)),
+      );
       if (page + 1 >= data.totalPages) break;
     }
     const { destinations } = await getFeaturedDestinations();
@@ -274,8 +276,10 @@ export async function getProvinceDetails(id: string) {
     if (!result.ok) throw new Error("Province attractions unavailable");
     const data: AttractionPage = await result.json();
     if (!Array.isArray(data.content)) throw new Error("Invalid attractions");
-    attractions = data.content;
-    total = data.totalElements ?? total;
+    attractions = data.content.filter((item) => isVisibleAttraction(item.id));
+    total =
+      (data.totalElements ?? data.content.length) -
+      (data.content.length - attractions.length);
   } catch {
     attractionsUnavailable = true;
   }
