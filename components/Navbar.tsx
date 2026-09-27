@@ -39,8 +39,8 @@ export default function Navbar() {
   }
   return (
     <header className="relative z-40 border-b border-slate/15 bg-surface">
-      <div className="shell flex h-[88px] items-center justify-between gap-4">
-        <Brand />
+      <div className="shell flex h-[88px] items-center justify-between gap-2 sm:gap-4">
+        <Brand logoSrc="/images/brand/vireyak-logo.png" />
         <nav
           aria-label="Main navigation"
           className="hidden h-full items-center gap-9 md:flex"
@@ -59,7 +59,7 @@ export default function Navbar() {
             );
           })}
         </nav>
-        <div className="flex items-center gap-3 lg:gap-5">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-3 lg:gap-5">
           <button
             type="button"
             onClick={toggleTheme}
@@ -74,7 +74,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/register"
-            className="button-primary min-h-10 px-4 py-2 text-[11px] sm:px-5"
+            className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
           >
             Sign up <Icon name="arrow" size={15} />
           </Link>

@@ -15,6 +15,9 @@ export default function Dropdown({
   options,
   variant = "field",
   className = "",
+  name,
+  disabled = false,
+  describedBy,
 }: {
   id?: string;
   label: string;
@@ -23,16 +26,23 @@ export default function Dropdown({
   options: { value: string | number; label: string }[];
   variant?: "field" | "inline";
   className?: string;
+  name?: string;
+  disabled?: boolean;
+  describedBy?: string;
 }) {
   const selected = String(value);
   return (
     <Select.Root
+      name={name}
+      disabled={disabled}
       value={selected === "" ? ALL_VALUE : selected}
       onValueChange={(next) => onChange(next === ALL_VALUE ? "" : next)}
     >
       <Select.Trigger
         id={id}
         aria-label={label}
+        aria-describedby={describedBy}
+        disabled={disabled}
         className={`group flex w-full min-w-0 items-center justify-between gap-3 rounded-lg text-left text-xs text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-panel data-[state=open]:text-secondary dark:data-[state=open]:text-brightgold ${variant === "inline" ? "min-h-7 bg-transparent py-1" : "min-h-11 border border-slate/30 bg-panel px-3.5 py-3 hover:border-accent/70 data-[state=open]:border-accent"} ${className}`}
       >
         <span className="truncate">

@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
+import Dropdown from "./Dropdown";
 export default function AuthForm({ register = false }) {
   const [message, setMessage] = useState("");
+  const [attraction, setAttraction] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [attractions, setAttractions] = useState<
@@ -89,6 +91,7 @@ export default function AuthForm({ register = false }) {
         : "Your login information is valid. Authentication service is not connected yet.",
     );
     e.currentTarget.reset();
+    setAttraction("");
   }
   return (
     <div
@@ -107,17 +110,13 @@ export default function AuthForm({ register = false }) {
       >
         <div className="relative isolate hidden min-h-[640px] flex-col justify-end bg-navy p-10 text-white lg:flex">
           <img
-            src="/images/angkor.jpg"
-            alt="The peaceful grounds of Angkor Wat"
-            width="700"
-            height="1000"
-            className={
-              register
-                ? "absolute inset-0 -z-20 h-full w-full object-cover object-[60%_center]"
-                : "absolute inset-0 -z-20 h-full w-full object-cover"
-            }
+            src="/images/l&s.png"
+            alt="Cambodian dancer in blue and gold beside Angkor Wat and travel illustrations"
+            width="1122"
+            height="1402"
+            className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy via-navy/30 to-navy/10" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
           <p className="text-[10px] uppercase tracking-[0.2em] text-brightgold">
             Your next chapter
           </p>
@@ -270,28 +269,34 @@ export default function AuthForm({ register = false }) {
                   />
                   {fieldError("confirmPassword")}
                 </label>
-                <label className="block">
-                  <span className="field-label">
+                <div className="block">
+                  <label htmlFor="attraction-interest" className="field-label">
                     Attraction of interest (optional)
-                  </span>
-                  <select
+                  </label>
+                  <Dropdown
+                    id="attraction-interest"
+                    label="Attraction of interest (optional)"
                     name="attraction"
-                    className="field"
+                    value={attraction}
+                    onChange={setAttraction}
+                    className="disabled:cursor-not-allowed disabled:opacity-60"
                     disabled={loadState !== "ready" || !attractions.length}
-                    aria-describedby="attraction-help"
-                  >
-                    <option value="">
-                      {loadState === "loading"
-                        ? "Loading attractions…"
-                        : "Choose an attraction"}
-                    </option>
-                    {attractions.map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                    describedBy="attraction-help"
+                    options={[
+                      {
+                        value: "",
+                        label:
+                          loadState === "loading"
+                            ? "Loading attractions…"
+                            : "Choose an attraction",
+                      },
+                      ...attractions.map((item) => ({
+                        value: item.id,
+                        label: item.name,
+                      })),
+                    ]}
+                  />
+                </div>
                 <p
                   id="attraction-help"
                   className="text-xs text-ink/65"
