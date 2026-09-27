@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProvinceDetails, regions } from "@/lib/cam-trip";
-import { localDestinationImage } from "@/lib/destination-images";
+import { getProvincePhoto, getAttractionPhoto } from "@/lib/destination-images";
+import PhotoCredits from "@/components/home/PhotoCredits";
 import DestinationImage from "@/components/home/DestinationImage";
 
 export default async function ProvincePage({
@@ -14,6 +15,7 @@ export default async function ProvincePage({
   if (!result) notFound();
   const { province, attractions, total, attractionsUnavailable } = result;
   const name = province.nameEn || province.nameKh;
+  const provincePhoto = getProvincePhoto(name, province.imageUrl);
   const location = regions[province.region] || "Cambodia";
   return (
     <main className="shell py-10 sm:py-16">
@@ -25,11 +27,9 @@ export default async function ProvincePage({
       </Link>
       <div className="mt-6 overflow-hidden rounded-3xl border border-slate/20 bg-panel">
         <DestinationImage
-          src={localDestinationImage(
-            "province",
-            province.id,
-            province.imageUrl,
-          )}
+          src={provincePhoto?.src}
+          fallbackSrc={provincePhoto?.backupSrc}
+          title={provincePhoto?.alt}
           alt={name}
           width={1400}
           height={700}
@@ -73,18 +73,16 @@ export default async function ProvincePage({
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {attractions.map((item) => {
               const title = item.nameEn || item.nameKh;
+              const photo = getAttractionPhoto(title, name, item.imageUrls);
               return (
                 <article
                   key={item.id}
                   className="overflow-hidden rounded-2xl border border-slate/20 bg-panel"
                 >
                   <DestinationImage
-                    src={localDestinationImage(
-                      "attraction",
-                      item.id,
-                      item.imageUrls?.find(Boolean) || province.imageUrl,
-                    )}
-                    alt={title}
+                    src={photo?.src}
+                    fallbackSrc={photo?.backupSrc}
+                    alt={photo?.alt || title}
                     width={600}
                     height={400}
                     loading="lazy"
@@ -127,6 +125,18 @@ export default async function ProvincePage({
             </p>
           )}
       </section>
+      <PhotoCredits
+        photos={[
+          provincePhoto,
+          ...attractions.map((item) =>
+            getAttractionPhoto(
+              item.nameEn || item.nameKh,
+              name,
+              item.imageUrls,
+            ),
+          ),
+        ]}
+      />
     </main>
   );
 }

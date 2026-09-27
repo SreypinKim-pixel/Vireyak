@@ -1,6 +1,6 @@
 import { provinceNames } from "@/data/province-names";
 import { attractions } from "@/data/travel";
-import { localDestinationImage } from "./destination-images";
+import { getProvincePhoto, getAttractionPhoto } from "./destination-images";
 
 export interface Province {
   id: string | number;
@@ -78,7 +78,8 @@ function getLocalFeaturedDestinations() {
             .join(", ")} and more in ${name}.`
         : `Discover cultural and natural highlights in ${name}, Cambodia.`,
       attractionCount: highlights.length,
-      image: highlights[0]?.image || null,
+      image: getProvincePhoto(name)?.src || highlights[0]?.image || null,
+      photo: getProvincePhoto(name),
       // The curated travel listing supports destination filters and remains
       // useful when the live province service is unavailable.
       href: `/attraction?destination=${encodeURIComponent(name)}`,
@@ -133,11 +134,8 @@ export async function getFeaturedDestinations() {
               ? `${name} highlights include ${highlights.join(", ")}.`
               : `${name} is in ${regions[province.region] || "Cambodia"}.`,
             attractionCount,
-            image: localDestinationImage(
-              "province",
-              province.id,
-              province.imageUrl,
-            ),
+            image: getProvincePhoto(name, province.imageUrl)?.src || null,
+            photo: getProvincePhoto(name, province.imageUrl),
             href: `/provinces/${encodeURIComponent(province.id)}`,
           };
         }),
@@ -210,15 +208,7 @@ export async function getHomepageAttractions() {
             item.descriptionEn) ||
           item.descriptionKh ||
           `${name} is a ${(item.category || "attraction").toLowerCase().replaceAll("_", " ")} in ${province}.`,
-        image: localDestinationImage(
-          "attraction",
-          item.id,
-          item.imageUrls?.find(
-            (image: unknown) => typeof image === "string" && image,
-          ) ||
-            item.province.imageUrl ||
-            null,
-        ),
+        image: getAttractionPhoto(name, province, item.imageUrls)?.src || null,
         rating: item.rating,
         entryFee: item.entryFee,
         openingHours: item.openingHours,
