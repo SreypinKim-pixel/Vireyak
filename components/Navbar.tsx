@@ -63,7 +63,7 @@ export default function Navbar() {
   return (
     <header className="relative z-40 border-b border-slate/15 bg-surface transition-colors duration-300">
       <div className="shell flex h-[88px] items-center justify-between gap-2 sm:gap-4">
-        <Brand logoSrc="/images/brand/vireyak-logo.png" />
+        <Brand logoSrc="/Logo.png" />
         <nav
           aria-label="Main navigation"
           className="hidden h-full items-center gap-9 md:flex"
