@@ -1,13 +1,13 @@
 // Editorial copy for the About page. Live catalogue figures are never written
-// here: they come from the public CamTrip API through lib/camTripApi.js.
-export const platformName = "CamTrip";
+// here: they come from the public Vireyak API through lib/camTripApi.js.
+export const platformName = "Vireyak";
 
 export const aboutHero = {
-  eyebrow: "About CamTrip",
+  eyebrow: "About Vireyak",
   title: "Discover Cambodia",
   titleAccent: `with ${platformName}`,
   description:
-    "CamTrip is a Cambodia-first travel platform. We bring provinces, destinations, and visitor information together in one clear place, so planning a trip starts with discovery instead of twenty open browser tabs.",
+    "Vireyak is a Cambodia-first travel platform. We bring provinces, destinations, and visitor information together in one clear place, so planning a trip starts with discovery instead of twenty open browser tabs.",
   image: {
     src: "/images/angkor.jpg",
     alt: "Morning light across the ancient grounds of Angkor Wat in Cambodia",
@@ -27,8 +27,8 @@ export const aboutIntro = {
   pillars: [
     {
       icon: "search",
-      title: "What CamTrip does",
-      copy: "CamTrip collects Cambodian provinces, destinations, and visitor information into one searchable catalogue — from the temple cities of the northwest to the quiet waterfalls of the northeast.",
+      title: "What Vireyak does",
+      copy: "Vireyak collects Cambodian provinces, destinations, and visitor information into one searchable catalogue — from the temple cities of the northwest to the quiet waterfalls of the northeast.",
     },
     {
       icon: "users",
@@ -38,7 +38,7 @@ export const aboutIntro = {
     {
       icon: "shield",
       title: "The problem it solves",
-      copy: "Information about Cambodian places is scattered across blogs, maps, and agency pages. CamTrip keeps it in one place, in one format, with Khmer and English names side by side.",
+      copy: "Information about Cambodian places is scattered across blogs, maps, and agency pages. Vireyak keeps it in one place, in one format, with Khmer and English names side by side.",
     },
     {
       icon: "temple",
@@ -46,14 +46,14 @@ export const aboutIntro = {
       copy: "Cambodia is compact, welcoming, and astonishingly varied. A single country holds temple complexes, river towns, tropical islands, and highland forest — and much of it is still quietly under-visited.",
     },
   ],
-  note: "Figures on this page are calculated from live responses of the public CamTrip API. Country facts are general reference information.",
+  note: "Figures on this page are calculated from live responses of the public Vireyak API. Country facts are general reference information.",
 };
 
 export const cambodiaSection = {
   eyebrow: "Cambodia at a glance",
   title: "One country. Four regions. Hundreds of places.",
   description:
-    "The CamTrip catalogue is organized the way Cambodia is: by province, and by the region that province belongs to.",
+    "The Vireyak catalogue is organized the way Cambodia is: by province, and by the region that province belongs to.",
   factsTitle: "Country overview",
   factsNote: "General reference information, not API data.",
   provincesTitle: "Provinces in the catalogue",
@@ -84,19 +84,19 @@ export const placesSection = {
   eyebrow: "Explore Cambodia",
   title: "Places worth a closer look.",
   description:
-    "A selection from the live CamTrip catalogue, chosen from the places the API marks as featured.",
+    "A selection from the live Vireyak catalogue, chosen from the places the API marks as featured.",
   cta: { label: "Browse all experiences", href: "/attraction" },
   emptyTitle: "No places to show just yet.",
   emptyCopy:
     "The catalogue returned an empty list. Our experiences page still has plenty of Cambodian inspiration to explore.",
   errorTitle: "The live catalogue is unavailable.",
   errorCopy:
-    "We could not reach the CamTrip API, so here are a few Cambodian destinations from our own guide instead. The live catalogue returns as soon as the API is reachable again.",
+    "We could not reach the Vireyak API, so here are a few Cambodian destinations from our own guide instead. The live catalogue returns as soon as the API is reachable again.",
   footnote:
-    "Names, provinces, categories, and descriptions are returned by the public CamTrip API.",
+    "Names, provinces, categories, and descriptions are returned by the public Vireyak API.",
 };
 
-export const whyCamTrip = [
+export const whyVireyak = [
   {
     icon: "temple",
     title: "Discover",
@@ -119,8 +119,8 @@ export const whyCamTrip = [
   },
 ];
 
-export const whyCamTripSection = {
-  eyebrow: "Why CamTrip",
+export const whyVireyakSection = {
+  eyebrow: "Why Vireyak",
   title: "Built for the way people travel Cambodia.",
   description:
     "Four ideas shape every part of the platform, from the catalogue to the way places are presented.",
@@ -155,14 +155,14 @@ export const aboutFaqs = {
   title: "Good questions. Honest answers.",
   questions: [
     {
-      question: "Can I make a booking on CamTrip?",
+      question: "Can I make a booking on Vireyak?",
       answer:
-        "Not yet. CamTrip is currently a discovery preview. You can explore sample stays and experiences, save favorites on your device, and preview a trip. No reservation or payment is made.",
+        "Not yet. Vireyak is currently a discovery preview. You can explore sample stays and experiences, save favorites on your device, and preview a trip. No reservation or payment is made.",
     },
     {
       question: "Where does the place information come from?",
       answer:
-        "Province and place details are requested live from the public CamTrip API and cached for a short time. Figures such as the number of provinces or places are calculated from those API responses, not typed in by hand.",
+        "Province and place details are requested live from the public Vireyak API and cached for a short time. Figures such as the number of provinces or places are calculated from those API responses, not typed in by hand.",
     },
     {
       question: "Are the prices and reviews live?",

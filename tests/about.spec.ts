@@ -18,11 +18,11 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
 
   // Every required section is present, including the anchors the footer uses.
   for (const id of [
-    "about-camtrip",
+    "about-vireyak",
     "cambodia",
     "explore-cambodia",
     "team",
-    "why-camtrip",
+    "why-vireyak",
     "travel-thoughtfully",
     "questions",
   ]) {

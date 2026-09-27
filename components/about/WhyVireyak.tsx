@@ -1,19 +1,19 @@
 import Icon from "../Icon";
-import { whyCamTrip, whyCamTripSection } from "../../data/about";
+import { whyVireyak, whyVireyakSection } from "../../data/about";
 
 /** The four values that describe what the platform does. */
-export default function WhyCamTrip() {
+export default function WhyVireyak() {
   return (
-    <section id="why-camtrip" className="shell scroll-mt-8 py-14 sm:py-16">
+    <section id="why-vireyak" className="shell scroll-mt-8 py-14 sm:py-16">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="eyebrow mb-3">{whyCamTripSection.eyebrow}</p>
-        <h2 className="section-title">{whyCamTripSection.title}</h2>
+        <p className="eyebrow mb-3">{whyVireyakSection.eyebrow}</p>
+        <h2 className="section-title">{whyVireyakSection.title}</h2>
         <p className="mt-4 text-xs leading-7 text-ink/60">
-          {whyCamTripSection.description}
+          {whyVireyakSection.description}
         </p>
       </div>
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {whyCamTrip.map((value) => (
+        {whyVireyak.map((value) => (
           <article
             key={value.title}
             className="flex h-full flex-col rounded-xl border border-slate/15 bg-panel p-6 transition duration-300 hover:-translate-y-1 hover:shadow-soft"

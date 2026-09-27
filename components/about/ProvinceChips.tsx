@@ -4,7 +4,7 @@ import type { Province } from "../../lib/camTripApi";
 type RegionGroup = { region: string; label: string; items: Province[] };
 
 /**
- * The provinces the CamTrip catalogue covers, grouped by API region and shown
+ * The provinces the Vireyak catalogue covers, grouped by API region and shown
  * with both the Khmer and English names returned by the API.
  */
 export default function ProvinceChips({

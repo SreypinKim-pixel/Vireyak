@@ -11,7 +11,7 @@ import AboutIntro from "../../components/about/AboutIntro";
 import CambodiaSection from "../../components/about/CambodiaSection";
 import PlacesSection from "../../components/about/PlacesSection";
 import TeamSection from "../../components/about/TeamSection";
-import WhyCamTrip from "../../components/about/WhyCamTrip";
+import WhyVireyak from "../../components/about/WhyVireyak";
 import TravelCompass from "../../components/about/TravelCompass";
 import AboutFaqs from "../../components/about/AboutFaqs";
 import AboutCTA from "../../components/about/AboutCTA";
@@ -21,10 +21,12 @@ import {
   type PlaceCardData,
 } from "../../lib/camTripApi";
 
+// `absolute` ignores the root layout's "%s | Vireyak" title template, so the
+// browser tab reads "About Vireyak" instead of repeating the site name twice.
 export const metadata = {
-  title: "About CamTrip",
+  title: { absolute: "About Vireyak" },
   description:
-    "CamTrip is a Cambodia-first travel platform. See what it does, the provinces and places it covers, the team behind it, and how to start exploring.",
+    "Vireyak is a Cambodia-first travel platform. See what it does, the provinces and places it covers, the team behind it, and how to start exploring.",
 };
 
 // Route segment config must be a literal. Keep in sync with
@@ -104,7 +106,7 @@ export default function AboutPage() {
         <LivePlacesSection />
       </Suspense>
       <TeamSection />
-      <WhyCamTrip />
+      <WhyVireyak />
       <TravelCompass />
       <AboutFaqs />
       <AboutCTA />

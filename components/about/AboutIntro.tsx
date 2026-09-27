@@ -1,10 +1,10 @@
 import Icon from "../Icon";
 import { aboutIntro } from "../../data/about";
 
-/** Explains what CamTrip is, who it serves, and why Cambodia is the focus. */
+/** Explains what Vireyak is, who it serves, and why Cambodia is the focus. */
 export default function AboutIntro() {
   return (
-    <section id="about-camtrip" className="shell scroll-mt-8 py-14 sm:py-16">
+    <section id="about-vireyak" className="shell scroll-mt-8 py-14 sm:py-16">
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
         <div>
           <p className="eyebrow mb-3">{aboutIntro.eyebrow}</p>

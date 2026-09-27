@@ -54,7 +54,7 @@ export function HeroFootnote() {
         href="#cambodia"
         className="underline decoration-dotted underline-offset-2 hover:text-indigo dark:hover:text-brightgold"
       >
-        CamTrip public API
+        Vireyak public API
       </Link>
       . Country facts and team details are editorial content.
     </p>

@@ -101,7 +101,7 @@ export const teamMembers: TeamMember[] = [
 ];
 
 export const teamSection = {
-  eyebrow: "The people behind CamTrip",
+  eyebrow: "The people behind Vireyak",
   title: "Meet the team.",
   description:
     "Six students built this platform together — design, development, data, content, and testing.",
@@ -120,7 +120,7 @@ export const mentor: TeamMember = {
   id: "mentor",
   name: "Srorng Sokcheat",
   role: "Project Mentor",
-  bio: "Guides the team through scope, architecture, and presentation, and reviews each release before it reaches the CamTrip catalogue.",
+  bio: "Guides the team through scope, architecture, and presentation, and reviews each release before it reaches the Vireyak catalogue.",
   photo: mentorPhoto,
   links: [],
 };

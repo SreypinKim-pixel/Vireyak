@@ -54,7 +54,7 @@ export default function CambodiaSection({
               className="text-gold"
             />
             {hasLiveFigures
-              ? "Live figures from the CamTrip API"
+              ? "Live figures from the Vireyak API"
               : reachable
                 ? "No catalogue entries to count yet"
                 : "Live figures unavailable — reference content shown"}
@@ -69,7 +69,7 @@ export default function CambodiaSection({
           <p className="mt-8 rounded-xl border border-dashed border-slate/30 bg-panel p-6 text-xs leading-7 text-ink/60">
             {reachable
               ? "The catalogue returned no entries, so there are no figures to calculate yet. The rest of this section is reference information about Cambodia."
-              : "The CamTrip API did not respond, so catalogue figures cannot be shown right now. Everything on this page still works — the rest of the section is reference information about Cambodia."}
+              : "The Vireyak API did not respond, so catalogue figures cannot be shown right now. Everything on this page still works — the rest of the section is reference information about Cambodia."}
           </p>
         )}
 
