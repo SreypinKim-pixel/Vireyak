@@ -135,7 +135,7 @@ export default function Navbar() {
           )}
           <Link
             href="/register"
-            className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
+            className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-xs sm:px-5"
           >
             Sign up <Icon name="arrow" size={15} />
           </Link>

@@ -38,7 +38,7 @@ export default function ProvinceGrid({
       )
     : expanded
       ? orderedDestinations
-      : orderedDestinations.slice(0, 6);
+      : orderedDestinations.slice(0, 8);
 
   return (
     <section
@@ -60,7 +60,7 @@ export default function ProvinceGrid({
               : "Find Cambodia’s best known temples, coastlines, wildlife, and cultural sites across every province."
           }
         >
-          {!selectedProvince && destinations.length > 6 && (
+          {!selectedProvince && destinations.length > 8 && (
             <button
               type="button"
               aria-expanded={expanded}
@@ -90,9 +90,9 @@ export default function ProvinceGrid({
                 : "New destinations are coming soon."}
           </p>
         )}
-        <div id="province-grid" className="mt-8 grid gap-6 md:grid-cols-3">
+        <div id="province-grid" className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {visibleDestinations.map((destination, index) => (
-            <Reveal key={destination.id} delay={(index % 3) * 0.08}>
+            <Reveal key={destination.id} delay={(index % 4) * 0.08}>
               <article className="group h-full overflow-hidden rounded-3xl border border-slate/60 dark:border-ink/10 bg-surface shadow-sm transition-shadow hover:shadow-xl">
                 <Link
                   href={destination.href}

@@ -1,4 +1,4 @@
-import { PlacesTableSkeleton } from "@/components/places/PlacesTable";
+import { PlacesTableSkeleton } from "./PlacesTable";
 
 export default function Loading() {
   return (

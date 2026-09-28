@@ -23,13 +23,13 @@ export default function MentorCard({ mentor }: { mentor?: TeamMember | null }) {
           />
         </div>
         <div className="p-7 sm:p-9 lg:p-11">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brightgold/30 bg-brightgold/15 px-3.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.22em] text-brightgold">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brightgold/30 bg-brightgold/15 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-brightgold">
             Mentor
           </span>
           <h3 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
             {mentor.name}
           </h3>
-          <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-ivory/55">
+          <p className="mt-2 text-xs uppercase tracking-[0.14em] text-ivory/55">
             {mentor.role}
           </p>
           <p className="mt-5 max-w-2xl text-xs leading-7 text-ivory/70">

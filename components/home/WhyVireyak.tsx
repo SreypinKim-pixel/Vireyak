@@ -31,7 +31,7 @@ export default function WhyVireyak({
     >
       <div className="shell grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-10 xl:gap-12">
         <div className="min-w-0">
-          <p className="mb-5 text-[13px] font-semibold uppercase tracking-[0.18em] text-indigo dark:text-brightgold sm:text-sm">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-indigo dark:text-brightgold sm:text-sm">
             Off the beaten path
           </p>
           <h2

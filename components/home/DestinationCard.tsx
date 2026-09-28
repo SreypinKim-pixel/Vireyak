@@ -93,7 +93,7 @@ export default function DestinationCard({
         </h3>
         <div className="mt-2 flex items-center">
           <p
-            className="rounded-full px-2.5 py-1.5 text-[10px] font-semibold leading-4"
+            className="rounded-full px-2.5 py-1.5 text-xs font-semibold leading-4"
             style={{ backgroundColor: accent.background, color: accent.text }}
           >
             {destination.province} <span aria-hidden="true">·</span>{" "}
@@ -105,7 +105,7 @@ export default function DestinationCard({
         </p>
         <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-slate/60 dark:border-[#E8E8E8] pt-3">
           <RatingBadge rating={destination.rating} />
-          <span className="rounded-full bg-[#F7F7F5] px-2.5 py-1.5 text-[10px] font-medium text-[#555555]">
+          <span className="rounded-full bg-[#F7F7F5] px-2.5 py-1.5 text-xs font-medium text-[#555555]">
             {destination.entryFee == null
               ? "Entry fee not listed"
               : destination.entryFee === 0

@@ -55,7 +55,7 @@ export default function DatePicker({
           required={required}
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="min-w-0 w-full bg-transparent text-[11px] outline-none"
+          className="min-w-0 w-full bg-transparent text-xs outline-none"
         />
         <Popover.Trigger asChild>
           <button

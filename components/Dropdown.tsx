@@ -66,7 +66,7 @@ export default function Dropdown({
           </Select.ScrollUpButton>
           <Select.Viewport className="max-h-[min(320px,var(--radix-select-content-available-height))] p-1.5">
             <Select.Group>
-              <Select.Label className="mx-1 mb-1 border-b border-slate/60 dark:border-slate/15 px-2 py-2.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/55">
+              <Select.Label className="mx-1 mb-1 border-b border-slate/60 dark:border-slate/15 px-2 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-ink/55">
                 {label}
               </Select.Label>
               {options.map((option) => (

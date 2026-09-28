@@ -84,7 +84,7 @@ export default function Footer() {
             Your Cambodia, beautifully discovered.
           </p>
 
-          <div className="mt-6 flex items-center gap-2 text-[10px] tracking-wide text-gray-500 dark:text-gray-400">
+          <div className="mt-6 flex items-center gap-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
             <Icon name="pin" size={14} /> Made with love in Cambodia
           </div>
 
@@ -230,7 +230,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-slate/60 dark:border-gray-800">
-        <div className="shell flex flex-col items-center justify-between gap-4 py-5 text-[10px] text-gray-500 dark:text-gray-400 sm:flex-row">
+        <div className="shell flex flex-col items-center justify-between gap-4 py-5 text-xs text-gray-500 dark:text-gray-400 sm:flex-row">
           <p suppressHydrationWarning>
             © {new Date().getFullYear()} Vireyak. A world of wonder, closer to
             home.

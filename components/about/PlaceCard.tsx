@@ -31,43 +31,43 @@ export default function PlaceCard({ place }: { place: PlaceCardData }) {
           </div>
         )}
         {place.categoryLabel ? (
-          <span className="absolute left-3 top-3 rounded bg-ivory/95 px-2.5 py-1.5 text-[9px] font-medium text-navy">
+          <span className="absolute left-3 top-3 rounded bg-ivory/95 px-2.5 py-1.5 text-xs font-medium text-navy">
             {place.categoryLabel}
           </span>
         ) : null}
         {place.featured ? (
-          <span className="absolute right-3 top-3 rounded bg-navy/85 px-2.5 py-1.5 text-[9px] font-medium text-brightgold backdrop-blur">
+          <span className="absolute right-3 top-3 rounded bg-navy/85 px-2.5 py-1.5 text-xs font-medium text-brightgold backdrop-blur">
             Featured
           </span>
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <p className="flex items-center gap-1.5 text-[9px] uppercase tracking-wider text-ink/50">
+        <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-ink/50">
           <Icon name="pin" size={12} /> {location || "Cambodia"}
         </p>
-        <h3 className="mt-2 text-[15px] font-semibold tracking-tight text-navy dark:text-ivory">
+        <h3 className="mt-2 text-sm font-semibold tracking-tight text-navy dark:text-ivory">
           {place.nameEn}
         </h3>
         {place.nameKh ? (
-          <p lang="km" className="text-khmer mt-1 text-[11px] text-ink/50">
+          <p lang="km" className="text-khmer mt-1 text-xs text-ink/50">
             {place.nameKh}
           </p>
         ) : null}
         {place.description ? (
-          <p className="mt-3 line-clamp-3 text-[11px] leading-6 text-ink/60">
+          <p className="mt-3 line-clamp-3 text-xs leading-6 text-ink/60">
             {place.description}
           </p>
         ) : null}
         <div className="mt-5 flex items-center justify-between gap-3 border-t border-slate/60 dark:border-slate/15 pt-4">
           {hasRating ? (
             <span className="flex items-center gap-2">
-              <span className="rounded-t-md rounded-br-md bg-navy px-1.5 py-1 text-[10px] font-semibold text-white dark:bg-indigo">
+              <span className="rounded-t-md rounded-br-md bg-navy px-1.5 py-1 text-xs font-semibold text-white dark:bg-indigo">
                 {rating.toFixed(1)}
               </span>
-              <span className="text-[9px] text-ink/45">API rating</span>
+              <span className="text-xs text-ink/45">API rating</span>
             </span>
           ) : (
-            <span className="text-[9px] text-ink/45">
+            <span className="text-xs text-ink/45">
               {place.note || "Preview destination"}
             </span>
           )}
@@ -76,7 +76,7 @@ export default function PlaceCard({ place }: { place: PlaceCardData }) {
               href={place.mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 text-[10px] font-medium text-indigo underline decoration-transparent underline-offset-4 transition-colors duration-500 ease-out motion-reduce:transition-none hover:decoration-current dark:text-brightgold"
+              className="flex items-center gap-1 text-xs font-medium text-indigo underline decoration-transparent underline-offset-4 transition-colors duration-500 ease-out motion-reduce:transition-none hover:decoration-current dark:text-brightgold"
             >
               Open in maps <Icon name="arrow" size={13} />
             </a>

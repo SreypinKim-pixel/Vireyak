@@ -62,7 +62,7 @@ export default function TravelCard({
             className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
           />
         </Link>
-        <span className="absolute left-3 top-3 rounded bg-ivory/95 px-2.5 py-1.5 text-[9px] font-medium text-navy">
+        <span className="absolute left-3 top-3 rounded bg-ivory/95 px-2.5 py-1.5 text-xs font-medium text-navy">
           {item.badge}
         </span>
         <button
@@ -80,39 +80,39 @@ export default function TravelCard({
         </button>
       </div>
       <div className="p-4">
-        <div className="mb-2 flex items-center gap-1 text-[9px] uppercase tracking-wider text-ink/50">
+        <div className="mb-2 flex items-center gap-1 text-xs uppercase tracking-wider text-ink/50">
           <Icon name="pin" size={12} /> {item.destination}
           <span className="mx-1">·</span>
           {item.type}
         </div>
         <Link
           href={`/${kind}/${item.id}${query ? `?${query}` : ""}`}
-          className="text-[14px] font-semibold tracking-tight text-navy hover:text-indigo dark:text-ivory"
+          className="text-sm font-semibold tracking-tight text-navy hover:text-indigo dark:text-ivory"
         >
           {item.name}
         </Link>
         <div className="mt-3 flex items-center gap-2">
-          <span className="rounded-t-md rounded-br-md bg-navy px-1.5 py-1 text-[10px] font-semibold text-white dark:bg-indigo">
+          <span className="rounded-t-md rounded-br-md bg-navy px-1.5 py-1 text-xs font-semibold text-white dark:bg-indigo">
             {item.rating}
           </span>
-          <span className="text-[10px] font-medium">
+          <span className="text-xs font-medium">
             {kind === "stays" ? "Wonderful" : "Guest favorite"}
           </span>
-          <span className="text-[9px] text-ink/45">
+          <span className="text-xs text-ink/45">
             ({item.reviews} sample reviews)
           </span>
         </div>
         <div className="mt-4 flex items-end justify-between border-t border-slate/60 dark:border-slate/15 pt-3">
-          <span className="flex items-center gap-1 text-[9px] text-ink/55">
+          <span className="flex items-center gap-1 text-xs text-ink/55">
             <Icon name={kind === "stays" ? "check" : "clock"} size={12} />
             {kind === "stays" ? "A stay to remember" : item.duration}
           </span>
           <div className="text-right">
-            <span className="text-[9px] text-ink/50">from </span>
+            <span className="text-xs text-ink/50">from </span>
             <span className="text-lg font-semibold text-navy dark:text-ivory">
               ${item.price}
             </span>
-            <p className="text-[8px] text-ink/50">
+            <p className="text-xs text-ink/50">
               {kind === "stays" ? "per night" : "per person"} · sample price
             </p>
           </div>

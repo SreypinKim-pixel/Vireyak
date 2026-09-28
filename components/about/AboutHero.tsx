@@ -59,7 +59,7 @@ export default function AboutHero({
           />
           <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/20 bg-navy/85 p-5 text-white backdrop-blur">
             <p className="text-xs font-medium">{aboutHero.overlay.title}</p>
-            <p className="mt-2 text-[10px] leading-5 text-white/60">
+            <p className="mt-2 text-xs leading-5 text-white/60">
               {aboutHero.overlay.copy}
             </p>
           </div>

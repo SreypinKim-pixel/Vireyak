@@ -27,7 +27,7 @@ export default function ProvinceChips({
     <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
       {groups.map((group) => (
         <div key={group.region}>
-          <p className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/50">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-ink/50">
             <span className="h-1 w-4 rounded-full bg-gold" />
             {group.label}
             <span className="font-normal normal-case tracking-normal text-ink/40">
@@ -40,13 +40,13 @@ export default function ProvinceChips({
                 key={province.id}
                 className="rounded-lg border border-slate/60 dark:border-slate/15 bg-panel px-3 py-2 transition duration-500 ease-out hover:border-gold dark:hover:border-gold/40 motion-reduce:transition-none"
               >
-                <p className="text-[11px] font-medium text-navy dark:text-ivory">
+                <p className="text-xs font-medium text-navy dark:text-ivory">
                   {province.nameEn}
                 </p>
                 {province.nameKh ? (
                   <p
                     lang="km"
-                    className="text-khmer mt-0.5 text-[11px] text-ink/50"
+                    className="text-khmer mt-0.5 text-xs text-ink/50"
                   >
                     {province.nameKh}
                   </p>

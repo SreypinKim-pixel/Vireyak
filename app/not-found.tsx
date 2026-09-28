@@ -110,7 +110,7 @@ export default function NotFound() {
           <section className="flex justify-center lg:justify-end">
             <div className="w-full max-w-[430px]">
               <div className="mb-6 text-center">
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.35em] text-[#80651d] dark:text-[#D4AF37]">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#80651d] dark:text-[#D4AF37]">
                   Discover Cambodia
                 </p>
 
@@ -133,7 +133,7 @@ export default function NotFound() {
         </div>
 
         <div className="flex items-center justify-center border-t border-slate/60 dark:border-white/[0.06] pt-5">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-ink/50 dark:text-white/25">
+          <p className="text-xs uppercase tracking-[0.25em] text-ink/50 dark:text-white/25">
             Vireyak · Explore Cambodia
           </p>
         </div>

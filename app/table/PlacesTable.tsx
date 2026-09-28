@@ -230,7 +230,7 @@ export default function PlacesTable() {
                 </td>
                 <th scope="row" className="px-4 py-4 font-medium">
                   <Link
-                    className="underline decoration-gold underline-offset-4"
+                    className="hover:text-indigo dark:hover:text-brightgold"
                     href={`/attraction/${encodeURIComponent(item.id)}`}
                   >
                     {item.name}

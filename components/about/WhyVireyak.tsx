@@ -23,7 +23,7 @@ export default function WhyVireyak() {
             <h3 className="mt-5 text-sm font-semibold text-navy dark:text-ivory">
               {value.title}
             </h3>
-            <p className="mt-3 text-[11px] leading-6 text-ink/60">
+            <p className="mt-3 text-xs leading-6 text-ink/60">
               {value.copy}
             </p>
           </article>

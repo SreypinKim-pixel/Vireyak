@@ -14,7 +14,7 @@ export default function CambodiaStats({
           key={stat.key}
           className="rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-5 transition duration-500 ease-out hover:-translate-y-1 hover:shadow-soft motion-reduce:transition-none motion-reduce:transform-none"
         >
-          <dt className="flex items-start gap-2 text-[10px] font-medium uppercase tracking-[0.12em] text-ink/50">
+          <dt className="flex items-start gap-2 text-xs font-medium uppercase tracking-[0.12em] text-ink/50">
             <Icon name={stat.icon} size={14} className="mt-0.5 text-gold" />
             {stat.label}
           </dt>
@@ -43,13 +43,13 @@ export function RegionBreakdown({
       <h3 className="text-sm font-semibold text-navy dark:text-ivory">
         Regions at a glance
       </h3>
-      <p className="mt-2 text-[11px] leading-6 text-ink/55">
+      <p className="mt-2 text-xs leading-6 text-ink/55">
         Province counts come from{" "}
-        <code className="text-[10px]">/api/provinces</code>
+        <code className="text-xs">/api/provinces</code>
         {showBars ? (
           <>
             ; place counts come from{" "}
-            <code className="text-[10px]">/api/attractions</code>
+            <code className="text-xs">/api/attractions</code>
           </>
         ) : null}
         .
@@ -61,14 +61,14 @@ export function RegionBreakdown({
               <p className="text-xs font-semibold text-navy dark:text-ivory">
                 {region.label}
               </p>
-              <p className="text-[10px] text-ink/55">
+              <p className="text-xs text-ink/55">
                 {region.provinceCount}{" "}
                 {region.provinceCount === 1 ? "province" : "provinces"}
                 {region.placeCount > 0 ? ` · ${region.placeCount} places` : ""}
               </p>
             </div>
             {descriptions[region.region] ? (
-              <p className="mt-1 text-[10px] leading-5 text-ink/50">
+              <p className="mt-1 text-xs leading-5 text-ink/50">
                 {descriptions[region.region]}
               </p>
             ) : null}

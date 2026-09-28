@@ -43,7 +43,7 @@ export default function CambodiaSection({
               {cambodiaSection.description}
             </p>
           </div>
-          <span className="flex items-center gap-2 rounded-full border border-gold/60 dark:border-gold/30 bg-gold/10 px-3.5 py-2 text-[10px] font-medium text-ink/70">
+          <span className="flex items-center gap-2 rounded-full border border-gold/60 dark:border-gold/30 bg-gold/10 px-3.5 py-2 text-xs font-medium text-ink/70">
             <Icon
               name={hasLiveFigures ? "globe" : "shield"}
               size={14}
@@ -80,7 +80,7 @@ export default function CambodiaSection({
             <h3 className="text-sm font-semibold text-navy dark:text-ivory">
               {cambodiaSection.factsTitle}
             </h3>
-            <p className="mt-2 text-[10px] text-ink/50">
+            <p className="mt-2 text-xs text-ink/50">
               {cambodiaSection.factsNote}
             </p>
             <dl className="mt-5 divide-y divide-slate/50 dark:divide-slate/15">
@@ -89,8 +89,8 @@ export default function CambodiaSection({
                   key={fact.label}
                   className="flex items-center justify-between gap-3 py-3"
                 >
-                  <dt className="text-[11px] text-ink/55">{fact.label}</dt>
-                  <dd className="text-[11px] font-medium text-navy dark:text-ivory">
+                  <dt className="text-xs text-ink/55">{fact.label}</dt>
+                  <dd className="text-xs font-medium text-navy dark:text-ivory">
                     {fact.value}
                   </dd>
                 </div>
@@ -104,9 +104,9 @@ export default function CambodiaSection({
             <h3 className="section-title text-lg">
               {cambodiaSection.provincesTitle}
             </h3>
-            <p className="mt-3 text-[11px] leading-6 text-ink/55">
+            <p className="mt-3 text-xs leading-6 text-ink/55">
               Khmer and English names exactly as returned by{" "}
-              <code className="text-[10px]">GET /api/provinces</code>.
+              <code className="text-xs">GET /api/provinces</code>.
             </p>
             <div className="mt-6">
               <ProvinceChips provinces={provinces} />
