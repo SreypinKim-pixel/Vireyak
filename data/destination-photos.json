@@ -841,7 +841,7 @@
       "licenseUrl": ""
     },
     "battambang-user-cover": {
-      "src": "/images/provinces/battambang.jpg",
+      "src": "https://cdn.getyourguide.com/image/format=auto%2Cfit=crop%2Cgravity=auto%2Cquality=60%2Cwidth=375%2Cheight=375%2Cdpr=2/tour_img/2abd49cb7c63a049d72bba69423afd9f1adebc8bc1c892da3b44e66100244ac0.jpg",
       "alt": "Battambang",
       "source": "https://cdn.getyourguide.com/image/format=auto%2Cfit=crop%2Cgravity=auto%2Cquality=60%2Cwidth=375%2Cheight=375%2Cdpr=2/tour_img/2abd49cb7c63a049d72bba69423afd9f1adebc8bc1c892da3b44e66100244ac0.jpg",
       "credit": "GetYourGuide",
@@ -1139,7 +1139,7 @@
       "licenseUrl": ""
     },
     "kampong-chhnang-user-cover": {
-      "src": "/images/Kampong Chhnang.png",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPfU6ZRiWUdISLF5dRqMLyObX8jPBlm-4x8s93JXLcmw1frfozyvD1Q0k&s=10",
       "alt": "Kampong Chhnang",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPfU6ZRiWUdISLF5dRqMLyObX8jPBlm-4x8s93JXLcmw1frfozyvD1Q0k&s=10",
       "credit": "User-supplied image",
@@ -1147,8 +1147,8 @@
       "licenseUrl": ""
     },
     "kep-user-cover": {
-      "src": "/images/provinces/kep.jpg",
-      "alt": "Kep province, Cambodia",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStrJVz_ttCngdQOD5cxbMUYVOQgjiuMDFz7NADSDi_KsqqhHldYJkkK7Qv&s=10",
+      "alt": "Kep",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStrJVz_ttCngdQOD5cxbMUYVOQgjiuMDFz7NADSDi_KsqqhHldYJkkK7Qv&s=10",
       "credit": "User-supplied image",
       "license": "",
@@ -1203,7 +1203,7 @@
       "licenseUrl": ""
     },
     "preah-sihanouk-user-cover": {
-      "src": "/images/Preah Sihanouk.png",
+      "src": "https://www.khmertimeskh.com/wp-content/uploads/2024/12/Sihanouk.jpg",
       "alt": "Preah Sihanouk",
       "source": "https://www.khmertimeskh.com/wp-content/uploads/2024/12/Sihanouk.jpg",
       "credit": "Khmer Times",
@@ -1259,7 +1259,7 @@
       "licenseUrl": ""
     },
     "kampot-user-cover": {
-      "src": "/images/Kampot.png",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkvxGUckXY3lNpyQkjFKfm9zhzdRxgTf-ZsSFJkeK5FAnQ8hcznJOACEg&s=10",
       "alt": "Kampot",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkvxGUckXY3lNpyQkjFKfm9zhzdRxgTf-ZsSFJkeK5FAnQ8hcznJOACEg&s=10",
       "credit": "User-supplied image",
@@ -1267,8 +1267,8 @@
       "licenseUrl": ""
     },
     "takeo-user-cover": {
-      "src": "/images/provinces/takeo.jpg",
-      "alt": "Takeo province, Cambodia",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3TPxD7P4rVs2OSng_jCf03Lzyjehd-RUAeG6nGeaP7onn3RNjo6VzY-X&s=10",
+      "alt": "Takeo",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3TPxD7P4rVs2OSng_jCf03Lzyjehd-RUAeG6nGeaP7onn3RNjo6VzY-X&s=10",
       "credit": "User-supplied image",
       "license": "",
@@ -1291,7 +1291,7 @@
       "licenseUrl": ""
     },
     "pursat-user-cover": {
-      "src": "/images/provinces/pursat.jpg",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7a1MQsDXluwVEL06ebsnH7yyUz9Z4ixsAYjTMnO9ysFEHuNuy1FsR5AiC&s=10",
       "alt": "Pursat",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7a1MQsDXluwVEL06ebsnH7yyUz9Z4ixsAYjTMnO9ysFEHuNuy1FsR5AiC&s=10",
       "credit": "User-supplied image",
@@ -1299,7 +1299,7 @@
       "licenseUrl": ""
     },
     "kandal-user-cover": {
-      "src": "/images/provinces/kandal.jpg",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyJbzLnZPTE3AzPFm85oNnVidjux5AxB09S0Nc7Ywqdhthj-qppn8kZSwz&s=10",
       "alt": "Kandal",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyJbzLnZPTE3AzPFm85oNnVidjux5AxB09S0Nc7Ywqdhthj-qppn8kZSwz&s=10",
       "credit": "User-supplied image",
@@ -1307,7 +1307,7 @@
       "licenseUrl": ""
     },
     "phnom-penh-user-cover": {
-      "src": "/images/provinces/phnom-penh.jpg",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Sb-_WXlhgS-4Qo-uaSATbFs-NjBwhFurUHrnxuS8W0XMQkRkEUhDmYjO&s=10",
       "alt": "Phnom Penh",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Sb-_WXlhgS-4Qo-uaSATbFs-NjBwhFurUHrnxuS8W0XMQkRkEUhDmYjO&s=10",
       "credit": "User-supplied image",
