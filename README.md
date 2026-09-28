@@ -159,3 +159,22 @@ with backend adapters once a real API host and response schema are supplied.
 Attraction names and locations are based on the [Ministry of Tourism province guides](https://www.tourismcambodia.org/public/provinces). The catalog is a varied selection, not a visitor-count ranking. Existing local photographs may be illustrative.
 
 The demo catalog includes at least one attraction for every name in `data/province-names.ts`. Province slugs are derived from those names, and Preah Sihanouk maps to the Koh Rong destination. These are selected local highlights, not an official popularity ranking.
+
+## SEO
+
+Public discovery pages include titles, descriptions, canonical URLs, and social
+preview metadata. `/sitemap.xml` lists local catalog pages; `/robots.txt` points
+to it. Live API province detail pages have metadata but are discovered through
+site links rather than listed in the static sitemap. Account previews use
+`noindex`. Filter query parameters canonicalize to their base page.
+
+Set `SITE_URL` to the production origin (defaults to
+`https://vireyak-rust.vercel.app`) and rebuild when changing domains.
+Optionally set `GOOGLE_SITE_VERIFICATION` to the HTML-tag token provided by
+Google Search Console. After deploying, verify ownership there and submit
+`https://YOUR-DOMAIN/sitemap.xml`. Deployment and Search Console submission are
+separate steps; adding metadata does not guarantee indexing or rankings.
+
+Metadata uses the [Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata).
+Website structured data identifies Vireyak without publishing demo ratings or
+prices as verified offers.

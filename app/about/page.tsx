@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import AboutHero from "../../components/about/AboutHero";
 import HeroHighlights, {
@@ -20,14 +21,6 @@ import {
   loadCambodiaCatalogue,
   type PlaceCardData,
 } from "../../lib/camTripApi";
-
-// `absolute` ignores the root layout's "%s | Vireyak" title template, so the
-// browser tab reads "About Vireyak" instead of repeating the site name twice.
-export const metadata = {
-  title: { absolute: "About Vireyak" },
-  description:
-    "Vireyak is a Cambodia-first travel platform. See what it does, the provinces and places it covers, the team behind it, and how to start exploring.",
-};
 
 // Route segment config must be a literal. Keep in sync with
 // CAMTRIP_REVALIDATE_SECONDS in lib/camTripApi.ts.
@@ -113,3 +106,10 @@ export default function AboutPage() {
     </>
   );
 }
+
+export const metadata = pageMetadata({
+  title: "About Vireyak",
+  description:
+    "Meet Vireyak, a Cambodia travel discovery project. Explore our story, our team, and the provinces and places that inspire us.",
+  path: "/about",
+});

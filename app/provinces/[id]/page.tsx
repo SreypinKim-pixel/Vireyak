@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProvinceDetails, regions } from "@/lib/cam-trip";
@@ -139,4 +140,20 @@ export default async function ProvincePage({
       />
     </main>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const result = await getProvinceDetails(id);
+  if (!result) notFound();
+  const name = result.province.nameEn || result.province.nameKh;
+  return pageMetadata({
+    title: `${name} Attractions & Travel Guide`,
+    description: `Discover ${name}, Cambodia. Explore provincial highlights and attractions with Vireyak.`,
+    path: `/provinces/${encodeURIComponent(id)}`,
+  });
 }

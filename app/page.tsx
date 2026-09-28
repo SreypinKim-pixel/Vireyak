@@ -1,3 +1,4 @@
+import { siteUrl, pageMetadata } from "@/lib/seo";
 import HeroGrid from "@/components/smoothui/blocks/heroes/hero-grid/index";
 import { getHomepageAttractions, getProvinceNames } from "@/lib/cam-trip";
 import SearchForm from "@/components/SearchForm";
@@ -16,6 +17,18 @@ export default async function HomePage() {
   ]);
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Vireyak",
+            url: siteUrl,
+            inLanguage: "en",
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
       <HeroGrid />
       <div className="shell relative z-10 -mt-20">
         <SearchForm provinces={provinces} />
@@ -30,3 +43,10 @@ export default async function HomePage() {
     </>
   );
 }
+
+export const metadata = pageMetadata({
+  title: "Discover Cambodia: Attractions & Places to Stay",
+  description:
+    "Explore Cambodia with Vireyak. Discover temples, provincial highlights, and places to stay, from Siem Reap and Phnom Penh to the coast.",
+  path: "/",
+});

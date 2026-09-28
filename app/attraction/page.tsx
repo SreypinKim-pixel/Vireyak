@@ -1,7 +1,7 @@
+import { pageMetadata } from "@/lib/seo";
 import type { ListingPageProps } from "@/lib/travel-types";
 import ListingExplorer from "../../components/ListingExplorer";
 import { attractions } from "../../data/travel";
-export const metadata = { title: "Unforgettable experiences" };
 export default async function AttractionPage({
   searchParams,
 }: ListingPageProps) {
@@ -13,3 +13,10 @@ export default async function AttractionPage({
     />
   );
 }
+
+export const metadata = pageMetadata({
+  title: "Cambodia Attractions & Experiences",
+  description:
+    "Discover temples, waterfalls, islands, and cultural sights across Cambodia. Explore attractions by province and plan your next adventure.",
+  path: "/attraction",
+});
