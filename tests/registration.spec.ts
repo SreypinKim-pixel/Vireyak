@@ -1,5 +1,41 @@
 import { test, expect } from "@playwright/test";
 
+test("registration keeps its size while province options load", async ({
+  page,
+}) => {
+  let release: () => void = () => {};
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/api/attractions", async (route) => {
+    await pending;
+    await route.fulfill({
+      json: {
+        data: [
+          {
+            id: "angkor",
+            name: "Angkor Wat",
+            province: { id: "siem-reap", name: "Siem Reap" },
+          },
+        ],
+      },
+    });
+  });
+  await page.goto("/register");
+  await page.evaluate(() => document.fonts.ready);
+  const province = page.getByLabel("Province of interest");
+  await expect(province).toBeVisible();
+  await expect(province).toBeDisabled();
+  const before = await page.locator("form").boundingBox();
+  release();
+  await expect(province).toBeEnabled();
+  const after = await page.locator("form").boundingBox();
+  expect(before).not.toBeNull();
+  expect(after).not.toBeNull();
+  expect(after!.height).toBeCloseTo(before!.height, 0);
+  expect(after!.y).toBeCloseTo(before!.y, 0);
+});
+
 test("registration validates fields and loads optional attractions", async ({
   page,
 }) => {

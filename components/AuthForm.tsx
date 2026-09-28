@@ -358,31 +358,36 @@ export default function AuthForm({ register = false }) {
                   />
                   {fieldError("confirmPassword")}
                 </label>
-                {provinces.length > 0 && (
-                  <div className="block">
-                    <label htmlFor="province-interest" className="field-label">
-                      Province of interest (optional)
-                    </label>
-                    <Dropdown
-                      id="province-interest"
-                      label="Province of interest (optional)"
-                      name="province"
-                      value={province}
-                      onChange={(value) => {
-                        setProvince(value);
-                        setAttraction("");
-                      }}
-                      describedBy="attraction-help"
-                      options={[
-                        { value: "", label: "All provinces" },
-                        ...provinces.map((item) => ({
-                          value: item.id,
-                          label: item.name,
-                        })),
-                      ]}
-                    />
-                  </div>
-                )}
+                <div className="block">
+                  <label htmlFor="province-interest" className="field-label">
+                    Province of interest (optional)
+                  </label>
+                  <Dropdown
+                    id="province-interest"
+                    label="Province of interest (optional)"
+                    name="province"
+                    disabled={loadState !== "ready" || !provinces.length}
+                    value={province}
+                    onChange={(value) => {
+                      setProvince(value);
+                      setAttraction("");
+                    }}
+                    describedBy="attraction-help"
+                    options={[
+                      {
+                        value: "",
+                        label:
+                          loadState === "loading"
+                            ? "Loading provinces…"
+                            : "All provinces",
+                      },
+                      ...provinces.map((item) => ({
+                        value: item.id,
+                        label: item.name,
+                      })),
+                    ]}
+                  />
+                </div>
                 <div className="block">
                   <label htmlFor="attraction-interest" className="field-label">
                     Attraction of interest (optional)

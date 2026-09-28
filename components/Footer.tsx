@@ -222,7 +222,7 @@ export default function Footer() {
               alt="ISTAD — Institute of Science and Technology Advanced Development"
               width={455}
               height={439}
-              className="h-auto w-24 shrink-0 -translate-y-[40px] origin-top-right scale-125 object-contain sm:origin-top-left xl:scale-[1.75]"
+              className="h-auto w-24 shrink-0 -translate-y-[50px] origin-top-right scale-125 object-contain sm:origin-top-left xl:scale-[1.75]"
               style={{ clipPath: "ellipse(46.3% 48% at 50% 50%)" }}
             />
           </div>
