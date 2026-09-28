@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { signInDemo, matchesDemoAccount } from "../lib/demoSession";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
+import { Apple } from "./auth/Apple";
+import { Google } from "./auth/Google";
 export default function AuthForm({ register = false }) {
   const router = useRouter();
   const [submitState, setSubmitState] = useState<
@@ -24,6 +26,7 @@ export default function AuthForm({ register = false }) {
     [],
   );
   const [message, setMessage] = useState("");
+  const [providerMessage, setProviderMessage] = useState("");
   const [province, setProvince] = useState("");
   const [attraction, setAttraction] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -470,6 +473,50 @@ export default function AuthForm({ register = false }) {
               </p>
             )}
           </form>
+          {!register && (
+            <div className="mt-5">
+              <div className="mb-4 flex items-center gap-3 text-xs text-ink/50">
+                <span className="h-px flex-1 bg-border" />
+                <span>Or continue with</span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {[
+                  { name: "Google", Logo: Google },
+                  { name: "Apple", Logo: Apple },
+                ].map(({ name, Logo }) => (
+                  <button
+                    key={name}
+                    type="button"
+                    className="button-outline w-full gap-2.5"
+                    disabled={
+                      submitState === "loading" || submitState === "success"
+                    }
+                    aria-describedby="provider-help"
+                    onClick={() =>
+                      setProviderMessage(
+                        `${name} sign-in is not connected yet. Use the demo login or continue as a guest.`,
+                      )
+                    }
+                  >
+                    <Logo
+                      className="h-5 w-5 shrink-0"
+                      aria-hidden="true"
+                      focusable="false"
+                    />
+                    Continue with {name}
+                  </button>
+                ))}
+              </div>
+              <p
+                id="provider-help"
+                role="status"
+                className="mt-3 text-center text-xs leading-5 text-ink/60"
+              >
+                {providerMessage || "Google and Apple sign-in are coming soon."}
+              </p>
+            </div>
+          )}
           <p className="mt-5 text-center text-xs text-ink/60">
             {register ? "Already have an account?" : "New to Vireyak?"}{" "}
             <Link
