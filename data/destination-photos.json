@@ -1,0 +1,793 @@
+{
+  "photos": {
+    "angkor-jpg": {
+      "src": "/images/angkor.jpg",
+      "alt": "Angkor Wat, Siem Reap",
+      "source": "https://www.pexels.com/photo/view-of-the-angkor-wat-siem-reap-cambodia-15890579/",
+      "credit": "Source photographer",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "palace-jpg": {
+      "src": "/images/palace.jpg",
+      "alt": "Royal Palace, Phnom Penh",
+      "source": "https://www.pexels.com/photo/royal-palace-in-phnom-penh-in-cambodia-19400640/",
+      "credit": "Source photographer",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "river-jpg": {
+      "src": "/images/river.jpg",
+      "alt": "Kampot River, Kampot",
+      "source": "https://www.pexels.com/photo/scenic-riverside-huts-in-kampot-cambodia-31144553/",
+      "credit": "Source photographer",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "island-jpg": {
+      "src": "/images/island.jpg",
+      "alt": "Koh Rong, Preah Sihanouk",
+      "source": "https://www.pexels.com/photo/12001665/",
+      "credit": "Source photographer",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-chhmar-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Banteay_Chhmar_IMG_0715.JPG/960px-Banteay_Chhmar_IMG_0715.JPG",
+      "alt": "Banteay Chhmar Temple, Banteay Meanchey",
+      "source": "https://commons.wikimedia.org/wiki/File:Banteay_Chhmar_IMG_0715.JPG",
+      "credit": "Antoinette von Moos",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/banteay-chhmar.jpg"
+    },
+    "banteay-srei-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Banteay_Srei_full.jpg/960px-Banteay_Srei_full.jpg",
+      "alt": "Banteay Srei, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Banteay_Srei_full.jpg",
+      "credit": "Tsui",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "backupSrc": "/images/banteay-srei.jpg"
+    },
+    "bayon-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Angkor_-_Bayon_-_006_Tower_Faces_%288580725365%29.jpg/960px-Angkor_-_Bayon_-_006_Tower_Faces_%288580725365%29.jpg",
+      "alt": "Bayon Temple, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Angkor_-_Bayon_-_006_Tower_Faces_(8580725365).jpg",
+      "credit": "Photo Dharma from Penang, Malaysia",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "backupSrc": "/images/bayon.jpg"
+    },
+    "ta-prohm-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Ta_Prohm_Roots.jpg/960px-Ta_Prohm_Roots.jpg",
+      "alt": "Ta Prohm, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Ta_Prohm_Roots.jpg",
+      "credit": "RobAbroad",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "backupSrc": "/images/ta-prohm.jpg"
+    },
+    "kampong-phluk-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Kampong_Phlouk_%2851%29.jpg/960px-Kampong_Phlouk_%2851%29.jpg",
+      "alt": "Kampong Phluk floating village, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Kampong_Phlouk_(51).jpg",
+      "credit": "Krzysztof Golik",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/kampong-phluk.jpg"
+    },
+    "phnom-sampov-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Gate_on_Phnom_Sampeau.jpg/960px-Gate_on_Phnom_Sampeau.jpg",
+      "alt": "Phnom Sampeau, Battambang",
+      "source": "https://commons.wikimedia.org/wiki/File:Gate_on_Phnom_Sampeau.jpg",
+      "credit": "Christophe95",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/phnom-sampov.jpg"
+    },
+    "bousra-waterfall-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Bousra_Waterfall.jpg/960px-Bousra_Waterfall.jpg",
+      "alt": "Bou Sra Waterfall, Mondulkiri",
+      "source": "https://commons.wikimedia.org/wiki/File:Bousra_Waterfall.jpg",
+      "credit": "Kiensvay",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/bousra-waterfall.jpg"
+    },
+    "sambor-prei-kuk-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Sambor_Prei_Kuk-nX-11.jpg/960px-Sambor_Prei_Kuk-nX-11.jpg",
+      "alt": "Sambor Prei Kuk, Kampong Thom",
+      "source": "https://commons.wikimedia.org/wiki/File:Sambor_Prei_Kuk-nX-11.jpg",
+      "credit": "PsamatheM",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/sambor-prei-kuk.jpg"
+    },
+    "nokor-bachey-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/VatNokor_01.jpg/960px-VatNokor_01.jpg",
+      "alt": "Wat Nokor, Kampong Cham",
+      "source": "https://commons.wikimedia.org/wiki/File:VatNokor_01.jpg",
+      "credit": "BluesyPete",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/nokor-bachey.jpg"
+    },
+    "oudong-jpg": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Udong_0001.jpg",
+      "alt": "Oudong, Kandal",
+      "source": "https://commons.wikimedia.org/wiki/File:Udong_0001.jpg",
+      "credit": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/oudong.jpg"
+    },
+    "phnom-chisor-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Phnom_Chisor_4003.jpg/960px-Phnom_Chisor_4003.jpg",
+      "alt": "Phnom Chisor Temple, Takeo",
+      "source": "https://commons.wikimedia.org/wiki/File:Phnom_Chisor_4003.jpg",
+      "credit": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/phnom-chisor.jpg"
+    },
+    "kampong-luong-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Kompong_luong_catholic_church.jpg/960px-Kompong_luong_catholic_church.jpg",
+      "alt": "Kampong Luong floating village, Pursat",
+      "source": "https://commons.wikimedia.org/wiki/File:Kompong_luong_catholic_church.jpg",
+      "credit": "Phil Whitehouse from London, United Kingdom",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "backupSrc": "/images/kampong-luong.jpg"
+    },
+    "kirirom-national-park-jpg": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/0/05/Kirirom_National_Park.jpg",
+      "alt": "Kirirom National Park, Kampong Speu",
+      "source": "https://commons.wikimedia.org/wiki/File:Kirirom_National_Park.jpg",
+      "credit": "Arie at flickr",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "backupSrc": "/images/kirirom-national-park.jpg"
+    },
+    "kep-national-park-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Nacionalni_park_Kep.jpg/960px-Nacionalni_park_Kep.jpg",
+      "alt": "Kep National Park, Kep",
+      "source": "https://commons.wikimedia.org/wiki/File:Nacionalni_park_Kep.jpg",
+      "credit": "August Dominus",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/kep-national-park.jpg"
+    },
+    "koh-ker-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Koh_Ker%2C_Prasat_Thom_%286225843693%29.jpg/960px-Koh_Ker%2C_Prasat_Thom_%286225843693%29.jpg",
+      "alt": "Koh Ker Temple Complex, Preah Vihear",
+      "source": "https://commons.wikimedia.org/wiki/File:Koh_Ker,_Prasat_Thom_(6225843693).jpg",
+      "credit": "Arian Zwegers",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "backupSrc": "/images/koh-ker.jpg"
+    },
+    "central-market-jpg": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/9/90/Centralmarket_pp.jpg",
+      "alt": "Central Market, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:Centralmarket_pp.jpg",
+      "credit": "Henning Blatt",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/central-market.jpg"
+    },
+    "tuol-sleng-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Tuol_Sleng_-_S21_-_Phnom_Penh_-_01.JPG/960px-Tuol_Sleng_-_S21_-_Phnom_Penh_-_01.JPG",
+      "alt": "Tuol Sleng Genocide Museum, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:Tuol_Sleng_-_S21_-_Phnom_Penh_-_01.JPG",
+      "credit": "Adam Jones Adam63",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/tuol-sleng.jpg"
+    },
+    "kampot-slow-days-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Bokor_Church_2020_-_2.jpg/960px-Bokor_Church_2020_-_2.jpg",
+      "alt": "Bokor Church on Bokor Mountain, Kampot",
+      "source": "https://commons.wikimedia.org/wiki/File:Bokor_Church_2020_-_2.jpg",
+      "credit": "Mx. Granger",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "backupSrc": "/images/kampot-slow-days.jpg"
+    },
+    "ba-phnom-jpg": {
+      "src": "/images/ba-phnom.jpg",
+      "alt": "Ba Phnom, Prey Veng",
+      "source": "https://www.tourismcambodia.com/travelguides/provinces/prey-veng/what-to-see/93_ba-phnom-resort.htm",
+      "credit": "Tourism Cambodia",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "prey-ba-sak-jpg": {
+      "src": "/images/prey-ba-sak.jpg",
+      "alt": "Prey Ba Sak, Svay Rieng",
+      "source": "https://www.tourismcambodia.com/travelguides/provinces/svay-rieng/what-to-see/65_prey-ba-sak.htm",
+      "credit": "Tourism Cambodia",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-theat-basrey-jpg": {
+      "src": "/images/preah-theat-basrey.jpg",
+      "alt": "Preah Theat Basrei, Tboung Khmum",
+      "source": "https://helloangkor.com/attractions/preah-theat-preah-srei/",
+      "credit": "Hello Angkor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "andong-russei-jpg": {
+      "src": "/images/andong-russei.jpg",
+      "alt": "Andong Russey pottery village, Kampong Chhnang",
+      "source": "https://www.tour-cambodia.com/guide/attraction/potter-village-kampong-chhnang",
+      "credit": "Tour Cambodia",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "destinations-attraction-31-jpg": {
+      "src": "/images/destinations/attraction-31.jpg",
+      "alt": "Phnom Yat Temple, Pailin",
+      "source": "https://www.cambotours.com/userfiles/thumbs/phnom-yat-pagoda.jpg",
+      "credit": "Cambo Tours",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "destinations-attraction-41-jpg": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Prasat_Ta_Muen_Thom-3-HDC.jpg/960px-Prasat_Ta_Muen_Thom-3-HDC.jpg",
+      "alt": "Prasat Ta Muen Thom, Oddar Meanchey",
+      "source": "https://commons.wikimedia.org/wiki/File:Prasat_Ta_Muen_Thom-3-HDC.jpg",
+      "credit": "Ddalbiez",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/destinations/attraction-41.jpg"
+    },
+    "destinations-attraction-51-jpg": {
+      "src": "/images/destinations/attraction-51.jpg",
+      "alt": "Preah Vihear Temple, Preah Vihear",
+      "source": "https://www.greeneratravel.com/userfiles/850preahvihear.jpg",
+      "credit": "Green Era Travel",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "destinations-attraction-61-jpg": {
+      "src": "/images/destinations/attraction-61.jpg",
+      "alt": "Sopheakmitt Waterfall, Stung Treng",
+      "source": "https://www.visitsoutheastasia.travel/wp-content/uploads/2019/10/Cambodia-Sopheakmith-Waterflow-Stoeng-Treng-Province.jpg",
+      "credit": "Wikimedia Commons contributor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "destinations-attraction-71-jpg": {
+      "src": "/images/destinations/attraction-71.jpg",
+      "alt": "Yeak Laom Lake, Ratanakiri",
+      "source": "https://www.visitsoutheastasia.travel/wp-content/uploads/2019/10/Cambodia-Lake-Yeak-Laom-Ratanakiri-province-1024x682.jpg",
+      "credit": "Wikimedia Commons contributor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "destinations-attraction-22-jpg": {
+      "src": "/images/destinations/attraction-22.jpg",
+      "alt": "Banteay Torp Temple, Banteay Meanchey",
+      "source": "https://www.passionindochinatravel.com/uploads/thumbs/new-Banteay%20Torp.jpg",
+      "credit": "Passion Indochina Travel",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "commons-2461855": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/3/34/Sunset_Kracheh.jpg",
+      "alt": "Sunset over the Mekong River in Kratie",
+      "source": "https://commons.wikimedia.org/wiki/File:Sunset_Kracheh.jpg",
+      "credit": "Juan Manuel Garcia from Mexico City, Mexico",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "backupSrc": "/images/locations/commons-2461855.jpg"
+    },
+    "tatai": {
+      "src": "https://www.novo-monde.com/app/uploads/2023/07/tatai-waterfall-1024x683.jpg",
+      "alt": "Tatai Waterfall, Koh Kong",
+      "source": "https://www.novo-monde.com/en/koh-kong-island-cardamom-mountains-cambodia/",
+      "credit": "Novo-monde",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "commons-5609684": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Phnom_Bakheng.jpg/960px-Phnom_Bakheng.jpg",
+      "alt": "Phnom Bakheng, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Phnom_Bakheng.jpg",
+      "credit": "Helt",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-5609684.jpg"
+    },
+    "commons-30196924": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Phimeanakas%2C_Angkor_Thom%2C_Camboya%2C_2013-08-16%2C_DD_12.jpg/960px-Phimeanakas%2C_Angkor_Thom%2C_Camboya%2C_2013-08-16%2C_DD_12.jpg",
+      "alt": "Angkor Thom, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Phimeanakas,_Angkor_Thom,_Camboya,_2013-08-16,_DD_12.jpg",
+      "credit": "Diego Delso",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-30196924.jpg"
+    },
+    "commons-10369376": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Samraong_market_stalls.jpg/960px-Samraong_market_stalls.jpg",
+      "alt": "Samraong Market, Oddar Meanchey",
+      "source": "https://commons.wikimedia.org/wiki/File:Samraong_market_stalls.jpg",
+      "credit": "Helt",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-10369376.jpg"
+    },
+    "commons-81495348": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Scenery_on_Koh_Trong_Island_-_Mekong_River_-_Kratie_-_Cambodia_-_05_%2848378767337%29.jpg/960px-Scenery_on_Koh_Trong_Island_-_Mekong_River_-_Kratie_-_Cambodia_-_05_%2848378767337%29.jpg",
+      "alt": "Koh Trong Island, Kratie",
+      "source": "https://commons.wikimedia.org/wiki/File:Scenery_on_Koh_Trong_Island_-_Mekong_River_-_Kratie_-_Cambodia_-_05_(48378767337).jpg",
+      "credit": "Adam Jones from Kelowna, BC, Canada",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "backupSrc": "/images/locations/commons-81495348.jpg"
+    },
+    "commons-149901529": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Skyline_of_Koh_Pich_Cambodia.jpg/960px-Skyline_of_Koh_Pich_Cambodia.jpg",
+      "alt": "Koh Pich (Diamond Island), Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:Skyline_of_Koh_Pich_Cambodia.jpg",
+      "credit": "Maharaja1994",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-149901529.jpg"
+    },
+    "commons-81495260": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/French_Lighthouse_-_Tonle_Bet_Commune_-_Kampong_Cham_-_Cambodia_-_02_%2848345350341%29.jpg/960px-French_Lighthouse_-_Tonle_Bet_Commune_-_Kampong_Cham_-_Cambodia_-_02_%2848345350341%29.jpg",
+      "alt": "French Lighthouse, Tboung Khmum",
+      "source": "https://commons.wikimedia.org/wiki/File:French_Lighthouse_-_Tonle_Bet_Commune_-_Kampong_Cham_-_Cambodia_-_02_(48345350341).jpg",
+      "credit": "Adam Jones from Kelowna, BC, Canada",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "backupSrc": "/images/locations/commons-81495260.jpg"
+    },
+    "commons-17397061": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Bavet_Boder_2.JPG/960px-Bavet_Boder_2.JPG",
+      "alt": "Bavet-Moc Bai International Border Gate, Svay Rieng",
+      "source": "https://commons.wikimedia.org/wiki/File:Bavet_Boder_2.JPG",
+      "credit": "Original uploader was Liftold at vi.wikipedia",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-17397061.jpg"
+    },
+    "commons-82102296": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Angkor_National_Museum_%28I%29.jpg/960px-Angkor_National_Museum_%28I%29.jpg",
+      "alt": "Angkor National Museum, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Angkor_National_Museum_(I).jpg",
+      "credit": "This Photo was taken by Supanut Arunoprayote.\n\nFeel free to use any of my images, but please mention me as the author and may send me a message.  (สามารถใช้ภาพได้อิสระ แต่กรุณาใส่เครดิตผู้ถ่ายและอาจส่งข้อความบอกกล่าวด้วย) \n\n\n\nPlease do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates derivative or extract.",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "backupSrc": "/images/locations/commons-82102296.jpg"
+    },
+    "commons-85754503": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Phnom_Banan_temple.jpg/960px-Phnom_Banan_temple.jpg",
+      "alt": "Banan Temple, Battambang",
+      "source": "https://commons.wikimedia.org/wiki/File:Phnom_Banan_temple.jpg",
+      "credit": "Christophe95",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-85754503.jpg"
+    },
+    "commons-22673949": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Bamboo_Train_in_Battambang_province_-_%28SF%29_0001.jpg",
+      "alt": "Bamboo Train, Battambang",
+      "source": "https://commons.wikimedia.org/wiki/File:Bamboo_Train_in_Battambang_province_-_(SF)_0001.jpg",
+      "credit": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-22673949.jpg"
+    },
+    "commons-22685611": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/2/22/Wat_Ek%2C_Battambang_province_-_0001.jpg",
+      "alt": "Wat Ek Phnom, Battambang",
+      "source": "https://commons.wikimedia.org/wiki/File:Wat_Ek,_Battambang_province_-_0001.jpg",
+      "credit": "Stefan Fussan",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-22685611.jpg"
+    },
+    "commons-167039488": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Phnom_Sampeau_Killing_Caves-nX-07264.jpg/960px-Phnom_Sampeau_Killing_Caves-nX-07264.jpg",
+      "alt": "Killing Caves of Phnom Sampeau, Battambang",
+      "source": "https://commons.wikimedia.org/wiki/File:Phnom_Sampeau_Killing_Caves-nX-07264.jpg",
+      "credit": "PsamatheM",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-167039488.jpg"
+    },
+    "commons-85705509": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Phsar_Nat_2.jpg/960px-Phsar_Nat_2.jpg",
+      "alt": "Phsar Nat (Central Market), Battambang",
+      "source": "https://commons.wikimedia.org/wiki/File:Phsar_Nat_2.jpg",
+      "credit": "Christophe95",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-85705509.jpg"
+    },
+    "commons-181086227": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Pailin_Provincial_Hall.jpg/960px-Pailin_Provincial_Hall.jpg",
+      "alt": "Pailin Provincial Hall, Pailin",
+      "source": "https://commons.wikimedia.org/wiki/File:Pailin_Provincial_Hall.jpg",
+      "credit": "Kiensvay",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "backupSrc": "/images/locations/commons-181086227.jpg"
+    },
+    "commons-4444378": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Tamochouse_2008.jpg/960px-Tamochouse_2008.jpg",
+      "alt": "Ta Mok's House, Oddar Meanchey",
+      "source": "https://commons.wikimedia.org/wiki/File:Tamochouse_2008.jpg",
+      "credit": "Rolfmueller",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-4444378.jpg"
+    },
+    "commons-57851292": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Pol_Pot%27s_Cremation_Place_-_panoramio.jpg/960px-Pol_Pot%27s_Cremation_Place_-_panoramio.jpg",
+      "alt": "Pol Pot Cremation Site, Oddar Meanchey",
+      "source": "https://commons.wikimedia.org/wiki/File:Pol_Pot%27s_Cremation_Place_-_panoramio.jpg",
+      "credit": "Gonzo Gooner",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "backupSrc": "/images/locations/commons-57851292.jpg"
+    },
+    "commons-7719588": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Dangrek09.JPG/960px-Dangrek09.JPG",
+      "alt": "Dangrek Mountains, Oddar Meanchey",
+      "source": "https://commons.wikimedia.org/wiki/File:Dangrek09.JPG",
+      "credit": "Xufanc",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-7719588.jpg"
+    },
+    "commons-24453346": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Preah_Khan_of_Kampong_Svay.png/960px-Preah_Khan_of_Kampong_Svay.png",
+      "alt": "Preah Khan of Kampong Svay, Preah Vihear",
+      "source": "https://commons.wikimedia.org/wiki/File:Preah_Khan_of_Kampong_Svay.png",
+      "credit": "Saxula",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-24453346.jpg"
+    },
+    "commons-81495430": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Market_Scene_-_Stung_Treng_-_Cambodia_%2848436498006%29.jpg/960px-Market_Scene_-_Stung_Treng_-_Cambodia_%2848436498006%29.jpg",
+      "alt": "Stung Treng Central Market, Stung Treng",
+      "source": "https://commons.wikimedia.org/wiki/File:Market_Scene_-_Stung_Treng_-_Cambodia_(48436498006).jpg",
+      "credit": "Adam Jones from Kelowna, BC, Canada",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "backupSrc": "/images/locations/commons-81495430.jpg"
+    },
+    "commons-81495410": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Scene_at_Confluence_of_Tonle_Sekong_and_Mekong_Rivers_-_Stung_Treng_-_Cambodia_%2848422277536%29.jpg/960px-Scene_at_Confluence_of_Tonle_Sekong_and_Mekong_Rivers_-_Stung_Treng_-_Cambodia_%2848422277536%29.jpg",
+      "alt": "Sekong River Confluence, Stung Treng",
+      "source": "https://commons.wikimedia.org/wiki/File:Scene_at_Confluence_of_Tonle_Sekong_and_Mekong_Rivers_-_Stung_Treng_-_Cambodia_(48422277536).jpg",
+      "credit": "Adam Jones from Kelowna, BC, Canada",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "backupSrc": "/images/locations/commons-81495410.jpg"
+    },
+    "commons-96371245": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Yak_Loum_Lake_Panorama.jpg/960px-Yak_Loum_Lake_Panorama.jpg",
+      "alt": "Yeak Laom Lake, Ratanakiri",
+      "source": "https://commons.wikimedia.org/wiki/File:Yak_Loum_Lake_Panorama.jpg",
+      "credit": "Barang",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/destinations/attraction-71.jpg"
+    },
+    "commons-10732897": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Veal_Thom_Grasslands.jpg/960px-Veal_Thom_Grasslands.jpg",
+      "alt": "Virachey National Park, Ratanakiri",
+      "source": "https://commons.wikimedia.org/wiki/File:Veal_Thom_Grasslands.jpg",
+      "credit": "Mangoholic2",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "backupSrc": "/images/locations/commons-10732897.jpg"
+    },
+    "commons-16973632": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/d/d8/The_Banlung_Market_from_outside.jpg",
+      "alt": "Banlung Market, Ratanakiri",
+      "source": "https://commons.wikimedia.org/wiki/File:The_Banlung_Market_from_outside.jpg",
+      "credit": "Albeiro Rodas",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-16973632.jpg"
+    },
+    "commons-106269187": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/06-Kep_Crab_Market_Cambodia-nX-17.jpg/960px-06-Kep_Crab_Market_Cambodia-nX-17.jpg",
+      "alt": "Kep Crab Market, Kep",
+      "source": "https://commons.wikimedia.org/wiki/File:06-Kep_Crab_Market_Cambodia-nX-17.jpg",
+      "credit": "PsamatheM",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-106269187.jpg"
+    },
+    "commons-123792913": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Angkor_Wat_with_its_reflection_%28cropped%29.jpg/960px-Angkor_Wat_with_its_reflection_%28cropped%29.jpg",
+      "alt": "Angkor Wat, Siem Reap",
+      "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_with_its_reflection_(cropped).jpg",
+      "credit": "Satdeep Gill",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/angkor.jpg"
+    },
+    "commons-36853384": {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/d/df/DKoehl_Irrawaddi_Dolphin_jumping.jpg",
+      "alt": "Irrawaddy Dolphin Pool (Kampi), Kratie",
+      "source": "https://commons.wikimedia.org/wiki/File:DKoehl_Irrawaddi_Dolphin_jumping.jpg",
+      "credit": "Dan Koehl",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "backupSrc": "/images/locations/commons-36853384.jpg"
+    },
+    "commons-23216403": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Kratie_Market.jpg/960px-Kratie_Market.jpg",
+      "alt": "Kratie Central Market, Kratie",
+      "source": "https://commons.wikimedia.org/wiki/File:Kratie_Market.jpg",
+      "credit": "Jensre",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-23216403.jpg"
+    },
+    "commons-8928780": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Royal_Palace%2C_Phnom_Penh_Cambodia_1.jpg/960px-Royal_Palace%2C_Phnom_Penh_Cambodia_1.jpg",
+      "alt": "Royal Palace, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:Royal_Palace,_Phnom_Penh_Cambodia_1.jpg",
+      "credit": "Hanay",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/palace.jpg"
+    },
+    "commons-58344306": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/2016_Phnom_Penh%2C_Muzeum_Narodowe_Kambod%C5%BCy_%2809%29.jpg/960px-2016_Phnom_Penh%2C_Muzeum_Narodowe_Kambod%C5%BCy_%2809%29.jpg",
+      "alt": "National Museum, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:2016_Phnom_Penh,_Muzeum_Narodowe_Kambod%C5%BCy_(09).jpg",
+      "credit": "Marcin Konsek",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-58344306.jpg"
+    },
+    "commons-58333397": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/2016_Phnom_Penh%2C_Wat_Phnom_%2802%29.jpg/960px-2016_Phnom_Penh%2C_Wat_Phnom_%2802%29.jpg",
+      "alt": "Wat Phnom, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:2016_Phnom_Penh,_Wat_Phnom_(02).jpg",
+      "credit": "Marcin Konsek",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-58333397.jpg"
+    },
+    "commons-23011802": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Buddhist_Stupa_at_Choeung_Ek_killing_fields%2C_Cambodia.JPG/960px-Buddhist_Stupa_at_Choeung_Ek_killing_fields%2C_Cambodia.JPG",
+      "alt": "Choeung Ek Killing Fields, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:Buddhist_Stupa_at_Choeung_Ek_killing_fields,_Cambodia.JPG",
+      "credit": "Timgray200",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-23011802.jpg"
+    },
+    "commons-86396970": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Riverside_Park%2C_Phnom_Penh.jpg/960px-Riverside_Park%2C_Phnom_Penh.jpg",
+      "alt": "Sisowath Quay Riverside, Phnom Penh",
+      "source": "https://commons.wikimedia.org/wiki/File:Riverside_Park,_Phnom_Penh.jpg",
+      "credit": "Christophe95",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "backupSrc": "/images/locations/commons-86396970.jpg"
+    },
+    "commons-121399343": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Aerial_View_of_Kizuna_Bridge_and_Kampong_Cham_City.jpg/960px-Aerial_View_of_Kizuna_Bridge_and_Kampong_Cham_City.jpg",
+      "alt": "Kizuna Bridge, Kampong Cham",
+      "source": "https://commons.wikimedia.org/wiki/File:Aerial_View_of_Kizuna_Bridge_and_Kampong_Cham_City.jpg",
+      "credit": "Kiensvay",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "backupSrc": "/images/locations/commons-121399343.jpg"
+    },
+    "commons-162896125": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Wat_Hanchey_Foto_3.jpg/960px-Wat_Hanchey_Foto_3.jpg",
+      "alt": "Wat Hanchey, Kampong Cham",
+      "source": "https://commons.wikimedia.org/wiki/File:Wat_Hanchey_Foto_3.jpg",
+      "credit": "Gerd Fahrenhorst",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "backupSrc": "/images/locations/commons-162896125.jpg"
+    },
+    "commons-81495190": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Detail_of_Colonial-Era_Facade_-_Kampong_Cham_-_Cambodia_-_01_%2848328823956%29.jpg/960px-Detail_of_Colonial-Era_Facade_-_Kampong_Cham_-_Cambodia_-_01_%2848328823956%29.jpg",
+      "alt": "French Colonial Quarter, Kampong Cham",
+      "source": "https://commons.wikimedia.org/wiki/File:Detail_of_Colonial-Era_Facade_-_Kampong_Cham_-_Cambodia_-_01_(48328823956).jpg",
+      "credit": "Adam Jones from Kelowna, BC, Canada",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    },
+    "commons-14847208": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Cliff_view_phnom_santuk_05032011132.jpg/960px-Cliff_view_phnom_santuk_05032011132.jpg",
+      "alt": "Phnom Santuk, Kampong Thom",
+      "source": "https://commons.wikimedia.org/wiki/File:Cliff_view_phnom_santuk_05032011132.jpg",
+      "credit": "Dtfman",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "place-75": {
+      "src": "https://asset.cambodia.gov.kh/tourism/2024/10/462697197_937175001767727_6672669499282421412_n-1024x576.jpg",
+      "source": "https://tourism.gov.kh/2024/10/%E1%9E%9A%E1%9E%98%E1%9E%8E%E1%9E%B8%E1%9E%99%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%B6%E1%9E%93-%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%87%E1%9F%92%E1%9E%9A%E1%9F%84%E1%9F%87%E1%9E%80%E1%9E%B6%E1%9E%85%E1%9E%B6/",
+      "credit": "Cambodia Ministry of Tourism",
+      "alt": "Kachanh Waterfall, Ratanakiri",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-79": {
+      "src": "https://www.jayakiri.com/uploads/images/GalleryThumbs/906-9.jpg",
+      "source": "https://www.jayakiri.com/attractions/ratanakiri/cha-ong-waterfall.html",
+      "credit": "Jayakiri Angkor Travel",
+      "alt": "Cha Ong Waterfall, Ratanakiri",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-34": {
+      "src": "https://www.greeneratravel.com/userfiles/850otavao.jpg",
+      "source": "https://www.greeneratravel.com/O-Tavao-Pailin.html",
+      "credit": "Green Era Travel",
+      "alt": "O'Tavao Waterfall, Pailin",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-72": {
+      "src": "https://www.greeneratravel.com/userfiles/thumbs/620katiengwaterfall.jpg",
+      "source": "https://www.greeneratravel.com/request.html?bookcode=116",
+      "credit": "Green Era Travel",
+      "alt": "Ka Tieng Waterfall, Ratanakiri",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-33": {
+      "src": "https://www.cambotours.com/userfiles/thumbs/phnom-khiev-waterfall.jpg",
+      "source": "https://www.cambotours.com/pailin-travel-guide.html",
+      "credit": "Cambo Tours",
+      "alt": "Phnom Khieu (Blue Mountain), Pailin",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-86": {
+      "src": "https://www.asiakingtravel.fr/cuploads/files/mondulkiri-doh-kronom.jpeg",
+      "source": "https://www.asiakingtravel.fr/attraction/mondulkiri",
+      "credit": "Asia King Travel",
+      "alt": "Phnom Doh Kromom, Mondulkiri",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-107": {
+      "src": "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/90/2019/05/10072655/phnom-penh.jpg-e1560504090350-1170x764.jpg",
+      "source": "https://www.sofitel-phnompenh-phokeethra.com/discover-cambodia/what-to-do-in-phnom-penh/",
+      "credit": "Sofitel Phnom Penh",
+      "alt": "Independence Monument, Phnom Penh",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-94": {
+      "src": "https://cambodiatravel.com/images/2020/12/attractions-in-kratie-phnom-sombok.jpg",
+      "source": "https://cambodiatravel.com/top-attractions-in-kratie/",
+      "credit": "Cambodia Travel",
+      "alt": "Phnom Sombok Pagoda, Kratie",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "place-98": {
+      "src": "https://i0.wp.com/helloangkor.com/wp-content/uploads/2023/02/HA5D8084.jpg?fit=1280%2C853&ssl=1",
+      "source": "https://helloangkor.com/attractions/100-colums-pagoda/",
+      "credit": "Hello Angkor",
+      "alt": "Wat Sorsor Muoy Roy (100-Column Pagoda), Kratie",
+      "license": "",
+      "licenseUrl": ""
+    }
+  },
+  "provinces": {
+    "siem-reap": "commons-123792913",
+    "pailin": "destinations-attraction-31-jpg",
+    "oddar-meanchey": "destinations-attraction-41-jpg",
+    "preah-vihear": "destinations-attraction-51-jpg",
+    "stung-treng": "destinations-attraction-61-jpg",
+    "ratanakiri": "commons-96371245",
+    "mondulkiri": "bousra-waterfall-jpg",
+    "phnom-penh": "commons-8928780",
+    "kampong-cham": "nokor-bachey-jpg",
+    "tboung-khmum": "preah-theat-basrey-jpg",
+    "kampong-thom": "sambor-prei-kuk-jpg",
+    "kampong-chhnang": "andong-russei-jpg",
+    "kampong-speu": "kirirom-national-park-jpg",
+    "kandal": "oudong-jpg",
+    "pursat": "kampong-luong-jpg",
+    "prey-veng": "ba-phnom-jpg",
+    "svay-rieng": "prey-ba-sak-jpg",
+    "takeo": "phnom-chisor-jpg",
+    "kampot": "river-jpg",
+    "preah-sihanouk": "island-jpg",
+    "kep": "commons-106269187",
+    "battambang": "phnom-sampov-jpg",
+    "banteay-meanchey": "banteay-chhmar-jpg",
+    "kratie": "commons-2461855",
+    "koh-kong": "tatai"
+  },
+  "attractions": {
+    "siem-reap/angkor-wat": "commons-123792913",
+    "siem-reap/bayon-temple": "bayon-jpg",
+    "siem-reap/ta-prohm": "ta-prohm-jpg",
+    "siem-reap/banteay-srei": "banteay-srei-jpg",
+    "siem-reap/kompong-phluk-floating-village": "kampong-phluk-jpg",
+    "battambang/phnom-sampeau": "phnom-sampov-jpg",
+    "banteay-meanchey/banteay-chhmar-temple": "banteay-chhmar-jpg",
+    "banteay-meanchey/banteay-torp-temple": "destinations-attraction-22-jpg",
+    "pailin/phnom-yat-temple": "destinations-attraction-31-jpg",
+    "oddar-meanchey/prasat-ta-muen-thom": "destinations-attraction-41-jpg",
+    "preah-vihear/preah-vihear-temple": "destinations-attraction-51-jpg",
+    "preah-vihear/koh-ker-temple-complex": "koh-ker-jpg",
+    "stung-treng/sopheakmitt-waterfall": "destinations-attraction-61-jpg",
+    "ratanakiri/yeak-laom-lake": "commons-96371245",
+    "mondulkiri/bou-sra-waterfall": "bousra-waterfall-jpg",
+    "phnom-penh/royal-palace": "commons-8928780",
+    "phnom-penh/central-market": "central-market-jpg",
+    "phnom-penh/tuol-sleng-genocide-museum": "tuol-sleng-jpg",
+    "kampong-cham/wat-nokor": "nokor-bachey-jpg",
+    "tboung-khmum/preah-theat-basrei-temple": "preah-theat-basrey-jpg",
+    "kampong-thom/sambor-prei-kuk": "sambor-prei-kuk-jpg",
+    "kampong-chhnang/andong-russey-pottery-village": "andong-russei-jpg",
+    "kampong-speu/kirirom-national-park": "kirirom-national-park-jpg",
+    "kandal/oudong-historical-site": "oudong-jpg",
+    "pursat/kampong-luong-floating-village": "kampong-luong-jpg",
+    "prey-veng/ba-phnom-historical-hill": "ba-phnom-jpg",
+    "takeo/phnom-chisor-temple": "phnom-chisor-jpg",
+    "kampot/bokor-mountain": "kampot-slow-days-jpg",
+    "kampot/kampot-river": "river-jpg",
+    "preah-sihanouk/koh-rong": "island-jpg",
+    "kep/kep-national-park": "kep-national-park-jpg",
+    "koh-kong/tatai-waterfall": "tatai",
+    "siem-reap/phnom-bakheng": "commons-5609684",
+    "siem-reap/angkor-thom": "commons-30196924",
+    "oddar-meanchey/samraong-market": "commons-10369376",
+    "kratie/koh-trong-island": "commons-81495348",
+    "phnom-penh/koh-pich-diamond-island": "commons-149901529",
+    "tboung-khmum/french-lighthouse": "commons-81495260",
+    "svay-rieng/bavet-moc-bai-international-border-gate": "commons-17397061",
+    "siem-reap/angkor-national-museum": "commons-82102296",
+    "battambang/banan-temple": "commons-85754503",
+    "battambang/bamboo-train": "commons-22673949",
+    "battambang/wat-ek-phnom": "commons-22685611",
+    "battambang/killing-caves-of-phnom-sampeau": "commons-167039488",
+    "battambang/phsar-nat-central-market": "commons-85705509",
+    "pailin/pailin-provincial-hall": "commons-181086227",
+    "oddar-meanchey/ta-mok-s-house": "commons-4444378",
+    "oddar-meanchey/pol-pot-cremation-site": "commons-57851292",
+    "oddar-meanchey/dangrek-mountains": "commons-7719588",
+    "preah-vihear/preah-khan-of-kampong-svay": "commons-24453346",
+    "stung-treng/stung-treng-central-market": "commons-81495430",
+    "stung-treng/sekong-river-confluence": "commons-81495410",
+    "ratanakiri/virachey-national-park": "commons-10732897",
+    "ratanakiri/banlung-market": "commons-16973632",
+    "kep/kep-crab-market": "commons-106269187",
+    "kratie/irrawaddy-dolphin-pool-kampi": "commons-36853384",
+    "kratie/kratie-central-market": "commons-23216403",
+    "phnom-penh/national-museum": "commons-58344306",
+    "phnom-penh/wat-phnom": "commons-58333397",
+    "phnom-penh/choeung-ek-killing-fields": "commons-23011802",
+    "phnom-penh/sisowath-quay-riverside": "commons-86396970",
+    "kampong-cham/kizuna-bridge": "commons-121399343",
+    "kampong-cham/wat-hanchey": "commons-162896125",
+    "kampong-cham/french-colonial-quarter": "commons-81495190",
+    "kampong-thom/phnom-santuk": "commons-14847208",
+    "ratanakiri/kachanh-waterfall": "place-75",
+    "ratanakiri/cha-ong-waterfall": "place-79",
+    "pailin/o-tavao-waterfall": "place-34",
+    "ratanakiri/ka-tieng-waterfall": "place-72",
+    "pailin/phnom-khieu-blue-mountain": "place-33",
+    "mondulkiri/phnom-doh-kromom": "place-86",
+    "phnom-penh/independence-monument": "place-107",
+    "kratie/phnom-sombok-pagoda": "place-94",
+    "kratie/wat-sorsor-muoy-roy-100-column-pagoda": "place-98"
+  }
+}

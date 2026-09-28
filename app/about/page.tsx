@@ -1,0 +1,113 @@
+import { Suspense } from "react";
+import AboutHero from "../../components/about/AboutHero";
+import HeroHighlights, {
+  HeroHighlightsPlaceholder,
+} from "../../components/about/HeroHighlights";
+import {
+  CambodiaSectionSkeleton,
+  PlacesSectionSkeleton,
+} from "../../components/about/AboutSkeletons";
+import AboutIntro from "../../components/about/AboutIntro";
+import CambodiaSection from "../../components/about/CambodiaSection";
+import PlacesSection from "../../components/about/PlacesSection";
+import TeamSection from "../../components/about/TeamSection";
+import WhyCamTrip from "../../components/about/WhyCamTrip";
+import TravelCompass from "../../components/about/TravelCompass";
+import AboutFaqs from "../../components/about/AboutFaqs";
+import AboutCTA from "../../components/about/AboutCTA";
+import { destinations } from "../../data/travel";
+import {
+  loadCambodiaCatalogue,
+  type PlaceCardData,
+} from "../../lib/camTripApi";
+
+export const metadata = {
+  title: "About CamTrip",
+  description:
+    "CamTrip is a Cambodia-first travel platform. See what it does, the provinces and places it covers, the team behind it, and how to start exploring.",
+};
+
+// Route segment config must be a literal. Keep in sync with
+// CAMTRIP_REVALIDATE_SECONDS in lib/camTripApi.ts.
+export const revalidate = 1800;
+
+// Preview content used only when the public API cannot be reached, so the
+// page always shows real Cambodian destinations instead of an empty grid.
+const fallbackPlaces: PlaceCardData[] = destinations.map((destination) => ({
+  id: `preview-${destination.name}`,
+  nameEn: destination.name,
+  nameKh: null,
+  description: destination.subtitle,
+  categoryLabel: destination.tag,
+  provinceName: destination.name,
+  regionLabel: null,
+  rating: null,
+  image: destination.image,
+  imageIsProvincePhoto: false,
+  mapsUrl: null,
+  featured: false,
+  note: "From our own guide",
+}));
+
+async function LiveHighlights() {
+  const { stats } = await loadCambodiaCatalogue();
+  return <HeroHighlights stats={stats} />;
+}
+
+async function LiveCambodiaSection() {
+  const { provinces, stats, regions, live, ok } = await loadCambodiaCatalogue();
+  return (
+    <CambodiaSection
+      provinces={provinces}
+      stats={stats}
+      regions={regions}
+      live={live}
+      reachable={ok.provinces || ok.places}
+    />
+  );
+}
+
+async function LivePlacesSection() {
+  const { featuredPlaces, totalPlaces, ok } = await loadCambodiaCatalogue();
+  // "empty" means the API answered but returned no places; "error" means it
+  // could not be reached, which switches to the local preview content.
+  const status = !ok.places
+    ? "error"
+    : featuredPlaces.length > 0
+      ? "ready"
+      : "empty";
+  return (
+    <PlacesSection
+      places={featuredPlaces}
+      fallbackPlaces={fallbackPlaces}
+      totalPlaces={totalPlaces}
+      status={status}
+    />
+  );
+}
+
+export default function AboutPage() {
+  return (
+    <>
+      <AboutHero
+        highlights={
+          <Suspense fallback={<HeroHighlightsPlaceholder />}>
+            <LiveHighlights />
+          </Suspense>
+        }
+      />
+      <AboutIntro />
+      <Suspense fallback={<CambodiaSectionSkeleton />}>
+        <LiveCambodiaSection />
+      </Suspense>
+      <Suspense fallback={<PlacesSectionSkeleton />}>
+        <LivePlacesSection />
+      </Suspense>
+      <TeamSection />
+      <WhyCamTrip />
+      <TravelCompass />
+      <AboutFaqs />
+      <AboutCTA />
+    </>
+  );
+}

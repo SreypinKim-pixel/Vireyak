@@ -28,7 +28,7 @@ so an open development server does not overwrite the production check output.
 
 ## Design
 
-The Royal Twilight palette lives in `tailwind.config.js`; semantic light/dark
+The Royal Twilight palette lives in `tailwind.config.ts`; semantic light/dark
 mappings live in `app/globals.css`.
 
 | Token                | Light     | Dark      |
@@ -44,12 +44,12 @@ White light-mode cards and a dark card surface supplement the supplied tokens.
 Body copy uses translucent primary text for readability. The theme follows the
 system preference on first visit; the navbar toggle persists a manual choice.
 
-`components/Brand.js` contains the text wordmark and accepts a `logoSrc` prop
-for a future image. Navbar and footer are shared through `app/layout.js`.
+`components/Brand.tsx` contains the text wordmark and accepts a `logoSrc` prop
+for a future image. Navbar and footer are shared through `app/layout.tsx`.
 
 ## Structure and behavior
 
-- `app/page.js`: destination-led landing page with stay/experience search.
+- `app/page.tsx`: destination-led landing page with stay/experience search.
 - `app/stays/`: destination, capacity, type, budget, and saved-favorite filters;
   sorting; stay details; estimated trip subtotal.
 - `app/attraction/`: experience discovery, filtering, and detail pages.
@@ -57,8 +57,9 @@ for a future image. Navbar and footer are shared through `app/layout.js`.
 - `app/login/`, `app/register/`: styled account previews with native validation;
   valid submissions show an honest notice and return to the home page.
 - `components/`: shared navigation, footer, icons, cards, search, filters, and forms.
-- `data/travel.js`: explicitly illustrative stays, prices, ratings, and experiences.
-- `public/images/README.md`: photo sources and licensing links.
+- `data/travel.ts`: explicitly illustrative stays, prices, ratings, and experiences.
+- `public/images/README.md`: photo sources and licensing links, including the
+  named Cambodian properties' own photography.
 - Legacy `/products`, `/products/:id`, and `/table` URLs redirect to `/stays`.
 
 Favorites, the theme preference, and the local demo sign-in marker use browser
@@ -69,15 +70,13 @@ check real inventory. Subtotals exclude taxes and fees.
 ## Preview boundaries
 
 This is a functioning discovery UI, not a live reservation service. All property
-names, prices, ratings, reviews, and amenities are sample content. Accommodation
-photographs are inspiration imagery, not verified pictures of those properties.
-No booking, payment, or account is created. Account forms display an honest
-unavailable message rather than simulated authentication success, do not send
-or store credentials, and return to the home page after a valid demo
-submission. A successful demo login records a local-only "signed in" marker in
-browser storage to update the navbar; it uses session storage by default and is
-kept in local storage only when "Remember me" is checked. It is never
-transmitted and is cleared by Log out. Do not enter real passwords.
+names, prices, ratings, reviews, and amenities are sample content. Photographs
+for the fictional preview properties are inspiration imagery, not verified
+pictures of those properties; the named Cambodian hotels use the properties' own
+publicity photography instead (sources in `public/images/README.md`).
+No booking, payment, session, or account is created. Account forms display an
+honest unavailable message rather than simulated authentication success, and do
+not send or store credentials. Do not enter real passwords.
 
 Connect verified inventory and a server-side booking/authentication service before
 launching. The framework is updated to Next.js 16.3.5 with React 19, including the patched
@@ -89,7 +88,7 @@ pre-push checks.
 
 `.env` is ignored and has owner-only permissions. `.env.example` must contain
 placeholders only. Never expose secrets via `NEXT_PUBLIC_`, client props,
-`next.config.js`'s `env` option, or anything in `public/`.
+`next.config.ts`'s `env` option, or anything in `public/`.
 
 `.gitignore` protects Git staging; `.ignore` mirrors its rules for compatible
 search tools. Keep them synchronized. They exclude environment variants,
@@ -118,6 +117,41 @@ navigation, theme persistence, local images, filtering/sorting, favorites,
 search-to-trip date propagation, trip estimates, account preview feedback,
 legacy redirects, and missing pages. Screenshots are written to `/tmp/`.
 `npm run lint` runs ESLint with Next.js core web vitals rules and rejects warnings.
-Dropdowns share `components/Dropdown.js`, built with Radix Select: keyboard
+Dropdowns share `components/Dropdown.tsx`, built with Radix Select: keyboard
 navigation, typeahead, Escape/outside-click dismissal, focus restoration,
 viewport-aware positioning, and Royal Twilight light/dark menus.
+
+All application code and browser tests use TypeScript (`.ts` / `.tsx`). Run
+`npm run typecheck` for strict project-wide type checking. PostCSS uses
+`postcss.config.json` because Next.js does not load TypeScript PostCSS configs.
+
+## Registration and province API previews
+
+The registration form loads optional province and attraction preferences from
+`GET /api/attractions`. The catalog contains 32 real Cambodian attractions across all 25 province/capital groups (24 provinces and Phnom Penh), with mock prices and ratings.
+Each mock attraction includes province metadata; choosing
+another province clears the selected attraction and filters the available choices.
+The endpoint returns `{ data: [...], demo: true }`. API failures, malformed data,
+and empty results allow registration validation to continue without a preference.
+There is no registration backend yet: valid submissions explain that accounts
+cannot be created and clear the form without sending or saving credentials.
+
+Registration includes inline name/email validation, a 12-character minimum password,
+password confirmation, and an optional attraction selector fetched from
+`GET /api/attractions`. Loading, empty, and failed requests are handled, with retry.
+Credentials and preferences are neither sent nor stored; a valid submission explains
+that account creation is unavailable. Replace this preview submission with the real
+registration API when its endpoint and contract are provided.
+
+The local demo APIs return `{ data: [...], demo: true }` from the curated catalog.
+`GET /api/provinces/{id}/attractions` also returns a `province` object, or a JSON
+404 for unknown IDs. Demo province IDs are `siem-reap`, `preah-sihanouk`,
+`phnom-penh`, and `kampot`; they are not official administrative codes.
+`/provinces/{id}/attractions` uses the same catalog lookup and shows the custom
+404 for unknown provinces. Invalid `/attraction/{id}` URLs also show that page,
+with Back Home and Explore Attractions links. These local endpoints can be replaced
+with backend adapters once a real API host and response schema are supplied.
+
+Attraction names and locations are based on the [Ministry of Tourism province guides](https://www.tourismcambodia.org/public/provinces). The catalog is a varied selection, not a visitor-count ranking. Existing local photographs may be illustrative.
+
+The demo catalog includes at least one attraction for every name in `data/province-names.ts`. Province slugs are derived from those names, and Preah Sihanouk maps to the Koh Rong destination. These are selected local highlights, not an official popularity ranking.

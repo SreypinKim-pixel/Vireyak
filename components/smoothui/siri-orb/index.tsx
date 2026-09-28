@@ -168,7 +168,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
     if (value < SIZE_THRESHOLD_SMALL) {
       return Math.max(
         contrastAmount * CONTRAST_MULTIPLIER_FINAL,
-        CONTRAST_MIN_FINAL
+        CONTRAST_MIN_FINAL,
       ); // Reduced contrast for small sizes
     }
     return contrastAmount;
@@ -187,7 +187,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
 
   const reactiveScale = useTransform(
     amplitudeValue,
-    (level) => stateMotion.scale + level * reactivity * AMPLITUDE_SCALE_GAIN
+    (level) => stateMotion.scale + level * reactivity * AMPLITUDE_SCALE_GAIN,
   );
 
   // CSS disables the loop for reduced motion without changing server markup.
