@@ -111,7 +111,7 @@ export default function ListingExplorer({
           />
         </div>
       </section>
-      <section className="shell grid gap-8 py-10 lg:grid-cols-[215px_1fr]">
+      <section className="shell grid gap-8 py-10 lg:grid-cols-[215px_minmax(0,1fr)] xl:max-w-[1536px]">
         <aside>
           <div className="rounded-xl border border-slate/60 dark:border-slate/20 bg-panel p-5">
             <h2 className="mb-5 text-sm font-semibold">
@@ -222,7 +222,7 @@ export default function ListingExplorer({
             reviews are illustrative; dates do not check live availability.
           </p>
           {filtered.length ? (
-            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
               {filtered.map((item) => (
                 <TravelCard
                   key={item.id}

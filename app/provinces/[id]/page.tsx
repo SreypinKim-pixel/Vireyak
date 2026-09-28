@@ -71,7 +71,7 @@ export default async function ProvincePage({
             More places to explore in {name} are coming soon.
           </p>
         ) : (
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {attractions.map((item) => {
               const title = item.nameEn || item.nameKh;
               const photo = getAttractionPhoto(title, name, item.imageUrls);

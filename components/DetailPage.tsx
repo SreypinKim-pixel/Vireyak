@@ -104,8 +104,8 @@ export default function DetailPage({
       </div>
       <section className="mt-16 border-t border-slate/60 dark:border-slate/20 pt-10">
         <h2 className="section-title mb-7">A little more inspiration</h2>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {related.slice(0, 3).map((i) => (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {related.slice(0, 4).map((i) => (
             <TravelCard key={i.id} item={i} kind={kind} />
           ))}
         </div>

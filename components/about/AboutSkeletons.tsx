@@ -47,7 +47,7 @@ export function PlacesSectionSkeleton() {
     <section aria-hidden="true" className="shell py-14 sm:py-16">
       <div className="h-3 w-32 animate-pulse rounded bg-slate/15" />
       <div className="mt-4 h-8 w-full max-w-sm animate-pulse rounded bg-slate/15" />
-      <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {[0, 1, 2, 3, 4, 5].map((index) => (
           <div
             key={index}

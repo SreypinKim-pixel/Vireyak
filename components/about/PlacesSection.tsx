@@ -77,7 +77,7 @@ export default function PlacesSection({
           </Link>
         </div>
       ) : (
-        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((place) => (
             <PlaceCard key={place.id} place={place} />
           ))}
