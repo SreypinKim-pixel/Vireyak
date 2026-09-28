@@ -177,16 +177,16 @@ export default function PlacesTable() {
         {sort.ascending ? "ascending" : "descending"}
       </p>
       <div
-        className="overflow-x-auto rounded-xl border border-slate/40 bg-panel"
+        className="overflow-x-auto rounded-xl border border-slate/60 bg-panel"
         tabIndex={0}
         role="region"
         aria-label="Places table"
       >
-        <table className="w-full min-w-[850px] text-left text-sm">
+        <table className="w-full min-w-[850px] border-separate border-spacing-0 text-left text-sm [&_tr>*:not(:last-child)]:border-r [&_tr>*]:border-slate/60 [&_tbody_tr>*]:border-t">
           <caption className="sr-only">
             Cambodia places. Select a column heading to change sorting.
           </caption>
-          <thead className="bg-slate/10">
+          <thead className="bg-slate/15">
             <tr>
               {columns.map(({ key, label }) => (
                 <th
@@ -223,7 +223,7 @@ export default function PlacesTable() {
             {rows.map((item) => (
               <tr
                 key={item.id}
-                className="border-t border-slate/20 hover:bg-slate/5"
+                className="hover:bg-slate/5"
               >
                 <td className="px-4 py-4 text-xs text-ink/60">
                   {item.numericId}
