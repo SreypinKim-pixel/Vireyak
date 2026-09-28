@@ -5,6 +5,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Brand from "./Brand";
 import Icon from "./Icon";
+import { getDemoUser, signOutDemo, subscribeDemoUser } from "../lib/demoSession";
 const links = [
   ["Home", "/"],
   ["Stays", "/stays"],
@@ -49,6 +50,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [previousPath, setPreviousPath] = useState(path);
   const dark = useSyncExternalStore(subscribeTheme, getTheme, getServerTheme);
+  const demoUser = useSyncExternalStore(
+    subscribeDemoUser,
+    getDemoUser,
+    () => null,
+  );
   if (path !== previousPath) {
     setPreviousPath(path);
     setOpen(false);
@@ -101,15 +107,35 @@ export default function Navbar() {
             <Icon name={dark ? "sun" : "moon"} size={18} />
           </button>
           <span className="hidden h-5 w-px bg-slate/25 lg:block" />
-          <Link href="/login" className="hidden text-xs font-medium sm:block">
-            Log in
-          </Link>
-          <Link
-            href="/register"
-            className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
-          >
-            Sign up <Icon name="arrow" size={15} />
-          </Link>
+          {demoUser ? (
+            <>
+              <span className="hidden text-[11px] font-medium text-ink/60 sm:block">
+                Signed in as {demoUser}
+              </span>
+              <button
+                type="button"
+                onClick={signOutDemo}
+                className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden text-xs font-medium sm:block"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/register"
+                className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
+              >
+                Sign up <Icon name="arrow" size={15} />
+              </Link>
+            </>
+          )}
           <button
             type="button"
             className="rounded-lg p-2 md:hidden"

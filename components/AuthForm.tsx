@@ -1,9 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
+import { signInDemo } from "../lib/demoSession";
+
+// Login password rules: at least 8 characters with an uppercase letter, a
+// lowercase letter, and a number. No special character is required.
+const PASSWORD_STRENGTH_PATTERN = /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/;
+const PASSWORD_STRENGTH_MESSAGE =
+  "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
 export default function AuthForm({ register = false }) {
+  const router = useRouter();
   const [message, setMessage] = useState("");
   const [province, setProvince] = useState("");
   const [attraction, setAttraction] = useState("");
@@ -73,8 +82,8 @@ export default function AuthForm({ register = false }) {
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setMessage("");
+    const values = new FormData(e.currentTarget);
     {
-      const values = new FormData(e.currentTarget);
       const next: Record<string, string> = {};
       if (register && !String(values.get("name") ?? "").trim())
         next.name = "Enter your full name.";
@@ -90,6 +99,14 @@ export default function AuthForm({ register = false }) {
         next.password = "Password is required.";
       else if (register && String(values.get("password") ?? "").length < 12)
         next.password = "Use at least 12 characters.";
+      else if (
+        !register &&
+        (String(values.get("password") ?? "").length < 8 ||
+          !PASSWORD_STRENGTH_PATTERN.test(
+            String(values.get("password") ?? ""),
+          ))
+      )
+        next.password = PASSWORD_STRENGTH_MESSAGE;
       if (
         register &&
         (!values.get("confirmPassword") ||
@@ -116,6 +133,13 @@ export default function AuthForm({ register = false }) {
     setAttraction("");
     setProvince("");
     setShowPassword(false);
+    if (!register) {
+      signInDemo(
+        String(values.get("email") ?? "").trim(),
+        values.get("remember") === "on",
+      );
+      setTimeout(() => router.push("/"), 1000);
+    }
   }
   return (
     <div
@@ -258,7 +282,7 @@ export default function AuthForm({ register = false }) {
                   type={showPassword ? "text" : "password"}
                   autoComplete={register ? "new-password" : "current-password"}
                   required
-                  minLength={register ? 12 : 1}
+                  minLength={register ? 12 : 8}
                   maxLength={128}
                   placeholder={
                     register ? "12+ characters" : "Enter a demo password"
@@ -276,6 +300,19 @@ export default function AuthForm({ register = false }) {
               </span>
               {fieldError("password")}
             </label>
+            {!register && (
+              <label className="flex items-center gap-2.5">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  aria-label="Remember me"
+                  className="h-4 w-4 accent-indigo dark:accent-brightgold"
+                />
+                <span className="text-[11px] font-medium text-ink/70">
+                  Remember me
+                </span>
+              </label>
+            )}
             {register && (
               <>
                 <label className="block min-w-0 sm:!col-span-1">
