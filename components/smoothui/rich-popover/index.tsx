@@ -170,7 +170,6 @@ export default function RichTooltip({
               </div>
             ) : null}
 
-            {/* Tail */}
             <PopoverArrow className="fill-black" />
           </motion.div>
         </PopoverContent>

@@ -5,11 +5,16 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Brand from "./Brand";
 import Icon from "./Icon";
-import { getDemoUser, signOutDemo, subscribeDemoUser } from "../lib/demoSession";
+import {
+  getDemoUser,
+  subscribeDemoUser,
+  signOutDemo,
+} from "../lib/demoSession";
 const links = [
   ["Home", "/"],
   ["Stays", "/stays"],
   ["Attraction", "/attraction"],
+  ["Places", "/table"],
   ["About", "/about"],
 ];
 function subscribeTheme(onChange: () => void) {
@@ -67,7 +72,7 @@ export default function Navbar() {
     } catch {}
   }
   return (
-    <header className="relative z-40 border-b border-slate/15 bg-surface transition-colors duration-300">
+    <header className="relative z-40 border-b border-slate/60 dark:border-slate/15 bg-surface transition-colors duration-300">
       <div className="shell flex h-[88px] items-center justify-between gap-2 sm:gap-4">
         <Brand logoSrc="/Logo.png" />
         <nav
@@ -108,34 +113,32 @@ export default function Navbar() {
           </button>
           <span className="hidden h-5 w-px bg-slate/25 lg:block" />
           {demoUser ? (
-            <>
-              <span className="hidden text-[11px] font-medium text-ink/60 sm:block">
-                Signed in as {demoUser}
+            <span className="hidden items-center gap-3 sm:flex">
+              <span className="flex max-w-[180px] items-center gap-2">
+                <Icon name="check" size={14} className="shrink-0 text-accent" />
+                <span className="truncate text-xs font-medium text-ink/80">
+                  Signed in as {demoUser}
+                </span>
               </span>
               <button
                 type="button"
                 onClick={signOutDemo}
-                className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
+                className="text-xs font-medium text-indigo transition hover:opacity-70 dark:text-brightgold"
               >
                 Log out
               </button>
-            </>
+            </span>
           ) : (
-            <>
-              <Link
-                href="/login"
-                className="hidden text-xs font-medium sm:block"
-              >
-                Log in
-              </Link>
-              <Link
-                href="/register"
-                className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
-              >
-                Sign up <Icon name="arrow" size={15} />
-              </Link>
-            </>
+            <Link href="/login" className="hidden text-xs font-medium sm:block">
+              Log in
+            </Link>
           )}
+          <Link
+            href="/register"
+            className="button-primary min-h-10 whitespace-nowrap px-3 py-2 text-[11px] sm:px-5"
+          >
+            Sign up <Icon name="arrow" size={15} />
+          </Link>
           <button
             type="button"
             className="rounded-lg p-2 md:hidden"
@@ -158,19 +161,33 @@ export default function Navbar() {
             transition={{ duration: reducedMotion ? 0 : 0.2 }}
             id="mobile-menu"
             aria-label="Mobile navigation"
-            className="absolute inset-x-0 top-full overflow-hidden border-b border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
+            className="absolute inset-x-0 top-full overflow-hidden border-b border-slate/60 dark:border-slate/20 bg-surface px-6 pb-5 shadow-soft md:hidden"
           >
-            {[...links, ["Log in", "/login"]].map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-4 py-3 text-sm hover:bg-slate/10"
-                aria-current={path === href ? "page" : undefined}
+            {[...links, ...(demoUser ? [] : [["Log in", "/login"]])].map(
+              ([label, href]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-4 py-3 text-sm hover:bg-slate/10"
+                  aria-current={path === href ? "page" : undefined}
+                >
+                  {label}
+                </Link>
+              ),
+            )}
+            {demoUser && (
+              <button
+                type="button"
+                onClick={() => {
+                  signOutDemo();
+                  setOpen(false);
+                }}
+                className="block w-full rounded-lg px-4 py-3 text-left text-sm hover:bg-slate/10"
               >
-                {label}
-              </Link>
-            ))}
+                Log out
+              </button>
+            )}
           </motion.nav>
         )}
       </AnimatePresence>

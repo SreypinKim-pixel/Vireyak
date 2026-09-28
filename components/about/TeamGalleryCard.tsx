@@ -3,7 +3,6 @@ import type { TeamMember } from "../../data/team";
 import ProfileLinks from "./ProfileLinks";
 import ProfilePhoto from "./ProfilePhoto";
 
-/** Fixed-size layers slide and clip; no width, font-size, or flex animation. */
 export default function TeamGalleryCard({
   member,
   index,

@@ -1,3 +1,4 @@
+import { siteUrl, pageMetadata } from "@/lib/seo";
 import HeroGrid from "@/components/smoothui/blocks/heroes/hero-grid/index";
 import { getHomepageAttractions, getProvinceNames } from "@/lib/cam-trip";
 import SearchForm from "@/components/SearchForm";
@@ -8,6 +9,7 @@ import FeaturedExperiences from "@/components/home/FeaturedExperiences";
 import HowItWorks from "@/components/home/HowItWorks";
 import TravelerReviews from "@/components/home/TravelerReviews";
 import HomeCTA from "@/components/home/HomeCTA";
+import ProvinceSelection from "@/components/home/ProvinceSelection";
 
 export default async function HomePage() {
   const [{ experiences }, provinces] = await Promise.all([
@@ -15,7 +17,19 @@ export default async function HomePage() {
     getProvinceNames(),
   ]);
   return (
-    <>
+    <ProvinceSelection>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Vireyak",
+            url: siteUrl,
+            inLanguage: "en",
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
       <HeroGrid />
       <div className="shell relative z-10 -mt-20">
         <SearchForm provinces={provinces} />
@@ -27,6 +41,14 @@ export default async function HomePage() {
       <HowItWorks />
       <TravelerReviews />
       <HomeCTA />
-    </>
+    </ProvinceSelection>
   );
 }
+
+export const metadata = pageMetadata({
+  tabTitle: "Home",
+  title: "Discover Cambodia: Attractions & Places to Stay",
+  description:
+    "Explore Cambodia with Vireyak. Discover temples, provincial highlights, and places to stay, from Siem Reap and Phnom Penh to the coast.",
+  path: "/",
+});

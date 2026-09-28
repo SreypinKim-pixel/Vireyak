@@ -1,15 +1,8 @@
-/**
- * Skeletons for the About page sections that stream live API data. The
- * proportions match the real sections closely so the page does not jump when
- * the data arrives.
- */
-
-/** Fallback for the Cambodia statistics section. */
 export function CambodiaSectionSkeleton() {
   return (
     <section
       aria-hidden="true"
-      className="border-y border-slate/15 bg-slate/[0.045] py-14 sm:py-16"
+      className="border-y border-slate/60 dark:border-slate/15 bg-slate/[0.045] py-14 sm:py-16"
     >
       <div className="shell">
         <div className="h-3 w-40 animate-pulse rounded bg-slate/15" />
@@ -19,7 +12,7 @@ export function CambodiaSectionSkeleton() {
           {[0, 1, 2, 3].map((index) => (
             <div
               key={index}
-              className="rounded-xl border border-slate/15 bg-panel p-5"
+              className="rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-5"
             >
               <div className="h-3 w-24 animate-pulse rounded bg-slate/10" />
               <div className="mt-4 h-8 w-16 animate-pulse rounded bg-slate/15" />
@@ -27,7 +20,7 @@ export function CambodiaSectionSkeleton() {
           ))}
         </div>
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-4 rounded-xl border border-slate/15 bg-panel p-6">
+          <div className="space-y-4 rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-6">
             {[0, 1, 2, 3].map((index) => (
               <div key={index} className="space-y-3">
                 <div className="h-3 w-32 animate-pulse rounded bg-slate/15" />
@@ -35,7 +28,7 @@ export function CambodiaSectionSkeleton() {
               </div>
             ))}
           </div>
-          <div className="space-y-3 rounded-xl border border-slate/15 bg-panel p-6">
+          <div className="space-y-3 rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-6">
             {[0, 1, 2, 3].map((index) => (
               <div
                 key={index}
@@ -49,7 +42,6 @@ export function CambodiaSectionSkeleton() {
   );
 }
 
-/** Fallback for the Explore Cambodia place grid. */
 export function PlacesSectionSkeleton() {
   return (
     <section aria-hidden="true" className="shell py-14 sm:py-16">
@@ -59,7 +51,7 @@ export function PlacesSectionSkeleton() {
         {[0, 1, 2, 3, 4, 5].map((index) => (
           <div
             key={index}
-            className="overflow-hidden rounded-xl border border-slate/15 bg-panel"
+            className="overflow-hidden rounded-xl border border-slate/60 dark:border-slate/15 bg-panel"
           >
             <div className="aspect-[1.5] w-full animate-pulse bg-slate/10" />
             <div className="space-y-3 p-5">

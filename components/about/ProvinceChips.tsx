@@ -1,12 +1,7 @@
 import type { Province } from "../../lib/camTripApi";
 
-/** One API region with the provinces that belong to it, in API order. */
 type RegionGroup = { region: string; label: string; items: Province[] };
 
-/**
- * The provinces the CamTrip catalogue covers, grouped by API region and shown
- * with both the Khmer and English names returned by the API.
- */
 export default function ProvinceChips({
   provinces = [],
 }: {
@@ -43,7 +38,7 @@ export default function ProvinceChips({
             {group.items.map((province) => (
               <li
                 key={province.id}
-                className="rounded-lg border border-slate/15 bg-panel px-3 py-2 transition hover:border-gold/40"
+                className="rounded-lg border border-slate/60 dark:border-slate/15 bg-panel px-3 py-2 transition duration-500 ease-out hover:border-gold dark:hover:border-gold/40 motion-reduce:transition-none"
               >
                 <p className="text-[11px] font-medium text-navy dark:text-ivory">
                   {province.nameEn}

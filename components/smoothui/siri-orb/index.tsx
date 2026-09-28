@@ -43,22 +43,21 @@ const CONTRAST_TINY = 1.1;
 const CONTRAST_MULTIPLIER_FINAL = 1.2;
 const CONTRAST_MIN_FINAL = 1.3;
 
-/** Loud audio tightens the gradient, which reads as the orb "focusing". */
 const AMPLITUDE_BLUR_FALLOFF = 0.45;
-/** Amplitude adds at most 12% of extra size on top of the state scale. */
+
 const AMPLITUDE_SCALE_GAIN = 0.12;
-/** Single lateral nudge used to signal `error`, well under 200ms. */
+
 const ERROR_SHAKE_KEYFRAMES = [0, -3, 3, 0];
 const ERROR_SHAKE_DURATION = 0.18;
 const EASE_IN_OUT = [0.645, 0.045, 0.355, 1] as const;
 const GLOW_BLUR_RATIO = 0.28;
 const GLOW_MAX_OPACITY = 0.7;
-/** Depth rim, as a fraction of the orb size. */
+
 const RIM_RATIO = 0.06;
 const RIM_MIN = 1.5;
-/** Sheen drift period at rest, before the state speed divides it. */
+
 const DRIFT_BASE_SECONDS = 12;
-/** `idle` breathes: a slow, shallow scale cycle that never draws attention. */
+
 const BREATHE_SCALE = [1, 1.035, 1];
 const BREATHE_SECONDS = 5.5;
 const SPRING_DEFAULT: Transition = {
@@ -68,12 +67,8 @@ const SPRING_DEFAULT: Transition = {
 };
 
 export interface SiriOrbProps {
-  /**
-   * Live audio level, 0–1. Pass the `MotionValue` from `useAudioAmplitude` so
-   * the signal never re-renders React.
-   */
   amplitude?: AIAmplitude;
-  /** Ambient rotation period in seconds, before the state speed multiplier. */
+
   animationDuration?: number;
   className?: string;
   colors?: {
@@ -81,11 +76,11 @@ export interface SiriOrbProps {
     c1?: string;
     c2?: string;
     c3?: string;
-    /** Fourth mesh stop. More stops means fewer visible repeats per rotation. */
+
     c4?: string;
   };
   size?: string;
-  /** Shared AI state driving speed, scale, saturation and reactivity. */
+
   state?: AIState;
 }
 
@@ -101,50 +96,40 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
   const amplitudeValue = useAmplitudeValue(amplitude);
   const stateMotion = getAIStateMotion(state);
 
-  /**
-   * Higher chroma than the original pastels.
-   *
-   * The first palette sat at chroma 0.12–0.15, which washes out once the mesh is
-   * blurred and the dot pattern is overlaid on top. Pushing to ~0.2 and adding a
-   * saturate() pass to the mesh is what makes the colour survive all that.
-   */
   const defaultColors = {
     bg: "oklch(92% 0.03 300)",
-    c1: "oklch(68% 0.21 350)", // Pink
-    c2: "oklch(70% 0.18 210)", // Blue
-    c3: "oklch(66% 0.2 285)", // Violet
-    c4: "oklch(72% 0.19 325)", // Magenta, the fourth stop for variety
+    c1: "oklch(68% 0.21 350)",
+    c2: "oklch(70% 0.18 210)",
+    c3: "oklch(66% 0.2 285)",
+    c4: "oklch(72% 0.19 325)",
   };
 
   const finalColors = { ...defaultColors, ...colors };
-  // The bloom stays in the orb's own palette — see the note in ai-orb-aura.
+
   const glowColor = finalColors.c2;
 
-  // Extract numeric value from size for calculations
   const sizeValue = Number.parseInt(size.replace("px", ""), 10);
 
-  // Responsive calculations based on size
   const blurAmount =
     sizeValue < SIZE_THRESHOLD_SMALL
-      ? Math.max(sizeValue * BLUR_MULTIPLIER_SMALL, BLUR_MIN_SMALL) // Reduced blur for small sizes
+      ? Math.max(sizeValue * BLUR_MULTIPLIER_SMALL, BLUR_MIN_SMALL)
       : Math.max(sizeValue * BLUR_MULTIPLIER_LARGE, BLUR_MIN_LARGE);
 
   const contrastAmount =
     sizeValue < SIZE_THRESHOLD_SMALL
-      ? Math.max(sizeValue * CONTRAST_MULTIPLIER_SMALL, CONTRAST_MIN_SMALL) // Reduced contrast for small sizes
+      ? Math.max(sizeValue * CONTRAST_MULTIPLIER_SMALL, CONTRAST_MIN_SMALL)
       : Math.max(sizeValue * CONTRAST_MULTIPLIER_LARGE, CONTRAST_MIN_LARGE);
 
   const dotSize =
     sizeValue < SIZE_THRESHOLD_SMALL
-      ? Math.max(sizeValue * DOT_SIZE_MULTIPLIER_SMALL, DOT_SIZE_MIN_SMALL) // Smaller dots for small sizes
+      ? Math.max(sizeValue * DOT_SIZE_MULTIPLIER_SMALL, DOT_SIZE_MIN_SMALL)
       : Math.max(sizeValue * DOT_SIZE_MULTIPLIER_LARGE, DOT_SIZE_MIN_LARGE);
 
   const shadowSpread =
     sizeValue < SIZE_THRESHOLD_SMALL
-      ? Math.max(sizeValue * SHADOW_MULTIPLIER_SMALL, SHADOW_MIN_SMALL) // Reduced shadow for small sizes
+      ? Math.max(sizeValue * SHADOW_MULTIPLIER_SMALL, SHADOW_MIN_SMALL)
       : Math.max(sizeValue * SHADOW_MULTIPLIER_LARGE, SHADOW_MIN_LARGE);
 
-  // Adjust mask radius based on size to reduce black center in small sizes
   const getMaskRadius = (value: number) => {
     if (value < SIZE_THRESHOLD_TINY) {
       return MASK_RADIUS_TINY;
@@ -160,24 +145,21 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
 
   const maskRadius = getMaskRadius(sizeValue);
 
-  // Use more subtle contrast for very small sizes
   const getFinalContrast = (value: number) => {
     if (value < SIZE_THRESHOLD_TINY) {
-      return CONTRAST_TINY; // Very subtle contrast for tiny sizes
+      return CONTRAST_TINY;
     }
     if (value < SIZE_THRESHOLD_SMALL) {
       return Math.max(
         contrastAmount * CONTRAST_MULTIPLIER_FINAL,
         CONTRAST_MIN_FINAL,
-      ); // Reduced contrast for small sizes
+      );
     }
     return contrastAmount;
   };
 
   const finalContrast = getFinalContrast(sizeValue);
 
-  // Reactivity is gated by the state preset: `thinking` barely listens so the
-  // orb keeps churning internally instead of throbbing with room noise.
   const reactivity = shouldReduceMotion ? 0 : stateMotion.reactivity;
 
   const reactiveBlur = useTransform(amplitudeValue, (level) => {
@@ -190,14 +172,10 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
     (level) => stateMotion.scale + level * reactivity * AMPLITUDE_SCALE_GAIN,
   );
 
-  // CSS disables the loop for reduced motion without changing server markup.
   const loopDuration = animationDuration / stateMotion.speed;
 
-  // Rim thickness scales with the orb, so the lit edge reads the same at 24px
-  // and at 240px instead of swallowing the small one.
   const rim = Math.max(sizeValue * RIM_RATIO, RIM_MIN);
-  // The sheen drifts slower than the mesh rotates; a busier state speeds it up
-  // a touch without matching the rotation, which would look mechanical.
+
   const driftDuration = (DRIFT_BASE_SECONDS / (1 + stateMotion.speed)) * 2;
 
   const getRootAnimate = (): TargetAndTransition => {
@@ -231,8 +209,6 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
   };
 
   return (
-    // The gradient disc clips its own overflow, so the bloom and the status
-    // motif have to live in a wrapper rather than inside it.
     <motion.div
       animate={getRootAnimate()}
       className={cn("relative", className)}
@@ -245,7 +221,6 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
       }
       transition={getRootTransition()}
     >
-      {/* Bloom tinted by the state's semantic accent. */}
       <motion.div
         animate={{ opacity: stateMotion.glow * GLOW_MAX_OPACITY }}
         className="absolute rounded-full"
@@ -274,9 +249,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
             "--mask-radius": maskRadius,
             "--rim": `${rim}px`,
             "--shadow-spread": `${shadowSpread}px`,
-            // Saturation and hue only affect the gradient disc. Applying them
-            // to the whole component would desaturate the semantic accent too,
-            // and `error` would lose the very red that identifies it.
+
             filter: `saturate(${stateMotion.saturation}) hue-rotate(${stateMotion.hueRotate}deg)`,
             height: "100%",
             scale: reactiveScale,
@@ -284,9 +257,6 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
           } as MotionStyle
         }
       >
-        {/* Specular sheen and depth rim. The mesh alone reads as a flat blurred
-            disc; a drifting highlight plus a lit top edge and shaded bottom are
-            what make it read as a sphere. */}
         <span aria-hidden="true" className="siri-orb-layer siri-orb-sheen" />
         <span aria-hidden="true" className="siri-orb-layer siri-orb-rim" />
         <style>{`
@@ -316,8 +286,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
           border-radius: 50%;
         }
 
-        /* Glassy highlight that drifts, so the sheen never sits still enough to
-           read as a printed-on gradient. */
+
         .siri-orb-sheen {
           background:
             radial-gradient(circle at 30% 24%, hsl(0 0% 100% / 0.32), transparent 34%),
@@ -326,7 +295,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
           animation: siri-drift var(--drift-duration) ease-in-out infinite alternate;
         }
 
-        /* Lit top edge, shaded bottom, thin inner ring. */
+
         .siri-orb-rim {
           box-shadow:
             inset 0 0 0 1px hsl(0 0% 100% / 0.16),
@@ -386,8 +355,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
             );
           box-shadow: inset var(--bg) 0 0 var(--shadow-spread)
             calc(var(--shadow-spread) * 0.2);
-          /* The saturate() pass is what keeps the colour alive after the blur
-             and the overlaid dot pattern have both eaten into it. */
+
           filter: blur(var(--blur-amount)) contrast(var(--contrast-amount))
             saturate(1.4);
           animation: rotate var(--animation-duration) linear infinite;
@@ -405,7 +373,7 @@ const SiriOrb: React.FC<SiriOrbProps> = ({
           mix-blend-mode: overlay;
         }
 
-        /* Apply mask only when radius is greater than 0 */
+
         .siri-orb[style*="--mask-radius: 0%"]::after {
           mask-image: none;
         }

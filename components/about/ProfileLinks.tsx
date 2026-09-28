@@ -3,11 +3,6 @@ import { GitHub, Telegram } from "./SocialIcons";
 
 type ProfileLink = { label: string; href: string };
 
-/**
- * Optional social or contact links for a profile card. `links` entries are
- * { label, href }. Anything that is not a mailto: link opens in a new tab.
- * An empty list renders nothing, so cards stay clean until real links exist.
- */
 export default function ProfileLinks({
   links,
   tone = "light",
@@ -22,7 +17,7 @@ export default function ProfileLinks({
   const toneClasses =
     tone === "dark"
       ? "border-white/25 text-ivory/75 hover:border-brightgold hover:text-brightgold"
-      : "border-slate/25 text-ink/70 hover:border-indigo hover:text-indigo dark:hover:border-brightgold dark:hover:text-brightgold";
+      : "border-slate/60 dark:border-slate/25 text-ink/70 hover:border-indigo hover:text-indigo dark:hover:border-brightgold dark:hover:text-brightgold";
 
   return (
     <div
@@ -45,7 +40,7 @@ export default function ProfileLinks({
             {link.label || "Profile"}
           </>
         );
-        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-[10px] font-medium transition-colors ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
+        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-[10px] font-medium transition-colors duration-500 ease-out motion-reduce:transition-none ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
         if (!link.href?.trim()) {
           return (
             <span

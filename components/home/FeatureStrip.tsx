@@ -38,7 +38,7 @@ export default function FeatureStrip() {
             <Reveal
               key={feature.title}
               delay={index * 0.1}
-              className="group rounded-2xl border border-ink/10 bg-panel p-5 shadow-sm transition-shadow duration-300 hover:shadow-soft"
+              className="group rounded-2xl border border-slate/60 dark:border-ink/10 bg-panel p-5 shadow-sm transition-shadow duration-300 hover:shadow-soft"
             >
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ink/5 text-gold transition-colors duration-300 group-hover:bg-navy group-hover:text-brightgold">

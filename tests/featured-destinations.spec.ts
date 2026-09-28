@@ -115,11 +115,43 @@ test("province gallery expands to 25, collapses to six, and opens a later provin
   }
 });
 
+test("every province card shows its own locally served cover image", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const section = page.locator(
+    'section[aria-labelledby="featured-destinations-title"]',
+  );
+  const cards = section.locator("article");
+  await section
+    .getByRole("button", { name: "View all 25 provinces", exact: true })
+    .click();
+  await expect(cards).toHaveCount(25);
+  for (const card of await cards.all()) {
+    await card.scrollIntoViewIfNeeded();
+    const name = await card.locator("h3").innerText();
+    const image = card.locator("img");
+    await expect(image, name).toHaveCount(1);
+
+    await expect(image, name).toHaveAttribute("src", /^\/images\//);
+    await expect
+      .poll(() =>
+        image.evaluate(
+          (node: HTMLImageElement) => node.complete && node.naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+  }
+  await expect(section.getByText("Image unavailable")).toHaveCount(0);
+});
+
 test("all provinces have named photos and attractions never borrow a province cover", () => {
   for (const name of provinceNames) {
     const photo = getProvincePhoto(name);
     expect(photo, name).toBeTruthy();
     expect(photo!.src).not.toMatch(/flag|placeholder|Special:FilePath/i);
+
+    expect(photo!.src, name).toMatch(/^\/images\//);
     expect(photo!.alt.length).toBeGreaterThan(5);
     expect(photo!.source).toMatch(/^https:\/\//);
   }
@@ -140,4 +172,40 @@ test("all provinces have named photos and attractions never borrow a province co
   expect(
     getAttractionPhoto("Unknown", "Unknown", ["javascript:alert(1)"]),
   ).toBeNull();
+});
+
+test("homepage destination selection shows only the matching province and can reset", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const section = page.locator(
+    'section[aria-labelledby="featured-destinations-title"]',
+  );
+  const cards = section.locator("article");
+  const dropdown = page.getByRole("combobox", {
+    name: "Destination",
+    exact: true,
+  });
+  await expect(cards).toHaveCount(6);
+  for (const [choice, province] of [
+    ["Kampot", "Kampot"],
+    ["Siem Reap", "Siem Reap"],
+    ["Koh Rong", "Preah Sihanouk"],
+  ]) {
+    await dropdown.click();
+    await page.getByRole("option", { name: choice, exact: true }).click();
+    await expect(cards).toHaveCount(1);
+    await expect(cards.getByRole("heading", { level: 3 })).toHaveText(province);
+    await expect(page).toHaveURL(/\/$/);
+    await expect(
+      section.getByRole("button", { name: /View all|Show fewer/ }),
+    ).toHaveCount(0);
+  }
+  await dropdown.click();
+  await page
+    .getByRole("option", { name: "Explore Cambodia", exact: true })
+    .click();
+  await expect(cards).toHaveCount(6);
+  await section.getByRole("button", { name: /View all/ }).click();
+  await expect(cards).toHaveCount(25);
 });

@@ -7,6 +7,8 @@
 
 @layer base {
   :root {
+    --font-sans: "Poppins", "Noto Sans Khmer", "Khmer OS", "Khmer UI", sans-serif;
+    --font-heading: var(--font-sans);
     --surface: 251 249 246;
     --panel: 255 255 255;
     --ink: 14 13 21;
@@ -27,8 +29,8 @@
     --muted-foreground: oklch(0.556 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
+    --border: rgb(124 131 173 / 60%);
+    --input: rgb(124 131 173 / 60%);
     --ring: oklch(0.708 0 0);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
@@ -128,6 +130,18 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-sans);
+  }
   ::selection {
     @apply bg-gold/30;
   }
@@ -149,7 +163,6 @@
   }
   .theme {
     --font-heading: var(--font-sans);
-    --font-sans: var(--font-sans);
     --color-brand: var(--brand, oklch(0.72 0.2 352.53));
     --color-brand-light: var(--brand-light, oklch(0.78 0.15 352.53));
     --color-brand-lighter: var(--brand-lighter, oklch(0.85 0.1 352.53));
@@ -198,16 +211,16 @@
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3 text-xs font-medium text-white transition hover:bg-indigo dark:bg-indigo dark:hover:bg-slate;
   }
   .button-outline {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate/30 px-5 py-3 text-xs font-medium text-ink transition hover:border-indigo hover:bg-slate/5;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate/60 dark:border-slate/30 px-5 py-3 text-xs font-medium text-ink transition hover:border-indigo dark:hover:border-indigo hover:bg-slate/5;
   }
   .field {
-    @apply w-full rounded-lg border border-slate/30 bg-panel px-4 py-3 text-sm text-ink placeholder:text-slate focus:border-indigo focus:outline-none focus:ring-2 focus:ring-indigo/20;
+    @apply w-full rounded-lg border border-slate/60 dark:border-slate/30 bg-panel px-4 py-3 text-sm text-ink placeholder:text-slate focus:border-indigo dark:focus:border-indigo focus:outline-none focus:ring-2 focus:ring-indigo/20;
   }
   .field-label {
     @apply mb-2 block text-xs font-medium;
   }
   .field-invalid {
-    @apply border-red-600/70 focus:border-red-600 focus:ring-red-600/20;
+    @apply border-red-600/70 dark:border-red-600/70 focus:border-red-600 dark:focus:border-red-600 focus:ring-red-600/20;
   }
   .field-error {
     @apply mt-1.5 block text-[11px] leading-4 text-red-600 dark:text-red-400;
@@ -215,9 +228,8 @@
   .muted {
     @apply text-ink/60;
   }
-  /* Poppins has no Khmer glyphs, so Khmer names use a system Khmer font first. */
   .text-khmer {
-    font-family: "Noto Sans Khmer", "Khmer OS", "Khmer UI", Poppins, sans-serif;
+    font-family: var(--font-sans);
   }
   .status-page {
     @apply shell flex min-h-[60vh] flex-col items-center justify-center gap-5 text-center;
@@ -231,13 +243,11 @@
   .btn {
     @apply button-primary;
   }
-  /* Keep the accordion design, but animate painted layers instead of layout.
-     The row and every card have fixed dimensions throughout hover. */
   .team-gallery-row {
     container-type: inline-size;
     --team-gap: 12px;
-    --team-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --team-duration: 600ms;
+    --team-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --team-duration: 720ms;
   }
   @media (min-width: 1024px) {
     .team-gallery-row {
@@ -285,8 +295,11 @@
     }
     .team-gallery-fade {
       transition:
-        opacity 220ms ease,
-        transform 320ms var(--team-ease);
+        opacity 280ms ease-in-out,
+        transform 480ms var(--team-ease);
+    }
+    .team-gallery-card[data-active="true"] .team-gallery-details {
+      transition-delay: 140ms;
     }
   }
 }
@@ -294,7 +307,6 @@
   object-position: center 52%;
 }
 @media (prefers-reduced-motion: no-preference) {
-  /* CSS handles the browser preference without changing hydration markup. */
   .nav-link-enter {
     animation: nav-link-enter 300ms ease-out both;
   }

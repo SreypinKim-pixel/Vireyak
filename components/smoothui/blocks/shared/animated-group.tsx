@@ -110,7 +110,6 @@ const addDefaultVariants = (variants: Variants) => ({
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
-// Keep a stable wrapper per element type across all renders and instances.
 const motionComponents = new Map<
   React.ElementType,
   React.ComponentType<import("motion/react").HTMLMotionProps<"div">>

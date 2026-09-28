@@ -19,7 +19,7 @@
     rgb(59 130 246 / 20%) 50%
   );
   padding: 12px;
-  border: 1px solid rgb(124 131 173 / 25%);
+  border: 1px solid rgb(124 131 173 / 60%);
   border-radius: 8px;
   background: rgb(var(--panel));
   color: rgb(var(--ink));
@@ -54,4 +54,8 @@
 .calendar :global(.rdp-day_button:focus-visible) {
   outline: 3px solid rgb(59 130 246 / 30%);
   outline-offset: 1px;
+}
+
+:global(.dark) .calendar {
+  border-color: rgb(124 131 173 / 25%);
 }

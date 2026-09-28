@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import AboutHero from "../../components/about/AboutHero";
 import HeroHighlights, {
@@ -11,7 +12,7 @@ import AboutIntro from "../../components/about/AboutIntro";
 import CambodiaSection from "../../components/about/CambodiaSection";
 import PlacesSection from "../../components/about/PlacesSection";
 import TeamSection from "../../components/about/TeamSection";
-import WhyCamTrip from "../../components/about/WhyCamTrip";
+import WhyVireyak from "../../components/about/WhyVireyak";
 import TravelCompass from "../../components/about/TravelCompass";
 import AboutFaqs from "../../components/about/AboutFaqs";
 import AboutCTA from "../../components/about/AboutCTA";
@@ -21,18 +22,8 @@ import {
   type PlaceCardData,
 } from "../../lib/camTripApi";
 
-export const metadata = {
-  title: "About CamTrip",
-  description:
-    "CamTrip is a Cambodia-first travel platform. See what it does, the provinces and places it covers, the team behind it, and how to start exploring.",
-};
-
-// Route segment config must be a literal. Keep in sync with
-// CAMTRIP_REVALIDATE_SECONDS in lib/camTripApi.ts.
 export const revalidate = 1800;
 
-// Preview content used only when the public API cannot be reached, so the
-// page always shows real Cambodian destinations instead of an empty grid.
 const fallbackPlaces: PlaceCardData[] = destinations.map((destination) => ({
   id: `preview-${destination.name}`,
   nameEn: destination.name,
@@ -69,8 +60,7 @@ async function LiveCambodiaSection() {
 
 async function LivePlacesSection() {
   const { featuredPlaces, totalPlaces, ok } = await loadCambodiaCatalogue();
-  // "empty" means the API answered but returned no places; "error" means it
-  // could not be reached, which switches to the local preview content.
+
   const status = !ok.places
     ? "error"
     : featuredPlaces.length > 0
@@ -104,10 +94,18 @@ export default function AboutPage() {
         <LivePlacesSection />
       </Suspense>
       <TeamSection />
-      <WhyCamTrip />
+      <WhyVireyak />
       <TravelCompass />
       <AboutFaqs />
       <AboutCTA />
     </>
   );
 }
+
+export const metadata = pageMetadata({
+  tabTitle: "About",
+  title: "About Vireyak",
+  description:
+    "Meet Vireyak, a Cambodia travel discovery project. Explore our story, our team, and the provinces and places that inspire us.",
+  path: "/about",
+});

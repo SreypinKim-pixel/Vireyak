@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { getProvinceAttractions } from "../../../../lib/provinces";
 import TravelCard from "../../../../components/TravelCard";
@@ -19,4 +20,20 @@ export default async function ProvinceAttractionsPage({
       </div>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const result = getProvinceAttractions(id);
+  if (!result) notFound();
+  const name = result.province.name;
+  return pageMetadata({
+    title: `${name} Attractions & Travel Guide`,
+    description: `Explore attractions and places to visit in ${name}, Cambodia, with Vireyak.`,
+    path: `/provinces/${encodeURIComponent(id)}/attractions`,
+  });
 }

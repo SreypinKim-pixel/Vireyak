@@ -2,7 +2,6 @@ import { attractions } from "../data/travel";
 
 import { provinceNames } from "../data/province-names";
 
-// All 24 provinces plus Phnom Penh. Slugs are demo IDs, not administrative codes.
 export const provinces = provinceNames.map((name) => ({
   id: name.toLowerCase().replaceAll(" ", "-"),
   name,

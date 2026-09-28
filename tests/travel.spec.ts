@@ -18,7 +18,7 @@ test("global navigation, local photography, theme persistence, and mobile layout
     page
       .getByRole("navigation", { name: "Main navigation", exact: true })
       .getByRole("link"),
-  ).toHaveCount(4);
+  ).toHaveCount(5);
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all(
@@ -116,8 +116,7 @@ test("search carries dates and travelers to a stay preview", async ({
   await page.getByRole("spinbutton", { name: "Travelers" }).fill("3");
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(page).toHaveURL(/destination=Siem\+Reap/);
-  // Lotus Blanc Retreat, Angkor Garden Villas, and Raffles Grand Hotel
-  // d'Angkor all sleep at least three guests.
+
   await expect(page.locator("article")).toHaveCount(3);
   await page
     .getByRole("link", { name: "Lotus Blanc Retreat", exact: true })
@@ -139,7 +138,7 @@ test("filters, sorting, saved favorites, and empty results", async ({
   page,
 }) => {
   await page.goto("/stays");
-  // Six curated previews plus eleven named Cambodian properties.
+
   await expect(page.locator("article")).toHaveCount(17);
   await choose(page, "Sort results", "Price: low to high");
   await expect(page.locator("article").first()).toContainText(
@@ -188,14 +187,14 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
     "Reservations are not open yet",
   );
   await page.goto("/login");
-  await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText(
-    "Authentication service is not connected yet",
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "Login successful!",
   );
   await expect(page).toHaveURL(/\/$/);
-  for (const route of ["/products", "/products/1", "/table"]) {
+  for (const route of ["/products", "/products/1"]) {
     await page.goto(route);
     await expect(page).toHaveURL(/\/stays$/);
   }
@@ -206,12 +205,11 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   ).toBeVisible();
 });
 
-test("login form validates client-side without pretending authentication", async ({
+test("login validates fields and completes a labeled demo session", async ({
   page,
 }) => {
   await page.goto("/login");
 
-  // Empty submission shows both field errors and stays on the page.
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("#email-error")).toContainText(
     "Email is required.",
@@ -221,17 +219,15 @@ test("login form validates client-side without pretending authentication", async
   );
   await expect(page).toHaveURL(/\/login$/);
 
-  // An invalid email format is rejected even with a filled password.
   await page.getByLabel("Email address").fill("not-an-email");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("#email-error")).toContainText(
     "Enter a valid email address.",
   );
   await expect(page.locator("#password-error")).toHaveCount(0);
 
-  // A missing password is rejected even when the email is valid.
-  await page.getByLabel("Email address").fill("test@example.com");
+  await page.getByLabel("Email address").fill("demo@example.com");
   await page.getByLabel("Password", { exact: true }).fill("");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("#password-error")).toContainText(
@@ -239,54 +235,54 @@ test("login form validates client-side without pretending authentication", async
   );
   await expect(page.locator("#email-error")).toHaveCount(0);
 
-  // Login passwords must be at least 8 characters with an uppercase letter, a
-  // lowercase letter, and a number.
-  const strengthMessage =
-    "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
-  for (const password of ["Ab1", "abcdefgh", "ABCDEFG1", "Abcdefgh"]) {
-    await page.getByLabel("Email address").fill("test@example.com");
+  for (const password of ["Ab1", "WrongPassword123", "demopassword123"]) {
+    await page.getByLabel("Email address").fill("demo@example.com");
     await page.getByLabel("Password", { exact: true }).fill(password);
     await page.getByRole("button", { name: "Log in", exact: true }).click();
-    await expect(page.locator("#password-error")).toContainText(
-      strengthMessage,
+    await expect(page.locator("form").getByRole("alert")).toContainText(
+      "Incorrect email or password",
     );
     await expect(page).toHaveURL(/\/login$/);
+    expect(
+      await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
+    ).toBeNull();
   }
+  await page.getByLabel("Email address").fill("wrong@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "Incorrect email or password",
+  );
 
-  // Remember me is visible and unchecked by default (session-only marker).
   const remember = page.getByRole("checkbox", { name: "Remember me" });
   await expect(remember).toBeVisible();
   await expect(remember).not.toBeChecked();
 
-  // A valid password passes client-side validation without claiming real login,
-  // then opens the home page as a guest so the preview does not dead-end.
-  await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  const status = page.getByRole("status");
+  await expect(
+    page.getByRole("button", { name: "Logging in…" }),
+  ).toBeDisabled();
+  const status = page.locator("form").getByRole("alert");
   await expect(status).toContainText(
-    "Your login information is valid. Authentication service is not connected yet.",
+    "Login successful! Taking you to the homepage…",
   );
-  await expect(status).not.toContainText(
-    /signed in|successful|welcome back|authenticated/i,
-  );
+
   await expect(page).toHaveURL(/\/$/);
 
-  // Default unchecked login uses session-only storage, never persistent.
   expect(
     await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
-  ).toBe("test@example.com");
+  ).toBe("demo@example.com");
   expect(
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
   ).toBe(null);
 
-  // The navbar shows the demo sign-in and a log-out action.
   await expect(
     page.getByRole("button", { name: "Log out", exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("Signed in as test@example.com")).toBeVisible();
+  await expect(page.getByText("Signed in as demo@example.com")).toBeVisible();
 
-  // The login page still links to the existing register page.
   await page.goto("/login");
   await page
     .locator("p")
@@ -301,7 +297,6 @@ test("login form validates client-side without pretending authentication", async
     }),
   ).toBeVisible();
 
-  // Logging out clears both stores and restores the guest nav.
   await page.goto("/");
   await page.getByRole("button", { name: "Log out", exact: true }).click();
   await expect(
@@ -314,17 +309,16 @@ test("login form validates client-side without pretending authentication", async
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
   ).toBe(null);
 
-  // Checking "Remember me" keeps the demo marker in persistent local storage.
   await page.goto("/login");
   await remember.check();
   await expect(remember).toBeChecked();
-  await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
   expect(
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
-  ).toBe("test@example.com");
+  ).toBe("demo@example.com");
   await page.getByRole("button", { name: "Log out", exact: true }).click();
   expect(
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
@@ -336,7 +330,6 @@ test("province lookup fetches live teacher API data with loading and error state
 }) => {
   await page.goto("/");
 
-  // Slow this same-origin proxy request so the loading state is observable.
   await page.route("**/api/provinces/2", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 600));
     await route.continue();
@@ -357,8 +350,6 @@ test("province lookup fetches live teacher API data with loading and error state
     "GET /api/provinces/2",
   );
 
-  // Local name-matched photos replace wrong or missing remote images, e.g.
-  // Kampong Thom (14) shows the user-added public/images/Kampong Thom.png.
   await page.getByLabel("Province ID").fill("14");
   await page
     .getByRole("button", { name: "View province", exact: true })
@@ -368,7 +359,7 @@ test("province lookup fetches live teacher API data with loading and error state
   );
   await expect(
     page.getByTestId("province-result").getByRole("img"),
-  ).toHaveAttribute("src", "/images/Kampong Thom.png");
+  ).toHaveAttribute("src", "/images/provinces/kampong-thom.jpg");
   await expect
     .poll(async () =>
       page
@@ -383,7 +374,6 @@ test("province lookup fetches live teacher API data with loading and error state
     )
     .toBe(true);
 
-  // A missing province is reported clearly, without showing stale data.
   await page.getByLabel("Province ID").fill("99999");
   await page
     .getByRole("button", { name: "View province", exact: true })
@@ -393,7 +383,6 @@ test("province lookup fetches live teacher API data with loading and error state
   );
   await expect(page.getByTestId("province-result")).toHaveCount(0);
 
-  // Empty input is rejected locally before any request is attempted.
   await page.getByLabel("Province ID").fill("");
   await page
     .getByRole("button", { name: "View province", exact: true })
@@ -410,7 +399,7 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
   const destination = page.getByRole("combobox", {
     name: "Destination",
     exact: true,
-    includeHidden: true, // Radix hides the trigger from the accessibility tree while open.
+    includeHidden: true,
   });
   await destination.focus();
   await page.keyboard.press("Enter");
@@ -419,7 +408,7 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
     page.getByRole("option", { name: "Explore Cambodia", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("End");
-// Radix moves keyboard focus on the next task; wait before selecting.
+
   await expect(
     page.getByRole("option", { name: "Tboung Khmum", exact: true }),
   ).toBeFocused();
@@ -431,7 +420,7 @@ test("themed dropdowns support keyboard navigation, dismissal, reset, and mobile
     page.getByRole("option", { name: "Tboung Khmum", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("Home");
-await expect(
+  await expect(
     page.getByRole("option", { name: "Explore Cambodia", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("Enter");
@@ -470,6 +459,6 @@ await expect(
   await page.getByRole("option", { name: "Koh Rong", exact: true }).click();
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(page).toHaveURL(/destination=Koh\+Rong/);
-  // The island hideaway and The Royal Sands Koh Rong both sleep four.
+
   await expect(page.locator("article")).toHaveCount(2);
 });

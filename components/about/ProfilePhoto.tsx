@@ -4,8 +4,6 @@ import { useState } from "react";
 import type { StaticImageData } from "next/image";
 import Icon from "../Icon";
 
-// Deterministic tones: the same name always renders the same placeholder, on
-// the server and in the browser, so there is no hydration mismatch.
 const TONES = [
   { surface: "bg-gradient-to-br from-navy to-indigo", text: "text-ivory" },
   { surface: "bg-gradient-to-br from-indigo to-slate", text: "text-ivory" },
@@ -13,13 +11,6 @@ const TONES = [
   { surface: "bg-gradient-to-br from-slate to-navy", text: "text-ivory" },
 ];
 
-// Image areas. Each variant carries its own position so a card face is never
-// mixed with the in-flow `relative` frames, and each keeps one fixed frame size
-// so cards in the same row never end up with mismatched photo heights.
-// - cover: square tile, e.g. a card with the details underneath.
-// - portrait: the mentor column, which fills its grid cell height from `sm` up.
-// - fill: the whole card face, for the interactive gallery where the caption is
-//   layered over the photo.
 const VARIANTS: Record<"cover" | "portrait" | "fill", string> = {
   cover: "relative aspect-square w-full",
   portrait:
@@ -46,26 +37,6 @@ function toneFor(name: string) {
   return hash % TONES.length;
 }
 
-/**
- * Photo area for a team member or mentor.
- *
- * `photo` accepts either a static import — as data/team.ts does, e.g.
- * `import pinPhoto from "./image/Pin-Leader.JPG"` — or a plain path string for
- * a file in `public/`, for example `photo: "/images/team/member-1.jpg"`. Both
- * fill the frame with `object-cover` anchored to the top edge, so a portrait
- * shot with the face in the upper half keeps the head inside the frame.
- *
- * Until a photo is set — or if it fails to load — an initials placeholder is
- * shown instead, so the card never breaks and never shows a broken image.
- *
- * `variant` picks the frame: "cover" for a square tile, "portrait" for the
- * mentor column, and "fill" for the interactive gallery, where the photo is the
- * card face and the caption sits on top of it. All three crop with
- * `object-cover` anchored to the top edge.
- *
- * Gallery portraits stay at a fixed size while their parent layer is clipped
- * and translated to create the accordion expansion.
- */
 function photoSourceOf(photo: StaticImageData | string | null) {
   if (typeof photo === "string" && photo.length > 0) {
     return { src: photo, width: 800, height: 800 };
@@ -100,8 +71,6 @@ export default function ProfilePhoto({
       data-slot="profile-photo"
       className={`block overflow-hidden ${VARIANTS[variant] || VARIANTS.cover} ${tone.surface} ${tone.text}`}
     >
-      {/* Always rendered underneath, so it doubles as a placeholder while a real
-          photo is still loading, and as the fallback if that photo fails. */}
       <span
         aria-hidden="true"
         className="absolute inset-0 grid place-items-center"
@@ -129,7 +98,7 @@ export default function ProfilePhoto({
           className={`absolute inset-0 h-full w-full object-cover object-top ${
             isGalleryFace
               ? "team-gallery-photo"
-              : "transition duration-700 motion-reduce:transition-none group-hover:scale-105"
+              : "transition duration-500 ease-out motion-reduce:transition-none motion-safe:group-hover:scale-105"
           }`}
         />
       ) : null}

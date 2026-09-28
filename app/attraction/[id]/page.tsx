@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { DetailPageProps } from "@/lib/travel-types";
 import { notFound } from "next/navigation";
 import { attractions } from "../../../data/travel";
@@ -10,9 +11,14 @@ export async function generateMetadata({
   params,
 }: Pick<DetailPageProps, "params">) {
   const { id } = await params;
-  return {
-    title: attractions.find((i) => i.id === id)?.name || "Experience not found",
-  };
+  const item = attractions.find((item) => item.id === id);
+  if (!item) notFound();
+  return pageMetadata({
+    title: `${item.name} in ${item.destination}`,
+    description: item.description,
+    path: `/attraction/${encodeURIComponent(item.id)}`,
+    image: item.image,
+  });
 }
 export default async function AttractionPage({
   params,

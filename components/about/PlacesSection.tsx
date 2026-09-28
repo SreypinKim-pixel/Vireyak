@@ -4,12 +4,6 @@ import Icon from "../Icon";
 import { placesSection } from "../../data/about";
 import PlaceCard from "./PlaceCard";
 
-/**
- * Explore Cambodia grid. Handles every API outcome:
- * ready (cards), empty (helpful empty state) and error (static fallback cards
- * plus an explanation), so the page never breaks when the API is unreachable.
- * @param {{ places: import("./PlaceCard").PlaceCardData[], fallbackPlaces?: import("./PlaceCard").PlaceCardData[], totalPlaces?: number, status?: "ready" | "empty" | "error" }} props
- */
 export default function PlacesSection({
   places,
   fallbackPlaces = [],
@@ -56,7 +50,7 @@ export default function PlacesSection({
       </div>
 
       {isError ? (
-        <div className="mt-9 flex items-start gap-3 rounded-xl border border-gold/30 bg-gold/10 p-5">
+        <div className="mt-9 flex items-start gap-3 rounded-xl border border-gold/60 dark:border-gold/30 bg-gold/10 p-5">
           <Icon name="shield" size={18} className="mt-0.5 shrink-0 text-gold" />
           <div>
             <p className="text-xs font-semibold text-navy dark:text-ivory">
@@ -70,7 +64,7 @@ export default function PlacesSection({
       ) : null}
 
       {isEmpty ? (
-        <div className="mt-9 rounded-xl border border-dashed border-slate/30 bg-panel px-6 py-14 text-center">
+        <div className="mt-9 rounded-xl border border-dashed border-slate/60 dark:border-slate/30 bg-panel px-6 py-14 text-center">
           <Icon name="search" size={30} className="mx-auto mb-4 text-slate" />
           <h3 className="text-base font-medium text-navy dark:text-ivory">
             {placesSection.emptyTitle}

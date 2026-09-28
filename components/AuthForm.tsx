@@ -1,19 +1,32 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signInDemo, registerLocalAccount } from "../lib/demoSession";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
-import { signInDemo } from "../lib/demoSession";
-
-// Login password rules: at least 8 characters with an uppercase letter, a
-// lowercase letter, and a number. No special character is required.
-const PASSWORD_STRENGTH_PATTERN = /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/;
-const PASSWORD_STRENGTH_MESSAGE =
-  "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
+import { Apple } from "./auth/Apple";
+import { Google } from "./auth/Google";
 export default function AuthForm({ register = false }) {
   const router = useRouter();
+  const [submitState, setSubmitState] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const submitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  const redirectTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  useEffect(
+    () => () => {
+      clearTimeout(submitTimer.current);
+      clearTimeout(redirectTimer.current);
+    },
+    [],
+  );
   const [message, setMessage] = useState("");
+  const [providerMessage, setProviderMessage] = useState("");
   const [province, setProvince] = useState("");
   const [attraction, setAttraction] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -81,9 +94,11 @@ export default function AuthForm({ register = false }) {
   }
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitState === "loading" || submitState === "success") return;
     setMessage("");
-    const values = new FormData(e.currentTarget);
+    const data = new FormData(e.currentTarget);
     {
+      const values = new FormData(e.currentTarget);
       const next: Record<string, string> = {};
       if (register && !String(values.get("name") ?? "").trim())
         next.name = "Enter your full name.";
@@ -99,14 +114,6 @@ export default function AuthForm({ register = false }) {
         next.password = "Password is required.";
       else if (register && String(values.get("password") ?? "").length < 12)
         next.password = "Use at least 12 characters.";
-      else if (
-        !register &&
-        (String(values.get("password") ?? "").length < 8 ||
-          !PASSWORD_STRENGTH_PATTERN.test(
-            String(values.get("password") ?? ""),
-          ))
-      )
-        next.password = PASSWORD_STRENGTH_MESSAGE;
       if (
         register &&
         (!values.get("confirmPassword") ||
@@ -116,7 +123,10 @@ export default function AuthForm({ register = false }) {
         next.confirmPassword = "Your passwords must match.";
       setErrors(next);
       if (Object.keys(next).length) {
-        setMessage("Please fix the highlighted fields and try again.");
+        setSubmitState("error");
+        setMessage(
+          `${register ? "Sign-up" : "Login"} failed. Please fix the highlighted fields and try again.`,
+        );
         const invalidField = e.currentTarget.elements.namedItem(
           Object.keys(next)[0],
         );
@@ -124,38 +134,54 @@ export default function AuthForm({ register = false }) {
         return;
       }
     }
+    const form = e.currentTarget;
+    const email = String(data.get("email") || "").trim();
+    const remember = data.get("remember") === "on";
+    const password = String(data.get("password") || "");
+    setSubmitState("loading");
     setMessage(
       register
-        ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
-        : "Your login information is valid. Authentication service is not connected yet.",
+        ? "Setting up your demo profile…"
+        : "Starting your demo session…",
     );
-    e.currentTarget.reset();
-    setAttraction("");
-    setProvince("");
+
     setShowPassword(false);
-    if (!register) {
-      signInDemo(
-        String(values.get("email") ?? "").trim(),
-        values.get("remember") === "on",
+    submitTimer.current = setTimeout(async () => {
+      try {
+        if (register) {
+          await registerLocalAccount(email, password);
+        } else if (!(await signInDemo(email, password, remember))) {
+          setSubmitState("error");
+          setMessage("Login failed. Incorrect email or password.");
+          return;
+        }
+      } catch (error) {
+        setSubmitState("error");
+        setMessage(
+          error instanceof Error
+            ? error.message
+            : "Unable to save your account. Enable browser storage and try again.",
+        );
+        return;
+      }
+      form.reset();
+      setSubmitState("success");
+      setMessage(
+        register
+          ? "Sign-up successful! Please log in to continue."
+          : "Login successful! Taking you to the homepage…",
       );
-      setTimeout(() => router.push("/"), 1000);
-    }
+      setAttraction("");
+      setProvince("");
+      redirectTimer.current = setTimeout(
+        () => router.push(register ? "/login" : "/"),
+        1000,
+      );
+    }, 700);
   }
   return (
-    <div
-      className={
-        register
-          ? "flex min-h-dvh items-center justify-center bg-gradient-to-br from-gold/10 via-transparent to-indigo/10 px-4 py-6 sm:px-8 sm:py-8"
-          : "shell py-10 sm:py-16"
-      }
-    >
-      <div
-        className={
-          register
-            ? "grid w-full max-w-[1040px] overflow-hidden rounded-3xl border border-slate/15 bg-panel shadow-soft lg:grid-cols-[0.85fr_1.15fr]"
-            : "mx-auto grid max-w-[1000px] overflow-hidden rounded-2xl border border-slate/20 bg-panel shadow-soft lg:grid-cols-2"
-        }
-      >
+    <div className="flex min-h-dvh items-center justify-center bg-gradient-to-br from-gold/10 via-transparent to-indigo/10 px-4 py-6 sm:px-8 sm:py-8">
+      <div className="grid w-full max-w-[1040px] overflow-hidden rounded-3xl border border-slate/60 dark:border-slate/15 bg-panel shadow-soft sm:min-h-[820px] lg:grid-cols-[0.85fr_1.15fr]">
         <div className="relative isolate hidden min-h-[640px] flex-col justify-end bg-navy p-10 text-white lg:flex">
           <img
             src="/images/l&s.png"
@@ -181,21 +207,13 @@ export default function AuthForm({ register = false }) {
             <Icon name="pin" size={14} /> Angkor Wat, Siem Reap
           </p>
         </div>
-        <div
-          className={
-            register
-              ? "mx-auto flex w-full max-w-xl flex-col justify-center px-6 py-7 sm:px-10 sm:py-8"
-              : "flex flex-col justify-center p-6 sm:p-10"
-          }
-        >
-          {register && (
-            <Link
-              href="/"
-              className="mb-5 w-fit text-xs font-medium text-ink/60 transition-colors hover:text-gold"
-            >
-              ← Back to Vireyak
-            </Link>
-          )}
+        <div className="mx-auto flex w-full max-w-xl flex-col justify-center px-6 py-7 sm:px-10 sm:py-8">
+          <Link
+            href="/"
+            className="mb-5 w-fit text-xs font-medium text-ink/60 transition-colors hover:text-gold"
+          >
+            ← Back to Vireyak
+          </Link>
           <p className="eyebrow mb-3">
             {register ? "Begin something beautiful" : "Good to see you again"}
           </p>
@@ -210,11 +228,12 @@ export default function AuthForm({ register = false }) {
             }
           >
             {register
-              ? "Preview registration with demo details. Account creation is not connected yet; your details will not be saved."
-              : "Your next Cambodian escape is waiting."}
+              ? "Create a local account, then log in with the same email and password. Accounts are saved only in this browser; use a sample password."
+              : "Log in with your registered account or the demo account on this browser."}
           </p>
           <form
             onSubmit={submit}
+            aria-busy={submitState === "loading"}
             noValidate
             className={
               register
@@ -282,10 +301,10 @@ export default function AuthForm({ register = false }) {
                   type={showPassword ? "text" : "password"}
                   autoComplete={register ? "new-password" : "current-password"}
                   required
-                  minLength={register ? 12 : 8}
+                  minLength={register ? 12 : undefined}
                   maxLength={128}
                   placeholder={
-                    register ? "12+ characters" : "Enter a demo password"
+                    register ? "12+ characters" : "Enter your password"
                   }
                   className="field pr-16"
                 />
@@ -300,19 +319,6 @@ export default function AuthForm({ register = false }) {
               </span>
               {fieldError("password")}
             </label>
-            {!register && (
-              <label className="flex items-center gap-2.5">
-                <input
-                  type="checkbox"
-                  name="remember"
-                  aria-label="Remember me"
-                  className="h-4 w-4 accent-indigo dark:accent-brightgold"
-                />
-                <span className="text-[11px] font-medium text-ink/70">
-                  Remember me
-                </span>
-              </label>
-            )}
             {register && (
               <>
                 <label className="block min-w-0 sm:!col-span-1">
@@ -340,31 +346,36 @@ export default function AuthForm({ register = false }) {
                   />
                   {fieldError("confirmPassword")}
                 </label>
-                {provinces.length > 0 && (
-                  <div className="block">
-                    <label htmlFor="province-interest" className="field-label">
-                      Province of interest (optional)
-                    </label>
-                    <Dropdown
-                      id="province-interest"
-                      label="Province of interest (optional)"
-                      name="province"
-                      value={province}
-                      onChange={(value) => {
-                        setProvince(value);
-                        setAttraction("");
-                      }}
-                      describedBy="attraction-help"
-                      options={[
-                        { value: "", label: "All provinces" },
-                        ...provinces.map((item) => ({
-                          value: item.id,
-                          label: item.name,
-                        })),
-                      ]}
-                    />
-                  </div>
-                )}
+                <div className="block">
+                  <label htmlFor="province-interest" className="field-label">
+                    Province of interest (optional)
+                  </label>
+                  <Dropdown
+                    id="province-interest"
+                    label="Province of interest (optional)"
+                    name="province"
+                    disabled={loadState !== "ready" || !provinces.length}
+                    value={province}
+                    onChange={(value) => {
+                      setProvince(value);
+                      setAttraction("");
+                    }}
+                    describedBy="attraction-help"
+                    options={[
+                      {
+                        value: "",
+                        label:
+                          loadState === "loading"
+                            ? "Loading provinces…"
+                            : "All provinces",
+                      },
+                      ...provinces.map((item) => ({
+                        value: item.id,
+                        label: item.name,
+                      })),
+                    ]}
+                  />
+                </div>
                 <div className="block">
                   <label htmlFor="attraction-interest" className="field-label">
                     Attraction of interest (optional)
@@ -418,19 +429,99 @@ export default function AuthForm({ register = false }) {
                 )}
               </>
             )}
-            <button type="submit" className="button-primary w-full">
-              {register ? "Create account" : "Log in"}
-              <Icon name="arrow" size={16} />
+            {!register && (
+              <label className="flex items-center gap-2.5">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  aria-label="Remember me"
+                  className="h-4 w-4 accent-indigo dark:accent-brightgold"
+                />
+                <span className="text-[11px] font-medium text-ink/70">
+                  Remember me
+                </span>
+              </label>
+            )}
+            <button
+              type="submit"
+              disabled={submitState === "loading" || submitState === "success"}
+              className="button-primary w-full disabled:cursor-wait disabled:opacity-75"
+            >
+              {submitState === "loading"
+                ? register
+                  ? "Signing up…"
+                  : "Logging in…"
+                : submitState === "success"
+                  ? "Success!"
+                  : register
+                    ? "Create account"
+                    : "Log in"}
+              {submitState === "loading" ? (
+                <span
+                  aria-hidden="true"
+                  className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white motion-safe:animate-spin"
+                />
+              ) : (
+                <Icon
+                  name={submitState === "success" ? "check" : "arrow"}
+                  size={16}
+                />
+              )}
             </button>
             {message && (
               <p
-                role="status"
-                className="rounded-lg border border-slate/20 p-4 text-xs leading-6"
+                role={submitState === "loading" ? "status" : "alert"}
+                aria-atomic="true"
+                className={`rounded-lg border p-4 text-sm leading-6 ${submitState === "success" ? "border-green-600/40 bg-green-600/10 text-green-800 dark:text-green-200" : submitState === "error" ? "border-red-600/40 bg-red-600/10 text-red-800 dark:text-red-200" : "border-slate/60 dark:border-slate/20"}`}
               >
                 {message}
               </p>
             )}
           </form>
+          {!register && (
+            <div className="mt-5">
+              <div className="mb-4 flex items-center gap-3 text-xs text-ink/50">
+                <span className="h-px flex-1 bg-border" />
+                <span>Or continue with</span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {[
+                  { name: "Google", Logo: Google },
+                  { name: "Apple", Logo: Apple },
+                ].map(({ name, Logo }) => (
+                  <button
+                    key={name}
+                    type="button"
+                    className="button-outline w-full gap-2.5"
+                    disabled={
+                      submitState === "loading" || submitState === "success"
+                    }
+                    aria-describedby="provider-help"
+                    onClick={() =>
+                      setProviderMessage(
+                        `${name} sign-in is not connected yet. Use the demo login or continue as a guest.`,
+                      )
+                    }
+                  >
+                    <Logo
+                      className="h-5 w-5 shrink-0"
+                      aria-hidden="true"
+                      focusable="false"
+                    />
+                    Continue with {name}
+                  </button>
+                ))}
+              </div>
+              <p
+                id="provider-help"
+                role="status"
+                className="mt-3 text-center text-xs leading-5 text-ink/60"
+              >
+                {providerMessage || "Google and Apple sign-in are coming soon."}
+              </p>
+            </div>
+          )}
           <p className="mt-5 text-center text-xs text-ink/60">
             {register ? "Already have an account?" : "New to Vireyak?"}{" "}
             <Link

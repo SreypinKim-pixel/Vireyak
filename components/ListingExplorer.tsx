@@ -22,16 +22,26 @@ export default function ListingExplorer({
   const [savedOnly, setSavedOnly] = useState(false);
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const types = ["All", ...new Set(items.map((i) => i.type))];
-  const destination =
+  const initialDestination =
     typeof initial.destination === "string" ? initial.destination : "";
+  const [destination, setDestination] = useState(initialDestination);
+  const [previousDestination, setPreviousDestination] =
+    useState(initialDestination);
+  if (previousDestination !== initialDestination) {
+    setPreviousDestination(initialDestination);
+    setDestination(initialDestination);
+  }
   const catalogDestination =
     provinces.find((province) => province.name === destination)?.destination ??
     destination;
-  const query = new URLSearchParams(
+  const queryParams = new URLSearchParams(
     Object.entries(initial).filter(
       (entry): entry is [string, string] => typeof entry[1] === "string",
     ),
-  ).toString();
+  );
+  if (destination) queryParams.set("destination", destination);
+  else queryParams.delete("destination");
+  const query = queryParams.toString();
   const guests = Math.max(1, Math.min(6, Number(initial.guests) || 2));
   const filtered = useMemo(() => {
     const result = items.filter(
@@ -75,7 +85,7 @@ export default function ListingExplorer({
   }
   return (
     <>
-      <section className="border-b border-slate/15 bg-slate/[0.045] pb-10 pt-10">
+      <section className="border-b border-slate/60 dark:border-slate/15 bg-slate/[0.045] pb-10 pt-10">
         <div className="shell">
           <p className="eyebrow">
             {kind === "stays"
@@ -97,12 +107,13 @@ export default function ListingExplorer({
             compact
             initial={initial}
             mode={kind}
+            onDestinationChange={setDestination}
           />
         </div>
       </section>
       <section className="shell grid gap-8 py-10 lg:grid-cols-[215px_1fr]">
         <aside>
-          <div className="rounded-xl border border-slate/20 bg-panel p-5">
+          <div className="rounded-xl border border-slate/60 dark:border-slate/20 bg-panel p-5">
             <h2 className="mb-5 text-sm font-semibold">
               Make it your kind of trip
             </h2>
@@ -229,7 +240,7 @@ export default function ListingExplorer({
               ))}
             </div>
           ) : (
-            <div className="rounded-xl border border-dashed border-slate/30 px-6 py-16 text-center">
+            <div className="rounded-xl border border-dashed border-slate/60 dark:border-slate/30 px-6 py-16 text-center">
               <Icon
                 name="search"
                 size={32}

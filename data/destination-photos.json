@@ -33,7 +33,7 @@
       "licenseUrl": ""
     },
     "banteay-chhmar-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Banteay_Chhmar_IMG_0715.JPG/960px-Banteay_Chhmar_IMG_0715.JPG",
+      "src": "/images/provinces/banteay-meanchey.jpg",
       "alt": "Banteay Chhmar Temple, Banteay Meanchey",
       "source": "https://commons.wikimedia.org/wiki/File:Banteay_Chhmar_IMG_0715.JPG",
       "credit": "Antoinette von Moos",
@@ -78,7 +78,7 @@
       "backupSrc": "/images/kampong-phluk.jpg"
     },
     "phnom-sampov-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Gate_on_Phnom_Sampeau.jpg/960px-Gate_on_Phnom_Sampeau.jpg",
+      "src": "/images/provinces/battambang.jpg",
       "alt": "Phnom Sampeau, Battambang",
       "source": "https://commons.wikimedia.org/wiki/File:Gate_on_Phnom_Sampeau.jpg",
       "credit": "Christophe95",
@@ -87,7 +87,7 @@
       "backupSrc": "/images/phnom-sampov.jpg"
     },
     "bousra-waterfall-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Bousra_Waterfall.jpg/960px-Bousra_Waterfall.jpg",
+      "src": "/images/provinces/mondulkiri.jpg",
       "alt": "Bou Sra Waterfall, Mondulkiri",
       "source": "https://commons.wikimedia.org/wiki/File:Bousra_Waterfall.jpg",
       "credit": "Kiensvay",
@@ -96,7 +96,7 @@
       "backupSrc": "/images/bousra-waterfall.jpg"
     },
     "sambor-prei-kuk-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Sambor_Prei_Kuk-nX-11.jpg/960px-Sambor_Prei_Kuk-nX-11.jpg",
+      "src": "/images/provinces/kampong-thom.jpg",
       "alt": "Sambor Prei Kuk, Kampong Thom",
       "source": "https://commons.wikimedia.org/wiki/File:Sambor_Prei_Kuk-nX-11.jpg",
       "credit": "PsamatheM",
@@ -105,7 +105,7 @@
       "backupSrc": "/images/sambor-prei-kuk.jpg"
     },
     "nokor-bachey-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/VatNokor_01.jpg/960px-VatNokor_01.jpg",
+      "src": "/images/provinces/kampong-cham.jpg",
       "alt": "Wat Nokor, Kampong Cham",
       "source": "https://commons.wikimedia.org/wiki/File:VatNokor_01.jpg",
       "credit": "BluesyPete",
@@ -114,7 +114,7 @@
       "backupSrc": "/images/nokor-bachey.jpg"
     },
     "oudong-jpg": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Udong_0001.jpg",
+      "src": "/images/provinces/kandal.jpg",
       "alt": "Oudong, Kandal",
       "source": "https://commons.wikimedia.org/wiki/File:Udong_0001.jpg",
       "credit": "Stefan Fussan",
@@ -123,7 +123,7 @@
       "backupSrc": "/images/oudong.jpg"
     },
     "phnom-chisor-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Phnom_Chisor_4003.jpg/960px-Phnom_Chisor_4003.jpg",
+      "src": "/images/provinces/takeo.jpg",
       "alt": "Phnom Chisor Temple, Takeo",
       "source": "https://commons.wikimedia.org/wiki/File:Phnom_Chisor_4003.jpg",
       "credit": "Stefan Fussan",
@@ -132,7 +132,7 @@
       "backupSrc": "/images/phnom-chisor.jpg"
     },
     "kampong-luong-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Kompong_luong_catholic_church.jpg/960px-Kompong_luong_catholic_church.jpg",
+      "src": "/images/provinces/pursat.jpg",
       "alt": "Kampong Luong floating village, Pursat",
       "source": "https://commons.wikimedia.org/wiki/File:Kompong_luong_catholic_church.jpg",
       "credit": "Phil Whitehouse from London, United Kingdom",
@@ -141,7 +141,7 @@
       "backupSrc": "/images/kampong-luong.jpg"
     },
     "kirirom-national-park-jpg": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/0/05/Kirirom_National_Park.jpg",
+      "src": "/images/provinces/kampong-speu.jpg",
       "alt": "Kirirom National Park, Kampong Speu",
       "source": "https://commons.wikimedia.org/wiki/File:Kirirom_National_Park.jpg",
       "credit": "Arie at flickr",
@@ -235,7 +235,7 @@
       "licenseUrl": ""
     },
     "destinations-attraction-41-jpg": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Prasat_Ta_Muen_Thom-3-HDC.jpg/960px-Prasat_Ta_Muen_Thom-3-HDC.jpg",
+      "src": "/images/provinces/oddar-meanchey.jpg",
       "alt": "Prasat Ta Muen Thom, Oddar Meanchey",
       "source": "https://commons.wikimedia.org/wiki/File:Prasat_Ta_Muen_Thom-3-HDC.jpg",
       "credit": "Ddalbiez",
@@ -276,7 +276,7 @@
       "licenseUrl": ""
     },
     "commons-2461855": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/3/34/Sunset_Kracheh.jpg",
+      "src": "/images/provinces/kratie.jpg",
       "alt": "Sunset over the Mekong River in Kratie",
       "source": "https://commons.wikimedia.org/wiki/File:Sunset_Kracheh.jpg",
       "credit": "Juan Manuel Garcia from Mexico City, Mexico",
@@ -285,12 +285,22 @@
       "backupSrc": "/images/locations/commons-2461855.jpg"
     },
     "tatai": {
-      "src": "https://www.novo-monde.com/app/uploads/2023/07/tatai-waterfall-1024x683.jpg",
+      "src": "/images/provinces/koh-kong.jpg",
       "alt": "Tatai Waterfall, Koh Kong",
       "source": "https://www.novo-monde.com/en/koh-kong-island-cardamom-mountains-cambodia/",
       "credit": "Novo-monde",
       "license": "",
-      "licenseUrl": ""
+      "licenseUrl": "",
+      "backupSrc": "https://www.novo-monde.com/app/uploads/2023/07/tatai-waterfall-1024x683.jpg"
+    },
+    "koh-kong-jpg": {
+      "src": "/images/provinces/koh-kong.jpg",
+      "alt": "Tatai Waterfall, Koh Kong",
+      "source": "https://www.novo-monde.com/en/koh-kong-island-cardamom-mountains-cambodia/",
+      "credit": "Novo-monde",
+      "license": "",
+      "licenseUrl": "",
+      "backupSrc": "/images/provinces/koh-kong-island.jpg"
     },
     "commons-5609684": {
       "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Phnom_Bakheng.jpg/960px-Phnom_Bakheng.jpg",
@@ -473,7 +483,7 @@
       "backupSrc": "/images/locations/commons-81495410.jpg"
     },
     "commons-96371245": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Yak_Loum_Lake_Panorama.jpg/960px-Yak_Loum_Lake_Panorama.jpg",
+      "src": "/images/provinces/ratanakiri.jpg",
       "alt": "Yeak Laom Lake, Ratanakiri",
       "source": "https://commons.wikimedia.org/wiki/File:Yak_Loum_Lake_Panorama.jpg",
       "credit": "Barang",
@@ -500,7 +510,7 @@
       "backupSrc": "/images/locations/commons-16973632.jpg"
     },
     "commons-106269187": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/06-Kep_Crab_Market_Cambodia-nX-17.jpg/960px-06-Kep_Crab_Market_Cambodia-nX-17.jpg",
+      "src": "/images/provinces/kep.jpg",
       "alt": "Kep Crab Market, Kep",
       "source": "https://commons.wikimedia.org/wiki/File:06-Kep_Crab_Market_Cambodia-nX-17.jpg",
       "credit": "PsamatheM",
@@ -509,7 +519,7 @@
       "backupSrc": "/images/locations/commons-106269187.jpg"
     },
     "commons-123792913": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Angkor_Wat_with_its_reflection_%28cropped%29.jpg/960px-Angkor_Wat_with_its_reflection_%28cropped%29.jpg",
+      "src": "/images/provinces/siem-reap.jpg",
       "alt": "Angkor Wat, Siem Reap",
       "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_with_its_reflection_(cropped).jpg",
       "credit": "Satdeep Gill",
@@ -536,7 +546,7 @@
       "backupSrc": "/images/locations/commons-23216403.jpg"
     },
     "commons-8928780": {
-      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Royal_Palace%2C_Phnom_Penh_Cambodia_1.jpg/960px-Royal_Palace%2C_Phnom_Penh_Cambodia_1.jpg",
+      "src": "/images/provinces/phnom-penh.jpg",
       "alt": "Royal Palace, Phnom Penh",
       "source": "https://commons.wikimedia.org/wiki/File:Royal_Palace,_Phnom_Penh_Cambodia_1.jpg",
       "credit": "Hanay",
@@ -685,6 +695,624 @@
       "alt": "Wat Sorsor Muoy Roy (100-Column Pagoda), Kratie",
       "license": "",
       "licenseUrl": ""
+    },
+    "oddar-meanchey-wat-somromg": {
+      "src": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/97/a9/ee/caption.jpg?w=1200&h=-1&s=1",
+      "alt": "Wat Somromg, Oddar Meanchey",
+      "source": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/97/a9/ee/caption.jpg?w=1200&h=-1&s=1",
+      "credit": "Tripadvisor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "oddar-meanchey-kulen-promtep-wildlife-sanctuary": {
+      "src": "https://images.trvl-media.com/place/3000409870/be12c7a1-5150-4d87-b369-c4e604dea106.jpg",
+      "alt": "Kulen Promtep Wildlife Sanctuary, Oddar Meanchey",
+      "source": "https://images.trvl-media.com/place/3000409870/be12c7a1-5150-4d87-b369-c4e604dea106.jpg",
+      "credit": "Expedia / trvl-media",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "oddar-meanchey-trapeang-prasat-reservoir": {
+      "src": "https://www.alltrails.com/mugen/image/location-app-router?url=https%3A%2F%2Fimages.alltrails.com%2FeyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMTI0OTU0ODA2L2NmNTY0ZDUwZTU0MzZjZDY5OGQzYTM2MGM1ODIyYjNjLmpwZyIsImVkaXRzIjp7InRvRm9ybWF0Ijoid2VicCIsInJlc2l6ZSI6eyJ3aWR0aCI6IjEwODAiLCJoZWlnaHQiOiI3MDAiLCJmaXQiOiJjb3ZlciJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ%3D%3D&w=3840&q=90",
+      "alt": "Trapeang Prasat Reservoir, Oddar Meanchey",
+      "source": "https://www.alltrails.com/mugen/image/location-app-router?url=https%3A%2F%2Fimages.alltrails.com%2FeyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMTI0OTU0ODA2L2NmNTY0ZDUwZTU0MzZjZDY5OGQzYTM2MGM1ODIyYjNjLmpwZyIsImVkaXRzIjp7InRvRm9ybWF0Ijoid2VicCIsInJlc2l6ZSI6eyJ3aWR0aCI6IjEwODAiLCJoZWlnaHQiOiI3MDAiLCJmaXQiOiJjb3ZlciJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ%3D%3D&w=3840&q=90",
+      "credit": "AllTrails",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "oddar-meanchey-choam-border-market": {
+      "src": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/44/36/1b/chong-chom-market.jpg?w=900&h=500&s=1",
+      "alt": "Choam Border Market, Oddar Meanchey",
+      "source": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/44/36/1b/chong-chom-market.jpg?w=900&h=500&s=1",
+      "credit": "Tripadvisor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "oddar-meanchey-anlong-veng": {
+      "src": "https://www.cambotours.com/userfiles/thumbs/anlong-veng.jpg",
+      "alt": "Anlong Veng, Oddar Meanchey",
+      "source": "https://www.cambotours.com/userfiles/thumbs/anlong-veng.jpg",
+      "credit": "CamboTours",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "battambang-old-market-phsar-chas": {
+      "src": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/43/8f/9f/psar-chaa-old-market.jpg?w=900&h=500&s=1",
+      "alt": "Old Market (Phsar Chas), Battambang",
+      "source": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/43/8f/9f/psar-chaa-old-market.jpg?w=900&h=500&s=1",
+      "credit": "Tripadvisor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "battambang-sangkae-riverside": {
+      "src": "https://allpointseast.com/wp-content/uploads/2020/11/SR-to-Bbang-Nov-2010-2-1080x729.jpg",
+      "alt": "Sangkae Riverside, Battambang",
+      "source": "https://allpointseast.com/wp-content/uploads/2020/11/SR-to-Bbang-Nov-2010-2-1080x729.jpg",
+      "credit": "All Points East",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "battambang-wat-kor-heritage-village": {
+      "src": "https://mdw-travel-data-us-east-1.s3.amazonaws.com/img/country/Cambodia/Wat-Kor-Village/img_00.jpg",
+      "alt": "Wat Kor Heritage Village, Battambang",
+      "source": "https://mdw-travel-data-us-east-1.s3.amazonaws.com/img/country/Cambodia/Wat-Kor-Village/img_00.jpg",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "battambang-ksach-poy-bamboo-bridge": {
+      "src": "https://www.khmertimeskh.com/wp-content/uploads/2026/01/dsfsdf.jpg",
+      "alt": "Ksach Poy Bamboo Bridge, Battambang",
+      "source": "https://www.khmertimeskh.com/wp-content/uploads/2026/01/dsfsdf.jpg",
+      "credit": "Khmer Times",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "battambang-battambang-provincial-museum": {
+      "src": "https://www.angkor-temples-in-cambodia.com/uploads/3/0/0/4/30047791/provincial-museum-battambang-02_orig.jpg",
+      "alt": "Battambang Provincial Museum, Battambang",
+      "source": "https://www.angkor-temples-in-cambodia.com/uploads/3/0/0/4/30047791/provincial-museum-battambang-02_orig.jpg",
+      "credit": "Angkor Temples in Cambodia",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-ang-trapeang-thmor-reserve": {
+      "src": "https://i0.wp.com/www.birdguideasso.org/wp-content/uploads/2024/09/Sarus_Crane.jpg?fit=800%2C533&ssl=1",
+      "alt": "Ang Trapeang Thmor Reserve, Banteay Meanchey",
+      "source": "https://i0.wp.com/www.birdguideasso.org/wp-content/uploads/2024/09/Sarus_Crane.jpg?fit=800%2C533&ssl=1",
+      "credit": "Bird Guide Association",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-poipet-border-market": {
+      "src": "https://www.khmertimeskh.com/wp-content/uploads/2026/01/114960.jpg",
+      "alt": "Poipet Border Market, Banteay Meanchey",
+      "source": "https://www.khmertimeskh.com/wp-content/uploads/2026/01/114960.jpg",
+      "credit": "Khmer Times",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-sisophon-riverside": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpCT_r7yLrrDlJD8GqMjcf_uEAY7jMte6ot7VrX0tCxlhlJw2NIfh4O0t-&s=10",
+      "alt": "Sisophon Riverside, Banteay Meanchey",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpCT_r7yLrrDlJD8GqMjcf_uEAY7jMte6ot7VrX0tCxlhlJw2NIfh4O0t-&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-wat-preah-ang-chorm": {
+      "src": "https://d122axpxm39woi.cloudfront.net/images/destinations/origin/5d076cccb1154.jpg",
+      "alt": "Wat Preah Ang Chorm, Banteay Meanchey",
+      "source": "https://d122axpxm39woi.cloudfront.net/images/destinations/origin/5d076cccb1154.jpg",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-o-neang-waterfall": {
+      "src": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/c7/d4/a3/air-terjun-oenesu.jpg?w=1200&h=-1&s=1",
+      "alt": "O'Neang Waterfall, Banteay Meanchey",
+      "source": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/c7/d4/a3/air-terjun-oenesu.jpg?w=1200&h=-1&s=1",
+      "credit": "Tripadvisor",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-ou-chrov-casino-strip": {
+      "src": "https://pix10.agoda.net/hotelImages/286634/0/28928a3cf2c8e1fad81b441a3bebb1c0.jpeg?s=414x232",
+      "alt": "Ou Chrov Casino Strip, Banteay Meanchey",
+      "source": "https://pix10.agoda.net/hotelImages/286634/0/28928a3cf2c8e1fad81b441a3bebb1c0.jpeg?s=414x232",
+      "credit": "Agoda",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-banteay-meanchey-provincial-museum": {
+      "src": "https://ak-d.tripcdn.com/images/0HJ0512000gmnxtnpBF46.jpg",
+      "alt": "Banteay Meanchey Provincial Museum, Banteay Meanchey",
+      "source": "https://ak-d.tripcdn.com/images/0HJ0512000gmnxtnpBF46.jpg",
+      "credit": "Trip.com",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "banteay-meanchey-phnom-dei": {
+      "src": "https://img.cambodianess.com/uploads/news/20250625_091433_1752309108.jpg",
+      "alt": "Phnom Dei, Banteay Meanchey",
+      "source": "https://img.cambodianess.com/uploads/news/20250625_091433_1752309108.jpg",
+      "credit": "Cambodianess",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "battambang-user-cover": {
+      "src": "/images/provinces/battambang.jpg",
+      "alt": "Battambang",
+      "source": "https://cdn.getyourguide.com/image/format=auto%2Cfit=crop%2Cgravity=auto%2Cquality=60%2Cwidth=375%2Cheight=375%2Cdpr=2/tour_img/2abd49cb7c63a049d72bba69423afd9f1adebc8bc1c892da3b44e66100244ac0.jpg",
+      "credit": "GetYourGuide",
+      "license": "",
+      "licenseUrl": "",
+      "backupSrc": "/images/provinces/battambang.jpg"
+    },
+    "pailin-pailin-gem-mining-sites": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfxUokrmnAlZM3A87EBsKRe-fhe53uYShcNX85Qdjy2ZeqFGFQR7X-vVs&s=10",
+      "alt": "Pailin Gem Mining Sites, Pailin",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfxUokrmnAlZM3A87EBsKRe-fhe53uYShcNX85Qdjy2ZeqFGFQR7X-vVs&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "pailin-pailin-market": {
+      "src": "https://www.bustonowhere.com/wp-content/uploads/2021/07/CAMBODIA-PAILIN-pineapples.jpg",
+      "alt": "Pailin Market, Pailin",
+      "source": "https://www.bustonowhere.com/wp-content/uploads/2021/07/CAMBODIA-PAILIN-pineapples.jpg",
+      "credit": "Bus to Nowhere",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "pailin-stung-kambot-river": {
+      "src": "https://cdn.getyourguide.com/image/format=auto%2Cfit=crop%2Cgravity=auto%2Cquality=60%2Cwidth=375%2Cheight=375%2Cdpr=2/tour_img/86fd42d5d0833bbb8960bbf0a4fa2f5d5276877b082da112899b65e136a862d3.jpg",
+      "alt": "Stung Kambot River, Pailin",
+      "source": "https://cdn.getyourguide.com/image/format=auto%2Cfit=crop%2Cgravity=auto%2Cquality=60%2Cwidth=375%2Cheight=375%2Cdpr=2/tour_img/86fd42d5d0833bbb8960bbf0a4fa2f5d5276877b082da112899b65e136a862d3.jpg",
+      "credit": "GetYourGuide",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "pailin-former-khmer-rouge-stronghold-site": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSocbPx8_ucLd0Gh0GwWiLfDDNou60pXIr9RUeYjJ1FjDLIEtqc-376Aa4_&s=10",
+      "alt": "Former Khmer Rouge Stronghold Site, Pailin",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSocbPx8_ucLd0Gh0GwWiLfDDNou60pXIr9RUeYjJ1FjDLIEtqc-376Aa4_&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "pailin-wat-rattanak-sophoan": {
+      "src": "https://pcontrol.tourismcambodia.com/cdn/tourismcambodia.com/img/travelguides/thumbnails/360_pailin.gif",
+      "alt": "Wat Rattanak Sophoan, Pailin",
+      "source": "https://pcontrol.tourismcambodia.com/cdn/tourismcambodia.com/img/travelguides/thumbnails/360_pailin.gif",
+      "credit": "Tourism Cambodia",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "pailin-durian-orchards-of-pailin": {
+      "src": "https://www.khmertimeskh.com/wp-content/uploads/2026/06/P7-002.jpg",
+      "alt": "Durian Orchards of Pailin, Pailin",
+      "source": "https://www.khmertimeskh.com/wp-content/uploads/2026/06/P7-002.jpg",
+      "credit": "Khmer Times",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-preah-khan-of-kampong-svay": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPW-H66AdlfMzUECS0-4DE5j3Jh48YZEwgaZgEH1mMymverjEJV2hlZIFr&s=10",
+      "alt": "Preah Khan of Kampong Svay, Preah Vihear",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPW-H66AdlfMzUECS0-4DE5j3Jh48YZEwgaZgEH1mMymverjEJV2hlZIFr&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": "",
+      "backupSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Preah_Khan_of_Kampong_Svay.png/960px-Preah_Khan_of_Kampong_Svay.png"
+    },
+    "preah-vihear-tbeng-mountain": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-vuiK_hHYlTFB0wDS08eItvMLLIcwzIh3-pWsB54Rks19EClSetSQ9DuY&s=10",
+      "alt": "Tbeng Mountain, Preah Vihear",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-vuiK_hHYlTFB0wDS08eItvMLLIcwzIh3-pWsB54Rks19EClSetSQ9DuY&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-kulen-promtep-wildlife-sanctuary": {
+      "src": "https://www.cambotours.com/userfiles/thumbs/kulen-prum-tep-wildlife-sanctuary.jpg",
+      "alt": "Kulen Promtep Wildlife Sanctuary, Preah Vihear",
+      "source": "https://www.cambotours.com/userfiles/thumbs/kulen-prum-tep-wildlife-sanctuary.jpg",
+      "credit": "CamboTours",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-steung-ksach-resort": {
+      "src": "https://i.ytimg.com/vi/tK2s1hHaOmw/maxresdefault.jpg",
+      "alt": "Steung Ksach Resort, Preah Vihear",
+      "source": "https://i.ytimg.com/vi/tK2s1hHaOmw/maxresdefault.jpg",
+      "credit": "YouTube thumbnail",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-preah-vihear-provincial-museum": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0lWOLVljGBUnF6PTiZOjIVJoX0-futUym-lGRuOPk_65aYrIzPmNSa-I&s=10",
+      "alt": "Preah Vihear Provincial Museum, Preah Vihear",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0lWOLVljGBUnF6PTiZOjIVJoX0-futUym-lGRuOPk_65aYrIzPmNSa-I&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-preah-vihear-market": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsSB8CnZYd-x_dYTh72SdM25vyI5LkwLrDuD7YuYbAZYmK7W1oHCCeKPc&s=10",
+      "alt": "Preah Vihear Market, Preah Vihear",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsSB8CnZYd-x_dYTh72SdM25vyI5LkwLrDuD7YuYbAZYmK7W1oHCCeKPc&s=10",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-chheu-teal-waterfall": {
+      "src": "https://d3fphkxyf5o5bm.cloudfront.net/image-resize/format=webp,w=720/QwRY54Li1HMwD7oNfoVh7czH75XznthiucYzmCEtMY",
+      "alt": "Chheu Teal Waterfall, Preah Vihear",
+      "source": "https://d3fphkxyf5o5bm.cloudfront.net/image-resize/format=webp,w=720/QwRY54Li1HMwD7oNfoVh7czH75XznthiucYzmCEtMY",
+      "credit": "Supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-vihear-sra-em-town": {
+      "src": "https://thumbs.dreamstime.com/b/city-square-centre-town-sra-em-province-preah-vihear-northwaest-cambodia-november-123775834.jpg",
+      "alt": "Sra Em Town, Preah Vihear",
+      "source": "https://thumbs.dreamstime.com/b/city-square-centre-town-sra-em-province-preah-vihear-northwaest-cambodia-november-123775834.jpg",
+      "credit": "Dreamstime",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-tonle-sap-lake-shoreline": {
+      "src": "https://www.greeneratravel.com/userfiles/850tonlesapviewkampongchhnang.jpg",
+      "alt": "Tonle Sap Lake Shoreline — user-selected photo",
+      "source": "https://www.greeneratravel.com/TonleSap-View-Kampong-Chhnang.html",
+      "credit": "User-selected source image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-kampong-leng-floating-village": {
+      "src": "https://plan-pack-go.com/assets/2017/06/Tour-boats-in-Kompong-Khleang.jpg",
+      "alt": "Kampong Leng Floating Village — user-selected photo",
+      "source": "https://plan-pack-go.com/a-siem-reap-tour-that-gives-back-community-first-kompong-khleang-floating-village-tours/",
+      "credit": "User-selected source image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-old-french-airfield": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJxslb5Ca_PbyyYM9JweSM1rLal7Pkc9gCg3uM_BwFsw&s=10",
+      "alt": "Old French Airfield",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJxslb5Ca_PbyyYM9JweSM1rLal7Pkc9gCg3uM_BwFsw&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-kampong-chhnang-central-market": {
+      "src": "https://www.asiakingtravel.com/cuploads/files/4529785741_e757f22912_b(1).jpg",
+      "alt": "Kampong Chhnang Central Market — user-selected photo",
+      "source": "https://www.asiakingtravel.com/attraction/kampong-cham-markets",
+      "credit": "User-selected source image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-phnom-kroul": {
+      "src": "https://necvlggenujydiokngfg.supabase.co/storage/v1/object/public/nomadays-images/photos/b54833bc-d1b3-4a2d-a82c-8a354fc363d8/content/94384d4d-840e-440d-a1a0-ea19cadb6299/eab0b4b5-544f-4678-9188-5f7c089d67fa.png",
+      "alt": "Phnom Kroul — user-selected photo",
+      "source": "https://www.tour-cambodia.com/guide/attraction/phnom-neang-kangrey-nature-reserve",
+      "credit": "User-selected source image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-wat-kampong-chhnang": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWn7iu2WzIPZFDfnlHTVoT7_Ly_Xt7rNL-d4k8y8BGjA5_jKYWCmJzDbg&s=10",
+      "alt": "Wat Kampong Chhnang",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWn7iu2WzIPZFDfnlHTVoT7_Ly_Xt7rNL-d4k8y8BGjA5_jKYWCmJzDbg&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-kampong-chhnang-provincial-museum": {
+      "src": "https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcrop%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D285%2Cheight%3D160/tour_img/58a0a2abe2dbb.jpeg",
+      "alt": "Kampong Chhnang Provincial Museum — user-selected photo",
+      "source": "https://www.getyourguide.com/kampong-chhnang-province-l2864/museums-exhibitions-tc132/",
+      "credit": "User-selected source image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-kampong-tralach-wooden-bridge": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlikIQgsbltQpvSfzgvkImXllaVBzn3Lps25ZAFUCxl-TXWgbxCZ8SdwM&s=10",
+      "alt": "Kampong Tralach Wooden Bridge",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlikIQgsbltQpvSfzgvkImXllaVBzn3Lps25ZAFUCxl-TXWgbxCZ8SdwM&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-chnok-trou-floating-village": {
+      "src": "https://d122axpxm39woi.cloudfront.net/images/destinations/origin/5d2ee3e14371f.jpg",
+      "alt": "Chnok Trou Floating Village",
+      "source": "https://d122axpxm39woi.cloudfront.net/images/destinations/origin/5d2ee3e14371f.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "stung-treng-limestone-canyons-koh-han": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd94KjAoTnHEpobSY7GBYlsLR9bZuHfV-d43ttt7RKb8_CqHeccNuRZPo&s=10",
+      "alt": "Limestone Canyons & Koh Han",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd94KjAoTnHEpobSY7GBYlsLR9bZuHfV-d43ttt7RKb8_CqHeccNuRZPo&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "stung-treng-thala-barivat-temple-ruins": {
+      "src": "https://www.greeneratravel.com/userfiles/850thalabarivat.jpg",
+      "alt": "Thala Barivat Temple Ruins",
+      "source": "https://www.greeneratravel.com/userfiles/850thalabarivat.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "stung-treng-stung-treng-riverside-park": {
+      "src": "https://visitcambodia.b-cdn.net/city/stung-treng-hero.jpg",
+      "alt": "Stung Treng Riverside Park",
+      "source": "https://visitcambodia.b-cdn.net/city/stung-treng-hero.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "stung-treng-preah-rumkel-ecotourism-site": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKmwQTQHLghkd1JsA1CVbadhSsF3PCsoRgEzpqrVcc7lZqXAnNlA7H00k&s=10",
+      "alt": "Preah Rumkel Ecotourism Site",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKmwQTQHLghkd1JsA1CVbadhSsF3PCsoRgEzpqrVcc7lZqXAnNlA7H00k&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "stung-treng-wat-preah-bat": {
+      "src": "https://www.cambotours.com/userfiles/thumbs/preah-bat-chan-tuk-buddha-statue.jpg",
+      "alt": "Wat Preah Bat",
+      "source": "https://www.cambotours.com/userfiles/thumbs/preah-bat-chan-tuk-buddha-statue.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "stung-treng-anlong-cheuteal-dolphin-pool": {
+      "src": "https://www.vivutravel.com/images/des-cambodia1/cambodia-travel-package-to-stung-treng.jpg",
+      "alt": "Anlong Cheuteal Dolphin Pool",
+      "source": "https://www.vivutravel.com/images/des-cambodia1/cambodia-travel-package-to-stung-treng.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-koh-kong-island": {
+      "src": "https://img1.wsimg.com/isteam/ip/4f643cb8-c431-452f-87d9-04a44f5ff07e/9be8aa51cfaea6cfb0680ac21a73d0bd-6f9f769.jpg/:/cr=t:0%25,l:12.59%25,w:74.81%25,h:100%25/rs=w:400,h:300.7518796992481,cg:true",
+      "alt": "Koh Kong Island",
+      "source": "https://img1.wsimg.com/isteam/ip/4f643cb8-c431-452f-87d9-04a44f5ff07e/9be8aa51cfaea6cfb0680ac21a73d0bd-6f9f769.jpg/:/cr=t:0%25,l:12.59%25,w:74.81%25,h:100%25/rs=w:400,h:300.7518796992481,cg:true",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-cardamom-mountains-koh-kong-side": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkB5zgbTpJ3BAcDCsEcysNhSz1dU3o4BkWxYTPSmUyqfbR7x1P2whMfY&s=10",
+      "alt": "Cardamom Mountains (Koh Kong side)",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkB5zgbTpJ3BAcDCsEcysNhSz1dU3o4BkWxYTPSmUyqfbR7x1P2whMfY&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-peam-krasop-wildlife-sanctuary": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo_IuBrDOPtZGl2shuEMoMHMd4ptFzY_uPLm2_pL9cgQ&s=10",
+      "alt": "Peam Krasop Wildlife Sanctuary",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo_IuBrDOPtZGl2shuEMoMHMd4ptFzY_uPLm2_pL9cgQ&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-koh-kong-central-market": {
+      "src": "https://c8.alamy.com/comp/RJR33G/cambodia-preah-koh-kong-town-centre-central-market-psar-dong-tong-stall-selling-dried-shrimp-squid-and-fish-RJR33G.jpg",
+      "alt": "Koh Kong Central Market",
+      "source": "https://c8.alamy.com/comp/RJR33G/cambodia-preah-koh-kong-town-centre-central-market-psar-dong-tong-stall-selling-dried-shrimp-squid-and-fish-RJR33G.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-koh-kong-suspension-bridge": {
+      "src": "https://www.shutterstock.com/shutterstock/photos/2652764997/display_1500/stock-photo-hanging-bridge-koh-kong-waterway-2652764997.jpg",
+      "alt": "Koh Kong Suspension Bridge",
+      "source": "https://www.shutterstock.com/shutterstock/photos/2652764997/display_1500/stock-photo-hanging-bridge-koh-kong-waterway-2652764997.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-botum-sakor-national-park": {
+      "src": "https://cambotours.com/userfiles/thumbs/botum-sakor-national-park.jpg",
+      "alt": "Botum Sakor National Park",
+      "source": "https://cambotours.com/userfiles/thumbs/botum-sakor-national-park.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "koh-kong-koh-kong-safari-world": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNDwNQFgYvFUwmt8ENviYUFbOGT0390yLQSJKTOZkB8bXRvB2unPT6goc&s=10",
+      "alt": "Koh Kong Safari World",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNDwNQFgYvFUwmt8ENviYUFbOGT0390yLQSJKTOZkB8bXRvB2unPT6goc&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampong-chhnang-user-cover": {
+      "src": "/images/Kampong Chhnang.png",
+      "alt": "Kampong Chhnang",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPfU6ZRiWUdISLF5dRqMLyObX8jPBlm-4x8s93JXLcmw1frfozyvD1Q0k&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kep-user-cover": {
+      "src": "/images/provinces/kep.jpg",
+      "alt": "Kep province, Cambodia",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStrJVz_ttCngdQOD5cxbMUYVOQgjiuMDFz7NADSDi_KsqqhHldYJkkK7Qv&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kep-koh-tonsay-rabbit-island": {
+      "src": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/7d/da/6f/koh-tonsay-rabbit-island.jpg?w=1200&h=-1&s=1",
+      "alt": "Koh Tonsay (Rabbit Island)",
+      "source": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/7d/da/6f/koh-tonsay-rabbit-island.jpg?w=1200&h=-1&s=1",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kep-kep-beach": {
+      "src": "https://www.bookaway.com/blog/wp-content/uploads/2022/12/kep-feature.jpg",
+      "alt": "Kep Beach",
+      "source": "https://www.bookaway.com/blog/wp-content/uploads/2022/12/kep-feature.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-sihanouk-ochheuteal-beach": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9EyDdiFOxmqV6Y_yXgDQXG8HhzOPo8xqo5c7uXi9CFp8Kmq6FUIb93Y&s=10",
+      "alt": "Ochheuteal Beach",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9EyDdiFOxmqV6Y_yXgDQXG8HhzOPo8xqo5c7uXi9CFp8Kmq6FUIb93Y&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-sihanouk-otres-beach": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHY-IoSIMjnPGqS0X_5DWt2FPRfC9_zX3JwNriLEpavb0jiqgUM7KuJQV7&s=10",
+      "alt": "Otres Beach",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHY-IoSIMjnPGqS0X_5DWt2FPRfC9_zX3JwNriLEpavb0jiqgUM7KuJQV7&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-sihanouk-koh-rong-samloem": {
+      "src": "https://images.trvl-media.com/place/6275744/420b1580-60ec-4638-bbef-e6a461c9206a.jpg",
+      "alt": "Koh Rong Samloem",
+      "source": "https://images.trvl-media.com/place/6275744/420b1580-60ec-4638-bbef-e6a461c9206a.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-sihanouk-kbal-chhay-waterfall": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgVhQs64PqMnmVyGnlFIouOjwZQUwX0BktUirZRMn7iZr25j6RCtld8og8&s=10",
+      "alt": "Kbal Chhay Waterfall",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgVhQs64PqMnmVyGnlFIouOjwZQUwX0BktUirZRMn7iZr25j6RCtld8og8&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "preah-sihanouk-user-cover": {
+      "src": "/images/Preah Sihanouk.png",
+      "alt": "Preah Sihanouk",
+      "source": "https://www.khmertimeskh.com/wp-content/uploads/2024/12/Sihanouk.jpg",
+      "credit": "Khmer Times",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampot-phnom-chhnork-cave-temple": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy1ta28KfVHKBfJzBgNS7xOvmRw3-Y7Xm7v20EZuGecsZGZOR5auU7hxW4&s=10",
+      "alt": "Phnom Chhnork Cave Temple",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy1ta28KfVHKBfJzBgNS7xOvmRw3-Y7Xm7v20EZuGecsZGZOR5auU7hxW4&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampot-kampot-old-market": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjlVm3oWJIdSic3tcIQeJ7hXPqyAdQGHAlBkMlJMDkfryYuN9lmxHHQ34&s=10",
+      "alt": "Kampot Old Market",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjlVm3oWJIdSic3tcIQeJ7hXPqyAdQGHAlBkMlJMDkfryYuN9lmxHHQ34&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampot-kampot-pepper-farm": {
+      "src": "https://laplantation.com/wp-content/uploads/2022/11/3-visite-vuedrone.jpg",
+      "alt": "Kampot Pepper Farm",
+      "source": "https://laplantation.com/wp-content/uploads/2022/11/3-visite-vuedrone.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "takeo-phnom-da-temple": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqDsaeb6dhiexONwN1gjsdpzVZMXg6xjpO2ttesvXKEZiEIw_PIHxvysxy&s=10",
+      "alt": "Phnom Da Temple",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqDsaeb6dhiexONwN1gjsdpzVZMXg6xjpO2ttesvXKEZiEIw_PIHxvysxy&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "takeo-takeo-provincial-museum": {
+      "src": "https://i.ytimg.com/vi/UeyYGnaa6Nk/maxresdefault.jpg",
+      "alt": "Takeo Provincial Museum",
+      "source": "https://i.ytimg.com/vi/UeyYGnaa6Nk/maxresdefault.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "takeo-koh-andet-rural-village": {
+      "src": "https://pix10.agoda.net/hotelImages/2605684/-1/5dc98eafe4a9049b21d8903869d8b655.jpg?ce=0&s=414x232",
+      "alt": "Koh Andet Rural Village",
+      "source": "https://pix10.agoda.net/hotelImages/2605684/-1/5dc98eafe4a9049b21d8903869d8b655.jpg?ce=0&s=414x232",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kampot-user-cover": {
+      "src": "/images/Kampot.png",
+      "alt": "Kampot",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkvxGUckXY3lNpyQkjFKfm9zhzdRxgTf-ZsSFJkeK5FAnQ8hcznJOACEg&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "takeo-user-cover": {
+      "src": "/images/provinces/takeo.jpg",
+      "alt": "Takeo province, Cambodia",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3TPxD7P4rVs2OSng_jCf03Lzyjehd-RUAeG6nGeaP7onn3RNjo6VzY-X&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "takeo-tonle-bati-temple-complex": {
+      "src": "https://www.angkor-temples-in-cambodia.com/uploads/3/0/0/4/30047791/tonle-bati-01-600_orig.jpg",
+      "alt": "Tonle Bati Temple Complex",
+      "source": "https://www.angkor-temples-in-cambodia.com/uploads/3/0/0/4/30047791/tonle-bati-01-600_orig.jpg",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "phnom-penh-russian-market-toul-tom-poung": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYGVyA_SqwUszezgW8CC4jbBIqCmXPCeIvUB463G3m-wM_ckL1HvI5Hy0&s=10",
+      "alt": "Russian Market (Toul Tom Poung)",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYGVyA_SqwUszezgW8CC4jbBIqCmXPCeIvUB463G3m-wM_ckL1HvI5Hy0&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "pursat-user-cover": {
+      "src": "/images/provinces/pursat.jpg",
+      "alt": "Pursat",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7a1MQsDXluwVEL06ebsnH7yyUz9Z4ixsAYjTMnO9ysFEHuNuy1FsR5AiC&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "kandal-user-cover": {
+      "src": "/images/provinces/kandal.jpg",
+      "alt": "Kandal",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyJbzLnZPTE3AzPFm85oNnVidjux5AxB09S0Nc7Ywqdhthj-qppn8kZSwz&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
+    },
+    "phnom-penh-user-cover": {
+      "src": "/images/provinces/phnom-penh.jpg",
+      "alt": "Phnom Penh",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Sb-_WXlhgS-4Qo-uaSATbFs-NjBwhFurUHrnxuS8W0XMQkRkEUhDmYjO&s=10",
+      "credit": "User-supplied image",
+      "license": "",
+      "licenseUrl": ""
     }
   },
   "provinces": {
@@ -695,24 +1323,24 @@
     "stung-treng": "destinations-attraction-61-jpg",
     "ratanakiri": "commons-96371245",
     "mondulkiri": "bousra-waterfall-jpg",
-    "phnom-penh": "commons-8928780",
+    "phnom-penh": "phnom-penh-user-cover",
     "kampong-cham": "nokor-bachey-jpg",
     "tboung-khmum": "preah-theat-basrey-jpg",
     "kampong-thom": "sambor-prei-kuk-jpg",
-    "kampong-chhnang": "andong-russei-jpg",
+    "kampong-chhnang": "kampong-chhnang-user-cover",
     "kampong-speu": "kirirom-national-park-jpg",
-    "kandal": "oudong-jpg",
-    "pursat": "kampong-luong-jpg",
+    "kandal": "kandal-user-cover",
+    "pursat": "pursat-user-cover",
     "prey-veng": "ba-phnom-jpg",
     "svay-rieng": "prey-ba-sak-jpg",
-    "takeo": "phnom-chisor-jpg",
-    "kampot": "river-jpg",
-    "preah-sihanouk": "island-jpg",
-    "kep": "commons-106269187",
-    "battambang": "phnom-sampov-jpg",
+    "takeo": "takeo-user-cover",
+    "kampot": "kampot-user-cover",
+    "preah-sihanouk": "preah-sihanouk-user-cover",
+    "kep": "kep-user-cover",
+    "battambang": "battambang-user-cover",
     "banteay-meanchey": "banteay-chhmar-jpg",
     "kratie": "commons-2461855",
-    "koh-kong": "tatai"
+    "koh-kong": "koh-kong-jpg"
   },
   "attractions": {
     "siem-reap/angkor-wat": "commons-123792913",
@@ -764,7 +1392,7 @@
     "oddar-meanchey/ta-mok-s-house": "commons-4444378",
     "oddar-meanchey/pol-pot-cremation-site": "commons-57851292",
     "oddar-meanchey/dangrek-mountains": "commons-7719588",
-    "preah-vihear/preah-khan-of-kampong-svay": "commons-24453346",
+    "preah-vihear/preah-khan-of-kampong-svay": "preah-vihear-preah-khan-of-kampong-svay",
     "stung-treng/stung-treng-central-market": "commons-81495430",
     "stung-treng/sekong-river-confluence": "commons-81495410",
     "ratanakiri/virachey-national-park": "commons-10732897",
@@ -788,6 +1416,76 @@
     "mondulkiri/phnom-doh-kromom": "place-86",
     "phnom-penh/independence-monument": "place-107",
     "kratie/phnom-sombok-pagoda": "place-94",
-    "kratie/wat-sorsor-muoy-roy-100-column-pagoda": "place-98"
+    "kratie/wat-sorsor-muoy-roy-100-column-pagoda": "place-98",
+    "oddar-meanchey/wat-somromg": "oddar-meanchey-wat-somromg",
+    "oddar-meanchey/kulen-promtep-wildlife-sanctuary": "oddar-meanchey-kulen-promtep-wildlife-sanctuary",
+    "oddar-meanchey/trapeang-prasat-reservoir": "oddar-meanchey-trapeang-prasat-reservoir",
+    "oddar-meanchey/choam-border-market": "oddar-meanchey-choam-border-market",
+    "oddar-meanchey/anlong-veng": "oddar-meanchey-anlong-veng",
+    "oddar-meanchey/wat-samraong": "oddar-meanchey-wat-somromg",
+    "oddar-meanchey/wat-samrong": "oddar-meanchey-wat-somromg",
+    "oddar-meanchey/wat-somrong": "oddar-meanchey-wat-somromg",
+    "battambang/old-market-phsar-chas": "battambang-old-market-phsar-chas",
+    "battambang/sangkae-riverside": "battambang-sangkae-riverside",
+    "battambang/wat-kor-heritage-village": "battambang-wat-kor-heritage-village",
+    "battambang/ksach-poy-bamboo-bridge": "battambang-ksach-poy-bamboo-bridge",
+    "battambang/battambang-provincial-museum": "battambang-battambang-provincial-museum",
+    "banteay-meanchey/ang-trapeang-thmor-reserve": "banteay-meanchey-ang-trapeang-thmor-reserve",
+    "banteay-meanchey/poipet-border-market": "banteay-meanchey-poipet-border-market",
+    "banteay-meanchey/sisophon-riverside": "banteay-meanchey-sisophon-riverside",
+    "banteay-meanchey/wat-preah-ang-chorm": "banteay-meanchey-wat-preah-ang-chorm",
+    "banteay-meanchey/o-neang-waterfall": "banteay-meanchey-o-neang-waterfall",
+    "banteay-meanchey/ou-chrov-casino-strip": "banteay-meanchey-ou-chrov-casino-strip",
+    "banteay-meanchey/banteay-meanchey-provincial-museum": "banteay-meanchey-banteay-meanchey-provincial-museum",
+    "banteay-meanchey/phnom-dei": "banteay-meanchey-phnom-dei",
+    "pailin/pailin-gem-mining-sites": "pailin-pailin-gem-mining-sites",
+    "pailin/pailin-market": "pailin-pailin-market",
+    "pailin/stung-kambot-river": "pailin-stung-kambot-river",
+    "pailin/former-khmer-rouge-stronghold-site": "pailin-former-khmer-rouge-stronghold-site",
+    "pailin/wat-rattanak-sophoan": "pailin-wat-rattanak-sophoan",
+    "pailin/durian-orchards-of-pailin": "pailin-durian-orchards-of-pailin",
+    "preah-vihear/tbeng-mountain": "preah-vihear-tbeng-mountain",
+    "preah-vihear/kulen-promtep-wildlife-sanctuary": "preah-vihear-kulen-promtep-wildlife-sanctuary",
+    "preah-vihear/steung-ksach-resort": "preah-vihear-steung-ksach-resort",
+    "preah-vihear/preah-vihear-provincial-museum": "preah-vihear-preah-vihear-provincial-museum",
+    "preah-vihear/preah-vihear-market": "preah-vihear-preah-vihear-market",
+    "preah-vihear/chheu-teal-waterfall": "preah-vihear-chheu-teal-waterfall",
+    "preah-vihear/sra-em-town": "preah-vihear-sra-em-town",
+    "kampong-chhnang/tonle-sap-lake-shoreline": "kampong-chhnang-tonle-sap-lake-shoreline",
+    "kampong-chhnang/kampong-leng-floating-village": "kampong-chhnang-kampong-leng-floating-village",
+    "kampong-chhnang/old-french-airfield": "kampong-chhnang-old-french-airfield",
+    "kampong-chhnang/kampong-chhnang-central-market": "kampong-chhnang-kampong-chhnang-central-market",
+    "kampong-chhnang/phnom-kroul": "kampong-chhnang-phnom-kroul",
+    "kampong-chhnang/wat-kampong-chhnang": "kampong-chhnang-wat-kampong-chhnang",
+    "kampong-chhnang/kampong-chhnang-provincial-museum": "kampong-chhnang-kampong-chhnang-provincial-museum",
+    "kampong-chhnang/kampong-tralach-wooden-bridge": "kampong-chhnang-kampong-tralach-wooden-bridge",
+    "kampong-chhnang/chnok-trou-floating-village": "kampong-chhnang-chnok-trou-floating-village",
+    "stung-treng/limestone-canyons-koh-han": "stung-treng-limestone-canyons-koh-han",
+    "stung-treng/thala-barivat-temple-ruins": "stung-treng-thala-barivat-temple-ruins",
+    "stung-treng/stung-treng-riverside-park": "stung-treng-stung-treng-riverside-park",
+    "stung-treng/preah-rumkel-ecotourism-site": "stung-treng-preah-rumkel-ecotourism-site",
+    "stung-treng/wat-preah-bat": "stung-treng-wat-preah-bat",
+    "stung-treng/anlong-cheuteal-dolphin-pool": "stung-treng-anlong-cheuteal-dolphin-pool",
+    "koh-kong/koh-kong-island": "koh-kong-koh-kong-island",
+    "koh-kong/cardamom-mountains-koh-kong-side": "koh-kong-cardamom-mountains-koh-kong-side",
+    "koh-kong/peam-krasop-wildlife-sanctuary": "koh-kong-peam-krasop-wildlife-sanctuary",
+    "koh-kong/koh-kong-central-market": "koh-kong-koh-kong-central-market",
+    "koh-kong/koh-kong-suspension-bridge": "koh-kong-koh-kong-suspension-bridge",
+    "koh-kong/botum-sakor-national-park": "koh-kong-botum-sakor-national-park",
+    "koh-kong/koh-kong-safari-world": "koh-kong-koh-kong-safari-world",
+    "kep/koh-tonsay-rabbit-island": "kep-koh-tonsay-rabbit-island",
+    "kep/kep-beach": "kep-kep-beach",
+    "preah-sihanouk/ochheuteal-beach": "preah-sihanouk-ochheuteal-beach",
+    "preah-sihanouk/otres-beach": "preah-sihanouk-otres-beach",
+    "preah-sihanouk/koh-rong-samloem": "preah-sihanouk-koh-rong-samloem",
+    "preah-sihanouk/kbal-chhay-waterfall": "preah-sihanouk-kbal-chhay-waterfall",
+    "kampot/phnom-chhnork-cave-temple": "kampot-phnom-chhnork-cave-temple",
+    "kampot/kampot-old-market": "kampot-kampot-old-market",
+    "kampot/kampot-pepper-farm": "kampot-kampot-pepper-farm",
+    "takeo/phnom-da-temple": "takeo-phnom-da-temple",
+    "takeo/takeo-provincial-museum": "takeo-takeo-provincial-museum",
+    "takeo/koh-andet-rural-village": "takeo-koh-andet-rural-village",
+    "takeo/tonle-bati-temple-complex": "takeo-tonle-bati-temple-complex",
+    "phnom-penh/russian-market-toul-tom-poung": "phnom-penh-russian-market-toul-tom-poung"
   }
 }

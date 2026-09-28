@@ -46,7 +46,7 @@ export default function TravelCard({
     onSavedChange?.(item.id, next);
   }
   return (
-    <article className="group overflow-hidden rounded-xl border border-slate/15 bg-panel transition duration-300 hover:-translate-y-1 hover:shadow-soft">
+    <article className="group overflow-hidden rounded-xl border border-slate/60 dark:border-slate/15 bg-panel transition duration-300 hover:-translate-y-1 hover:shadow-soft">
       <div className="relative aspect-[1.48] overflow-hidden">
         <Link
           href={`/${kind}/${item.id}${query ? `?${query}` : ""}`}
@@ -102,7 +102,7 @@ export default function TravelCard({
             ({item.reviews} sample reviews)
           </span>
         </div>
-        <div className="mt-4 flex items-end justify-between border-t border-slate/15 pt-3">
+        <div className="mt-4 flex items-end justify-between border-t border-slate/60 dark:border-slate/15 pt-3">
           <span className="flex items-center gap-1 text-[9px] text-ink/55">
             <Icon name={kind === "stays" ? "check" : "clock"} size={12} />
             {kind === "stays" ? "A stay to remember" : item.duration}

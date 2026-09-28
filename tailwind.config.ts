@@ -23,7 +23,7 @@ const config: Config = {
         secondary: "rgb(var(--secondary) / <alpha-value>)",
         accent: "rgb(var(--accent) / <alpha-value>)",
       },
-      fontFamily: { sans: ["Poppins", "sans-serif"] },
+      fontFamily: { sans: ["var(--font-sans)"] },
       boxShadow: {
         soft: "0 8px 32px -12px rgb(24 35 70 / 0.15)",
         search: "0 12px 40px -12px rgb(14 13 21 / 0.2)",

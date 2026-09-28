@@ -1,19 +1,6 @@
 import type { PlaceCardData } from "../../lib/camTripApi";
 import Icon from "../Icon";
 
-/**
- * @typedef {Omit<import("../../lib/camTripApi").Place, "id" | "category" | "provinceNameKh"> & { id: string | number, note?: string }} PlaceCardData
- */
-
-/**
- * Reusable card for one Cambodian place. Works for API catalogue entries and
- * for the local fallback destinations shown when the API is unreachable.
- *
- * Expected shape (see lib/camTripApi.ts):
- * { id, nameEn, nameKh, description, categoryLabel, provinceName, regionLabel,
- *   rating, image, imageIsProvincePhoto, mapsUrl, featured }
- * @param {{ place: PlaceCardData }} props
- */
 export default function PlaceCard({ place }: { place: PlaceCardData }) {
   const location = [place.provinceName, place.regionLabel]
     .filter(Boolean)
@@ -26,7 +13,7 @@ export default function PlaceCard({ place }: { place: PlaceCardData }) {
   const hasRating = typeof rating === "number";
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate/15 bg-panel transition duration-300 hover:-translate-y-1 hover:shadow-soft">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate/60 dark:border-slate/15 bg-panel transition duration-500 ease-out hover:-translate-y-1 hover:shadow-soft motion-reduce:transition-none motion-reduce:transform-none">
       <div className="relative aspect-[1.5] overflow-hidden bg-slate/10">
         {place.image ? (
           <img
@@ -36,7 +23,7 @@ export default function PlaceCard({ place }: { place: PlaceCardData }) {
             height="400"
             loading="lazy"
             referrerPolicy="no-referrer"
-            className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition duration-500 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"
           />
         ) : (
           <div className="grid h-full place-items-center text-slate">
@@ -71,7 +58,7 @@ export default function PlaceCard({ place }: { place: PlaceCardData }) {
             {place.description}
           </p>
         ) : null}
-        <div className="mt-5 flex items-center justify-between gap-3 border-t border-slate/15 pt-4">
+        <div className="mt-5 flex items-center justify-between gap-3 border-t border-slate/60 dark:border-slate/15 pt-4">
           {hasRating ? (
             <span className="flex items-center gap-2">
               <span className="rounded-t-md rounded-br-md bg-navy px-1.5 py-1 text-[10px] font-semibold text-white dark:bg-indigo">
@@ -89,7 +76,7 @@ export default function PlaceCard({ place }: { place: PlaceCardData }) {
               href={place.mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 text-[10px] font-medium text-indigo hover:underline dark:text-brightgold"
+              className="flex items-center gap-1 text-[10px] font-medium text-indigo underline decoration-transparent underline-offset-4 transition-colors duration-500 ease-out motion-reduce:transition-none hover:decoration-current dark:text-brightgold"
             >
               Open in maps <Icon name="arrow" size={13} />
             </a>

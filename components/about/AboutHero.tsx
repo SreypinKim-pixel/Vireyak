@@ -2,13 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import Icon from "../Icon";
 import { aboutHero } from "../../data/about";
-import { HeroFootnote } from "./HeroHighlights";
 
-/**
- * About page hero. `highlights` is an optional streamed slot holding the live
- * API figures, so the hero itself paints immediately.
- * @param {{ highlights?: import("react").ReactNode }} props
- */
 export default function AboutHero({
   highlights = null,
 }: {
@@ -17,7 +11,7 @@ export default function AboutHero({
   return (
     <section
       aria-labelledby="about-hero-title"
-      className="relative isolate overflow-hidden border-b border-slate/15 bg-surface"
+      className="relative isolate overflow-hidden border-b border-slate/60 dark:border-slate/15 bg-surface"
     >
       <div
         aria-hidden="true"
@@ -39,15 +33,20 @@ export default function AboutHero({
             {aboutHero.description}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={aboutHero.primaryCta.href} className="button-primary">
+            <Link
+              href={aboutHero.primaryCta.href}
+              className="button-primary duration-500 ease-out motion-reduce:transition-none"
+            >
               {aboutHero.primaryCta.label} <Icon name="arrow" size={16} />
             </Link>
-            <Link href={aboutHero.secondaryCta.href} className="button-outline">
+            <Link
+              href={aboutHero.secondaryCta.href}
+              className="button-outline duration-500 ease-out motion-reduce:transition-none"
+            >
               {aboutHero.secondaryCta.label}
             </Link>
           </div>
           {highlights}
-          <HeroFootnote />
         </div>
         <div className="relative">
           <img

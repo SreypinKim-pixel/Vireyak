@@ -1,14 +1,21 @@
+import { siteUrl, siteDescription } from "@/lib/seo";
 import "./globals.css";
+import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SiteChrome from "../components/SiteChrome";
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Vireyak — Discover Cambodia, beautifully",
+    default: "Vireyak — Discover Cambodia",
     template: "%s | Vireyak",
   },
-  description:
-    "Find your kind of extraordinary. Explore memorable stays, timeless temples, and beautiful escapes across Cambodia with Vireyak.",
+  description: siteDescription,
+  icons: {
+    icon: { url: "/Logo.png", type: "image/png" },
+    apple: { url: "/Logo.png", type: "image/png" },
+  },
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || undefined },
 };
 const themeScript = `(function(){try{var t=localStorage.getItem('vireyak-theme');document.documentElement.classList.toggle('dark',t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches));}catch(e){}})();`;
 export default function RootLayout({

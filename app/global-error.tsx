@@ -2,6 +2,14 @@
 export default function GlobalError({ reset }: { reset: () => void }) {
   return (
     <html lang="en">
+      <head>
+        {/* Global errors replace the root layout, so they load their own font. */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        />
+      </head>
       <body
         style={{
           margin: 0,
@@ -34,6 +42,7 @@ export default function GlobalError({ reset }: { reset: () => void }) {
               background: "#182346",
               color: "#FBF9F6",
               cursor: "pointer",
+              fontFamily: "inherit",
             }}
           >
             Try again

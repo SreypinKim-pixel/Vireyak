@@ -74,8 +74,8 @@ export default function DestinationCard({
   const accent = categoryAccent(destination.category);
   return (
     <article
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg motion-reduce:transition-none"
-      style={{ borderColor: accent.border }}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate/60 dark:[border-color:var(--destination-border)] bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg motion-reduce:transition-none"
+      style={{ "--destination-border": accent.border } as React.CSSProperties}
     >
       <div className="aspect-[1.48] overflow-hidden">
         <DestinationImage
@@ -103,7 +103,7 @@ export default function DestinationCard({
         <p className="mb-3 mt-2 line-clamp-2 text-sm leading-5 text-[#667085]">
           {destination.description}
         </p>
-        <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-[#E8E8E8] pt-3">
+        <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-slate/60 dark:border-[#E8E8E8] pt-3">
           <RatingBadge rating={destination.rating} />
           <span className="rounded-full bg-[#F7F7F5] px-2.5 py-1.5 text-[10px] font-medium text-[#555555]">
             {destination.entryFee == null

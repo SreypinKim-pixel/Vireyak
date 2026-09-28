@@ -2,15 +2,6 @@ import type { TeamMember } from "../../data/team";
 import ProfileLinks from "./ProfileLinks";
 import ProfilePhoto from "./ProfilePhoto";
 
-/**
- * Highlighted mentor card, shown separately above the interactive team gallery.
- * Larger than a team panel, on a dark surface, with gold accents and a dedicated
- * portrait frame for the mentor's photo, so the mentor reads as the profile the
- * six team panels sit under. It deliberately has none of the gallery's
- * hover, expansion, or photo zoom behaviour.
- *
- * Expected shape (see data/team.ts): { id, name, role, bio, photo, links }
- */
 export default function MentorCard({ mentor }: { mentor?: TeamMember | null }) {
   if (!mentor) return null;
   return (

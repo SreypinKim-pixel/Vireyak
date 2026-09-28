@@ -6,18 +6,22 @@ import { useRouter } from "next/navigation";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 import DatePicker, { parseDate } from "./DatePicker";
+import { useProvinceSelection } from "./home/ProvinceSelection";
 export default function SearchForm({
   compact = false,
   initial = {},
   mode = "stays",
   provinces = provinceNames,
+  onDestinationChange,
 }: {
   compact?: boolean;
   initial?: SearchParams;
   mode?: TravelKind;
   provinces?: string[];
+  onDestinationChange?: (destination: string) => void;
 }) {
   const router = useRouter();
+  const provinceSelection = useProvinceSelection();
   const [tab, setTab] = useState<TravelKind>(mode);
   const [destination, setDestination] = useState(
     String(initial.destination || ""),
@@ -59,10 +63,10 @@ export default function SearchForm({
   }
   return (
     <div
-      className={`relative rounded-xl border border-slate/15 bg-panel text-ink ${compact ? "p-4 shadow-soft" : "p-5 shadow-search sm:p-6"}`}
+      className={`relative rounded-xl border border-slate/60 dark:border-slate/15 bg-panel text-ink ${compact ? "p-4 shadow-soft" : "p-5 shadow-search sm:p-6"}`}
     >
       {!compact && (
-        <div className="mb-5 flex items-center gap-6 border-b border-slate/15">
+        <div className="mb-5 flex items-center gap-6 border-b border-slate/60 dark:border-slate/15">
           <button
             type="button"
             onClick={() => setTab("stays")}
@@ -88,7 +92,7 @@ export default function SearchForm({
         onSubmit={submit}
         className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_0.85fr_auto]"
       >
-        <div className="flex items-center gap-3 rounded-lg border border-slate/25 px-3 py-3">
+        <div className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
           <Icon name="pin" className="text-slate" />
           <span className="min-w-0 flex-1">
             <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
@@ -98,7 +102,11 @@ export default function SearchForm({
               label="Destination"
               variant="inline"
               value={destination}
-              onChange={setDestination}
+              onChange={(value) => {
+                setDestination(value);
+                onDestinationChange?.(value);
+                provinceSelection?.selectProvince(value);
+              }}
               options={[
                 { value: "", label: "Explore Cambodia" },
                 ...destinationNames(provinces).map((d) => ({
@@ -109,7 +117,7 @@ export default function SearchForm({
             />
           </span>
         </div>
-        <label className="flex items-center gap-3 rounded-lg border border-slate/25 px-3 py-3">
+        <label className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
           <Icon name="calendar" className="text-slate" size={18} />
           <span className="min-w-0 flex-1">
             <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
@@ -135,7 +143,7 @@ export default function SearchForm({
           </span>
         </label>
         {tab === "stays" ? (
-          <label className="flex items-center gap-3 rounded-lg border border-slate/25 px-3 py-3">
+          <label className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
             <Icon name="calendar" className="text-slate" size={18} />
             <span className="min-w-0 flex-1">
               <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
@@ -157,11 +165,11 @@ export default function SearchForm({
             </span>
           </label>
         ) : (
-          <div className="hidden items-center rounded-lg border border-slate/25 px-4 text-xs text-ink/60 lg:flex">
+          <div className="hidden items-center rounded-lg border border-slate/60 dark:border-slate/25 px-4 text-xs text-ink/60 lg:flex">
             Make a little room for wonder.
           </div>
         )}
-        <div className="flex items-center gap-3 rounded-lg border border-slate/25 px-3 py-3">
+        <div className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
           <Icon name="users" className="text-slate" size={18} />
           <span className="min-w-0 flex-1">
             <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">

@@ -1,6 +1,3 @@
-// Curated demo content. Prices, ratings, and properties are illustrative, not live inventory.
-// The named properties below use the hotels' own photography, cropped to the
-// card ratio; see `public/images/README.md` for every source link.
 export const destinations = [
   {
     name: "Siem Reap",
@@ -354,7 +351,7 @@ export const stays = [
     ],
   },
 ];
-// Real Cambodian place names; commercial details and some images are illustrative.
+
 export const attractions = [
   {
     id: "angkor-sunrise",

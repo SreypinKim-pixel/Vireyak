@@ -12,12 +12,11 @@ const config = [
     ],
   },
   {
-    // These are local, pre-sized inspiration images, not remote image endpoints.
     rules: { "@next/next/no-img-element": "off" },
   },
   {
     files: ["app/global-error.tsx"],
-    // The root failure fallback deliberately works without the client router.
+
     rules: { "@next/next/no-html-link-for-pages": "off" },
   },
 ];

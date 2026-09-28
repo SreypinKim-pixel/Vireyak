@@ -1,9 +1,5 @@
 import { getProvince } from "@/lib/cam-trip";
 
-// Thin read-only proxy to the teacher CamTrip API. The teacher API does not
-// send CORS headers, so the browser calls this same-origin route and the
-// request is forwarded server-side to:
-//   GET https://cam-trip.cheat.casa/api/provinces/{id}
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },

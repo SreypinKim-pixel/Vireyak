@@ -76,6 +76,16 @@ New photographs are resized and compressed; card layouts crop them. Commons deri
 - `andong-russei.jpg`: [Nomadays / Tour Cambodia](https://www.tour-cambodia.com/guide/attraction/potter-village-kampong-chhnang). License: Source does not state an open license; local preview use.
 
 Phnom Yat, Ta Moan Thom, and Sopheakmit use the existing location-specific assets documented in [destinations/README.md](destinations/README.md).
+
+## Province covers
+
+The 25 province cards in the homepage "Explore all 25 provinces" gallery read
+their cover photo from `data/destination-photos.json`. Third-party covers were
+copied locally so a slow, rate-limited, or hotlink-blocking host can never leave
+a card without an image. The copies added for that are listed in
+[provinces/README.md](provinces/README.md); the remaining covers already used the
+local files documented above.
+
 ## Named property photography
 
 The named Cambodian hotels added to `data/travel.ts` use each property's own

@@ -73,7 +73,7 @@ export function getAttractionPhoto(
     const photo = apiPhoto(url, `${name}, ${province}`);
     if (photo) return photo;
   }
-  // A province cover is not evidence of what this particular attraction looks like.
+
   return null;
 }
 

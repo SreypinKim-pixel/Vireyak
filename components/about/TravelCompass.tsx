@@ -1,15 +1,11 @@
 import Icon from "../Icon";
 import { travelCompass } from "../../data/about";
 
-/**
- * The original "Our compass" guidance from the first About page. The id is
- * unchanged so the footer link /about#travel-thoughtfully still works.
- */
 export default function TravelCompass() {
   return (
     <section
       id="travel-thoughtfully"
-      className="scroll-mt-8 border-y border-slate/15 bg-slate/[0.045] py-14"
+      className="scroll-mt-8 border-y border-slate/60 dark:border-slate/15 bg-slate/[0.045] py-14"
     >
       <div className="shell">
         <p className="eyebrow mb-3 text-center">{travelCompass.eyebrow}</p>
@@ -18,9 +14,13 @@ export default function TravelCompass() {
           {travelCompass.points.map((point) => (
             <div
               key={point.title}
-              className="rounded-xl border border-slate/15 bg-panel p-7"
+              className="group rounded-xl border border-slate/60 bg-panel p-7 transition duration-500 ease-out hover:-translate-y-1 hover:border-gold hover:bg-gold/10 hover:shadow-soft motion-reduce:transform-none motion-reduce:transition-none dark:border-slate/15 dark:hover:border-brightgold/60 dark:hover:bg-gold/10"
             >
-              <Icon name={point.icon} className="mb-5 text-gold" size={28} />
+              <Icon
+                name={point.icon}
+                className="mb-5 text-gold transition-colors duration-500 ease-out group-hover:text-indigo motion-reduce:transition-none dark:group-hover:text-brightgold"
+                size={28}
+              />
               <h3 className="text-base font-semibold">{point.title}</h3>
               <p className="mt-3 text-xs leading-7 text-ink/60">{point.copy}</p>
             </div>

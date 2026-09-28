@@ -1,4 +1,3 @@
-// Local fallback for the province API; includes Phnom Penh, the capital.
 export const provinceNames: string[] = [
   "Banteay Meanchey",
   "Battambang",

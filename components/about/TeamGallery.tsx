@@ -5,7 +5,6 @@ import type { CSSProperties, PointerEvent, KeyboardEvent } from "react";
 import type { TeamMember } from "../../data/team";
 import TeamGalleryCard from "./TeamGalleryCard";
 
-/** The accordion is drawn with clipped layers, without resizing the layout. */
 export default function TeamGallery({ members }: { members: TeamMember[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const pointer = useRef<{ x: number; y: number } | null>(null);
@@ -22,8 +21,7 @@ export default function TeamGallery({ members }: { members: TeamMember[] }) {
     if (event.pointerType !== "mouse") return;
     clearTimeout(leaveTimer.current);
     const { clientX: x, clientY: y } = event;
-    // Ignore layout-generated boundary events and tiny pointer jitter. Only
-    // intentional movement can switch the member while panels slide underneath.
+
     if (
       pointer.current &&
       Math.hypot(x - pointer.current.x, y - pointer.current.y) < 6

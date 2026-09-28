@@ -82,14 +82,14 @@ export default function NotFound() {
 
               <Link
                 href="/attraction"
-                className="inline-flex min-h-12 items-center rounded-xl border border-slate/30 dark:border-white/15 px-6 py-3.5 text-sm font-semibold"
+                className="inline-flex min-h-12 items-center rounded-xl border border-slate/60 dark:border-white/15 px-6 py-3.5 text-sm font-semibold"
               >
                 Explore Attractions
               </Link>
               <button
                 type="button"
                 onClick={goBack}
-                className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-slate/30 bg-panel dark:border-white/15 dark:bg-white/[0.05] px-6 py-3.5 text-sm font-semibold text-navy dark:text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo/40 hover:bg-slate/10 dark:hover:border-white/25 dark:hover:bg-white/[0.09]"
+                className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-slate/60 bg-panel dark:border-white/15 dark:bg-white/[0.05] px-6 py-3.5 text-sm font-semibold text-navy dark:text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo/40 hover:bg-slate/10 dark:hover:border-white/25 dark:hover:bg-white/[0.09]"
               >
                 <ArrowLeft size={17} />
                 Go Back
@@ -132,7 +132,7 @@ export default function NotFound() {
           </section>
         </div>
 
-        <div className="flex items-center justify-center border-t border-slate/20 dark:border-white/[0.06] pt-5">
+        <div className="flex items-center justify-center border-t border-slate/60 dark:border-white/[0.06] pt-5">
           <p className="text-[10px] uppercase tracking-[0.25em] text-ink/50 dark:text-white/25">
             Vireyak · Explore Cambodia
           </p>

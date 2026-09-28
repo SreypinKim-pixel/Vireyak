@@ -1,5 +1,41 @@
 import { test, expect } from "@playwright/test";
 
+test("registration keeps its size while province options load", async ({
+  page,
+}) => {
+  let release: () => void = () => {};
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/api/attractions", async (route) => {
+    await pending;
+    await route.fulfill({
+      json: {
+        data: [
+          {
+            id: "angkor",
+            name: "Angkor Wat",
+            province: { id: "siem-reap", name: "Siem Reap" },
+          },
+        ],
+      },
+    });
+  });
+  await page.goto("/register");
+  await page.evaluate(() => document.fonts.ready);
+  const province = page.getByLabel("Province of interest");
+  await expect(province).toBeVisible();
+  await expect(province).toBeDisabled();
+  const before = await page.locator("form").boundingBox();
+  release();
+  await expect(province).toBeEnabled();
+  const after = await page.locator("form").boundingBox();
+  expect(before).not.toBeNull();
+  expect(after).not.toBeNull();
+  expect(after!.height).toBeCloseTo(before!.height, 0);
+  expect(after!.y).toBeCloseTo(before!.y, 0);
+});
+
 test("registration validates fields and loads optional attractions", async ({
   page,
 }) => {
@@ -15,7 +51,7 @@ test("registration validates fields and loads optional attractions", async ({
   await expect(page.getByText("Enter a valid email address.")).toBeVisible();
   await expect(page.getByText("Use at least 12 characters.")).toBeVisible();
   await page.getByLabel("Full name").fill("Demo Traveler");
-  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Email address").fill("registered@example.com");
   await page.getByLabel("Password", { exact: true }).fill("demo-password-only");
   await page.getByLabel("Confirm password").fill("different-password");
   await page.getByRole("button", { name: "Create account" }).click();
@@ -41,9 +77,14 @@ test("registration validates fields and loads optional attractions", async ({
     .click();
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
-    page.getByText(/Account creation is not available yet/),
-  ).toBeVisible();
+    page.getByRole("button", { name: "Signing up…" }),
+  ).toBeDisabled();
+  await expect(page.getByText(/Sign-up successful!/)).toBeVisible();
   await expect(page.getByLabel("Password", { exact: true })).toHaveValue("");
+  await expect(page).toHaveURL(/\/login$/);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
+  ).toBeNull();
 });
 
 test("attraction loading failures can be retried and empty results are explained", async ({
@@ -109,11 +150,77 @@ test("malformed attraction data does not block registration", async ({
   await page.goto("/register");
   await expect(page.getByText(/Attractions could not be loaded/)).toBeVisible();
   await page.getByLabel("Full name").fill("Demo Traveler");
-  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Email address").fill("registered@example.com");
   await page.getByLabel("Password", { exact: true }).fill("demo-password-only");
   await page.getByLabel("Confirm password").fill("demo-password-only");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
-    page.getByText(/Account creation is not available yet/),
+    page.getByRole("button", { name: "Signing up…" }),
+  ).toBeDisabled();
+  await expect(page.getByText(/Sign-up successful!/)).toBeVisible();
+});
+
+test("account forms announce failure and let visitors retry", async ({
+  page,
+}) => {
+  for (const [path, button, message] of [
+    ["/register", "Create account", "Sign-up failed."],
+    ["/login", "Log in", "Login failed."],
+  ]) {
+    await page.goto(path);
+    await page.getByRole("button", { name: button, exact: true }).click();
+    await expect(page.locator("form").getByRole("alert")).toContainText(
+      message,
+    );
+    await expect(
+      page.getByRole("button", { name: button, exact: true }),
+    ).toBeEnabled();
+  }
+  await page.evaluate(() => {
+    Storage.prototype.setItem = () => {
+      throw new Error("Storage blocked");
+    };
+  });
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "Login failed. Your browser could not save the session.",
+  );
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(
+    page.getByRole("button", { name: "Log in", exact: true }),
+  ).toBeEnabled();
+});
+
+test("registered accounts can log in and persist without plaintext passwords", async ({
+  page,
+}) => {
+  await page.goto("/register");
+  await page.getByLabel("Full name").fill("Local Traveler");
+  await page.getByLabel("Email address").fill("traveler@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("SamplePassword@123");
+  await page.getByLabel("Confirm password").fill("SamplePassword@123");
+  await page
+    .getByRole("button", { name: "Create account", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/login$/);
+  const saved = await page.evaluate(() =>
+    localStorage.getItem("vireyak-local-accounts"),
+  );
+  expect(saved).toContain("traveler@example.com");
+  expect(saved).not.toContain("SamplePassword@123");
+  await page.getByLabel("Email address").fill("TRAVELER@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("wrong-password");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(
+    page.getByText("Login failed. Incorrect email or password."),
   ).toBeVisible();
+  await page.getByLabel("Password", { exact: true }).fill("SamplePassword@123");
+  await page.getByLabel("Remember me").check();
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  expect(
+    await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
+  ).toBe("traveler@example.com");
 });
