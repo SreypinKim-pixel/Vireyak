@@ -16,7 +16,7 @@ export default function TeamSection() {
       {mentor ? (
         <div className="mt-10">
           <h3 className="section-title text-lg">{teamSection.mentorTitle}</h3>
-          <p className="mt-3 max-w-2xl text-[11px] leading-6 text-ink/55">
+          <p className="mt-3 max-w-2xl text-xs leading-6 text-ink/55">
             {teamSection.mentorDescription}
           </p>
           <div className="mt-6">
@@ -28,7 +28,7 @@ export default function TeamSection() {
       <div className="mt-14">
         <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
           <h3 className="section-title text-lg">{teamSection.membersTitle}</h3>
-          <p className="text-[11px] text-ink/55">
+          <p className="text-xs text-ink/55">
             Hover a card — or tap one on a touch screen — to see each
             member&rsquo;s role and work.
           </p>

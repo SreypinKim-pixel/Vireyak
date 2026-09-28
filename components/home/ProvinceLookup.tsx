@@ -143,7 +143,7 @@ export default function ProvinceLookup() {
                   </dd>
                 </div>
               </dl>
-              <p className="mt-4 text-[10px] leading-5 text-ink/55">
+              <p className="mt-4 text-xs leading-5 text-ink/55">
                 Live data from the teacher CamTrip API —{" "}
                 <code className="break-all">
                   GET /api/provinces/{province.id}

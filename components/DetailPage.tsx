@@ -18,7 +18,7 @@ export default function DetailPage({
     <div className="shell py-8 sm:py-12">
       <nav
         aria-label="Breadcrumb"
-        className="mb-6 flex items-center gap-2 text-[10px] text-ink/55"
+        className="mb-6 flex items-center gap-2 text-xs text-ink/55"
       >
         <Link href="/">Home</Link>
         <Icon name="chevron" size={11} />
@@ -41,7 +41,7 @@ export default function DetailPage({
         <div className="flex items-center gap-3">
           <div className="text-right">
             <p className="text-xs font-medium">A little extraordinary</p>
-            <p className="mt-1 text-[9px] text-ink/55">
+            <p className="mt-1 text-xs text-ink/55">
               {item.reviews} illustrative reviews
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function DetailPage({
           fetchPriority="high"
           className="h-full w-full object-cover"
         />
-        <span className="absolute bottom-4 left-4 rounded bg-navy/75 px-3 py-2 text-[9px] text-white backdrop-blur">
+        <span className="absolute bottom-4 left-4 rounded bg-navy/75 px-3 py-2 text-xs text-white backdrop-blur">
           Inspiration imagery · sample listing
         </span>
       </div>

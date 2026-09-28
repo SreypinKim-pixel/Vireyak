@@ -11,7 +11,7 @@ export default function AboutCTA() {
           className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-gold/15 blur-3xl"
         />
         <div className="relative">
-          <p className="text-[9px] font-medium uppercase tracking-[0.22em] text-brightgold">
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-brightgold">
             {finalCta.eyebrow}
           </p>
           <h2

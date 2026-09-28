@@ -15,7 +15,7 @@ export default function HeroHighlights({
           <dd className="text-2xl font-semibold tracking-tight text-navy dark:text-ivory">
             {stat.value.toLocaleString("en-US")}
           </dd>
-          <dt className="mt-1 flex items-start gap-1.5 text-[10px] leading-4 text-ink/55">
+          <dt className="mt-1 flex items-start gap-1.5 text-xs leading-4 text-ink/55">
             <Icon name={stat.icon} size={13} className="mt-0.5 text-gold" />
             {stat.label}
           </dt>

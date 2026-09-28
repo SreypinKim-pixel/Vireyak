@@ -30,7 +30,7 @@ export default function PlacesSection({
             {placesSection.description}
           </p>
           {status === "ready" && totalPlaces > 0 ? (
-            <div className="mt-5 flex flex-wrap items-center gap-2 text-[10px]">
+            <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
               <span className="rounded-full bg-gold/10 px-3 py-1.5 font-medium text-ink/70">
                 {totalPlaces.toLocaleString("en-US")} places in the live
                 catalogue
@@ -43,7 +43,7 @@ export default function PlacesSection({
         </div>
         <Link
           href={placesSection.cta.href}
-          className="flex items-center gap-2 text-[11px] font-medium text-indigo dark:text-brightgold"
+          className="flex items-center gap-2 text-xs font-medium text-indigo dark:text-brightgold"
         >
           {placesSection.cta.label} <Icon name="arrow" size={16} />
         </Link>
@@ -56,7 +56,7 @@ export default function PlacesSection({
             <p className="text-xs font-semibold text-navy dark:text-ivory">
               {placesSection.errorTitle}
             </p>
-            <p className="mt-2 text-[11px] leading-6 text-ink/65">
+            <p className="mt-2 text-xs leading-6 text-ink/65">
               {placesSection.errorCopy}
             </p>
           </div>
@@ -69,7 +69,7 @@ export default function PlacesSection({
           <h3 className="text-base font-medium text-navy dark:text-ivory">
             {placesSection.emptyTitle}
           </h3>
-          <p className="mx-auto mt-3 max-w-sm text-[11px] leading-6 text-ink/60">
+          <p className="mx-auto mt-3 max-w-sm text-xs leading-6 text-ink/60">
             {placesSection.emptyCopy}
           </p>
           <Link href={placesSection.cta.href} className="button-primary mt-6">
@@ -85,7 +85,7 @@ export default function PlacesSection({
       )}
 
       {status === "ready" ? (
-        <p className="mt-6 text-[10px] leading-5 text-ink/45">
+        <p className="mt-6 text-xs leading-5 text-ink/45">
           {placesSection.footnote}
         </p>
       ) : null}

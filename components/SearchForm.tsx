@@ -83,7 +83,7 @@ export default function SearchForm({
           >
             <Icon name="temple" size={17} /> Find an experience
           </button>
-          <span className="ml-auto hidden text-[10px] text-ink/45 sm:block">
+          <span className="ml-auto hidden text-xs text-ink/45 sm:block">
             A beautiful journey starts here.
           </span>
         </div>
@@ -95,7 +95,7 @@ export default function SearchForm({
         <div className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
           <Icon name="pin" className="text-slate" />
           <span className="min-w-0 flex-1">
-            <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-ink/60">
               Where to?
             </span>
             <Dropdown
@@ -120,7 +120,7 @@ export default function SearchForm({
         <label className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
           <Icon name="calendar" className="text-slate" size={18} />
           <span className="min-w-0 flex-1">
-            <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-ink/60">
               {tab === "stays" ? "Check-in" : "Experience date"}
             </span>
             <DatePicker
@@ -146,7 +146,7 @@ export default function SearchForm({
           <label className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
             <Icon name="calendar" className="text-slate" size={18} />
             <span className="min-w-0 flex-1">
-              <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
+              <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-ink/60">
                 Check-out
               </span>
               <DatePicker
@@ -172,7 +172,7 @@ export default function SearchForm({
         <div className="flex items-center gap-3 rounded-lg border border-slate/60 dark:border-slate/25 px-3 py-3">
           <Icon name="users" className="text-slate" size={18} />
           <span className="min-w-0 flex-1">
-            <span className="mb-1 block text-[9px] font-semibold uppercase tracking-wider text-ink/60">
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-ink/60">
               Travelers
             </span>
             <input

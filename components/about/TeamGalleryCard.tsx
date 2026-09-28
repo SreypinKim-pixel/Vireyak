@@ -60,10 +60,10 @@ export default function TeamGalleryCard({
         <h3 className="text-lg font-semibold tracking-tight text-ivory sm:text-xl">
           {member.name}
         </h3>
-        <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-brightgold sm:text-[10px]">
+        <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brightgold sm:text-xs">
           {member.role}
         </p>
-        <p className="mt-3 text-[11px] leading-5 text-ivory/75 sm:leading-6">
+        <p className="mt-3 text-xs leading-5 text-ivory/75 sm:leading-6">
           {member.bio}
         </p>
         <div inert={!active}>
@@ -74,10 +74,10 @@ export default function TeamGalleryCard({
         aria-hidden="true"
         className={`team-gallery-idle team-gallery-fade pointer-events-none absolute bottom-0 left-0 p-4 sm:p-5 ${activeIndex === null ? "opacity-100" : "opacity-0"}`}
       >
-        <p className="truncate text-[13px] font-semibold leading-5 text-ivory">
+        <p className="truncate text-xs font-semibold leading-5 text-ivory">
           {member.name}
         </p>
-        <p className="mt-1.5 truncate text-[9px] font-semibold uppercase tracking-[0.16em] text-brightgold">
+        <p className="mt-1.5 truncate text-xs font-semibold uppercase tracking-[0.16em] text-brightgold">
           {member.role}
         </p>
       </div>
@@ -85,7 +85,7 @@ export default function TeamGalleryCard({
         aria-hidden="true"
         className={`team-gallery-spine team-gallery-fade pointer-events-none absolute inset-y-0 left-0 flex items-end justify-center p-3 ${collapsed ? "opacity-100" : "opacity-0"}`}
       >
-        <span className="max-h-full overflow-hidden text-[11px] font-medium tracking-wide text-ivory/90 [writing-mode:vertical-rl] rotate-180">
+        <span className="max-h-full overflow-hidden text-xs font-medium tracking-wide text-ivory/90 [writing-mode:vertical-rl] rotate-180">
           {member.name}
         </span>
       </div>

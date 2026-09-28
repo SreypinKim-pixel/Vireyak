@@ -40,7 +40,7 @@ export default function ProfileLinks({
             {link.label || "Profile"}
           </>
         );
-        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-[10px] font-medium transition-colors duration-500 ease-out motion-reduce:transition-none ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
+        const className = `inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border p-2.5 text-xs font-medium transition-colors duration-500 ease-out motion-reduce:transition-none ${SocialIcon ? "bg-navy" : ""} ${toneClasses}`;
         if (!link.href?.trim()) {
           return (
             <span

@@ -1,4 +1,4 @@
-import PlacesTable from "@/components/places/PlacesTable";
+import PlacesTable from "./PlacesTable";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({

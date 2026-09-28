@@ -191,7 +191,7 @@ export default function AuthForm({ register = false }) {
             className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
           />
           <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
-          <p className="text-[10px] uppercase tracking-[0.2em] text-brightgold">
+          <p className="text-xs uppercase tracking-[0.2em] text-brightgold">
             Your next chapter
           </p>
           <p className="mt-4 text-4xl font-semibold leading-tight tracking-tight">
@@ -203,7 +203,7 @@ export default function AuthForm({ register = false }) {
             <br />
             Make your next journey a Vireyak journey.
           </p>
-          <p className="mt-8 flex items-center gap-2 text-[10px] text-white/70">
+          <p className="mt-8 flex items-center gap-2 text-xs text-white/70">
             <Icon name="pin" size={14} /> Angkor Wat, Siem Reap
           </p>
         </div>
@@ -312,7 +312,7 @@ export default function AuthForm({ register = false }) {
                   type="button"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-4 text-[10px] font-medium text-indigo dark:text-brightgold"
+                  className="absolute inset-y-0 right-4 text-xs font-medium text-indigo dark:text-brightgold"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -437,7 +437,7 @@ export default function AuthForm({ register = false }) {
                   aria-label="Remember me"
                   className="h-4 w-4 accent-indigo dark:accent-brightgold"
                 />
-                <span className="text-[11px] font-medium text-ink/70">
+                <span className="text-xs font-medium text-ink/70">
                   Remember me
                 </span>
               </label>

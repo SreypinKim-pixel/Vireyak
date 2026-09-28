@@ -125,7 +125,7 @@ export default function ListingExplorer({
                 {types.map((t) => (
                   <label
                     key={t}
-                    className="flex cursor-pointer items-center gap-2 text-[11px] text-ink/65"
+                    className="flex cursor-pointer items-center gap-2 text-xs text-ink/65"
                   >
                     <input
                       className="accent-navy dark:accent-brightgold"
@@ -174,7 +174,7 @@ export default function ListingExplorer({
                 setSort("recommended");
                 setSavedOnly(false);
               }}
-              className="mt-5 text-[11px] font-medium text-indigo underline underline-offset-4 dark:text-brightgold"
+              className="mt-5 text-xs font-medium text-indigo underline underline-offset-4 dark:text-brightgold"
             >
               Reset filters
             </button>
@@ -182,7 +182,7 @@ export default function ListingExplorer({
           <div className="mt-5 hidden rounded-xl bg-gold/10 p-5 lg:block">
             <Icon name="leaf" className="mb-3 text-gold" />
             <p className="text-xs font-semibold">A little more thoughtful.</p>
-            <p className="mt-2 text-[11px] leading-6 text-ink/60">
+            <p className="mt-2 text-xs leading-6 text-ink/60">
               Travel slowly. Choose locally. Leave room for the unexpected.
             </p>
           </div>
@@ -193,7 +193,7 @@ export default function ListingExplorer({
               <h2 className="text-lg font-semibold text-navy dark:text-ivory">
                 {destination || "Explore Cambodia"}
               </h2>
-              <p aria-live="polite" className="mt-1 text-[11px] text-ink/55">
+              <p aria-live="polite" className="mt-1 text-xs text-ink/55">
                 {filtered.length} {kind === "stays" ? "stays" : "experiences"}{" "}
                 to discover
                 {kind === "stays"
@@ -201,7 +201,7 @@ export default function ListingExplorer({
                   : ""}
               </p>
             </div>
-            <div className="flex items-center gap-2 text-[11px] text-ink/55">
+            <div className="flex items-center gap-2 text-xs text-ink/55">
               Sort by
               <Dropdown
                 label="Sort results"
@@ -217,7 +217,7 @@ export default function ListingExplorer({
               />
             </div>
           </div>
-          <p className="mb-5 rounded-lg bg-slate/5 px-4 py-3 text-[10px] leading-5 text-ink/60">
+          <p className="mb-5 rounded-lg bg-slate/5 px-4 py-3 text-xs leading-5 text-ink/60">
             A preview of what&apos;s possible. Listings, imagery, prices, and
             reviews are illustrative; dates do not check live availability.
           </p>

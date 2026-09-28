@@ -307,7 +307,7 @@ export default function HeroGrid() {
 
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0E0D15] via-[#0E0D15]/20 to-transparent" />
 
-                          <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-[#0E0D15]/45 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                          <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-[#0E0D15]/45 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md">
                             {destination.category}
                           </div>
 
@@ -362,7 +362,7 @@ export default function HeroGrid() {
         </div>
 
         <div>
-          <p className="text-[10px] uppercase tracking-[0.25em] text-white/40">
+          <p className="text-xs uppercase tracking-[0.25em] text-white/40">
             Discover
           </p>
 

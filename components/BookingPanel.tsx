@@ -35,13 +35,38 @@ export default function BookingPanel({
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setConfirmed(false);
-    if (
-      !parseDate(date) ||
-      date < today ||
-      (kind === "stays" && (!parseDate(end) || nights < 1))
+    const dateLabel = kind === "stays" ? "Check-in" : "Experience date";
+    const travelerCount = Number(guests);
+    let error = "";
+    let field = dateLabel;
+    if (!date.trim()) {
+      error = `Please select your ${dateLabel.toLowerCase()} before previewing your trip.`;
+    } else if (!parseDate(date)) {
+      error = `Please enter a valid ${dateLabel.toLowerCase()} in YYYY-MM-DD format.`;
+    } else if (date < today) {
+      error = `Your ${dateLabel.toLowerCase()} must be today or a future date.`;
+    } else if (kind === "stays" && (!parseDate(end) || nights < 1)) {
+      field = "Check-out";
+      error = !end.trim()
+        ? "Please select your check-out date."
+        : !parseDate(end)
+          ? "Please enter a valid check-out date in YYYY-MM-DD format."
+          : "Check-out must be after your check-in date.";
+    } else if (
+      !guests.trim() ||
+      !Number.isInteger(travelerCount) ||
+      travelerCount < 1 ||
+      travelerCount > (item.capacity || 6)
     ) {
+      field = "Travelers";
+      error = `Please enter a whole number of travelers between 1 and ${item.capacity || 6}.`;
+    }
+    if (error) {
       setReady(false);
-      setMessage("Choose a future stay with check-out after check-in.");
+      setMessage(error);
+      e.currentTarget
+        .querySelector<HTMLInputElement>(`input[aria-label="${field}"]`)
+        ?.focus();
       return;
     }
     setReady(true);
@@ -57,10 +82,10 @@ export default function BookingPanel({
           / {kind === "stays" ? "night" : "person"}
         </span>
       </div>
-      <p className="mb-6 mt-1 text-[10px] text-ink/50">
+      <p className="mb-6 mt-1 text-xs text-ink/50">
         Illustrative price · USD
       </p>
-      <form onSubmit={submit} className="space-y-4">
+      <form onSubmit={submit} noValidate className="space-y-4">
         <label className="block">
           <span className="field-label">
             {kind === "stays" ? "Check-in" : "Experience date"}
@@ -148,14 +173,14 @@ export default function BookingPanel({
         <button className="button-primary w-full" type="submit">
           Preview your trip <Icon name="arrow" size={16} />
         </button>
-        <p className="text-center text-[9px] text-ink/50">
+        <p className="text-center text-xs text-ink/50">
           No payment required. Taxes and fees not calculated.
         </p>
       </form>
       {message && !confirmed && (
         <div
-          role="status"
-          className={`mt-5 rounded-lg p-4 leading-6 ${ready ? "flex items-center gap-3 border-2 border-gold bg-gold/20 text-sm font-bold text-navy dark:text-brightgold" : "bg-red-500/10 text-xs"}`}
+          role={ready ? "status" : "alert"}
+          className={`mt-5 rounded-lg p-4 leading-6 ${ready ? "flex items-center gap-3 border-2 border-gold bg-gold/20 text-sm font-bold text-navy dark:text-brightgold" : "border border-red-600/40 bg-red-500/10 text-sm font-medium text-red-700 dark:text-red-300"}`}
         >
           {ready && <Icon name="arrow" size={20} className="shrink-0" />}
           <span>{message}</span>
