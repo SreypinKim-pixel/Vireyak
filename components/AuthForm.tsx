@@ -2,12 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  signInDemo,
-  matchesDemoAccount,
-  DEMO_EMAIL,
-  DEMO_PASSWORD,
-} from "../lib/demoSession";
+import { signInDemo, matchesDemoAccount } from "../lib/demoSession";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 export default function AuthForm({ register = false }) {
@@ -152,9 +147,7 @@ export default function AuthForm({ register = false }) {
     submitTimer.current = setTimeout(() => {
       if (!register && !matchesDemoAccount(email, password)) {
         setSubmitState("error");
-        setMessage(
-          "Login failed. Incorrect email or password. Use the demo account shown above.",
-        );
+        setMessage("Login failed. Incorrect email or password.");
         return;
       }
       if (!register && !signInDemo(email, password, remember)) {
@@ -247,20 +240,9 @@ export default function AuthForm({ register = false }) {
             }
           >
             {register
-              ? "Try sign-up with sample details, then use the demo account on the login page. This preview does not create new accounts or save passwords."
-              : "Use the demo account below. Login checks these credentials and starts a local preview session."}
+              ? "Try sign-up with sample details, then log in with your demo account. This preview does not create new accounts or save passwords."
+              : "Log in with your demo account to start a local preview session."}
           </p>
-          {!register && (
-            <div className="mb-5 rounded-lg border border-gold/40 bg-gold/10 p-4 text-sm">
-              <p className="font-semibold">Demo account</p>
-              <p className="mt-2">
-                Email: <code>{DEMO_EMAIL}</code>
-              </p>
-              <p className="mt-1">
-                Password: <code>{DEMO_PASSWORD}</code>
-              </p>
-            </div>
-          )}
           <form
             onSubmit={submit}
             aria-busy={submitState === "loading"}

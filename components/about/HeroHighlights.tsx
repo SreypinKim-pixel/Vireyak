@@ -1,10 +1,6 @@
 import type { CatalogueStat } from "../../lib/camTripApi";
 import Icon from "../Icon";
 
-/**
- * The hero's live figures, streamed in after the hero has painted. Renders
- * nothing when the API is unavailable, so the hero stays intact.
- */
 export default function HeroHighlights({
   stats = [],
 }: {

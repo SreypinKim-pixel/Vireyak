@@ -3,15 +3,7 @@ import Icon from "../Icon";
 
 /**
  * @typedef {Omit<import("../../lib/camTripApi").Place, "id" | "category" | "provinceNameKh"> & { id: string | number, note?: string }} PlaceCardData
- */
 
-/**
- * Reusable card for one Cambodian place. Works for API catalogue entries and
- * for the local fallback destinations shown when the API is unreachable.
- *
- * Expected shape (see lib/camTripApi.ts):
- * { id, nameEn, nameKh, description, categoryLabel, provinceName, regionLabel,
- *   rating, image, imageIsProvincePhoto, mapsUrl, featured }
  * @param {{ place: PlaceCardData }} props
  */
 export default function PlaceCard({ place }: { place: PlaceCardData }) {

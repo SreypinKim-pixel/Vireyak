@@ -1,22 +1,5 @@
 import { isVisibleAttraction } from "./attraction-visibility";
-/**
- * CamTrip public API client.
- *
- * Server-side only: the public API (https://cam-trip.cheat.casa) does not send
- * CORS headers, so every request is made from a React Server Component and
- * cached with the Next.js fetch cache (revalidated every 30 minutes).
- *
- * Documented endpoints used here, from
- * https://cam-trip.cheat.casa/swagger-ui/index.html:
- *   GET /api/provinces    -> ProvinceResponse[]
- *   GET /api/attractions  -> PageResponseAttractionResponse
- *                            { content: AttractionResponse[], page, size, totalPages, totalElements }
- *
- * Only properties defined by the API documentation are read. When a documented
- * field is empty in practice (for example the often-empty `imageUrls`), the UI
- * falls back to another real API field (`province.imageUrl`) or to local
- * content — never to invented data.
- */
+
 import { cache } from "react";
 
 /** Province regions exactly as defined by the API `region` enum. */
@@ -61,11 +44,10 @@ export interface PlaceCardData {
   imageIsProvincePhoto: boolean;
   mapsUrl: string | null;
   featured: boolean;
-  /** Shown instead of a rating by preview cards; API places have none. */
+
   note?: string;
 }
 
-/** A catalogued attraction, as read from `GET /api/attractions`. */
 export interface Place extends PlaceCardData {
   id: number;
   category: string;
@@ -73,7 +55,6 @@ export interface Place extends PlaceCardData {
   region: string | null;
 }
 
-/** One live figure for the hero and the Cambodia section. */
 export interface CatalogueStat {
   key: string;
   label: string;
@@ -81,7 +62,6 @@ export interface CatalogueStat {
   icon: string;
 }
 
-/** Province and place counts for one API region. */
 export interface RegionSummary {
   region: string;
   label: string;
@@ -90,7 +70,6 @@ export interface RegionSummary {
   share: number;
 }
 
-/** Everything the About page sections read from the API, in one object. */
 export interface Catalogue {
   provinces: Province[];
   places: Place[];
@@ -103,7 +82,6 @@ export interface Catalogue {
   ok: { provinces: boolean; places: boolean };
 }
 
-/** Query options for one page of `GET /api/attractions`. */
 export interface AttractionQuery {
   page?: number;
   size?: number;
@@ -112,12 +90,10 @@ export interface AttractionQuery {
   sort?: string;
 }
 
-/** Base URL of the public CamTrip API. Override with CAMTRIP_API_BASE_URL. */
 export const CAMTRIP_API_BASE_URL = (
   process.env.CAMTRIP_API_BASE_URL?.trim() || "https://cam-trip.cheat.casa"
 ).replace(/\/+$/, "");
 
-/** How long API responses and the About page stay cached, in seconds. */
 export const CAMTRIP_REVALIDATE_SECONDS = 1800;
 
 const REQUEST_TIMEOUT_MS = 8000;
@@ -125,7 +101,6 @@ const PAGE_SIZE = 100;
 const MAX_RECORDS = 400;
 const FEATURED_PLACE_COUNT = 6;
 
-/** Province regions exactly as defined by the API `region` enum. */
 export const REGION_LABELS: Record<string, string> = Object.freeze({
   NORTHWEST: "Northwest",
   NORTHEAST: "Northeast",
@@ -134,7 +109,6 @@ export const REGION_LABELS: Record<string, string> = Object.freeze({
   SOUTHWEST: "Southwest",
 });
 
-/** Attraction categories exactly as defined by the API `category` enum. */
 export const CATEGORY_LABELS: Record<string, string> = Object.freeze({
   TEMPLE: "Temple",
   NATURE: "Nature",
@@ -146,7 +120,6 @@ export const CATEGORY_LABELS: Record<string, string> = Object.freeze({
   OTHER: "Other",
 });
 
-/** Narrows an API value to trimmed text, or null when it is not usable. */
 function asText(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
@@ -170,14 +143,10 @@ function asObject(value: unknown): Record<string, unknown> {
     : {};
 }
 
-/** Keeps the non-null results of a mapper, with the type narrowed. */
 function isPresent<T>(value: T | null): value is T {
   return value !== null;
 }
 
-/**
- * Performs a GET request against the documented API and returns parsed JSON.
- */
 async function apiGet(
   path: string,
   params: Record<string, string | number | undefined | null> = {},
@@ -207,7 +176,6 @@ async function apiGet(
   return response.json();
 }
 
-/** Reads one page of documented attraction data. */
 async function fetchAttractionPage(options: AttractionQuery = {}) {
   const { page = 0, size = PAGE_SIZE, ...rest } = options;
   const data = asObject(
@@ -220,15 +188,10 @@ async function fetchAttractionPage(options: AttractionQuery = {}) {
   };
 }
 
-/** Reads every province documented by `GET /api/provinces`. */
 async function fetchProvinces(): Promise<unknown[]> {
   return asArray(await apiGet("/api/provinces"));
 }
 
-/**
- * Walks the paged attraction endpoint until the whole catalogue is read, so
- * derived figures are exact rather than sampled. Stops early at MAX_RECORDS.
- */
 async function fetchAllAttractions() {
   const records = [];
   let totalElements = 0;
@@ -251,9 +214,6 @@ async function fetchAllAttractions() {
   };
 }
 
-/**
- * Maps a documented ProvinceResponse onto the shape the UI needs.
- */
 function toProvince(input: unknown): Province | null {
   const raw = asObject(input);
   const id = asNumber(raw.id);
@@ -270,12 +230,6 @@ function toProvince(input: unknown): Province | null {
   };
 }
 
-/**
- * Maps a documented AttractionResponse onto the shape the UI needs. The card
- * image prefers the documented `imageUrls` entry and otherwise uses the parent
- * province's documented `imageUrl`, so every card can still show a real
- * Cambodian photograph.
- */
 function toPlace(input: unknown): Place | null {
   const raw = asObject(input);
   const id = asNumber(raw.id);
@@ -314,11 +268,6 @@ function toPlace(input: unknown): Place | null {
   };
 }
 
-/**
- * Chooses featured places in a stable, province-varied order so the grid looks
- * intentional on every rebuild. Falls back to the whole catalogue when nothing
- * is flagged as featured.
- */
 function selectFeaturedPlaces(
   places: Place[],
   limit = FEATURED_PLACE_COUNT,
@@ -349,7 +298,6 @@ function selectFeaturedPlaces(
   return chosen;
 }
 
-/** The distinct, non-empty strings of a list, in first-seen order. */
 function unique(values: (string | null | undefined)[]): string[] {
   const found = new Set<string>();
   for (const value of values) {
@@ -358,10 +306,6 @@ function unique(values: (string | null | undefined)[]): string[] {
   return [...found];
 }
 
-/**
- * Builds only the figures the API responses actually support. Counts that need
- * the complete catalogue are omitted when the scan could not finish.
- */
 function buildStats({
   provinces,
   places,
@@ -413,10 +357,6 @@ function buildStats({
   return stats;
 }
 
-/**
- * Groups provinces into the API regions and counts the catalogued places in
- * each one. Place counts are only reported when the whole catalogue was read.
- */
 function buildRegionSummaries(
   provinces: Province[],
   places: Place[],
@@ -461,11 +401,6 @@ function buildRegionSummaries(
     );
 }
 
-/**
- * Single entry point for the About page. Never throws: each endpoint resolves
- * independently, and the page falls back to static content when one is down.
- * Wrapped in React `cache` so several sections share one set of requests.
- */
 export const loadCambodiaCatalogue = cache(async (): Promise<Catalogue> => {
   const [provinceResult, attractionResult] = await Promise.allSettled([
     fetchProvinces(),
@@ -493,7 +428,7 @@ export const loadCambodiaCatalogue = cache(async (): Promise<Catalogue> => {
     totalPlaces,
     catalogueComplete: complete,
     live: { provinces: provinces.length > 0, places: places.length > 0 },
-    // Request success, so the UI can tell "empty" apart from "unreachable".
+
     ok: {
       provinces: provinceResult.status === "fulfilled",
       places: attractionResult.status === "fulfilled",

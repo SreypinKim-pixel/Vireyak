@@ -12,10 +12,6 @@ import {
 import CambodiaStats, { RegionBreakdown } from "./CambodiaStats";
 import ProvinceChips from "./ProvinceChips";
 
-/**
- * Cambodia information section. Statistics, the region breakdown, and the
- * province list are all rendered from live API responses passed in by the page.
- */
 export default function CambodiaSection({
   provinces = [],
   stats = [],

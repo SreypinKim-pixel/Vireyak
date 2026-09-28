@@ -3,11 +3,6 @@ import Link from "next/link";
 import Icon from "../Icon";
 import { aboutHero } from "../../data/about";
 
-/**
- * About page hero. `highlights` is an optional streamed slot holding the live
- * API figures, so the hero itself paints immediately.
- * @param {{ highlights?: import("react").ReactNode }} props
- */
 export default function AboutHero({
   highlights = null,
 }: {
