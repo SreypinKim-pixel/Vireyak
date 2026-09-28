@@ -2,13 +2,18 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signInDemo } from "../lib/demoSession";
+import {
+  signInDemo,
+  matchesDemoAccount,
+  DEMO_EMAIL,
+  DEMO_PASSWORD,
+} from "../lib/demoSession";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 export default function AuthForm({ register = false }) {
   const router = useRouter();
   const [submitState, setSubmitState] = useState<
-    "idle" | "loading" | "success"
+    "idle" | "loading" | "success" | "error"
   >("idle");
   const submitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined,
@@ -91,7 +96,7 @@ export default function AuthForm({ register = false }) {
   }
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (submitState !== "idle") return;
+    if (submitState === "loading" || submitState === "success") return;
     setMessage("");
     const data = new FormData(e.currentTarget);
     {
@@ -112,16 +117,6 @@ export default function AuthForm({ register = false }) {
       else if (register && String(values.get("password") ?? "").length < 12)
         next.password = "Use at least 12 characters.";
       if (
-        !register &&
-        String(values.get("password") ?? "").trim() &&
-        (String(values.get("password")).length < 8 ||
-          !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/.test(
-            String(values.get("password")),
-          ))
-      )
-        next.password =
-          "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
-      if (
         register &&
         (!values.get("confirmPassword") ||
           values.get("confirmPassword") !==
@@ -130,7 +125,10 @@ export default function AuthForm({ register = false }) {
         next.confirmPassword = "Your passwords must match.";
       setErrors(next);
       if (Object.keys(next).length) {
-        setMessage("Please fix the highlighted fields and try again.");
+        setSubmitState("error");
+        setMessage(
+          `${register ? "Sign-up" : "Login"} failed. Please fix the highlighted fields and try again.`,
+        );
         const invalidField = e.currentTarget.elements.namedItem(
           Object.keys(next)[0],
         );
@@ -141,6 +139,7 @@ export default function AuthForm({ register = false }) {
     const form = e.currentTarget;
     const email = String(data.get("email") || "").trim();
     const remember = data.get("remember") === "on";
+    const password = String(data.get("password") || "");
     setSubmitState("loading");
     setMessage(
       register
@@ -151,16 +150,32 @@ export default function AuthForm({ register = false }) {
     form.reset();
     setShowPassword(false);
     submitTimer.current = setTimeout(() => {
-      signInDemo(email, remember);
+      if (!register && !matchesDemoAccount(email, password)) {
+        setSubmitState("error");
+        setMessage(
+          "Login failed. Incorrect email or password. Use the demo account shown above.",
+        );
+        return;
+      }
+      if (!register && !signInDemo(email, password, remember)) {
+        setSubmitState("error");
+        setMessage(
+          "Login failed. Your browser could not save the session. Enable site storage and try again.",
+        );
+        return;
+      }
       setSubmitState("success");
       setMessage(
         register
-          ? "Demo sign-up successful! Taking you to the homepage…"
-          : "Demo login successful! Taking you to the homepage…",
+          ? "Sign-up successful! Please log in to continue."
+          : "Login successful! Taking you to the homepage…",
       );
       setAttraction("");
       setProvince("");
-      redirectTimer.current = setTimeout(() => router.push("/"), 1000);
+      redirectTimer.current = setTimeout(
+        () => router.push(register ? "/login" : "/"),
+        1000,
+      );
     }, 700);
   }
   return (
@@ -232,9 +247,20 @@ export default function AuthForm({ register = false }) {
             }
           >
             {register
-              ? "Try sign-up with demo details. This creates a local demo session, not a real account. Passwords are never saved."
-              : "Try login with demo details. This starts a local demo session; passwords are not verified or saved."}
+              ? "Try sign-up with sample details, then use the demo account on the login page. This preview does not create new accounts or save passwords."
+              : "Use the demo account below. Login checks these credentials and starts a local preview session."}
           </p>
+          {!register && (
+            <div className="mb-5 rounded-lg border border-gold/40 bg-gold/10 p-4 text-sm">
+              <p className="font-semibold">Demo account</p>
+              <p className="mt-2">
+                Email: <code>{DEMO_EMAIL}</code>
+              </p>
+              <p className="mt-1">
+                Password: <code>{DEMO_PASSWORD}</code>
+              </p>
+            </div>
+          )}
           <form
             onSubmit={submit}
             aria-busy={submitState === "loading"}
@@ -305,7 +331,7 @@ export default function AuthForm({ register = false }) {
                   type={showPassword ? "text" : "password"}
                   autoComplete={register ? "new-password" : "current-password"}
                   required
-                  minLength={register ? 12 : 8}
+                  minLength={register ? 12 : undefined}
                   maxLength={128}
                   placeholder={
                     register ? "12+ characters" : "Enter a demo password"
@@ -443,7 +469,7 @@ export default function AuthForm({ register = false }) {
             )}
             <button
               type="submit"
-              disabled={submitState !== "idle"}
+              disabled={submitState === "loading" || submitState === "success"}
               className="button-primary w-full disabled:cursor-wait disabled:opacity-75"
             >
               {submitState === "loading"
@@ -469,8 +495,9 @@ export default function AuthForm({ register = false }) {
             </button>
             {message && (
               <p
-                role="status"
-                className="rounded-lg border border-slate/60 dark:border-slate/20 p-4 text-xs leading-6"
+                role={submitState === "loading" ? "status" : "alert"}
+                aria-atomic="true"
+                className={`rounded-lg border p-4 text-sm leading-6 ${submitState === "success" ? "border-green-600/40 bg-green-600/10 text-green-800 dark:text-green-200" : submitState === "error" ? "border-red-600/40 bg-red-600/10 text-red-800 dark:text-red-200" : "border-slate/60 dark:border-slate/20"}`}
               >
                 {message}
               </p>

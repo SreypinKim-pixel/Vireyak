@@ -60,7 +60,8 @@ for a future image. Navbar and footer are shared through `app/layout.tsx`.
 - `data/travel.ts`: explicitly illustrative stays, prices, ratings, and experiences.
 - `public/images/README.md`: photo sources and licensing links, including the
   named Cambodian properties' own photography.
-- Legacy `/products`, `/products/:id`, and `/table` URLs redirect to `/stays`.
+- `/table`: searchable places directory with province filtering, sortable columns, and loading skeletons.
+- Legacy `/products` and `/products/:id` URLs redirect to `/stays`.
 
 Favorites, the theme preference, and the local demo sign-in marker use browser
 storage; none of them require an account.
@@ -75,8 +76,9 @@ for the fictional preview properties are inspiration imagery, not verified
 pictures of those properties; the named Cambodian hotels use the properties' own
 publicity photography instead (sources in `public/images/README.md`).
 No booking, payment, or real account is created. Both account forms show a loading
-state followed by explicitly labeled demo success and return to the home page.
-Passwords are never sent or saved. Demo login and sign-up record an email-only
+state followed by a success alert within the labeled demo flow. Sign-up redirects to Log in;
+only login starts a demo session and returns to the home page.
+Passwords are never sent or saved. Demo login records an email-only
 "signed in" marker in
 browser storage to update the navbar; it uses session storage by default and is
 kept in local storage only when "Remember me" is checked. It is never
@@ -137,14 +139,14 @@ Each mock attraction includes province metadata; choosing
 another province clears the selected attraction and filters the available choices.
 The endpoint returns `{ data: [...], demo: true }`. API failures, malformed data,
 and empty results allow registration validation to continue without a preference.
-There is no registration backend yet: valid submissions start a local demo
-session and clear the form without sending or saving passwords.
+There is no registration backend yet: valid submissions redirect to Log in
+and clear the form without sending or saving passwords.
 
 Registration includes inline name/email validation, a 12-character minimum password,
 password confirmation, and an optional attraction selector fetched from
 `GET /api/attractions`. Loading, empty, and failed requests are handled, with retry.
 Passwords and preferences are neither sent nor stored; a valid submission shows
-demo success. Only the email is saved in the local demo session. Replace this preview submission with the real
+demo success and asks the visitor to log in. Only login saves the email in the local demo session. Replace this preview submission with the real
 registration API when its endpoint and contract are provided.
 
 The local demo APIs return `{ data: [...], demo: true }` from the curated catalog.
@@ -178,3 +180,16 @@ separate steps; adding metadata does not guarantee indexing or rankings.
 Metadata uses the [Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata).
 Website structured data identifies Vireyak without publishing demo ratings or
 prices as verified offers.
+
+## Demo account
+
+Use `demo@example.com` with `DemoPassword123`. These are public preview
+credentials displayed on the login page. Incorrect credentials show a failure
+alert and do not start a session. Sign-up remains a UI preview and does not
+create additional accounts; it sends visitors to login with this demo account.
+This client-side check is not real authentication or access control.
+
+The Places table uses numeric catalog IDs (`numericId` from `/api/attractions`),
+assigned from the curated catalog order before filtering or sorting. Existing
+slug IDs remain in use for detail-page links. These are local catalog identifiers,
+not IDs from the external CamTrip API.

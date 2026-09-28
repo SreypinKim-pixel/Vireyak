@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "/",
     "/about",
+    "/table",
     "/stays",
     "/attraction",
     ...stays.map((item) => `/stays/${encodeURIComponent(item.id)}`),

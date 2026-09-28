@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/products/:path*", destination: "/stays", permanent: true },
-      { source: "/table", destination: "/stays", permanent: true },
     ];
   },
 };

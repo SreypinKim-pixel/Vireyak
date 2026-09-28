@@ -4,6 +4,14 @@
 // that the demo login succeeded. It uses session storage by default and is kept
 // in persistent local storage as well only when "Remember me" is checked. It is
 // cleared by Log out.
+// Public test credentials, not a secret or a real account.
+export const DEMO_EMAIL = "demo@example.com";
+export const DEMO_PASSWORD = "DemoPassword123";
+export function matchesDemoAccount(email: string, password: string) {
+  return (
+    email.trim().toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD
+  );
+}
 const STORAGE_KEY = "vireyak-demo-user";
 
 const listeners = new Set<() => void>();
@@ -35,15 +43,18 @@ export function getDemoUser() {
   return readSession() || readPersistent();
 }
 
-export function signInDemo(email: string, remember = false) {
+export function signInDemo(email: string, password: string, remember = false) {
+  if (!matchesDemoAccount(email, password)) return false;
+  email = DEMO_EMAIL;
   try {
     window.sessionStorage.setItem(STORAGE_KEY, email);
     if (remember) window.localStorage.setItem(STORAGE_KEY, email);
     else window.localStorage.removeItem(STORAGE_KEY);
   } catch {
-    return;
+    return false;
   }
   emit();
+  return true;
 }
 
 export function signOutDemo() {

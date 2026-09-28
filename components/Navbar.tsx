@@ -14,6 +14,7 @@ const links = [
   ["Home", "/"],
   ["Stays", "/stays"],
   ["Attraction", "/attraction"],
+  ["Places", "/table"],
   ["About", "/about"],
 ];
 function subscribeTheme(onChange: () => void) {

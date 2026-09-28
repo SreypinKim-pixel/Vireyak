@@ -18,7 +18,7 @@ test("global navigation, local photography, theme persistence, and mobile layout
     page
       .getByRole("navigation", { name: "Main navigation", exact: true })
       .getByRole("link"),
-  ).toHaveCount(4);
+  ).toHaveCount(5);
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all(
@@ -188,14 +188,14 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
     "Reservations are not open yet",
   );
   await page.goto("/login");
-  await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText(
-    "Demo login successful!",
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "Login successful!",
   );
   await expect(page).toHaveURL(/\/$/);
-  for (const route of ["/products", "/products/1", "/table"]) {
+  for (const route of ["/products", "/products/1"]) {
     await page.goto(route);
     await expect(page).toHaveURL(/\/stays$/);
   }
@@ -223,7 +223,7 @@ test("login validates fields and completes a labeled demo session", async ({
 
   // An invalid email format is rejected even with a filled password.
   await page.getByLabel("Email address").fill("not-an-email");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("#email-error")).toContainText(
     "Enter a valid email address.",
@@ -231,7 +231,7 @@ test("login validates fields and completes a labeled demo session", async ({
   await expect(page.locator("#password-error")).toHaveCount(0);
 
   // A missing password is rejected even when the email is valid.
-  await page.getByLabel("Email address").fill("test@example.com");
+  await page.getByLabel("Email address").fill("demo@example.com");
   await page.getByLabel("Password", { exact: true }).fill("");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("#password-error")).toContainText(
@@ -239,19 +239,25 @@ test("login validates fields and completes a labeled demo session", async ({
   );
   await expect(page.locator("#email-error")).toHaveCount(0);
 
-  // Login passwords must be at least 8 characters with an uppercase letter, a
-  // lowercase letter, and a number.
-  const strengthMessage =
-    "Password must be at least 8 characters and include an uppercase letter, lowercase letter, and number.";
-  for (const password of ["Ab1", "abcdefgh", "ABCDEFG1", "Abcdefgh"]) {
-    await page.getByLabel("Email address").fill("test@example.com");
+  // Wrong passwords never create a session, even when their format is valid.
+  for (const password of ["Ab1", "WrongPassword123", "demopassword123"]) {
+    await page.getByLabel("Email address").fill("demo@example.com");
     await page.getByLabel("Password", { exact: true }).fill(password);
     await page.getByRole("button", { name: "Log in", exact: true }).click();
-    await expect(page.locator("#password-error")).toContainText(
-      strengthMessage,
+    await expect(page.locator("form").getByRole("alert")).toContainText(
+      "Incorrect email or password",
     );
     await expect(page).toHaveURL(/\/login$/);
+    expect(
+      await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
+    ).toBeNull();
   }
+  await page.getByLabel("Email address").fill("wrong@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "Incorrect email or password",
+  );
 
   // Remember me is visible and unchecked by default (session-only marker).
   const remember = page.getByRole("checkbox", { name: "Remember me" });
@@ -260,23 +266,23 @@ test("login validates fields and completes a labeled demo session", async ({
 
   // A valid password passes client-side validation without claiming real login,
   // then opens the home page as a guest so the preview does not dead-end.
-  await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Logging in…" }),
   ).toBeDisabled();
-  const status = page.getByRole("status");
+  const status = page.locator("form").getByRole("alert");
   await expect(status).toContainText(
-    "Demo login successful! Taking you to the homepage…",
+    "Login successful! Taking you to the homepage…",
   );
-  await expect(status).toContainText("Demo");
+
   await expect(page).toHaveURL(/\/$/);
 
   // Default unchecked login uses session-only storage, never persistent.
   expect(
     await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
-  ).toBe("test@example.com");
+  ).toBe("demo@example.com");
   expect(
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
   ).toBe(null);
@@ -285,7 +291,7 @@ test("login validates fields and completes a labeled demo session", async ({
   await expect(
     page.getByRole("button", { name: "Log out", exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("Signed in as test@example.com")).toBeVisible();
+  await expect(page.getByText("Signed in as demo@example.com")).toBeVisible();
 
   // The login page still links to the existing register page.
   await page.goto("/login");
@@ -319,13 +325,13 @@ test("login validates fields and completes a labeled demo session", async ({
   await page.goto("/login");
   await remember.check();
   await expect(remember).toBeChecked();
-  await page.getByLabel("Email address").fill("test@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
   expect(
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
-  ).toBe("test@example.com");
+  ).toBe("demo@example.com");
   await page.getByRole("button", { name: "Log out", exact: true }).click();
   expect(
     await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),

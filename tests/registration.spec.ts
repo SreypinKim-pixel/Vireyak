@@ -43,12 +43,12 @@ test("registration validates fields and loads optional attractions", async ({
   await expect(
     page.getByRole("button", { name: "Signing up…" }),
   ).toBeDisabled();
-  await expect(page.getByText(/Demo sign-up successful!/)).toBeVisible();
+  await expect(page.getByText(/Sign-up successful!/)).toBeVisible();
   await expect(page.getByLabel("Password", { exact: true })).toHaveValue("");
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/login$/);
   expect(
     await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
-  ).toBe("demo@example.com");
+  ).toBeNull();
 });
 
 test("attraction loading failures can be retried and empty results are explained", async ({
@@ -121,5 +121,38 @@ test("malformed attraction data does not block registration", async ({
   await expect(
     page.getByRole("button", { name: "Signing up…" }),
   ).toBeDisabled();
-  await expect(page.getByText(/Demo sign-up successful!/)).toBeVisible();
+  await expect(page.getByText(/Sign-up successful!/)).toBeVisible();
+});
+
+test("account forms announce failure and let visitors retry", async ({
+  page,
+}) => {
+  for (const [path, button, message] of [
+    ["/register", "Create account", "Sign-up failed."],
+    ["/login", "Log in", "Login failed."],
+  ]) {
+    await page.goto(path);
+    await page.getByRole("button", { name: button, exact: true }).click();
+    await expect(page.locator("form").getByRole("alert")).toContainText(
+      message,
+    );
+    await expect(
+      page.getByRole("button", { name: button, exact: true }),
+    ).toBeEnabled();
+  }
+  await page.evaluate(() => {
+    Storage.prototype.setItem = () => {
+      throw new Error("Storage blocked");
+    };
+  });
+  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "Login failed. Your browser could not save the session.",
+  );
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(
+    page.getByRole("button", { name: "Log in", exact: true }),
+  ).toBeEnabled();
 });
