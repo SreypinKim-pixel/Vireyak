@@ -8,6 +8,6 @@ export default function SiteChrome({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  if (pathname === "/register") return null;
+  if (pathname === "/register" || pathname === "/login") return null;
   return children;
 }

@@ -172,20 +172,8 @@ export default function AuthForm({ register = false }) {
     }, 700);
   }
   return (
-    <div
-      className={
-        register
-          ? "flex min-h-dvh items-center justify-center bg-gradient-to-br from-gold/10 via-transparent to-indigo/10 px-4 py-6 sm:px-8 sm:py-8"
-          : "shell py-10 sm:py-16"
-      }
-    >
-      <div
-        className={
-          register
-            ? "grid w-full max-w-[1040px] overflow-hidden rounded-3xl border border-slate/60 dark:border-slate/15 bg-panel shadow-soft lg:grid-cols-[0.85fr_1.15fr]"
-            : "mx-auto grid max-w-[1000px] overflow-hidden rounded-2xl border border-slate/60 dark:border-slate/20 bg-panel shadow-soft lg:grid-cols-2"
-        }
-      >
+    <div className="flex min-h-dvh items-center justify-center bg-gradient-to-br from-gold/10 via-transparent to-indigo/10 px-4 py-6 sm:px-8 sm:py-8">
+      <div className="grid w-full max-w-[1040px] overflow-hidden rounded-3xl border border-slate/60 dark:border-slate/15 bg-panel shadow-soft sm:min-h-[820px] lg:grid-cols-[0.85fr_1.15fr]">
         <div className="relative isolate hidden min-h-[640px] flex-col justify-end bg-navy p-10 text-white lg:flex">
           <img
             src="/images/l&s.png"
@@ -211,21 +199,13 @@ export default function AuthForm({ register = false }) {
             <Icon name="pin" size={14} /> Angkor Wat, Siem Reap
           </p>
         </div>
-        <div
-          className={
-            register
-              ? "mx-auto flex w-full max-w-xl flex-col justify-center px-6 py-7 sm:px-10 sm:py-8"
-              : "flex flex-col justify-center p-6 sm:p-10"
-          }
-        >
-          {register && (
-            <Link
-              href="/"
-              className="mb-5 w-fit text-xs font-medium text-ink/60 transition-colors hover:text-gold"
-            >
-              ← Back to Vireyak
-            </Link>
-          )}
+        <div className="mx-auto flex w-full max-w-xl flex-col justify-center px-6 py-7 sm:px-10 sm:py-8">
+          <Link
+            href="/"
+            className="mb-5 w-fit text-xs font-medium text-ink/60 transition-colors hover:text-gold"
+          >
+            ← Back to Vireyak
+          </Link>
           <p className="eyebrow mb-3">
             {register ? "Begin something beautiful" : "Good to see you again"}
           </p>
