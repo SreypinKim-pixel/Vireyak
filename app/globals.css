@@ -236,8 +236,8 @@
   .team-gallery-row {
     container-type: inline-size;
     --team-gap: 12px;
-    --team-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --team-duration: 600ms;
+    --team-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --team-duration: 720ms;
   }
   @media (min-width: 1024px) {
     .team-gallery-row {
@@ -285,8 +285,11 @@
     }
     .team-gallery-fade {
       transition:
-        opacity 220ms ease,
-        transform 320ms var(--team-ease);
+        opacity 280ms ease-in-out,
+        transform 480ms var(--team-ease);
+    }
+    .team-gallery-card[data-active="true"] .team-gallery-details {
+      transition-delay: 140ms;
     }
   }
 }

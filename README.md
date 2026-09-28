@@ -74,10 +74,10 @@ names, prices, ratings, reviews, and amenities are sample content. Photographs
 for the fictional preview properties are inspiration imagery, not verified
 pictures of those properties; the named Cambodian hotels use the properties' own
 publicity photography instead (sources in `public/images/README.md`).
-No booking, payment, or account is created. Account forms display an honest
-unavailable message rather than simulated authentication success, do not send
-or store credentials, and return to the home page after a valid demo
-submission. A successful demo login records a local-only "signed in" marker in
+No booking, payment, or real account is created. Both account forms show a loading
+state followed by explicitly labeled demo success and return to the home page.
+Passwords are never sent or saved. Demo login and sign-up record an email-only
+"signed in" marker in
 browser storage to update the navbar; it uses session storage by default and is
 kept in local storage only when "Remember me" is checked. It is never
 transmitted and is cleared by Log out. Do not enter real passwords.
@@ -137,14 +137,14 @@ Each mock attraction includes province metadata; choosing
 another province clears the selected attraction and filters the available choices.
 The endpoint returns `{ data: [...], demo: true }`. API failures, malformed data,
 and empty results allow registration validation to continue without a preference.
-There is no registration backend yet: valid submissions explain that accounts
-cannot be created and clear the form without sending or saving credentials.
+There is no registration backend yet: valid submissions start a local demo
+session and clear the form without sending or saving passwords.
 
 Registration includes inline name/email validation, a 12-character minimum password,
 password confirmation, and an optional attraction selector fetched from
 `GET /api/attractions`. Loading, empty, and failed requests are handled, with retry.
-Credentials and preferences are neither sent nor stored; a valid submission explains
-that account creation is unavailable. Replace this preview submission with the real
+Passwords and preferences are neither sent nor stored; a valid submission shows
+demo success. Only the email is saved in the local demo session. Replace this preview submission with the real
 registration API when its endpoint and contract are provided.
 
 The local demo APIs return `{ data: [...], demo: true }` from the curated catalog.

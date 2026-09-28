@@ -108,6 +108,7 @@ export default function AboutPage() {
 }
 
 export const metadata = pageMetadata({
+  tabTitle: "About",
   title: "About Vireyak",
   description:
     "Meet Vireyak, a Cambodia travel discovery project. Explore our story, our team, and the provinces and places that inspire us.",

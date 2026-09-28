@@ -15,6 +15,7 @@ export default async function AttractionPage({
 }
 
 export const metadata = pageMetadata({
+  tabTitle: "Attractions",
   title: "Cambodia Attractions & Experiences",
   description:
     "Discover temples, waterfalls, islands, and cultural sights across Cambodia. Explore attractions by province and plan your next adventure.",

@@ -9,6 +9,7 @@ import FeaturedExperiences from "@/components/home/FeaturedExperiences";
 import HowItWorks from "@/components/home/HowItWorks";
 import TravelerReviews from "@/components/home/TravelerReviews";
 import HomeCTA from "@/components/home/HomeCTA";
+import ProvinceSelection from "@/components/home/ProvinceSelection";
 
 export default async function HomePage() {
   const [{ experiences }, provinces] = await Promise.all([
@@ -16,7 +17,7 @@ export default async function HomePage() {
     getProvinceNames(),
   ]);
   return (
-    <>
+    <ProvinceSelection>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -40,11 +41,12 @@ export default async function HomePage() {
       <HowItWorks />
       <TravelerReviews />
       <HomeCTA />
-    </>
+    </ProvinceSelection>
   );
 }
 
 export const metadata = pageMetadata({
+  tabTitle: "Home",
   title: "Discover Cambodia: Attractions & Places to Stay",
   description:
     "Explore Cambodia with Vireyak. Discover temples, provincial highlights, and places to stay, from Siem Reap and Phnom Penh to the coast.",

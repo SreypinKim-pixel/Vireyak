@@ -6,18 +6,22 @@ import { useRouter } from "next/navigation";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 import DatePicker, { parseDate } from "./DatePicker";
+import { useProvinceSelection } from "./home/ProvinceSelection";
 export default function SearchForm({
   compact = false,
   initial = {},
   mode = "stays",
   provinces = provinceNames,
+  onDestinationChange,
 }: {
   compact?: boolean;
   initial?: SearchParams;
   mode?: TravelKind;
   provinces?: string[];
+  onDestinationChange?: (destination: string) => void;
 }) {
   const router = useRouter();
+  const provinceSelection = useProvinceSelection();
   const [tab, setTab] = useState<TravelKind>(mode);
   const [destination, setDestination] = useState(
     String(initial.destination || ""),
@@ -98,7 +102,11 @@ export default function SearchForm({
               label="Destination"
               variant="inline"
               value={destination}
-              onChange={setDestination}
+              onChange={(value) => {
+                setDestination(value);
+                onDestinationChange?.(value);
+                provinceSelection?.selectProvince(value);
+              }}
               options={[
                 { value: "", label: "Explore Cambodia" },
                 ...destinationNames(provinces).map((d) => ({

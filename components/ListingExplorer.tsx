@@ -22,16 +22,26 @@ export default function ListingExplorer({
   const [savedOnly, setSavedOnly] = useState(false);
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const types = ["All", ...new Set(items.map((i) => i.type))];
-  const destination =
+  const initialDestination =
     typeof initial.destination === "string" ? initial.destination : "";
+  const [destination, setDestination] = useState(initialDestination);
+  const [previousDestination, setPreviousDestination] =
+    useState(initialDestination);
+  if (previousDestination !== initialDestination) {
+    setPreviousDestination(initialDestination);
+    setDestination(initialDestination);
+  }
   const catalogDestination =
     provinces.find((province) => province.name === destination)?.destination ??
     destination;
-  const query = new URLSearchParams(
+  const queryParams = new URLSearchParams(
     Object.entries(initial).filter(
       (entry): entry is [string, string] => typeof entry[1] === "string",
     ),
-  ).toString();
+  );
+  if (destination) queryParams.set("destination", destination);
+  else queryParams.delete("destination");
+  const query = queryParams.toString();
   const guests = Math.max(1, Math.min(6, Number(initial.guests) || 2));
   const filtered = useMemo(() => {
     const result = items.filter(
@@ -97,6 +107,7 @@ export default function ListingExplorer({
             compact
             initial={initial}
             mode={kind}
+            onDestinationChange={setDestination}
           />
         </div>
       </section>

@@ -9,6 +9,7 @@ export default async function StaysPage({ searchParams }: ListingPageProps) {
 }
 
 export const metadata = pageMetadata({
+  tabTitle: "Stays",
   title: "Places to Stay in Cambodia",
   description:
     "Explore our sample collection of Cambodian hotels, villas, and resorts. Compare destinations and amenities to find inspiration for your next trip.",

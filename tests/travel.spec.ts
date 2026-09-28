@@ -192,7 +192,7 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.getByRole("status")).toContainText(
-    "Authentication service is not connected yet",
+    "Demo login successful!",
   );
   await expect(page).toHaveURL(/\/$/);
   for (const route of ["/products", "/products/1", "/table"]) {
@@ -206,7 +206,7 @@ test("experiences, honest account forms, legacy redirects, and missing pages", a
   ).toBeVisible();
 });
 
-test("login form validates client-side without pretending authentication", async ({
+test("login validates fields and completes a labeled demo session", async ({
   page,
 }) => {
   await page.goto("/login");
@@ -263,13 +263,14 @@ test("login form validates client-side without pretending authentication", async
   await page.getByLabel("Email address").fill("test@example.com");
   await page.getByLabel("Password", { exact: true }).fill("DemoPass123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Logging in…" }),
+  ).toBeDisabled();
   const status = page.getByRole("status");
   await expect(status).toContainText(
-    "Your login information is valid. Authentication service is not connected yet.",
+    "Demo login successful! Taking you to the homepage…",
   );
-  await expect(status).not.toContainText(
-    /signed in|successful|welcome back|authenticated/i,
-  );
+  await expect(status).toContainText("Demo");
   await expect(page).toHaveURL(/\/$/);
 
   // Default unchecked login uses session-only storage, never persistent.
@@ -374,7 +375,12 @@ test("province lookup fetches live teacher API data with loading and error state
       page
         .getByTestId("province-result")
         .getByRole("img")
-        .evaluate((image) => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0),
+        .evaluate(
+          (image) =>
+            image instanceof HTMLImageElement &&
+            image.complete &&
+            image.naturalWidth > 0,
+        ),
     )
     .toBe(true);
 

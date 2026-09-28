@@ -11,6 +11,10 @@ export const metadata: Metadata = {
     template: "%s | Vireyak",
   },
   description: siteDescription,
+  icons: {
+    icon: { url: "/Logo.png", type: "image/png" },
+    apple: { url: "/Logo.png", type: "image/png" },
+  },
   verification: { google: process.env.GOOGLE_SITE_VERIFICATION || undefined },
 };
 const themeScript = `(function(){try{var t=localStorage.getItem('vireyak-theme');document.documentElement.classList.toggle('dark',t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches));}catch(e){}})();`;

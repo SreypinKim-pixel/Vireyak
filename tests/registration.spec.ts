@@ -41,9 +41,14 @@ test("registration validates fields and loads optional attractions", async ({
     .click();
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
-    page.getByText(/Account creation is not available yet/),
-  ).toBeVisible();
+    page.getByRole("button", { name: "Signing up…" }),
+  ).toBeDisabled();
+  await expect(page.getByText(/Demo sign-up successful!/)).toBeVisible();
   await expect(page.getByLabel("Password", { exact: true })).toHaveValue("");
+  await expect(page).toHaveURL(/\/$/);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("vireyak-demo-user")),
+  ).toBe("demo@example.com");
 });
 
 test("attraction loading failures can be retried and empty results are explained", async ({
@@ -114,6 +119,7 @@ test("malformed attraction data does not block registration", async ({
   await page.getByLabel("Confirm password").fill("demo-password-only");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(
-    page.getByText(/Account creation is not available yet/),
-  ).toBeVisible();
+    page.getByRole("button", { name: "Signing up…" }),
+  ).toBeDisabled();
+  await expect(page.getByText(/Demo sign-up successful!/)).toBeVisible();
 });

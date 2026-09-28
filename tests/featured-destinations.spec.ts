@@ -175,3 +175,39 @@ test("all provinces have named photos and attractions never borrow a province co
     getAttractionPhoto("Unknown", "Unknown", ["javascript:alert(1)"]),
   ).toBeNull();
 });
+
+test("homepage destination selection shows only the matching province and can reset", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const section = page.locator(
+    'section[aria-labelledby="featured-destinations-title"]',
+  );
+  const cards = section.locator("article");
+  const dropdown = page.getByRole("combobox", {
+    name: "Destination",
+    exact: true,
+  });
+  await expect(cards).toHaveCount(6);
+  for (const [choice, province] of [
+    ["Kampot", "Kampot"],
+    ["Siem Reap", "Siem Reap"],
+    ["Koh Rong", "Preah Sihanouk"],
+  ]) {
+    await dropdown.click();
+    await page.getByRole("option", { name: choice, exact: true }).click();
+    await expect(cards).toHaveCount(1);
+    await expect(cards.getByRole("heading", { level: 3 })).toHaveText(province);
+    await expect(page).toHaveURL(/\/$/);
+    await expect(
+      section.getByRole("button", { name: /View all|Show fewer/ }),
+    ).toHaveCount(0);
+  }
+  await dropdown.click();
+  await page
+    .getByRole("option", { name: "Explore Cambodia", exact: true })
+    .click();
+  await expect(cards).toHaveCount(6);
+  await section.getByRole("button", { name: /View all/ }).click();
+  await expect(cards).toHaveCount(25);
+});

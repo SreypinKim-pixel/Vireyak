@@ -5,6 +5,7 @@ import Link from "next/link";
 import { TypingAnimation } from "@/registry/magicui/typing-animation";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, MapPin, Star } from "lucide-react";
+import HeroImage from "./HeroImage";
 
 const destinations = [
   {
@@ -98,11 +99,10 @@ export default function HeroGrid() {
             opacity: { duration: 1.1 },
             scale: { duration: 7, ease: "easeOut" },
           }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${activeDestination.background})`,
-          }}
-        />
+          className="absolute inset-0"
+        >
+          <HeroImage src={activeDestination.background} alt="" priority />
+        </motion.div>
       </AnimatePresence>
 
       {/* Dark cinematic overlay */}
@@ -325,10 +325,11 @@ export default function HeroGrid() {
                       >
                         {/* Image */}
                         <div className="relative h-[420px] overflow-hidden">
-                          <img
+                          <HeroImage
                             src={destination.image}
                             alt={destination.name}
-                            className={`h-full w-full object-cover transition-transform duration-700 ${
+                            priority={index === 0}
+                            className={`${
                               isActive ? "scale-105" : "scale-100"
                             }`}
                           />

@@ -8,18 +8,20 @@ export const siteDescription =
 
 export function pageMetadata({
   title,
+  tabTitle,
   description,
   path,
   image = "/images/thumbnail.png",
 }: {
   title: string;
+  tabTitle?: string;
   description: string;
   path: string;
   image?: string;
 }): Metadata {
   const socialTitle = `${title} | Vireyak`;
   return {
-    title,
+    title: { absolute: `${tabTitle || title} | Vireyak` },
     description,
     alternates: { canonical: path },
     openGraph: {

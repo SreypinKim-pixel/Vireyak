@@ -8,12 +8,20 @@ import DestinationImage from "./DestinationImage";
 import Reveal from "./Reveal";
 import PhotoCredits from "./PhotoCredits";
 import SectionHeading from "./SectionHeading";
+import { useProvinceSelection } from "./ProvinceSelection";
 
 export default function ProvinceGrid({
   destinations,
   unavailable,
 }: Awaited<ReturnType<typeof getFeaturedDestinations>>) {
   const [expanded, setExpanded] = useState(false);
+  const selectedProvince = useProvinceSelection()?.selectedProvince || "";
+  const normalizeProvince = (name: string) =>
+    name
+      .trim()
+      .toLowerCase()
+      .replace(/^koh rong$/, "preah sihanouk")
+      .replace(/^tbong khmum$/, "tboung khmum");
   const priority = ["Phnom Penh", "Preah Sihanouk"];
   const orderedDestinations = [...destinations].sort((a, b) => {
     const rank = (name: string) => {
@@ -22,9 +30,15 @@ export default function ProvinceGrid({
     };
     return rank(a.name) - rank(b.name);
   });
-  const visibleDestinations = expanded
-    ? orderedDestinations
-    : orderedDestinations.slice(0, 6);
+  const visibleDestinations = selectedProvince
+    ? orderedDestinations.filter(
+        (destination) =>
+          normalizeProvince(destination.name) ===
+          normalizeProvince(selectedProvince),
+      )
+    : expanded
+      ? orderedDestinations
+      : orderedDestinations.slice(0, 6);
 
   return (
     <section
@@ -35,10 +49,18 @@ export default function ProvinceGrid({
         <SectionHeading
           id="featured-destinations-title"
           eyebrow="Explore Cambodia"
-          title="Explore all 25 provinces"
-          description="Find Cambodia’s best known temples, coastlines, wildlife, and cultural sites across every province."
+          title={
+            selectedProvince
+              ? `Explore ${visibleDestinations[0]?.name || selectedProvince}`
+              : "Explore all 25 provinces"
+          }
+          description={
+            selectedProvince
+              ? "Discover highlights in your selected province. Choose Explore Cambodia above to see all provinces again."
+              : "Find Cambodia’s best known temples, coastlines, wildlife, and cultural sites across every province."
+          }
         >
-          {destinations.length > 6 && (
+          {!selectedProvince && destinations.length > 6 && (
             <button
               type="button"
               aria-expanded={expanded}
@@ -54,11 +76,18 @@ export default function ProvinceGrid({
           )}
         </SectionHeading>
 
-        {destinations.length === 0 && (
+        <p role="status" className="sr-only">
+          {selectedProvince
+            ? `${visibleDestinations.length} province matching ${selectedProvince}`
+            : `Showing ${visibleDestinations.length} provinces`}
+        </p>
+        {visibleDestinations.length === 0 && (
           <p className="mt-8 text-sm text-ink/60" role="status">
             {unavailable
               ? "Destinations are temporarily unavailable. Please try again later."
-              : "New destinations are coming soon."}
+              : selectedProvince
+                ? `No province information is available for ${selectedProvince} yet.`
+                : "New destinations are coming soon."}
           </p>
         )}
         <div id="province-grid" className="mt-8 grid gap-6 md:grid-cols-3">

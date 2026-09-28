@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInDemo } from "../lib/demoSession";
@@ -7,6 +7,22 @@ import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 export default function AuthForm({ register = false }) {
   const router = useRouter();
+  const [submitState, setSubmitState] = useState<
+    "idle" | "loading" | "success"
+  >("idle");
+  const submitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  const redirectTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  useEffect(
+    () => () => {
+      clearTimeout(submitTimer.current);
+      clearTimeout(redirectTimer.current);
+    },
+    [],
+  );
   const [message, setMessage] = useState("");
   const [province, setProvince] = useState("");
   const [attraction, setAttraction] = useState("");
@@ -75,6 +91,7 @@ export default function AuthForm({ register = false }) {
   }
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitState !== "idle") return;
     setMessage("");
     const data = new FormData(e.currentTarget);
     {
@@ -121,21 +138,30 @@ export default function AuthForm({ register = false }) {
         return;
       }
     }
+    const form = e.currentTarget;
+    const email = String(data.get("email") || "").trim();
+    const remember = data.get("remember") === "on";
+    setSubmitState("loading");
     setMessage(
       register
-        ? "Account creation is not available yet. You can still explore all stays and experiences without an account."
-        : "Your login information is valid. Authentication service is not connected yet.",
+        ? "Setting up your demo profile…"
+        : "Starting your demo session…",
     );
-    if (!register)
-      signInDemo(
-        String(data.get("email") || "").trim(),
-        data.get("remember") === "on",
-      );
-    setTimeout(() => router.push("/"), 1000);
-    e.currentTarget.reset();
-    setAttraction("");
-    setProvince("");
+    // Simulate the preview flow without transmitting or retaining passwords.
+    form.reset();
     setShowPassword(false);
+    submitTimer.current = setTimeout(() => {
+      signInDemo(email, remember);
+      setSubmitState("success");
+      setMessage(
+        register
+          ? "Demo sign-up successful! Taking you to the homepage…"
+          : "Demo login successful! Taking you to the homepage…",
+      );
+      setAttraction("");
+      setProvince("");
+      redirectTimer.current = setTimeout(() => router.push("/"), 1000);
+    }, 700);
   }
   return (
     <div
@@ -206,11 +232,12 @@ export default function AuthForm({ register = false }) {
             }
           >
             {register
-              ? "Preview registration with demo details. Account creation is not connected yet; your details will not be saved."
-              : "Your next Cambodian escape is waiting."}
+              ? "Try sign-up with demo details. This creates a local demo session, not a real account. Passwords are never saved."
+              : "Try login with demo details. This starts a local demo session; passwords are not verified or saved."}
           </p>
           <form
             onSubmit={submit}
+            aria-busy={submitState === "loading"}
             noValidate
             className={
               register
@@ -414,9 +441,31 @@ export default function AuthForm({ register = false }) {
                 </span>
               </label>
             )}
-            <button type="submit" className="button-primary w-full">
-              {register ? "Create account" : "Log in"}
-              <Icon name="arrow" size={16} />
+            <button
+              type="submit"
+              disabled={submitState !== "idle"}
+              className="button-primary w-full disabled:cursor-wait disabled:opacity-75"
+            >
+              {submitState === "loading"
+                ? register
+                  ? "Signing up…"
+                  : "Logging in…"
+                : submitState === "success"
+                  ? "Success!"
+                  : register
+                    ? "Create account"
+                    : "Log in"}
+              {submitState === "loading" ? (
+                <span
+                  aria-hidden="true"
+                  className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white motion-safe:animate-spin"
+                />
+              ) : (
+                <Icon
+                  name={submitState === "success" ? "check" : "arrow"}
+                  size={16}
+                />
+              )}
             </button>
             {message && (
               <p
