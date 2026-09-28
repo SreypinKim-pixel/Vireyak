@@ -1,7 +1,6 @@
 import Icon from "../Icon";
 import { aboutIntro } from "../../data/about";
 
-/** Explains what Vireyak is, who it serves, and why Cambodia is the focus. */
 export default function AboutIntro() {
   return (
     <section id="about-vireyak" className="shell scroll-mt-8 py-14 sm:py-16">

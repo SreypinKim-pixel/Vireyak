@@ -1,12 +1,7 @@
 import type { Province } from "../../lib/camTripApi";
 
-/** One API region with the provinces that belong to it, in API order. */
 type RegionGroup = { region: string; label: string; items: Province[] };
 
-/**
- * The provinces the Vireyak catalogue covers, grouped by API region and shown
- * with both the Khmer and English names returned by the API.
- */
 export default function ProvinceChips({
   provinces = [],
 }: {

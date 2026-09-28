@@ -132,8 +132,7 @@ test("every province card shows its own locally served cover image", async ({
     const name = await card.locator("h3").innerText();
     const image = card.locator("img");
     await expect(image, name).toHaveCount(1);
-    // Covers are local files, so a slow or hotlink-blocking third party cannot
-    // leave a card with an empty image area.
+
     await expect(image, name).toHaveAttribute("src", /^\/images\//);
     await expect
       .poll(() =>
@@ -151,8 +150,7 @@ test("all provinces have named photos and attractions never borrow a province co
     const photo = getProvincePhoto(name);
     expect(photo, name).toBeTruthy();
     expect(photo!.src).not.toMatch(/flag|placeholder|Special:FilePath/i);
-    // Every province cover is served from this site, so the card cannot break
-    // when a remote host rate-limits or blocks hotlinked requests.
+
     expect(photo!.src, name).toMatch(/^\/images\//);
     expect(photo!.alt.length).toBeGreaterThan(5);
     expect(photo!.source).toMatch(/^https:\/\//);

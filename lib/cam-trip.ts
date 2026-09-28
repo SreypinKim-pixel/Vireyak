@@ -1,4 +1,6 @@
 import { isVisibleAttraction } from "./attraction-visibility";
+import { API_BASE_URL } from "./api-config";
+export { API_BASE_URL } from "./api-config";
 import { provinceNames } from "@/data/province-names";
 import { attractions } from "@/data/travel";
 import { getProvincePhoto, getAttractionPhoto } from "./destination-images";
@@ -30,14 +32,6 @@ interface AttractionPage {
   totalPages: number;
   totalElements?: number;
 }
-
-const DEFAULT_API_BASE_URL = "https://cam-trip.cheat.casa/api";
-
-
-export const API_BASE_URL =
-  typeof process === "undefined" || !process.env.API_BASE_URL
-    ? DEFAULT_API_BASE_URL
-    : process.env.API_BASE_URL;
 
 export const API_ENDPOINTS = {
   provinces: {
@@ -79,8 +73,7 @@ function getLocalFeaturedDestinations() {
       attractionCount: highlights.length,
       image: getProvincePhoto(name)?.src || highlights[0]?.image || null,
       photo: getProvincePhoto(name),
-      // The curated travel listing supports destination filters and remains
-      // useful when the live province service is unavailable.
+
       href: `/attraction?destination=${encodeURIComponent(name)}`,
     };
   });
@@ -121,9 +114,7 @@ export async function getFeaturedDestinations() {
                 .filter(Boolean);
               attractionCount = data.totalElements ?? attractionCount;
             }
-          } catch {
-            /* Province information remains usable if highlights are unavailable. */
-          }
+          } catch {}
 
           return {
             id: province.id,
@@ -147,8 +138,6 @@ export async function getFeaturedDestinations() {
   }
 }
 
-// Single-province lookup used by the province API demo. Called server-side
-// inside app/api/provinces/[id]/route.ts against the teacher CamTrip API.
 export async function getProvince(id: string | number): Promise<Province> {
   const response = await fetch(API_ENDPOINTS.provinces.getById(id), {
     signal: AbortSignal.timeout(8000),
@@ -160,7 +149,6 @@ export async function getProvince(id: string | number): Promise<Province> {
   return province;
 }
 
-// Both sections share one selection so their places never overlap.
 export async function getHomepageAttractions() {
   try {
     const items: Attraction[] = [];
@@ -182,7 +170,7 @@ export async function getHomepageAttractions() {
     const usedProvinces = new Set(destinations.map((item) => String(item.id)));
     const usedIds = new Set();
     const selected = [];
-    // Prefer featured attractions, then fill with other places from distinct provinces.
+
     const candidates = [...items].sort(
       (a, b) =>
         Number(Boolean(b?.featured)) - Number(Boolean(a?.featured)) ||
@@ -253,7 +241,6 @@ export async function getProvinceNames(): Promise<string[]> {
   }
 }
 
-// Read the same province catalogue used by the homepage, preserving record IDs.
 export async function getProvinceDetails(id: string) {
   const response = await fetch(API_ENDPOINTS.provinces.getAll, {
     next: { revalidate: 300 },

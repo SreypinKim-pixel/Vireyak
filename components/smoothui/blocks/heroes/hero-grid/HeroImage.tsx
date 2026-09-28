@@ -19,7 +19,6 @@ export default function HeroImage({
   );
 
   useEffect(() => {
-    // Cached images may finish before React attaches the load handler.
     if (image.current?.complete) {
       setStatus(image.current.naturalWidth > 0 ? "loaded" : "error");
     }

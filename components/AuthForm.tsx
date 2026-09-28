@@ -141,7 +141,7 @@ export default function AuthForm({ register = false }) {
         ? "Setting up your demo profile…"
         : "Starting your demo session…",
     );
-    // Simulate the preview flow without transmitting or retaining passwords.
+
     form.reset();
     setShowPassword(false);
     submitTimer.current = setTimeout(() => {

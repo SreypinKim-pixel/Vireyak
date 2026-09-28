@@ -20,7 +20,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-300 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
-      {/* Subscribe Banner Above */}
       <div className="shell pt-12 pb-8 border-b border-slate/60 dark:border-gray-800">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="relative flex items-center gap-4">
@@ -29,7 +28,6 @@ export default function Footer() {
               Newsletter
             </h2>
 
-            {/* Curved Arrow Decorator */}
             <svg
               className="hidden sm:block w-20 h-10 text-amber-600 dark:text-amber-400 ml-2 -mt-2"
               viewBox="0 0 100 50"
@@ -47,7 +45,6 @@ export default function Footer() {
             </svg>
           </div>
 
-          {/* Email Input & Subscribe Button Form */}
           <form
             onSubmit={handleSubscribe}
             className="flex w-full max-w-md items-center gap-2 sm:gap-3"
@@ -76,9 +73,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main Footer Body */}
       <div className="shell grid gap-10 py-12 items-start sm:grid-cols-2 lg:grid-cols-4">
-        {/* Brand Column */}
         <div className="flex flex-col items-start justify-start">
           <div className="flex items-center leading-none">
             <Brand logoSrc="/Logo.png" />
@@ -92,7 +87,7 @@ export default function Footer() {
           <div className="mt-6 flex items-center gap-2 text-[10px] tracking-wide text-gray-500 dark:text-gray-400">
             <Icon name="pin" size={14} /> Made with love in Cambodia
           </div>
-          {/* Social Icons */}
+
           <div className="mt-2 flex items-center gap-3.5">
             <a
               href="https://facebook.com"
@@ -133,7 +128,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Column 1 */}
         <div>
           <h2 className="mb-5 text-m font-semibold text-gray-900 dark:text-white leading-none pt-10">
             Find your next journey
@@ -166,7 +160,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Column 2 */}
         <div>
           <h2 className="mb-5 text-m font-semibold text-gray-900 dark:text-white leading-none pt-10 ">
             Get to know Vireyak
@@ -193,27 +186,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* off */}
-
-        {/* Column 3 
-        <div>
-          <h2 className="mb-5 text-m font-semibold text-gray-900 dark:text-white leading-none pt-10">
-            A little closer to your next trip
-          </h2>
-          <p className="text-xs leading-6 text-gray-600 dark:text-gray-400">
-            Find a place that feels like you.
-            <br />
-            Let the journey begin.
-          </p>
-          <Link
-            href="/stays"
-            className="mt-5 inline-flex items-center gap-3 text-xs text-blue-800 dark:text-blue-400 font-medium"
-          >
-            Explore Cambodia <Icon name="arrow" size={16} />
-          </Link>
-        </div> */}
-
-        {/* Contact Info Column */}
         <div>
           <h2 className="mb-5 text-m font-semibold text-gray-900 dark:text-white leading-none pt-9">
             Contact Info
@@ -244,47 +216,6 @@ export default function Footer() {
                 </span>
                 <span>info@vireyak.com</span>
               </a>
-
-              {/* Social Icons */}
-              {/* <div className="mt-2 flex items-center gap-3.5"> */}
-              {/* <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="text-[#1877F2] hover:opacity-80 transition-opacity"
-              >
-                <Icon name="facebook" size={24} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-[#E4405F] hover:opacity-80 transition-opacity"
-              >
-                <Icon name="instagram" size={25} />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="text-[#FF0000] hover:opacity-80 transition-opacity"
-              >
-                <Icon name="youtube" size={28} />
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="text-gray-800 dark:text-white hover:opacity-80 transition-opacity"
-              >
-                <Icon name="github" size={25} />
-                
-              </a>
-            </div> */}
             </div>
             <img
               src="/images/istad-logo.png"
@@ -298,7 +229,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-slate/60 dark:border-gray-800">
         <div className="shell flex flex-col items-center justify-between gap-4 py-5 text-[10px] text-gray-500 dark:text-gray-400 sm:flex-row">
           <p suppressHydrationWarning>

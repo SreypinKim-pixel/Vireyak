@@ -3,8 +3,6 @@
 import * as Select from "@radix-ui/react-select";
 import Icon from "./Icon";
 
-// Radix reserves an empty string for its placeholder; our destination filter
-// intentionally uses an empty value to mean all destinations.
 const ALL_VALUE = "__vireyak_all__";
 
 export default function Dropdown({

@@ -146,7 +146,7 @@ test("account forms announce failure and let visitors retry", async ({
     };
   });
   await page.getByLabel("Email address").fill("demo@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("DemoPassword123");
+  await page.getByLabel("Password", { exact: true }).fill("DemoPassword@123");
   await page.getByRole("button", { name: "Log in", exact: true }).click();
   await expect(page.locator("form").getByRole("alert")).toContainText(
     "Login failed. Your browser could not save the session.",

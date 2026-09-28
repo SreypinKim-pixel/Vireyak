@@ -1,10 +1,3 @@
-/**
- * Skeletons for the About page sections that stream live API data. The
- * proportions match the real sections closely so the page does not jump when
- * the data arrives.
- */
-
-/** Fallback for the Cambodia statistics section. */
 export function CambodiaSectionSkeleton() {
   return (
     <section
@@ -49,7 +42,6 @@ export function CambodiaSectionSkeleton() {
   );
 }
 
-/** Fallback for the Explore Cambodia place grid. */
 export function PlacesSectionSkeleton() {
   return (
     <section aria-hidden="true" className="shell py-14 sm:py-16">

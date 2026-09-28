@@ -225,7 +225,7 @@ export default function PlacesTable() {
                 key={item.id}
                 className="border-t border-slate/20 hover:bg-slate/5"
               >
-                <td className="px-4 py-4 font-mono text-xs text-ink/60">
+                <td className="px-4 py-4 text-xs text-ink/60">
                   {item.numericId}
                 </td>
                 <th scope="row" className="px-4 py-4 font-medium">

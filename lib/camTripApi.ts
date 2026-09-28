@@ -1,12 +1,12 @@
 import { isVisibleAttraction } from "./attraction-visibility";
+import { API_BASE_URL } from "./api-config";
+export { CAMTRIP_API_BASE_URL } from "./api-config";
 
 import { cache } from "react";
 
-/** Province regions exactly as defined by the API `region` enum. */
 export type RegionKey =
   "NORTHWEST" | "NORTHEAST" | "CENTRAL" | "COASTAL" | "SOUTHWEST";
 
-/** Attraction categories exactly as defined by the API `category` enum. */
 export type CategoryKey =
   | "TEMPLE"
   | "NATURE"
@@ -17,7 +17,6 @@ export type CategoryKey =
   | "MARKET"
   | "OTHER";
 
-/** A province, as read from `GET /api/provinces`. */
 export interface Province {
   id: number;
   nameEn: string;
@@ -27,10 +26,6 @@ export interface Province {
   imageUrl: string | null;
 }
 
-/**
- * The subset of a place every card needs. Both API catalogue entries and the
- * local preview content shown when the API is unreachable satisfy this shape.
- */
 export interface PlaceCardData {
   id: number | string;
   nameEn: string;
@@ -90,10 +85,6 @@ export interface AttractionQuery {
   sort?: string;
 }
 
-export const CAMTRIP_API_BASE_URL = (
-  process.env.CAMTRIP_API_BASE_URL?.trim() || "https://cam-trip.cheat.casa"
-).replace(/\/+$/, "");
-
 export const CAMTRIP_REVALIDATE_SECONDS = 1800;
 
 const REQUEST_TIMEOUT_MS = 8000;
@@ -126,17 +117,14 @@ function asText(value: unknown): string | null {
   return trimmed ? trimmed : null;
 }
 
-/** Narrows an API value to a finite number, or null. */
 function asNumber(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
-/** Narrows an API value to an array, or an empty array. */
 function asArray(value: unknown): unknown[] {
   return Array.isArray(value) ? value : [];
 }
 
-/** Narrows an API value to a JSON object, or an empty object. */
 function asObject(value: unknown): Record<string, unknown> {
   return value && typeof value === "object"
     ? (value as Record<string, unknown>)
@@ -151,7 +139,7 @@ async function apiGet(
   path: string,
   params: Record<string, string | number | undefined | null> = {},
 ): Promise<unknown> {
-  const url = new URL(`${CAMTRIP_API_BASE_URL}${path}`);
+  const url = new URL(`${API_BASE_URL}${path}`);
   for (const [key, value] of Object.entries(params)) {
     if (value === undefined || value === null || value === "") continue;
     url.searchParams.set(key, String(value));
@@ -179,7 +167,7 @@ async function apiGet(
 async function fetchAttractionPage(options: AttractionQuery = {}) {
   const { page = 0, size = PAGE_SIZE, ...rest } = options;
   const data = asObject(
-    await apiGet("/api/attractions", { page, size, ...rest }),
+    await apiGet("/attractions", { page, size, ...rest }),
   );
   return {
     content: asArray(data.content),
@@ -189,7 +177,7 @@ async function fetchAttractionPage(options: AttractionQuery = {}) {
 }
 
 async function fetchProvinces(): Promise<unknown[]> {
-  return asArray(await apiGet("/api/provinces"));
+  return asArray(await apiGet("/provinces"));
 }
 
 async function fetchAllAttractions() {

@@ -1,11 +1,6 @@
 import type { PlaceCardData } from "../../lib/camTripApi";
 import Icon from "../Icon";
 
-/**
- * @typedef {Omit<import("../../lib/camTripApi").Place, "id" | "category" | "provinceNameKh"> & { id: string | number, note?: string }} PlaceCardData
-
- * @param {{ place: PlaceCardData }} props
- */
 export default function PlaceCard({ place }: { place: PlaceCardData }) {
   const location = [place.provinceName, place.regionLabel]
     .filter(Boolean)

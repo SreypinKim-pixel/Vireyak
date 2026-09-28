@@ -351,7 +351,7 @@ export const stays = [
     ],
   },
 ];
-// Real Cambodian place names; commercial details and some images are illustrative.
+
 export const attractions = [
   {
     id: "angkor-sunrise",

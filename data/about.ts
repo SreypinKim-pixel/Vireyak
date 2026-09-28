@@ -1,5 +1,3 @@
-// Editorial copy for the About page. Live catalogue figures are never written
-// here: they come from the public Vireyak API through lib/camTripApi.js.
 export const platformName = "Vireyak";
 
 export const aboutHero = {
@@ -58,7 +56,6 @@ export const cambodiaSection = {
   provincesTitle: "Provinces in the catalogue",
 };
 
-// Editorial geography notes, one per region defined by the API `region` enum.
 export const regionDescriptions = {
   NORTHWEST:
     "Angkor, the Tonle Sap plains, and the riverside streets of Battambang.",
@@ -125,7 +122,6 @@ export const whyVireyakSection = {
     "Four ideas shape every part of the platform, from the catalogue to the way places are presented.",
 };
 
-// Kept from the original About page so existing links keep working.
 export const travelCompass = {
   eyebrow: "Our compass",
   title: "A more meaningful way to go.",
@@ -148,7 +144,6 @@ export const travelCompass = {
   ],
 };
 
-// Kept from the original About page so /about#questions keeps working.
 export const aboutFaqs = {
   eyebrow: "A little clarity before you go",
   title: "Good questions. Honest answers.",

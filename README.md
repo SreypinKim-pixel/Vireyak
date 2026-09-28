@@ -183,7 +183,7 @@ prices as verified offers.
 
 ## Demo account
 
-Use `demo@example.com` with `DemoPassword123`. These are public preview
+Use `demo@example.com` with `DemoPassword@123`. These are public preview
 credentials for testing; they are not displayed on the login page. Incorrect credentials show a failure
 alert and do not start a session. Sign-up remains a UI preview and does not
 create additional accounts; it sends visitors to login with this demo account.

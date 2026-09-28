@@ -8,7 +8,7 @@ import { regions, type Province } from "@/lib/cam-trip";
 
 export default function ProvinceLookup() {
   const [provinceId, setProvinceId] = useState("1");
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [status, setStatus] = useState("idle");
   const [province, setProvince] = useState<Province | null>(null);
   const [errorText, setErrorText] = useState("");
 

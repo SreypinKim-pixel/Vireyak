@@ -25,7 +25,6 @@ export default function HeroHighlights({
   );
 }
 
-/** Shared with the hero skeleton so the layout does not jump. */
 export function HeroHighlightsPlaceholder() {
   return (
     <div className="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-5 border-t border-slate/50 dark:border-slate/20 pt-6 sm:grid-cols-4">

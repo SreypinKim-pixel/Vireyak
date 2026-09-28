@@ -2,7 +2,6 @@ import Link from "next/link";
 import Icon from "../Icon";
 import { finalCta } from "../../data/about";
 
-/** Closing call to action. Both links use the site's existing routes. */
 export default function AboutCTA() {
   return (
     <section aria-labelledby="about-cta-title" className="shell pb-16">

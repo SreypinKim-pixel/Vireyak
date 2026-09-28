@@ -2,7 +2,6 @@ import { mentor, teamMembers, teamSection } from "../../data/team";
 import MentorCard from "./MentorCard";
 import TeamGallery from "./TeamGallery";
 
-/** Mentor above the six-panel expanding member gallery. */
 export default function TeamSection() {
   return (
     <section id="team" className="shell scroll-mt-8 py-14 sm:py-16">

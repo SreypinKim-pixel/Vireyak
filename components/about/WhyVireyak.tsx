@@ -1,7 +1,6 @@
 import Icon from "../Icon";
 import { whyVireyak, whyVireyakSection } from "../../data/about";
 
-/** The four values that describe what the platform does. */
 export default function WhyVireyak() {
   return (
     <section id="why-vireyak" className="shell scroll-mt-8 py-14 sm:py-16">

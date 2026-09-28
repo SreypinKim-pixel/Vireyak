@@ -1,8 +1,3 @@
-// Local province photography lives in public/images/ and is named after each
-// province's English name, e.g. "Kampong Thom.png". The teacher CamTrip API
-// sometimes returns a wrong or failing remote imageUrl (missing flags, broken
-// Wikimedia links), so the name-matched local copy is preferred whenever one
-// exists.
 const LOCAL_PROVINCE_IMAGES: Record<string, string> = {
   "kampong cham": "/images/Kampong Cham.png",
   "kampong chhnang": "/images/Kampong Chhnang.png",
@@ -28,7 +23,6 @@ const LOCAL_PROVINCE_IMAGES: Record<string, string> = {
   "tboung khmum": "/images/Tboung Khmum.png",
 };
 
-// Alternate English spellings used by some data sources.
 const NAME_ALIASES: Record<string, string> = {
   "tbong khmum": "tboung khmum",
   sihanoukville: "preah sihanouk",

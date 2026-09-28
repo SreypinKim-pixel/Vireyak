@@ -71,7 +71,6 @@ export default function HeroGrid() {
 
   const activeDestination = destinations[activeIndex];
 
-  // Auto change destination
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % destinations.length);
@@ -85,10 +84,6 @@ export default function HeroGrid() {
       aria-label="Explore Cambodia destinations"
       className="relative isolate min-h-[780px] overflow-hidden bg-[#0E0D15]"
     >
-      {/* =========================================================
-          BACKGROUND
-      ========================================================= */}
-
       <AnimatePresence mode="sync">
         <motion.div
           key={activeDestination.id}
@@ -105,14 +100,9 @@ export default function HeroGrid() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Dark cinematic overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0E0D15]/70 via-[#0E0D15]/40 to-[#0E0D15]/10 dark:from-[#0E0D15]/60 dark:via-[#0E0D15]/45" />
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#0E0D15]/60 via-transparent to-[#0E0D15]/20" />
-
-      {/* =========================================================
-          DECORATIVE GOLD GLOW
-      ========================================================= */}
 
       <motion.div
         animate={{
@@ -140,16 +130,8 @@ export default function HeroGrid() {
         className="absolute -right-40 bottom-0 h-[450px] w-[450px] rounded-full bg-[#3D5387]/20 blur-[130px]"
       />
 
-      {/* =========================================================
-          MAIN CONTENT
-      ========================================================= */}
-
       <div className="relative z-10 mx-auto flex min-h-[780px] max-w-[1500px] items-center px-6 pb-52 pt-20 sm:px-10 lg:px-16 lg:pt-24">
         <div className="grid w-full items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          {/* =====================================================
-              LEFT CONTENT
-          ===================================================== */}
-
           <div className="max-w-2xl">
             <AnimatePresence mode="wait">
               <motion.div
@@ -159,7 +141,6 @@ export default function HeroGrid() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
               >
-                {/* Small label */}
                 <div className="mb-6 flex items-center gap-3">
                   <span className="h-px w-10 bg-[#D4AF37]" />
 
@@ -168,7 +149,6 @@ export default function HeroGrid() {
                   </span>
                 </div>
 
-                {/* Destination */}
                 <h1 className="text-[clamp(2.25rem,6vw,5.5rem)] font-extrabold leading-[1.05] tracking-[-0.04em] text-white">
                   <TypingAnimation
                     delay={0.5}
@@ -180,19 +160,16 @@ export default function HeroGrid() {
                   </TypingAnimation>
                 </h1>
 
-                {/* Location */}
                 <div className="mt-5 flex items-center gap-2 text-sm text-white/65">
                   <MapPin size={15} className="text-[#F3CD5F]" />
 
                   {activeDestination.location}
                 </div>
 
-                {/* Description */}
                 <p className="mt-6 max-w-lg text-base leading-7 text-white/70 sm:text-lg">
                   {activeDestination.description}
                 </p>
 
-                {/* Button */}
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <motion.div
                     whileHover={{
@@ -224,7 +201,6 @@ export default function HeroGrid() {
                   </Link>
                 </div>
 
-                {/* Rating */}
                 <div className="mt-8 flex items-center gap-4">
                   <div className="flex -space-x-2">
                     <Avatar src="https://i.pravatar.cc/80?img=12" />
@@ -252,10 +228,6 @@ export default function HeroGrid() {
               </motion.div>
             </AnimatePresence>
           </div>
-
-          {/* =====================================================
-              DESTINATION CARDS
-          ===================================================== */}
 
           <div className="relative h-[500px]">
             <div className="absolute inset-0 flex items-center justify-end">
@@ -323,7 +295,6 @@ export default function HeroGrid() {
                             : "border-white/15"
                         }`}
                       >
-                        {/* Image */}
                         <div className="relative h-[420px] overflow-hidden">
                           <HeroImage
                             src={destination.image}
@@ -334,20 +305,16 @@ export default function HeroGrid() {
                             }`}
                           />
 
-                          {/* Image overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0E0D15] via-[#0E0D15]/20 to-transparent" />
 
-                          {/* Category */}
                           <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-[#0E0D15]/45 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
                             {destination.category}
                           </div>
 
-                          {/* Bookmark */}
                           <div className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md">
                             <Star size={15} />
                           </div>
 
-                          {/* Card information */}
                           <div className="absolute bottom-0 left-0 right-0 p-6">
                             <p className="flex items-center gap-1.5 text-xs text-white/60">
                               <MapPin size={12} />
@@ -383,10 +350,6 @@ export default function HeroGrid() {
         </div>
       </div>
 
-      {/* =========================================================
-          SIDE INDICATOR
-      ========================================================= */}
-
       <div className="absolute bottom-28 left-8 z-20 hidden items-center gap-3 lg:flex">
         <div className="h-24 w-px bg-white/20">
           <motion.div
@@ -409,10 +372,6 @@ export default function HeroGrid() {
     </section>
   );
 }
-
-/* ===============================================================
-   AVATAR
-=============================================================== */
 
 function Avatar({ src }: { src: string }) {
   return (

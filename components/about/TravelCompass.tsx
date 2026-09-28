@@ -1,10 +1,6 @@
 import Icon from "../Icon";
 import { travelCompass } from "../../data/about";
 
-/**
- * The original "Our compass" guidance from the first About page. The id is
- * unchanged so the footer link /about#travel-thoughtfully still works.
- */
 export default function TravelCompass() {
   return (
     <section

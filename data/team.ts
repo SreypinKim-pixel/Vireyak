@@ -1,22 +1,3 @@
-// Team and mentor content for the About page.
-//
-// HOW TO EDIT
-// 1. `name`, `role`, and `bio` are plain text: change the wording here and the
-//    About page picks it up, with no component changes.
-// 2. Photos live in `components/about/image/` and are imported at the top of
-//    this file, so the browser receives a hashed, cache-friendly URL. A photo
-//    can also be a plain path string for a file in `public/`, for example
-//    `photo: "/images/team/member-1.jpg"`. Photos fill their card with
-//    `object-cover`, anchored to the top edge (the member panels in the
-//    interactive gallery and the mentor card alike), so a portrait shot with the
-//    face in the upper half looks best. If `photo` is null — or the file fails to
-//    load — the card shows an initials tile instead, so nothing ever breaks.
-// 3. Paste each person's profile URLs into the matching `href` below.
-//    Example: { label: "GitHub", href: "https://github.com/your-handle" }
-//    Example: { label: "Telegram", href: "https://t.me/your-handle" }
-//    Empty URLs show the icons without making them clickable.
-// 4. `id` is only used as the React key, so keep it stable and unique.
-
 import hengLeapPhoto from "../components/about/image/HengLeap.png";
 import longhuyPhoto from "../components/about/image/Longhuy.jpg";
 import mentorPhoto from "../components/about/image/Mentor.PNG";
@@ -26,25 +7,17 @@ import raguelPhoto from "../components/about/image/Raguel.png";
 import seavminhPhoto from "../components/about/image/Seavminh.jpg";
 import type { StaticImageData } from "next/image";
 
-/** One optional profile link, e.g. { label: "GitHub", href: "https://…" }. */
 export type ProfileLink = { label: string; href: string };
 
-/** A person on the About page: one team member, or the mentor. */
 export type TeamMember = {
   id: string;
   name: string;
   role: string;
   bio: string;
-  /**
-   * Bundled portrait — a `StaticImageData` from the imports above — or a plain
-   * path string for a file in `public/`. `null` shows the initials placeholder.
-   */
+
   photo: StaticImageData | string | null;
   links: ProfileLink[];
 };
-
-// The six members of the project, each wired to the photo in
-// `components/about/image/` that matches their name.
 
 export const teamMembers: TeamMember[] = [
   {
@@ -125,7 +98,6 @@ export const teamSection = {
     "Our mentor reviews the work at every stage and keeps the project focused on real travelers.",
   membersTitle: "The team",
 };
-
 
 export const mentor: TeamMember = {
   id: "mentor",

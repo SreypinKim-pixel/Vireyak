@@ -42,7 +42,6 @@ export const TypingAnimation = ({
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    // Start with the client-side entrance, not while server HTML is hidden.
     wrapper.dataset.typingReady = "true";
     return () => {
       delete wrapper.dataset.typingReady;

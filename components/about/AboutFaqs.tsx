@@ -1,9 +1,5 @@
 import { aboutFaqs } from "../../data/about";
 
-/**
- * The original FAQ list from the first About page. The id is unchanged so the
- * footer link /about#questions still works.
- */
 export default function AboutFaqs() {
   return (
     <section id="questions" className="shell max-w-[850px] scroll-mt-8 py-14">

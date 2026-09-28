@@ -1,6 +1,13 @@
-const { test, expect } = require("@playwright/test");
+import { test, expect } from "@playwright/test";
 
-function visiblePanelWidths(nodes) {
+declare global {
+  interface Window {
+    teamHoverFrames: { active: number; dimensions: number[][] }[];
+    teamHoverStop: boolean;
+  }
+}
+
+function visiblePanelWidths(nodes: Element[]) {
   return nodes.map((node) => {
     const clip = getComputedStyle(node).clipPath;
     const right = Number(clip.match(/^inset\(0px ([\d.]+)px/)?.[1] || 0);
@@ -11,12 +18,11 @@ function visiblePanelWidths(nodes) {
 test("about page renders live Cambodia catalogue data, team, and mentor", async ({
   page,
 }) => {
-  const errors = [];
+  const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
 
   await page.goto("/about");
 
-  // Hero
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Discover Cambodia",
   );
@@ -24,7 +30,6 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
     page.getByRole("link", { name: /See featured places/ }),
   ).toHaveAttribute("href", "#explore-cambodia");
 
-  // Every required section is present, including the anchors the footer uses.
   for (const id of [
     "about-vireyak",
     "cambodia",
@@ -37,8 +42,6 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
     await expect(page.locator(`#${id}`), `#${id} should exist`).toHaveCount(1);
   }
 
-  // Cambodia section: every figure is calculated from live API responses, so
-  // each value must be a number rather than placeholder text.
   const cambodia = page.locator("#cambodia");
   const statValues = cambodia.locator("dl").first().locator("dd");
   expect(
@@ -60,15 +63,12 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
     "Khmer names should be rendered from the API",
   ).toMatch(/[\u1780-\u17FF]/);
 
-  // Explore Cambodia: six featured places from GET /api/attractions.
   const places = page.locator("#explore-cambodia article");
   await expect(places).toHaveCount(6);
   for (const card of await places.all()) {
     await expect(card.getByRole("heading", { level: 3 })).toHaveText(/\S/);
   }
 
-  // Team: the mentor card leads the section, kept separate from the six-member
-  // interactive gallery that sits under it.
   const team = page.locator("#team");
   expect(
     await team.locator('[data-slot="profile-photo"]').count(),
@@ -78,7 +78,7 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
     await team
       .locator("article")
       .evaluateAll((cards) =>
-        cards.findIndex((card) => card.textContent.includes("Mentor")),
+        cards.findIndex((card) => card.textContent?.includes("Mentor")),
       ),
     "the mentor card should be presented above the team members",
   ).toBe(0);
@@ -89,9 +89,6 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
     "Srorng Sokcheat",
   );
 
-  // Photos are lazy-loaded, so walk every card before checking that it decoded:
-  // a missing or misnamed photo never loads and would leave the card on its
-  // initials fallback instead.
   const teamCards = team.locator("article");
   const teamCardCount = await teamCards.count();
   for (let index = 1; index < teamCardCount; index += 1) {
@@ -105,14 +102,15 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
           .evaluateAll(
             (photos) =>
               photos.length > 0 &&
-              photos.every((photo) => photo.naturalWidth > 0),
+              photos.every(
+                (photo) =>
+                  photo instanceof HTMLImageElement && photo.naturalWidth > 0,
+              ),
           ),
       { message: "every team photo should load", timeout: 15000 },
     )
     .toBe(true);
 
-  // Cards in order: the mentor first, then the six members as data/team.js lists
-  // them, each with their own bundled photo.
   const cards = await teamCards.evaluateAll((articles) =>
     articles.map((article) => {
       const photo = article.querySelector("img");
@@ -162,7 +160,6 @@ test("about page renders live Cambodia catalogue data, team, and mentor", async 
     animations: "disabled",
   });
 
-  // Values and closing call to action.
   await expect(
     page.getByRole("heading", { name: "Discover", exact: true }),
   ).toBeVisible();
@@ -189,17 +186,14 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
 
   const widths = () => cards.evaluateAll(visiblePanelWidths);
 
-  // Default state: nothing is hovered, so the six panels are about equal.
   const idle = await widths();
   expect(
     Math.max(...idle) - Math.min(...idle),
     "cards should start at similar widths",
   ).toBeLessThanOrEqual(8);
 
-  // Measure settled accordion states; switching mid-animation is tested separately.
   const settle = () => page.waitForTimeout(1300);
 
-  // Hovering a card expands it and shrinks the other five.
   await cards.nth(2).hover({ position: { x: 20, y: 30 } });
   await settle();
   const expanded = await widths();
@@ -221,7 +215,6 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
     ).toBeLessThan(idle[index]);
   }
 
-  // Moving the pointer to another card hands the expansion over.
   await cards.nth(4).hover({ position: { x: 20, y: 30 } });
   await settle();
   const handedOver = await widths();
@@ -234,7 +227,6 @@ test("team gallery expands the hovered member card and shrinks the rest", async 
     "the previously expanded card should shrink back",
   ).toBeLessThan(expanded[2]);
 
-  // Leaving the gallery restores the equal-width default state.
   await page.mouse.move(5, 5);
   await settle();
   const restored = await widths();
@@ -316,8 +308,6 @@ test("about page call to action links use the existing routes", async ({
   ).toBe(true);
   await expect(page.locator("#team article")).toHaveCount(7);
 
-  // Walk the team cards so the lazy-loaded photos are fetched before the
-  // screenshots below, which would otherwise capture the initials placeholders.
   const mobileCards = page.locator("#team article");
   for (let index = 0; index < (await mobileCards.count()); index += 1) {
     await mobileCards.nth(index).scrollIntoViewIfNeeded();
@@ -330,7 +320,10 @@ test("about page call to action links use the existing routes", async ({
           .evaluateAll(
             (photos) =>
               photos.length > 0 &&
-              photos.every((photo) => photo.naturalWidth > 0),
+              photos.every(
+                (photo) =>
+                  photo instanceof HTMLImageElement && photo.naturalWidth > 0,
+              ),
           ),
       { message: "team photos should load at mobile width", timeout: 15000 },
     )
@@ -353,16 +346,17 @@ test("team hover stays stable across gaps and brief exits", async ({
   await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
   await page.waitForTimeout(750);
   const box = await cards.nth(2).boundingBox();
-  // The space between panels belongs to the gallery, not another member.
+  if (!box) throw new Error("Hovered team card has no bounding box.");
+
   await page.mouse.move(box.x + box.width + 6, box.y + 30);
   await page.waitForTimeout(180);
   await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
-  // A small accidental excursion should not collapse and reopen the row.
+
   await page.mouse.move(box.x + box.width / 2, box.y - 3);
   await page.mouse.move(box.x + box.width / 2, box.y + 30);
   await page.waitForTimeout(180);
   await expect(cards.nth(2)).toHaveAttribute("data-active", "true");
-  // Remaining outside still restores the idle state.
+
   await page.mouse.move(5, 5);
   await expect(gallery.locator('[data-active="true"]')).toHaveCount(0);
 });
@@ -409,10 +403,10 @@ test("team portraits stay at a fixed size while an expansion is interrupted", as
   await cards.nth(4).focus();
   const samples = await cards.nth(2).evaluate(
     (card) =>
-      new Promise((resolve) => {
-        const widths = [];
+      new Promise<number[]>((resolve) => {
+        const widths: number[] = [];
         const start = performance.now();
-        const sample = (time) => {
+        const sample = (time: number) => {
           widths.push(
             card.getBoundingClientRect().width -
               Number(
@@ -432,7 +426,6 @@ test("team portraits stay at a fixed size while an expansion is interrupted", as
   expect(samples.at(-1)).toBeLessThan(samples[0]);
   const finalPhotos = await photoSizes();
   for (const [index, photo] of finalPhotos.entries()) {
-    // Translated DOMRects carry floating-point rounding below a thousandth px.
     expect(photo.width).toBeCloseTo(initialPhotos[index].width, 3);
     expect(photo.height).toBeCloseTo(initialPhotos[index].height, 3);
   }
@@ -469,7 +462,9 @@ test("accordion layers never resize or retrigger under a stationary pointer", as
     window.teamHoverFrames = [];
     window.teamHoverStop = false;
     const sample = () => {
-      const nodes = [...document.querySelectorAll(".team-gallery-card")];
+      const nodes = [
+        ...document.querySelectorAll<HTMLElement>(".team-gallery-card"),
+      ];
       window.teamHoverFrames.push({
         active: nodes.findIndex((node) => node.dataset.active === "true"),
         dimensions: nodes.map((node) => [node.offsetWidth, node.offsetHeight]),

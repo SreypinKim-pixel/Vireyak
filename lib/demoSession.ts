@@ -1,12 +1,5 @@
-// Demo-only, client-side sign-in marker. The account pages are previews, so no
-// credentials are ever stored or transmitted. This module only persists a
-// lightweight "signed in" marker in browser storage so the navbar can indicate
-// that the demo login succeeded. It uses session storage by default and is kept
-// in persistent local storage as well only when "Remember me" is checked. It is
-// cleared by Log out.
-// Public test credentials, not a secret or a real account.
 export const DEMO_EMAIL = "demo@example.com";
-export const DEMO_PASSWORD = "DemoPassword123";
+export const DEMO_PASSWORD = "DemoPassword@123";
 export function matchesDemoAccount(email: string, password: string) {
   return (
     email.trim().toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD
@@ -38,8 +31,7 @@ function readPersistent() {
 
 export function getDemoUser() {
   if (typeof window === "undefined") return null;
-  // The most recent session wins within this tab; fall back to a remembered
-  // persistent sign-in that survived a browser restart.
+
   return readSession() || readPersistent();
 }
 
@@ -75,7 +67,6 @@ export function subscribeDemoUser(onChange: () => void) {
 }
 
 if (typeof window !== "undefined") {
-  // Sync a remembered demo session started or ended in another tab.
   window.addEventListener("storage", (event) => {
     if (event.key === STORAGE_KEY || event.key === null) emit();
   });
