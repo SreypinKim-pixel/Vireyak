@@ -51,7 +51,7 @@ test("registration validates fields and loads optional attractions", async ({
   await expect(page.getByText("Enter a valid email address.")).toBeVisible();
   await expect(page.getByText("Use at least 12 characters.")).toBeVisible();
   await page.getByLabel("Full name").fill("Demo Traveler");
-  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Email address").fill("registered@example.com");
   await page.getByLabel("Password", { exact: true }).fill("demo-password-only");
   await page.getByLabel("Confirm password").fill("different-password");
   await page.getByRole("button", { name: "Create account" }).click();
@@ -150,7 +150,7 @@ test("malformed attraction data does not block registration", async ({
   await page.goto("/register");
   await expect(page.getByText(/Attractions could not be loaded/)).toBeVisible();
   await page.getByLabel("Full name").fill("Demo Traveler");
-  await page.getByLabel("Email address").fill("demo@example.com");
+  await page.getByLabel("Email address").fill("registered@example.com");
   await page.getByLabel("Password", { exact: true }).fill("demo-password-only");
   await page.getByLabel("Confirm password").fill("demo-password-only");
   await page.getByRole("button", { name: "Create account" }).click();
@@ -191,4 +191,36 @@ test("account forms announce failure and let visitors retry", async ({
   await expect(
     page.getByRole("button", { name: "Log in", exact: true }),
   ).toBeEnabled();
+});
+
+test("registered accounts can log in and persist without plaintext passwords", async ({
+  page,
+}) => {
+  await page.goto("/register");
+  await page.getByLabel("Full name").fill("Local Traveler");
+  await page.getByLabel("Email address").fill("traveler@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("SamplePassword@123");
+  await page.getByLabel("Confirm password").fill("SamplePassword@123");
+  await page
+    .getByRole("button", { name: "Create account", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/login$/);
+  const saved = await page.evaluate(() =>
+    localStorage.getItem("vireyak-local-accounts"),
+  );
+  expect(saved).toContain("traveler@example.com");
+  expect(saved).not.toContain("SamplePassword@123");
+  await page.getByLabel("Email address").fill("TRAVELER@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("wrong-password");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(
+    page.getByText("Login failed. Incorrect email or password."),
+  ).toBeVisible();
+  await page.getByLabel("Password", { exact: true }).fill("SamplePassword@123");
+  await page.getByLabel("Remember me").check();
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  expect(
+    await page.evaluate(() => localStorage.getItem("vireyak-demo-user")),
+  ).toBe("traveler@example.com");
 });

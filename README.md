@@ -75,10 +75,14 @@ names, prices, ratings, reviews, and amenities are sample content. Photographs
 for the fictional preview properties are inspiration imagery, not verified
 pictures of those properties; the named Cambodian hotels use the properties' own
 publicity photography instead (sources in `public/images/README.md`).
-No booking, payment, or real account is created. Both account forms show a loading
-state followed by a success alert within the labeled demo flow. Sign-up redirects to Log in;
-only login starts a demo session and returns to the home page.
-Passwords are never sent or saved. Demo login records an email-only
+No real booking, payment, or server account is created. Sign-up saves a local
+account in this browser and redirects to Log in; login accepts that account or
+the built-in demo account and returns to the home page. Local accounts store an
+email, random salt, and PBKDF2-SHA-256 password hash (600,000 iterations) in
+`vireyak-local-accounts`. Plaintext passwords are never saved or sent.
+These accounts only work in the same browser and site origin and are removed
+when site storage is cleared. This is not server-enforced authentication.
+Demo login records an email-only
 "signed in" marker in
 browser storage to update the navbar; it uses session storage by default and is
 kept in local storage only when "Remember me" is checked. It is never

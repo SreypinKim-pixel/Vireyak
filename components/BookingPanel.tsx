@@ -25,6 +25,8 @@ export default function BookingPanel({
   );
   const [message, setMessage] = useState("");
   const [ready, setReady] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [confirmed, setConfirmed] = useState(false);
   const nights =
     date && end
       ? Math.max(0, Math.round((Date.parse(end) - Date.parse(date)) / 86400000))
@@ -32,6 +34,7 @@ export default function BookingPanel({
   const today = new Date().toLocaleDateString("en-CA");
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setConfirmed(false);
     if (
       !parseDate(date) ||
       date < today ||
@@ -42,9 +45,7 @@ export default function BookingPanel({
       return;
     }
     setReady(true);
-    setMessage(
-      "Your trip preview is ready. Reservations are not open yet — no booking or payment has been made.",
-    );
+    setMessage("Continue to payment");
   }
   return (
     <div className="sticky top-6 rounded-xl border border-slate/60 dark:border-slate/20 bg-panel p-6 shadow-soft">
@@ -151,13 +152,96 @@ export default function BookingPanel({
           No payment required. Taxes and fees not calculated.
         </p>
       </form>
-      {message && (
+      {message && !confirmed && (
         <div
           role="status"
-          className={`mt-5 rounded-lg p-4 text-xs leading-6 ${ready ? "bg-gold/10" : "bg-red-500/10"}`}
+          className={`mt-5 rounded-lg p-4 leading-6 ${ready ? "flex items-center gap-3 border-2 border-gold bg-gold/20 text-sm font-bold text-navy dark:text-brightgold" : "bg-red-500/10 text-xs"}`}
         >
-          {message}
+          {ready && <Icon name="arrow" size={20} className="shrink-0" />}
+          <span>{message}</span>
         </div>
+      )}
+      {ready && (
+        <section
+          className="mt-5 rounded-lg border border-slate/60 p-4"
+          aria-label="Demo checkout"
+        >
+          <h2 className="text-base font-semibold">Your trip summary</h2>
+          <dl className="mt-3 space-y-2 text-xs leading-6">
+            <div>
+              <dt className="text-ink/60">Destination</dt>
+              <dd className="font-medium">{item.name}</dd>
+            </div>
+            <div>
+              <dt className="text-ink/60">Dates</dt>
+              <dd>
+                {date}
+                {kind === "stays" ? ` → ${end} (${nights} nights)` : ""}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-ink/60">Travelers</dt>
+              <dd>{guests}</dd>
+            </div>
+            <div className="flex justify-between border-t border-slate/60 pt-2">
+              <dt>Demo subtotal</dt>
+              <dd className="font-semibold">
+                {(
+                  item.price * (kind === "stays" ? nights : Number(guests))
+                ).toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
+              </dd>
+            </div>
+          </dl>
+          {confirmed ? (
+            <div
+              role="status"
+              className="mt-4 flex items-center gap-3 rounded-lg border-2 border-green-600 bg-green-100 p-4 text-sm font-bold leading-6 text-green-900 dark:border-green-400 dark:bg-green-950 dark:text-green-200"
+            >
+              <Icon name="check" size={22} className="shrink-0" />
+              <p>Payment successful</p>
+            </div>
+          ) : (
+            <form
+              className="mt-4 space-y-4"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setConfirmed(true);
+              }}
+            >
+              <fieldset>
+                <legend className="field-label">Demo payment method</legend>
+                <div className="space-y-2">
+                  {[
+                    { value: "card", label: "Credit / debit card (demo)" },
+                    { value: "aba", label: "ABA Pay (demo)" },
+                    { value: "bakong", label: "KHQR / Bakong (demo)" },
+                  ].map((method) => (
+                    <label
+                      key={method.value}
+                      className="flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border border-slate/60 px-3 py-2 text-xs has-[:checked]:border-gold has-[:checked]:bg-gold/10"
+                    >
+                      <input
+                        type="radio"
+                        name="demo-payment"
+                        value={method.value}
+                        checked={paymentMethod === method.value}
+                        onChange={() => setPaymentMethod(method.value)}
+                        className="accent-indigo"
+                      />
+                      {method.label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              <button type="submit" className="button-primary w-full">
+                Confirm booking <Icon name="check" size={16} />
+              </button>
+            </form>
+          )}
+        </section>
       )}
     </div>
   );

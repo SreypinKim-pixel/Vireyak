@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signInDemo, matchesDemoAccount } from "../lib/demoSession";
+import { signInDemo, registerLocalAccount } from "../lib/demoSession";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 import { Apple } from "./auth/Apple";
@@ -145,21 +145,26 @@ export default function AuthForm({ register = false }) {
         : "Starting your demo session…",
     );
 
-    form.reset();
     setShowPassword(false);
-    submitTimer.current = setTimeout(() => {
-      if (!register && !matchesDemoAccount(email, password)) {
-        setSubmitState("error");
-        setMessage("Login failed. Incorrect email or password.");
-        return;
-      }
-      if (!register && !signInDemo(email, password, remember)) {
+    submitTimer.current = setTimeout(async () => {
+      try {
+        if (register) {
+          await registerLocalAccount(email, password);
+        } else if (!(await signInDemo(email, password, remember))) {
+          setSubmitState("error");
+          setMessage("Login failed. Incorrect email or password.");
+          return;
+        }
+      } catch (error) {
         setSubmitState("error");
         setMessage(
-          "Login failed. Your browser could not save the session. Enable site storage and try again.",
+          error instanceof Error
+            ? error.message
+            : "Unable to save your account. Enable browser storage and try again.",
         );
         return;
       }
+      form.reset();
       setSubmitState("success");
       setMessage(
         register
@@ -223,8 +228,8 @@ export default function AuthForm({ register = false }) {
             }
           >
             {register
-              ? "Try sign-up with sample details, then log in with your demo account. This preview does not create new accounts or save passwords."
-              : "Log in with your demo account to start a local preview session."}
+              ? "Create a local account, then log in with the same email and password. Accounts are saved only in this browser; use a sample password."
+              : "Log in with your registered account or the demo account on this browser."}
           </p>
           <form
             onSubmit={submit}
@@ -299,7 +304,7 @@ export default function AuthForm({ register = false }) {
                   minLength={register ? 12 : undefined}
                   maxLength={128}
                   placeholder={
-                    register ? "12+ characters" : "Enter a demo password"
+                    register ? "12+ characters" : "Enter your password"
                   }
                   className="field pr-16"
                 />
