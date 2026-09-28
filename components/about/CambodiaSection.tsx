@@ -32,14 +32,16 @@ export default function CambodiaSection({
   return (
     <section
       id="cambodia"
-      className="scroll-mt-8 border-y border-slate/60 dark:border-slate/15 bg-slate/[0.045] py-14 sm:py-16"
+      className="scroll-mt-8 border-y border-slate/60 dark:border-slate/15 bg-slate/[0.045] py-16 sm:py-24"
     >
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
             <p className="eyebrow mb-3">{cambodiaSection.eyebrow}</p>
-            <h2 className="section-title">{cambodiaSection.title}</h2>
-            <p className="mt-4 text-xs leading-7 text-ink/60">
+            <h2 className="section-title text-3xl sm:text-4xl">
+              {cambodiaSection.title}
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-ink/65">
               {cambodiaSection.description}
             </p>
           </div>
@@ -50,7 +52,7 @@ export default function CambodiaSection({
               className="text-gold"
             />
             {hasLiveFigures
-              ? "Live figures from the Vireyak API"
+              ? "Live catalogue figures"
               : reachable
                 ? "No catalogue entries to count yet"
                 : "Live figures unavailable — reference content shown"}
@@ -58,7 +60,7 @@ export default function CambodiaSection({
         </div>
 
         {hasStats ? (
-          <div className="mt-10">
+          <div className="mt-10 rounded-3xl bg-navy p-4 shadow-soft sm:p-6">
             <CambodiaStats stats={stats} />
           </div>
         ) : (
@@ -69,15 +71,15 @@ export default function CambodiaSection({
           </p>
         )}
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+        <div className="mt-10 grid gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           {hasRegions ? (
             <RegionBreakdown
               regions={regions}
               descriptions={regionDescriptions}
             />
           ) : null}
-          <div className="h-full rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-6">
-            <h3 className="text-sm font-semibold text-navy dark:text-ivory">
+          <div className="h-full rounded-3xl border border-gold/30 bg-gold/5 p-6 sm:p-8">
+            <h3 className="text-xl font-semibold text-navy dark:text-ivory">
               {cambodiaSection.factsTitle}
             </h3>
             <p className="mt-2 text-xs text-ink/50">
@@ -87,10 +89,10 @@ export default function CambodiaSection({
               {countryFacts.map((fact) => (
                 <div
                   key={fact.label}
-                  className="flex items-center justify-between gap-3 py-3"
+                  className="flex flex-wrap items-center justify-between gap-3 py-4"
                 >
                   <dt className="text-xs text-ink/55">{fact.label}</dt>
-                  <dd className="text-xs font-medium text-navy dark:text-ivory">
+                  <dd className="text-sm font-medium text-navy dark:text-ivory">
                     {fact.value}
                   </dd>
                 </div>

@@ -12,13 +12,17 @@ export default function CambodiaStats({
       {stats.map((stat) => (
         <div
           key={stat.key}
-          className="rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-5 transition duration-500 ease-out hover:-translate-y-1 hover:shadow-soft motion-reduce:transition-none motion-reduce:transform-none"
+          className="flex flex-col items-center rounded-2xl border border-white/15 bg-white/5 px-5 py-7 text-center"
         >
-          <dt className="flex items-start gap-2 text-xs font-medium uppercase tracking-[0.12em] text-ink/50">
-            <Icon name={stat.icon} size={14} className="mt-0.5 text-gold" />
+          <dt className="order-2 mt-3 max-w-[14rem] text-sm font-medium leading-6 text-white/75">
+            <Icon
+              name={stat.icon}
+              size={14}
+              className="mr-2 inline-block align-middle text-brightgold"
+            />
             {stat.label}
           </dt>
-          <dd className="mt-3 text-3xl font-semibold tracking-tight text-navy dark:text-ivory">
+          <dd className="order-1 text-5xl font-semibold tracking-tight text-white">
             {stat.value.toLocaleString("en-US")}
           </dd>
         </div>
@@ -39,26 +43,22 @@ export function RegionBreakdown({
   const showBars = highest > 0;
 
   return (
-    <div className="h-full rounded-xl border border-slate/60 dark:border-slate/15 bg-panel p-6">
-      <h3 className="text-sm font-semibold text-navy dark:text-ivory">
+    <div className="h-full rounded-3xl border border-slate/25 bg-panel p-6 sm:p-8">
+      <h3 className="text-xl font-semibold text-navy dark:text-ivory">
         Regions at a glance
       </h3>
-      <p className="mt-2 text-xs leading-6 text-ink/55">
-        Province counts come from{" "}
-        <code className="text-xs">/api/provinces</code>
-        {showBars ? (
-          <>
-            ; place counts come from{" "}
-            <code className="text-xs">/api/attractions</code>
-          </>
-        ) : null}
-        .
+      <p className="mt-3 max-w-xl text-sm leading-7 text-ink/60">
+        Explore the landscapes and destinations that give each region its
+        character.
       </p>
-      <ul className="mt-5 space-y-5">
+      <ul className="mt-7 grid gap-4 sm:grid-cols-2">
         {regions.map((region) => (
-          <li key={region.region}>
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="text-xs font-semibold text-navy dark:text-ivory">
+          <li
+            key={region.region}
+            className="flex flex-col rounded-2xl border border-slate/20 bg-surface p-5"
+          >
+            <div className="space-y-2">
+              <p className="text-base font-semibold text-navy dark:text-ivory">
                 {region.label}
               </p>
               <p className="text-xs text-ink/55">
@@ -68,14 +68,14 @@ export function RegionBreakdown({
               </p>
             </div>
             {descriptions[region.region] ? (
-              <p className="mt-1 text-xs leading-5 text-ink/50">
+              <p className="mb-5 mt-3 flex-1 text-sm leading-7 text-ink/65">
                 {descriptions[region.region]}
               </p>
             ) : null}
             {showBars ? (
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate/15">
+              <div className="mt-auto h-1.5 w-full overflow-hidden rounded-full bg-slate/15">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-indigo to-gold"
+                  className="h-full rounded-full bg-gold"
                   style={{
                     width:
                       region.placeCount === 0

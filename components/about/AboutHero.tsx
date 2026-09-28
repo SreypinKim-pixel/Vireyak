@@ -48,22 +48,49 @@ export default function AboutHero({
           </div>
           {highlights}
         </div>
-        <div className="relative">
-          <img
-            src={aboutHero.image.src}
-            alt={aboutHero.image.alt}
-            width="760"
-            height="620"
-            fetchPriority="high"
-            className="aspect-[5/4] w-full rounded-2xl object-cover shadow-soft"
-          />
-          <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/20 bg-navy/85 p-5 text-white backdrop-blur">
-            <p className="text-xs font-medium">{aboutHero.overlay.title}</p>
-            <p className="mt-2 text-xs leading-5 text-white/60">
+        <figure className="relative overflow-hidden rounded-[2rem] border border-slate/20 bg-navy shadow-soft">
+          <div className="relative">
+            <img
+              src={aboutHero.image.src}
+              alt={aboutHero.image.alt}
+              width="760"
+              height="620"
+              fetchPriority="high"
+              className="aspect-[5/4] w-full object-cover sm:aspect-[4/3]"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent"
+            />
+            <span className="absolute bottom-5 left-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-navy/60 px-4 py-2 text-xs font-medium text-white backdrop-blur sm:left-8">
+              <Icon name="pin" size={16} className="shrink-0 text-brightgold" />
+              Angkor Wat · Cambodia
+            </span>
+          </div>
+          <figcaption className="relative isolate overflow-hidden border-t border-white/20 px-6 py-7 text-white sm:px-8 sm:py-9">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -z-10"
+            >
+              <img
+                src={aboutHero.image.src}
+                alt=""
+                className="h-full w-full scale-110 object-cover blur-xl"
+              />
+              <div className="absolute inset-0 bg-navy/70" />
+            </div>
+            <span
+              aria-hidden="true"
+              className="mb-5 block h-1 w-12 rounded-full bg-gold"
+            />
+            <h2 className="max-w-sm text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+              {aboutHero.overlay.title}
+            </h2>
+            <p className="mt-4 max-w-sm text-sm leading-7 text-white/80">
               {aboutHero.overlay.copy}
             </p>
-          </div>
-        </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
