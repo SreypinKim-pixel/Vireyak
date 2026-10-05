@@ -5,7 +5,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
-import DatePicker, { parseDate } from "./DatePicker";
+import { travelSearchSchema } from "@/lib/validation/travel";
+import DatePicker from "./DatePicker";
 import { useProvinceSelection } from "./home/ProvinceSelection";
 export default function SearchForm({
   compact = false,
@@ -33,24 +34,13 @@ export default function SearchForm({
   const today = new Date().toLocaleDateString("en-CA");
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (
-      (checkin && !parseDate(checkin)) ||
-      (tab === "stays" && checkout && !parseDate(checkout))
-    ) {
-      setError("Enter a valid date in YYYY-MM-DD format.");
-      return;
-    }
-    if (
-      tab === "stays" &&
-      ((checkin && !checkout) ||
-        (!checkin && checkout) ||
-        (checkout && checkout <= checkin))
-    ) {
-      setError("Choose a check-out date after your check-in date.");
-      return;
-    }
-    if (checkin && checkin < today) {
-      setError("Choose today or a future date.");
+    const result = travelSearchSchema(today).safeParse({
+      tab,
+      checkin,
+      checkout,
+    });
+    if (!result.success) {
+      setError(result.error.issues[0].message);
       return;
     }
     const params = new URLSearchParams();

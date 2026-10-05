@@ -169,10 +169,18 @@ The demo catalog includes at least one attraction for every name in `data/provin
 ## SEO
 
 Public discovery pages include titles, descriptions, canonical URLs, and social
-preview metadata. `/sitemap.xml` lists local catalog pages; `/robots.txt` points
-to it. Live API province detail pages have metadata but are discovered through
-site links rather than listed in the static sitemap. Account previews use
-`noindex`. Filter query parameters canonicalize to their base page.
+preview metadata. Destination-filtered listings generate titles, descriptions,
+and sharing images from the matching catalogue content. Their canonical URLs
+keep the destination and omit booking parameters; unknown destinations use
+`noindex`. Province pages use their curated photos for social previews.
+
+`/sitemap.xml` includes local catalogue pages and live API province pages,
+refreshing every five minutes. During API outages it still lists local pages.
+`/robots.txt` points to the sitemap. Account previews use `noindex`.
+
+Run `npm run build` then `npx playwright test tests/seo.spec.ts` to check
+rendered metadata, canonical URLs, social images, sitemap discovery, and
+indexing rules. The live province check requires the configured API.
 
 Set `SITE_URL` to the production origin (defaults to
 `https://vireyak-rust.vercel.app`) and rebuild when changing domains.

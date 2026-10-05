@@ -1,3 +1,4 @@
+import { getProvincePhoto } from "@/lib/destination-images";
 import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { getProvinceAttractions } from "../../../../lib/provinces";
@@ -35,5 +36,6 @@ export async function generateMetadata({
     title: `${name} Attractions & Travel Guide`,
     description: `Explore attractions and places to visit in ${name}, Cambodia, with Vireyak.`,
     path: `/provinces/${encodeURIComponent(id)}/attractions`,
+    image: getProvincePhoto(name)?.src,
   });
 }

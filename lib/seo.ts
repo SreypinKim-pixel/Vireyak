@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { SearchParams, TravelItem, TravelKind } from "./travel-types";
+import { provinces } from "./provinces";
 
 export const siteUrl = new URL(
   process.env.SITE_URL || "https://vireyak-rust.vercel.app",
@@ -39,4 +41,38 @@ export function pageMetadata({
       images: [image],
     },
   };
+}
+
+export function listingMetadata(
+  kind: TravelKind,
+  params: SearchParams,
+  items: TravelItem[],
+): Metadata {
+  const destination =
+    typeof params.destination === "string" ? params.destination : "";
+  const catalogueDestination =
+    provinces.find((province) => province.name === destination)?.destination ||
+    destination;
+  const matches = items.filter(
+    (item) => item.destination === catalogueDestination,
+  );
+  const validDestination = Boolean(destination && matches.length);
+  const location = validDestination ? destination : "Cambodia";
+  const title =
+    kind === "stays"
+      ? `Places to Stay in ${location}`
+      : `${location} Attractions & Experiences`;
+  const path = `/${kind}${validDestination ? `?${new URLSearchParams({ destination })}` : ""}`;
+  const metadata = pageMetadata({
+    title,
+    description:
+      kind === "stays"
+        ? `Explore our sample collection of hotels, villas, and resorts in ${location}. Compare destinations and amenities with Vireyak.`
+        : `Discover temples, nature, and cultural sights in ${location}. Explore attractions and plan your next adventure with Vireyak.`,
+    path,
+    image: validDestination ? matches[0].image : undefined,
+  });
+  if (destination && !validDestination)
+    metadata.robots = { index: false, follow: true };
+  return metadata;
 }

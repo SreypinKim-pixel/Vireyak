@@ -155,5 +155,6 @@ export async function generateMetadata({
     title: `${name} Attractions & Travel Guide`,
     description: `Discover ${name}, Cambodia. Explore provincial highlights and attractions with Vireyak.`,
     path: `/provinces/${encodeURIComponent(id)}`,
+    image: getProvincePhoto(name, result.province.imageUrl)?.src,
   });
 }

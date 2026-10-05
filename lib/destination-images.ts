@@ -14,6 +14,13 @@ const photos: Record<string, DestinationPhoto> = catalogue.photos;
 const provincePhotos: Record<string, string> = catalogue.provinces;
 const attractionPhotos: Record<string, string> = catalogue.attractions;
 
+// These landmarks can arrive with incorrect province metadata from the API.
+const landmarkPhotos: Record<string, string> = {
+  "banteay-chhmar-temple": "banteay-chhmar-jpg",
+  "prasat-ta-muen-thom": "destinations-attraction-41-jpg",
+  "preah-vihear-temple": "destinations-attraction-51-jpg",
+};
+
 function normalize(name: string) {
   return name
     .normalize("NFD")
@@ -67,6 +74,7 @@ export function getAttractionPhoto(
   remoteUrls: string[] = [],
 ): DestinationPhoto | null {
   const curated =
+    photos[landmarkPhotos[normalize(name)]] ||
     photos[attractionPhotos[`${provinceKey(province)}/${normalize(name)}`]];
   if (curated) return curated;
   for (const url of remoteUrls) {

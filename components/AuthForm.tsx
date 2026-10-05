@@ -3,6 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInDemo, registerLocalAccount } from "../lib/demoSession";
+import {
+  loginSchema,
+  registrationSchema,
+  attractionOptionsSchema,
+} from "@/lib/validation/auth";
 import Icon from "./Icon";
 import Dropdown from "./Dropdown";
 import { Apple } from "./auth/Apple";
@@ -43,28 +48,9 @@ export default function AuthForm({ register = false }) {
       .then(async (response) => {
         if (!response.ok) throw new Error("Unable to load attractions");
         const body = await response.json();
-        if (
-          !body ||
-          !Array.isArray(body.data) ||
-          body.data.some(
-            (
-              item: {
-                id?: unknown;
-                name?: unknown;
-                province?: { id?: unknown; name?: unknown } | null;
-              } | null,
-            ) =>
-              !item ||
-              typeof item.id !== "string" ||
-              typeof item.name !== "string" ||
-              (item.province !== undefined &&
-                (!item.province ||
-                  typeof item.province.id !== "string" ||
-                  typeof item.province.name !== "string")),
-          )
-        )
-          throw new Error("Invalid attractions response");
-        setAttractions(body.data);
+        const result = attractionOptionsSchema.safeParse(body);
+        if (!result.success) throw new Error("Invalid attractions response");
+        setAttractions(result.data.data);
         setLoadState("ready");
       })
       .catch((error) => {
@@ -97,47 +83,33 @@ export default function AuthForm({ register = false }) {
     if (submitState === "loading" || submitState === "success") return;
     setMessage("");
     const data = new FormData(e.currentTarget);
-    {
-      const values = new FormData(e.currentTarget);
-      const next: Record<string, string> = {};
-      if (register && !String(values.get("name") ?? "").trim())
-        next.name = "Enter your full name.";
-      if (
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-          String(values.get("email") ?? "").trim(),
-        )
-      )
-        next.email = "Enter a valid email address.";
-      if (!String(values.get("email") ?? "").trim())
-        next.email = "Email is required.";
-      if (!String(values.get("password") ?? "").trim())
-        next.password = "Password is required.";
-      else if (register && String(values.get("password") ?? "").length < 12)
-        next.password = "Use at least 12 characters.";
-      if (
-        register &&
-        (!values.get("confirmPassword") ||
-          values.get("confirmPassword") !==
-            String(values.get("password") ?? ""))
-      )
-        next.confirmPassword = "Your passwords must match.";
-      setErrors(next);
-      if (Object.keys(next).length) {
-        setSubmitState("error");
-        setMessage(
-          `${register ? "Sign-up" : "Login"} failed. Please fix the highlighted fields and try again.`,
-        );
-        const invalidField = e.currentTarget.elements.namedItem(
-          Object.keys(next)[0],
-        );
-        if (invalidField instanceof HTMLElement) invalidField.focus();
-        return;
+    const result = (register ? registrationSchema : loginSchema).safeParse({
+      name: data.get("name") ?? "",
+      email: data.get("email") ?? "",
+      password: data.get("password") ?? "",
+      confirmPassword: data.get("confirmPassword") ?? "",
+    });
+    const next: Record<string, string> = {};
+    if (!result.success) {
+      for (const issue of result.error.issues) {
+        const field = String(issue.path[0]);
+        next[field] ??= issue.message;
       }
+      setErrors(next);
+      setSubmitState("error");
+      setMessage(
+        `${register ? "Sign-up" : "Login"} failed. Please fix the highlighted fields and try again.`,
+      );
+      const invalidField = e.currentTarget.elements.namedItem(
+        Object.keys(next)[0],
+      );
+      if (invalidField instanceof HTMLElement) invalidField.focus();
+      return;
     }
+    setErrors({});
     const form = e.currentTarget;
-    const email = String(data.get("email") || "").trim();
+    const { email, password } = result.data;
     const remember = data.get("remember") === "on";
-    const password = String(data.get("password") || "");
     setSubmitState("loading");
     setMessage(
       register

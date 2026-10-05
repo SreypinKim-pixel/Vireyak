@@ -1,4 +1,4 @@
-import { pageMetadata } from "@/lib/seo";
+import { listingMetadata } from "@/lib/seo";
 import type { ListingPageProps } from "@/lib/travel-types";
 import ListingExplorer from "../../components/ListingExplorer";
 import { attractions } from "../../data/travel";
@@ -14,10 +14,6 @@ export default async function AttractionPage({
   );
 }
 
-export const metadata = pageMetadata({
-  tabTitle: "Attractions",
-  title: "Cambodia Attractions & Experiences",
-  description:
-    "Discover temples, waterfalls, islands, and cultural sights across Cambodia. Explore attractions by province and plan your next adventure.",
-  path: "/attraction",
-});
+export async function generateMetadata({ searchParams }: ListingPageProps) {
+  return listingMetadata("attraction", await searchParams, attractions);
+}

@@ -1,3 +1,4 @@
+import { provinceIdSchema } from "@/lib/validation/travel";
 import { getProvince } from "@/lib/cam-trip";
 
 export async function GET(
@@ -5,7 +6,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  if (!/^\d{1,6}$/.test(id)) {
+  if (!provinceIdSchema.safeParse(id).success) {
     return Response.json(
       { error: "Province ID must be a positive integer." },
       { status: 400 },

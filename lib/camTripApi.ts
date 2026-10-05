@@ -1,5 +1,6 @@
 import { isVisibleAttraction } from "./attraction-visibility";
 import { API_BASE_URL } from "./api-config";
+import { getAttractionPhoto } from "./destination-images";
 export { CAMTRIP_API_BASE_URL } from "./api-config";
 
 import { cache } from "react";
@@ -226,10 +227,13 @@ function toPlace(input: unknown): Place | null {
 
   const province = raw.province ? toProvince(raw.province) : null;
   const category = asText(raw.category) || "OTHER";
-  const ownImage =
+  const ownImage = getAttractionPhoto(
+    nameEn,
+    province?.nameEn || "",
     asArray(raw.imageUrls)
       .map(asText)
-      .find((value): value is string => Boolean(value)) ?? null;
+      .filter((value): value is string => Boolean(value)),
+  )?.src;
   const image = ownImage || province?.imageUrl || null;
   const latitude = asNumber(raw.latitude);
   const longitude = asNumber(raw.longitude);

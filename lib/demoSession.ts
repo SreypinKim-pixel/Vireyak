@@ -1,3 +1,8 @@
+import {
+  accountCredentialsSchema,
+  localAccountsSchema,
+  type LocalAccount,
+} from "./validation/auth";
 export const DEMO_EMAIL = "demo@example.com";
 export const DEMO_PASSWORD = "DemoPassword@123";
 export function matchesDemoAccount(email: string, password: string) {
@@ -7,24 +12,14 @@ export function matchesDemoAccount(email: string, password: string) {
 }
 const STORAGE_KEY = "vireyak-demo-user";
 const ACCOUNTS_KEY = "vireyak-local-accounts";
-type LocalAccount = { email: string; salt: string; hash: string };
 
 function readAccounts(): LocalAccount[] {
   const accounts: unknown = JSON.parse(
     localStorage.getItem(ACCOUNTS_KEY) || "[]",
   );
-  if (
-    !Array.isArray(accounts) ||
-    accounts.some(
-      (account) =>
-        !account ||
-        typeof account.email !== "string" ||
-        !/^[a-f0-9]{32}$/.test(account.salt) ||
-        !/^[a-f0-9]{64}$/.test(account.hash),
-    )
-  )
-    throw new Error("Saved accounts could not be read.");
-  return accounts;
+  const result = localAccountsSchema.safeParse(accounts);
+  if (!result.success) throw new Error("Saved accounts could not be read.");
+  return result.data;
 }
 
 async function passwordHash(password: string, salt: string) {
@@ -52,12 +47,7 @@ async function passwordHash(password: string, salt: string) {
 
 export async function registerLocalAccount(email: string, password: string) {
   email = email.trim().toLowerCase();
-  if (
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    !password.trim() ||
-    password.length < 12 ||
-    password.length > 128
-  ) {
+  if (!accountCredentialsSchema.safeParse({ email, password }).success) {
     throw new Error("Enter a valid email and a password of 12–128 characters.");
   }
   const salt = Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) =>
