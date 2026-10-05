@@ -325,22 +325,55 @@ test("login validates fields and completes a labeled demo session", async ({
   ).toBe(null);
 });
 
-test("province lookup fetches live teacher API data with loading and error states", async ({
+test("province lookup lets visitors explore a province by name with loading and error states", async ({
   page,
 }) => {
   await page.goto("/");
 
-  await page.route("**/api/provinces/2", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    await route.continue();
-  });
+  const provinces = {
+    2: {
+      id: 2,
+      nameKh: "បាត់ដំបង",
+      nameEn: "Battambang",
+      region: "NORTHWEST",
+      imageUrl: null,
+    },
+    14: {
+      id: 14,
+      nameKh: "កំពង់ធំ",
+      nameEn: "Kampong Thom",
+      region: "CENTRAL",
+      imageUrl: null,
+      attractionCount: null,
+    },
+    22: {
+      id: 22,
+      nameKh: "កំពត",
+      nameEn: "Kampot",
+      region: "COASTAL",
+      imageUrl: null,
+      attractionCount: 10,
+    },
+  };
+  for (const [id, province] of Object.entries(provinces)) {
+    await page.route(`**/api/provinces/${id}`, async (route) => {
+      if (id === "2") {
+        await new Promise((resolve) => setTimeout(resolve, 600));
+      }
+      await route.fulfill({ json: { data: province } });
+    });
+  }
 
-  await page.getByLabel("Province ID").fill("2");
-  await page
-    .getByRole("button", { name: "View province", exact: true })
-    .click();
+  const picker = page.getByRole("combobox", {
+    name: "Province Exploring",
+    exact: true,
+  });
+  await expect(picker).toContainText("Choose a province");
+
+  await picker.click();
+  await page.getByRole("option", { name: "Battambang", exact: true }).click();
   await expect(page.getByTestId("province-loading")).toContainText(
-    "Loading province 2",
+    "Loading Battambang",
   );
   await expect(page.getByTestId("province-result")).toContainText("Battambang");
   await expect(page.getByTestId("province-result")).toContainText(
@@ -349,11 +382,31 @@ test("province lookup fetches live teacher API data with loading and error state
   await expect(page.getByTestId("province-result")).toContainText(
     "GET /api/provinces/2",
   );
+  await expect(page.getByTestId("province-result")).toContainText("Nature");
+  await expect(page.getByTestId("province-result")).not.toContainText(
+    "unavailable",
+  );
+  const battambangAttractions = page.getByTestId("province-attractions");
+  await expect(battambangAttractions).toContainText(
+    "Explore Battambang attractions",
+  );
+  await expect(battambangAttractions.locator("article")).toHaveCount(1);
+  await expect(battambangAttractions.locator("img")).toHaveCount(0);
+  await expect(
+    battambangAttractions.getByRole("link", {
+      name: "Phnom Sampov",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(battambangAttractions).toContainText("Nature");
+  await expect(
+    battambangAttractions.getByRole("link", {
+      name: "View on Attractions page",
+    }),
+  ).toHaveAttribute("href", "/attraction?destination=Battambang");
 
-  await page.getByLabel("Province ID").fill("14");
-  await page
-    .getByRole("button", { name: "View province", exact: true })
-    .click();
+  await picker.click();
+  await page.getByRole("option", { name: "Kampong Thom", exact: true }).click();
   await expect(page.getByTestId("province-result")).toContainText(
     "Kampong Thom",
   );
@@ -373,22 +426,41 @@ test("province lookup fetches live teacher API data with loading and error state
         ),
     )
     .toBe(true);
-
-  await page.getByLabel("Province ID").fill("99999");
-  await page
-    .getByRole("button", { name: "View province", exact: true })
-    .click();
-  await expect(page.getByTestId("province-error")).toContainText(
-    "Province not found",
+  await expect(page.getByTestId("province-result")).toContainText("Culture");
+  await expect(page.getByTestId("province-result")).not.toContainText(
+    "unavailable",
   );
-  await expect(page.getByTestId("province-result")).toHaveCount(0);
+  await expect(page.getByTestId("province-attractions")).toContainText(
+    "Sambor Prei Kuk",
+  );
 
-  await page.getByLabel("Province ID").fill("");
-  await page
-    .getByRole("button", { name: "View province", exact: true })
-    .click();
-  await expect(page.getByTestId("province-error")).toContainText(
-    "Enter a positive province ID",
+  await picker.click();
+  await page.getByRole("option", { name: "Kratie", exact: true }).click();
+  await expect(page.getByTestId("province-result")).toContainText("Kratie");
+  await expect(
+    page.getByTestId("province-result").getByRole("img"),
+  ).toHaveAttribute("src", /^\/images\//);
+  await expect(page.getByTestId("province-result")).toContainText("Nature");
+  await expect(page.getByTestId("province-result")).toContainText(
+    "Curated preview from the Vireyak catalogue.",
+  );
+  await expect(page.getByTestId("province-result")).not.toContainText(
+    "GET /api/provinces",
+  );
+  await expect(page.getByTestId("province-result")).not.toContainText(
+    "unavailable",
+  );
+  await expect(page.getByTestId("province-attractions")).toContainText(
+    "Kampi Dolphin Area",
+  );
+
+  await picker.click();
+  await page.getByRole("option", { name: "Kampot", exact: true }).click();
+  await expect(page.getByTestId("province-result")).toContainText("Kampot");
+  await expect(page.getByTestId("province-result")).toContainText("Nature");
+  await expect(page.getByTestId("province-result")).toContainText("10");
+  await expect(page.getByTestId("province-attractions")).toContainText(
+    "Bokor National Park",
   );
 });
 
